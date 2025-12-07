@@ -13,42 +13,14 @@ body {
     position: relative;
 }
 
-/* ============================================
-   MOBILE MENU TOGGLE
-   ============================================ */
-.mobile-menu-toggle {
-    display: none;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 101;
-    background-color: #2d3949;
-    border: none;
-    width: 48px;
-    height: 48px;
-    border-radius: 16px;
-    color: #ffffff;
-    font-size: 20px;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 4px 0 #1e2633;
-}
-
-.mobile-menu-toggle:hover {
-    background-color: #3d4a5c;
-}
-
-.mobile-menu-toggle:active {
-    box-shadow: 0 2px 0 #1e2633;
-    transform: translateY(2px);
-}
+/* Mobile menu toggle is handled in header.php */
 
 /* ============================================
-   TOP RIGHT BUTTONS
+   TOP RIGHT BUTTONS (Now Bottom Right)
    ============================================ */
 .top-right-buttons {
     position: fixed;
-    top: 20px;
+    bottom: 30px;
     right: 30px;
     display: flex;
     gap: 16px;
@@ -108,7 +80,7 @@ body {
 /* Hover Popups */
 .hover-popup {
     position: absolute;
-    top: calc(100% + 12px);
+    bottom: calc(100% + 12px);
     right: 0;
     background-color: #1e2633;
     border: 2px solid #2d3949;
@@ -117,7 +89,7 @@ body {
     min-width: 280px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
+    transform: translateY(10px);
     transition: all 0.3s ease;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     z-index: 1000;
@@ -573,8 +545,9 @@ body {
    ============================================ */
 .main-content {
     flex: 1;
-    margin-left: 256px;
+    margin-left: 0;
     padding: 40px 60px;
+    padding-top: 120px; /* Account for fixed header */
     background-color: #131F24;
     overflow-x: auto;
     overflow-y: auto;
@@ -595,7 +568,7 @@ body {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 40px;
-    margin-top: 60px;
+    margin-top: 0;
     box-shadow: 0 4px 0 #1e2633;
 }
 
@@ -748,42 +721,54 @@ body {
    RESPONSIVE
    ============================================ */
 @media (max-width: 1024px) {
-    .sidebar {
-        transform: translateX(-100%);
-    }
-
-    .sidebar.open {
-        transform: translateX(0);
-    }
-
-    .mobile-menu-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
     .main-content {
         margin-left: 0;
         padding: 40px 30px;
+        padding-top: 120px;
     }
 
     .lesson-header {
-        margin-top: 60px;
+        margin-top: 0;
     }
 
     .roadmap {
         max-width: 1000px;
+        transform: scale(0.85);
+        transform-origin: center center;
     }
 
     .level-node {
         width: 75px;
         height: 75px;
         font-size: 34px;
+        transform: scale(1.176); /* Scale back up: 1/0.85 = 1.176 */
+    }
+
+    .level-node.completed:hover {
+        transform: scale(1.176) translateY(-1px);
+    }
+
+    .level-node.completed:active {
+        transform: scale(1.176) translateY(3px);
+    }
+
+    .level-node.current:hover {
+        transform: scale(1.176) translateY(-2px);
+    }
+
+    .level-node.current:active {
+        transform: scale(1.176) translateY(3px);
+    }
+
+    .level-node.locked:active {
+        transform: scale(1.176) translateY(3px);
     }
 
     .top-right-buttons {
+        bottom: 20px;
         right: 20px;
         gap: 12px;
+        flex-direction: row;
     }
 
     .top-btn {
@@ -794,12 +779,12 @@ body {
 
 @media (max-width: 768px) {
     .main-content {
-        padding: 80px 20px 20px;
+        padding: 100px 20px 20px;
     }
 
     .lesson-header {
         padding: 20px;
-        margin-top: 50px;
+        margin-top: 0;
     }
 
     .nav-arrow {
@@ -819,18 +804,42 @@ body {
     .roadmap {
         max-width: 900px;
         height: 450px;
+        transform: scale(0.75);
+        transform-origin: center center;
     }
 
     .level-node {
         width: 65px;
         height: 65px;
         font-size: 30px;
+        transform: scale(1.333); /* Scale back up: 1/0.75 = 1.333 */
+    }
+
+    .level-node.completed:hover {
+        transform: scale(1.333) translateY(-1px);
+    }
+
+    .level-node.completed:active {
+        transform: scale(1.333) translateY(3px);
+    }
+
+    .level-node.current:hover {
+        transform: scale(1.333) translateY(-2px);
+    }
+
+    .level-node.current:active {
+        transform: scale(1.333) translateY(3px);
+    }
+
+    .level-node.locked:active {
+        transform: scale(1.333) translateY(3px);
     }
 
     .top-right-buttons {
-        top: 80px;
+        bottom: 20px;
         right: 20px;
         gap: 10px;
+        flex-direction: row;
     }
 
     .top-btn {
@@ -883,16 +892,41 @@ body {
     .roadmap {
         max-width: 750px;
         height: 400px;
+        transform: scale(0.6);
+        transform-origin: center center;
     }
 
     .level-node {
         width: 55px;
         height: 55px;
         font-size: 26px;
+        transform: scale(1.667); /* Scale back up: 1/0.6 = 1.667 */
+    }
+
+    .level-node.completed:hover {
+        transform: scale(1.667) translateY(-1px);
+    }
+
+    .level-node.completed:active {
+        transform: scale(1.667) translateY(3px);
+    }
+
+    .level-node.current:hover {
+        transform: scale(1.667) translateY(-2px);
+    }
+
+    .level-node.current:active {
+        transform: scale(1.667) translateY(3px);
+    }
+
+    .level-node.locked:active {
+        transform: scale(1.667) translateY(3px);
     }
 
     .top-right-buttons {
-        flex-direction: column;
+        bottom: 20px;
+        right: 20px;
+        flex-direction: row;
         gap: 8px;
     }
 

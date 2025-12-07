@@ -60,7 +60,7 @@ $_SESSION['lesson_complete'] = [
     <title>Lesson Complete - WebQuest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/activity.css">
-    <link rel="stylesheet" href="../assets/css/lesson_complete.css">
+    <link rel="stylesheet" href="../assets/css/completion.css">
 </head>
 <body>
     <div class="main-content">
@@ -119,7 +119,7 @@ $_SESSION['lesson_complete'] = [
         </div>
     </div>
 
-    <script src="../assets/js/lesson_complete.js"></script>
+    <script src="../assets/js/completion.js"></script>
 </body>
 </html>
 

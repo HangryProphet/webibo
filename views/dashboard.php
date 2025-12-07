@@ -9,9 +9,7 @@
     <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
 <body>
-    <button class="mobile-menu-toggle" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-    </button>
+    <?php include 'header.php'; ?>
 
     <!-- Top Right Buttons -->
     <div class="top-right-buttons">
@@ -93,62 +91,6 @@
                 </div>
                 <div class="next-heart">Next heart in <span class="heart-timer"><?php echo formatTimeRemaining($userStats['hearts']['next_heart_in_seconds']); ?></span></div>
                 <div class="hearts-message">You still have hearts left! Keep on learning</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="sidebar" id="sidebar">
-        <div class="logo">
-            <div class="logo-text">Webibo</div>
-        </div>
-        
-        <div class="menu-items">
-            <a href="#" class="menu-item active" onclick="closeMenu()">
-                <div class="menu-icon">
-                    <i class="fas fa-map"></i>
-                </div>
-                <span class="menu-text">Adventure</span>
-            </a>
-            
-            <a href="#" class="menu-item" onclick="closeMenu()">
-                <div class="menu-icon">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <span class="menu-text">Achievements</span>
-            </a>
-
-            <a href="#" class="menu-item" onclick="closeMenu()">
-                <div class="menu-icon">
-                    <i class="fas fa-user"></i>
-                </div>
-                <span class="menu-text">Profile</span>
-            </a>
-
-            <!-- More menu with hover popup -->
-            <div class="menu-item-wrapper">
-                <a href="#" class="menu-item" onclick="closeMenu()">
-                    <div class="menu-icon">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </div>
-                    <span class="menu-text">More</span>
-                </a>
-                <div class="sidebar-hover-popup more-popup">
-                    <div class="popup-header">MORE OPTIONS</div>
-                    <div class="sidebar-menu-list">
-                        <a href="#" class="sidebar-menu-item">
-                            <div class="sidebar-menu-icon">
-                                <i class="fas fa-cog"></i>
-                            </div>
-                            <span class="sidebar-menu-text">Settings</span>
-                        </a>
-                        <a href="#" class="sidebar-menu-item">
-                            <div class="sidebar-menu-icon">
-                                <i class="fas fa-sign-out-alt"></i>
-                            </div>
-                            <span class="sidebar-menu-text">Logout</span>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-/* Completion Page Specific Styles */
+/* Completion/Result Page Styles - Reusable for lesson complete, out of hearts, etc. */
 .completion-container {
     width: 100%;
     max-width: 800px;
@@ -38,6 +38,10 @@
     color: #58cc02;
     margin-bottom: 16px;
     animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+.completion-title.error {
+    color: #ff4b4b;
 }
 
 .completion-message {

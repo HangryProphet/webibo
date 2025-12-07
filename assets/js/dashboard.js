@@ -1,26 +1,3 @@
-function toggleMenu() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('open');
-}
-
-function closeMenu() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.remove('open');
-}
-
-// Close sidebar when clicking outside on mobile
-document.addEventListener('click', function(event) {
-    const sidebar = document.getElementById('sidebar');
-    const menuToggle = document.querySelector('.mobile-menu-toggle');
-    
-    if (window.innerWidth <= 1024 && 
-        !sidebar.contains(event.target) && 
-        !menuToggle.contains(event.target) &&
-        sidebar.classList.contains('open')) {
-        closeMenu();
-    }
-});
-
 // Add click handlers to roadmap nodes
 document.addEventListener('DOMContentLoaded', function() {
     const levelNodes = document.querySelectorAll('.level-node');
@@ -34,6 +11,51 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = `adventure${adventureNumber}.php`;
             });
         }
+    });
+
+    // Scroll to current level node on mobile view
+    function scrollToCurrentNode() {
+        if (window.innerWidth <= 1024) {
+            const currentNode = document.querySelector('.level-node.current');
+            const roadmapContainer = document.querySelector('.roadmap-container');
+            const roadmap = document.querySelector('.roadmap');
+            
+            if (currentNode && roadmapContainer && roadmap) {
+                // Get the scale factor based on screen size
+                const scale = window.innerWidth <= 480 ? 0.6 : (window.innerWidth <= 768 ? 0.75 : 0.85);
+                
+                // Get the node's left position from inline style (relative to unscaled roadmap)
+                const nodeLeft = parseFloat(currentNode.style.left) || 0;
+                
+                // Get the node's actual rendered width (accounts for scale transform on node)
+                const nodeWidth = currentNode.offsetWidth;
+                
+                // Calculate the node's center position in the scaled roadmap coordinate system
+                // Roadmap is scaled, so node positions are scaled too
+                const nodeCenterInScaledRoadmap = (nodeLeft * scale) + (nodeWidth / 2);
+                
+                // Calculate scroll position to center the node
+                // We want the node center to align with the container center
+                const containerWidth = roadmapContainer.clientWidth;
+                const scrollLeft = nodeCenterInScaledRoadmap - (containerWidth / 2);
+                
+                // Smooth scroll to center the current node
+                roadmapContainer.scrollTo({
+                    left: Math.max(0, scrollLeft),
+                    behavior: 'smooth'
+                });
+            }
+        }
+    }
+
+    // Scroll to current node on load (with a small delay to ensure DOM is ready)
+    setTimeout(scrollToCurrentNode, 100);
+
+    // Also scroll on window resize (in case orientation changes)
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(scrollToCurrentNode, 250);
     });
 
     // Handle top button hover popups on mobile (tap to show/hide)
