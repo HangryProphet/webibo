@@ -1,0 +1,24 @@
+{
+  "question": "Which tag is used for the largest heading?",
+  "options": [
+    "<h1>",
+    "<h3>",
+    "<head>"
+  ],
+  "correct_answer": "<h1>",
+  "enemy": {
+    "name": "Fox",
+    "hp": 10,
+    "image": "assets/img/enemies/fox-happy.png"
+  },
+  "feedback": {
+    "correct": {
+      "title": "Correct! 🎉",
+      "details": "The <code>&lt;h1&gt;</code> tag defines the most important heading on a webpage. It's typically used for the main title of your page."
+    },
+    "wrong": {
+      "title": "Not quite! 🤔",
+      "details": "The <code>&lt;h1&gt;</code> tag defines the most important heading. HTML has 6 heading levels (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>), where <code>&lt;h1&gt;</code> is the largest and most important, and <code>&lt;h6&gt;</code> is the smallest."
+    }
+  }
+}

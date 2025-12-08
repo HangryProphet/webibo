@@ -388,11 +388,30 @@ body {
     gap: 30px;
 }
 
+/* Two-Panel Layout for Code Editor */
+.editor-panel-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+.editor-panel {
+    width: 100%;
+}
+
+.output-panel {
+    width: 100%;
+}
+
 .editor-container {
     background-color: #1e2633;
     border: 2px solid #2d3949;
     border-radius: 16px;
     overflow: hidden;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
 }
 
 .editor-header {
@@ -428,19 +447,21 @@ body {
 .code-editor {
     background-color: #0d1117;
     padding: 24px;
-    min-height: 200px;
+    flex: 1;
+    overflow: auto;
 }
 
 .code-textarea {
     width: 100%;
-    min-height: 150px;
+    height: 100%;
+    min-height: 300px;
     background-color: transparent;
     border: none;
     color: #ffffff;
     font-family: 'Courier New', monospace;
     font-size: 16px;
     line-height: 1.6;
-    resize: vertical;
+    resize: none;
     outline: none;
 }
 
@@ -453,11 +474,13 @@ body {
     border: 2px solid #2d3949;
     border-radius: 16px;
     overflow: hidden;
-    display: none;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
 }
 
 .output-container.active {
-    display: block;
+    display: flex;
 }
 
 .output-header {
@@ -470,6 +493,9 @@ body {
     font-size: 14px;
     font-weight: 600;
     color: #8b95a5;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .output-display {
@@ -478,6 +504,15 @@ body {
     min-height: 150px;
     color: #000000;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+}
+
+/* Live Preview Frame */
+.live-preview-frame {
+    width: 100%;
+    flex: 1;
+    border: none;
+    background: white;
+    display: block;
 }
 
 .output-display.error {
@@ -888,6 +923,17 @@ body {
 
     .code-textarea {
         font-size: 14px;
+    }
+
+    /* Mobile: Stack code editor panels vertically */
+    .editor-panel-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .editor-container,
+    .output-container {
+        height: 300px;
     }
 
     .header {

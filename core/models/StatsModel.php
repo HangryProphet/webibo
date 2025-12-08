@@ -185,4 +185,29 @@ class StatsModel
             return false;
         }
     }
+
+    /**
+     * Add XP to user's total
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User's ID
+     * @param int $xpAmount Amount of XP to add
+     * @return bool True on success
+     */
+    public static function addXP(PDO $pdo, int $userId, int $xpAmount): bool
+    {
+        try {
+            $sql = "UPDATE user_stats 
+                    SET xp_points = xp_points + :xp_amount 
+                    WHERE user_id = :user_id";
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([
+                ':xp_amount' => max(0, $xpAmount),
+                ':user_id' => $userId
+            ]);
+        } catch (PDOException $e) {
+            error_log("StatsModel::addXP Error: " . $e->getMessage());
+            return false;
+        }
+    }
 }

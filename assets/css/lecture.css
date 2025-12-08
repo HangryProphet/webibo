@@ -1,265 +1,336 @@
-.lecture-container {
-    width: 100%;
-    max-width: 1200px;
+/* ============================================
+   LECTURE PAGE - HORIZONTAL CARD LAYOUT
+   Matches activity.css design system
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    background-color: #131F24;
+    color: #ffffff;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.lecture-header {
+    display: flex;
     align-items: center;
-    gap: 40px;
-    padding: 40px 20px;
+    justify-content: space-between;
+    padding: 20px 40px;
 }
 
-.teacher-section-lecture {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 30px;
-    width: 100%;
-    max-width: 1200px;
-}
-
-.teacher-image-lecture {
-    width: 250px;
-    height: 250px;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.teacher-bubble-lecture {
-    background-color: #4a5f7f;
-    border-radius: 20px;
-    padding: 32px;
-    position: relative;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    flex: 1;
-    min-height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.teacher-bubble-lecture::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -10px;
-    transform: translateY(-50%);
-    width: 0;
-    height: 0;
-    border-top: 15px solid transparent;
-    border-bottom: 15px solid transparent;
-    border-right: 15px solid #4a5f7f;
-}
-
-.teacher-name-lecture {
+.lecture-logo {
     font-size: 24px;
     font-weight: 700;
-    color: #ffd93d;
+    color: #58cc02;
+}
+
+.lecture-logo a {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s;
+}
+
+.lecture-logo a:hover {
+    opacity: 0.8;
+}
+
+.lecture-progress {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.progress-text {
+    font-size: 14px;
+    color: #8b95a5;
+    font-weight: 500;
+}
+
+.progress-bar-mini {
+    width: 150px;
+    height: 16px;
+    background: #2d3949;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill-mini {
+    height: 100%;
+    background-color: #58cc02;
+    transition: width 0.3s ease;
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+
+.lecture-main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+    padding-bottom: 120px;
+    overflow-y: auto;
+}
+
+/* Cards Container - Grid Layout */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 24px;
+    max-width: 1400px;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Individual Lecture Card */
+.lecture-card {
+    background-color: #2d3949;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 0 #1e2633;
+    transition: transform 0.2s;
+}
+
+.lecture-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Card Headers */
+.lecture-card h1 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.lecture-card h2 {
+    font-size: 22px;
+    color: #58cc02;
+    margin-bottom: 16px;
+    margin-top: 24px;
+}
+
+.lecture-card p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #d1d5db;
     margin-bottom: 16px;
 }
 
-.teacher-instruction-lecture {
-    font-size: 22px;
+.lecture-card ul {
+    margin: 16px 0;
+    padding-left: 24px;
+}
+
+.lecture-card li {
+    font-size: 16px;
     line-height: 1.8;
+    color: #d1d5db;
+    margin-bottom: 10px;
+}
+
+.lecture-card strong {
     color: #ffffff;
+    font-weight: 600;
 }
 
-.teacher-instruction-lecture code {
-    background-color: #2d3949;
-    padding: 4px 8px;
+.lecture-card .highlight {
+    background: #ffc800;
+    color: #131F24;
+    padding: 3px 8px;
     border-radius: 4px;
-    font-family: 'Courier New', monospace;
-    color: #6bcf7f;
+    font-weight: 600;
 }
 
-.typewriter-cursor {
-    display: inline-block;
-    width: 2px;
-    height: 1em;
-    background-color: #ffffff;
-    margin-left: 2px;
-    animation: blink 1s infinite;
-    vertical-align: baseline;
+/* Code Blocks */
+.lecture-card code {
+    background: #1e2633;
+    color: #58cc02;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-family: 'Courier New', Consolas, Monaco, monospace;
+    font-size: 14px;
 }
 
-@keyframes blink {
-    0%, 50% {
-        opacity: 1;
-    }
-    51%, 100% {
-        opacity: 0;
-    }
+.lecture-card pre {
+    background: #1e2633;
+    padding: 20px;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 16px 0;
+    border: 2px solid #58cc02;
 }
 
-.lecture-footer {
-    padding: 30px 40px;
+.lecture-card pre code {
+    background: transparent;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d1d5db;
+}
+
+/* Icon Styling */
+.lecture-card h1 i {
+    color: #58cc02;
+}
+
+/* ============================================
+   NAVIGATION FOOTER
+   ============================================ */
+
+.lecture-nav-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #1e2633;
+    padding: 20px 40px;
+    border-top: 2px solid #2d3949;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    background-color: #131F24;
-    border-top: 2px solid #2d3949;
-    gap: 20px;
+    z-index: 100;
 }
 
-.lecture-footer-buttons {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.skip-btn-container {
-    display: flex;
-    align-items: center;
-}
-
-.nav-buttons-container {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.back-btn, .skip-btn, .next-btn {
-    padding: 18px 64px;
+.nav-btn {
+    padding: 16px 40px;
     border: none;
     border-radius: 16px;
-    color: #ffffff;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.1s;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.back-btn {
-    background-color: #6c757d;
-    box-shadow: 0 4px 0 #495057;
-}
-
-.back-btn:hover {
-    background-color: #7a8288;
-}
-
-.back-btn:active {
-    box-shadow: 0 2px 0 #495057;
-    transform: translateY(2px);
-}
-
-.back-btn:disabled {
-    background-color: #3d4a5c;
+.nav-btn-secondary {
+    background: #2d3949;
+    color: #8b95a5;
     box-shadow: 0 4px 0 #1e2633;
-    cursor: not-allowed;
-    opacity: 0.6;
 }
 
-.skip-btn {
-    background-color: #dc3545;
-    box-shadow: 0 4px 0 #c82333;
+.nav-btn-secondary:hover {
+    background: #3d4a5c;
     color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 #1e2633;
 }
 
-.skip-btn:hover {
-    background-color: #e4606d;
+.nav-btn-primary {
+    background: #58cc02;
+    color: #ffffff;
+    box-shadow: 0 4px 0 #46a302;
 }
 
-.skip-btn:active {
-    box-shadow: 0 2px 0 #c82333;
+.nav-btn-primary:hover {
+    background: #61d909;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 #46a302;
+}
+
+.nav-btn-primary:active {
     transform: translateY(2px);
+    box-shadow: 0 2px 0 #46a302;
 }
 
-.skip-btn:disabled {
-    background-color: #3d4a5c;
-    box-shadow: 0 4px 0 #1e2633;
-    cursor: not-allowed;
-    opacity: 0.6;
+/* ============================================
+   MASCOT
+   ============================================ */
+
+.mascot-guide {
+    position: fixed;
+    bottom: 120px;
+    left: 40px;
+    z-index: 50;
+    text-align: center;
 }
 
-.next-btn {
-    background-color: #1cb0f6;
-    box-shadow: 0 4px 0 #0e7fb0;
+.mascot-image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    animation: float 3s ease-in-out infinite;
 }
 
-.next-btn:hover {
-    background-color: #1ec5ff;
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
 }
 
-.next-btn:active {
-    box-shadow: 0 2px 0 #0e7fb0;
-    transform: translateY(2px);
-}
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
 
-.next-btn:disabled {
-    background-color: #3d4a5c;
-    box-shadow: 0 4px 0 #1e2633;
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.fade-up {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.6s ease-out forwards;
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+@media (max-width: 1024px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+        max-width: 700px;
     }
 }
 
 @media (max-width: 768px) {
-    .teacher-section-lecture {
-        flex-direction: column;
-        align-items: center;
+    .cards-container {
+        grid-template-columns: 1fr;
     }
-
-    .teacher-image-lecture {
-        width: 180px;
-        height: 180px;
+    
+    .lecture-header {
+        padding: 15px 20px;
     }
-
-    .teacher-bubble-lecture {
+    
+    .lecture-logo {
+        font-size: 20px;
+    }
+    
+    .progress-bar-mini {
+        width: 100px;
+    }
+    
+    .lecture-card {
         padding: 24px;
-        min-height: 120px;
+        min-width: 100%;
     }
-
-    .teacher-bubble-lecture::before {
-        top: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        border-top: none;
-        border-bottom: 15px solid #4a5f7f;
-        border-left: 15px solid transparent;
-        border-right: 15px solid transparent;
+    
+    .lecture-card h1 {
+        font-size: 22px;
     }
-
-    .teacher-instruction-lecture {
+    
+    .lecture-card h2 {
         font-size: 18px;
     }
-
-    .lecture-footer {
+    
+    .lecture-card p, .lecture-card li {
+        font-size: 14px;
+    }
+    
+    .mascot-guide {
+        display: none;
+    }
+    
+    .lecture-nav-footer {
+        padding: 15px 20px;
         flex-direction: column;
-        gap: 15px;
+        gap: 10px;
     }
-
-    .skip-btn-container, .nav-buttons-container {
+    
+    .nav-btn {
         width: 100%;
-    }
-
-    .nav-buttons-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .back-btn, .skip-btn, .next-btn {
-        width: 100%;
-        padding: 16px 48px;
-        font-size: 16px;
+        justify-content: center;
     }
 }
-

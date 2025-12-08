@@ -2,15 +2,15 @@
 document.addEventListener('DOMContentLoaded', function() {
     const levelNodes = document.querySelectorAll('.level-node');
     
-    // Map node indices to HTML files in order
+    // Map node indices to new universal view files with level IDs
     const nodeFileMap = [
-        'html/stage-001-lec.php',
-        'html/stage-002-mc.php',
-        'html/stage-003-lec.php',
-        'html/stage-004-fb.php',
-        'html/stage-005-lec.php',
-        'html/stage-006-ac.php',
-        'html/stage-007-lec.php'
+        'lecture.php?id=1',    // Level 1: Lecture
+        'activity.php?id=2',   // Level 2: Multiple Choice
+        'lecture.php?id=3',    // Level 3: Lecture
+        'activity.php?id=4',   // Level 4: Fill-Blank
+        'lecture.php?id=5',    // Level 5: Lecture
+        'activity.php?id=6',   // Level 6: Code Editor
+        'lecture.php?id=7'     // Level 7: Lecture
     ];
     
     // Helper: route through loading screen for a brief delay

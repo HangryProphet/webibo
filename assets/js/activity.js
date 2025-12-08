@@ -92,16 +92,43 @@
     // Initialize code editor activity
     function initCodeEditor() {
         const codeInput = document.getElementById('codeInput');
+        const livePreviewFrame = document.getElementById('livePreviewFrame');
+        
         if (!codeInput) return;
 
-        // Enable check button when user types
-        codeInput.addEventListener('input', function() {
-            const value = this.value.trim();
-            const checkBtn = document.getElementById('checkBtn');
-            if (checkBtn) {
-                checkBtn.disabled = value === '';
-            }
-        });
+        // Setup live preview functionality
+        if (livePreviewFrame) {
+            codeInput.addEventListener('input', function() {
+                const userCode = codeInput.value;
+                const checkBtn = document.getElementById('checkBtn');
+                
+                // Enable/disable check button
+                if (checkBtn) {
+                    checkBtn.disabled = userCode.trim() === '';
+                }
+                
+                // Update live preview in iframe
+                try {
+                    const previewDocument = livePreviewFrame.contentDocument || livePreviewFrame.contentWindow.document;
+                    
+                    // Write user code directly to iframe
+                    previewDocument.open();
+                    previewDocument.write(userCode);
+                    previewDocument.close();
+                } catch (e) {
+                    console.error('Error updating live preview:', e);
+                }
+            });
+        } else {
+            // Fallback if no iframe (old code)
+            codeInput.addEventListener('input', function() {
+                const value = this.value.trim();
+                const checkBtn = document.getElementById('checkBtn');
+                if (checkBtn) {
+                    checkBtn.disabled = value === '';
+                }
+            });
+        }
 
         // Focus on textarea when page loads
         window.addEventListener('load', function() {
@@ -175,6 +202,7 @@
         if (!userCode) return;
 
         pendingSkip = false;
+        selectedAnswer = userCode;
 
         // Disable textarea and check button
         codeInput.disabled = true;
@@ -189,31 +217,32 @@
             submittedCode.value = userCode;
         }
 
-        // Show output container
-        const outputContainer = document.getElementById('outputContainer');
-        const outputDisplay = document.getElementById('outputDisplay');
-        if (outputContainer && outputDisplay) {
-            outputContainer.classList.add('active');
+        // Update progress bar
+        updateProgress();
 
-            // Update progress bar
-            updateProgress();
+        // Validate the code
+        let codeToCheck = userCode;
+        let expectedCode = correctAnswer;
 
-            if (userCode === correctAnswer) {
-                // Correct code - render the output
-                isCorrect = true;
-                outputDisplay.className = 'output-display';
-                outputDisplay.innerHTML = userCode;
-                handleCorrectAnswer();
-            } else {
-                // Incorrect code - show error
-                isCorrect = false;
-                outputDisplay.className = 'output-display error';
-                outputDisplay.textContent = 'Error: Your code doesn\'t match the expected output. Please try again!';
-                
-                // Decrease hearts
-                decreaseHearts();
-                handleWrongAnswer();
+        // Apply validation rules if they exist
+        if (config.validation) {
+            if (config.validation.ignore_whitespace) {
+                codeToCheck = codeToCheck.replace(/\s+/g, '');
+                expectedCode = expectedCode.replace(/\s+/g, '');
             }
+            if (config.validation.case_sensitive === false) {
+                codeToCheck = codeToCheck.toLowerCase();
+                expectedCode = expectedCode.toLowerCase();
+            }
+        }
+
+        // Check if code is correct
+        if (codeToCheck === expectedCode) {
+            isCorrect = true;
+            handleCorrectAnswer();
+        } else {
+            isCorrect = false;
+            handleWrongAnswer();
         }
 
         // Hide skip button
@@ -471,14 +500,8 @@
     };
 
     window.exitToDashboard = function() {
-        // Get current path and navigate to dashboard (one level up from html folder)
-        const currentPath = window.location.pathname;
-        const pathParts = currentPath.split('/');
-        // Remove the html folder and filename, then add dashboard.php
-        const basePath = pathParts.slice(0, -2).join('/');
-        // Show loading screen before navigating to dashboard
-        const loadingUrl = `${basePath}/loading_screen.php?redirect=${encodeURIComponent('dashboard.php')}`;
-        window.location.href = loadingUrl;
+        // Simple redirect to dashboard
+        window.location.href = 'dashboard.php';
     };
 
     // Setup exit modal handlers
