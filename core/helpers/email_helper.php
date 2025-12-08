@@ -32,12 +32,12 @@ function sendVerificationEmail(string $recipientEmail, string $recipientName, st
         $mail->Port       = (int)($_ENV['SMTP_PORT'] ?? 587);
         
         // Recipients
-        $mail->setFrom($_ENV['SMTP_FROM'] ?? $_ENV['SMTP_USER'], 'CodeCodex Team');
+        $mail->setFrom($_ENV['SMTP_FROM'] ?? $_ENV['SMTP_USER'], 'Webibo Team');
         $mail->addAddress($recipientEmail, $recipientName);
         
         // Content
         $mail->isHTML(true);
-        $mail->Subject = 'Verify Your Email for CodeCodex';
+        $mail->Subject = 'Verify Your Email for Webibo';
         
         // Construct verification URL
         $baseUrl = $_ENV['APP_URL'] ?? 'http://localhost/Webibo';
@@ -138,12 +138,12 @@ function sendVerificationEmail(string $recipientEmail, string $recipientName, st
         <body>
             <div class="container">
                 <div class="header">
-                    <h1>🎓 CodeCodex</h1>
+                    <h1>🎓 Webibo</h1>
                 </div>
                 <div class="content">
                     <div class="greeting">Hi ' . htmlspecialchars($recipientName) . '! 👋</div>
                     <div class="message">
-                        Welcome to <strong>CodeCodex</strong>! We\'re excited to have you join our learning community.
+                        Welcome to <strong>Webibo</strong>! We\'re excited to have you join our learning community.
                         <br><br>
                         To get started, please verify your email address by clicking the button below:
                     </div>
@@ -160,11 +160,11 @@ function sendVerificationEmail(string $recipientEmail, string $recipientName, st
                         ' . htmlspecialchars($verificationUrl) . '
                     </div>
                     <div class="message">
-                        If you didn\'t create an account with CodeCodex, you can safely ignore this email.
+                        If you didn\'t create an account with Webibo, you can safely ignore this email.
                     </div>
                 </div>
                 <div class="footer">
-                    © ' . date('Y') . ' CodeCodex. All rights reserved.<br>
+                    © ' . date('Y') . ' Webibo. All rights reserved.<br>
                     Happy learning! 🚀
                 </div>
             </div>
@@ -174,12 +174,12 @@ function sendVerificationEmail(string $recipientEmail, string $recipientName, st
         
         // Plain text alternative
         $mail->AltBody = "Hi $recipientName!\n\n"
-                       . "Welcome to CodeCodex! Please verify your email address by clicking this link:\n\n"
+                       . "Welcome to Webibo! Please verify your email address by clicking this link:\n\n"
                        . "$verificationUrl\n\n"
                        . "This link will expire in 24 hours.\n\n"
                        . "If you didn't create an account, you can safely ignore this email.\n\n"
                        . "Happy learning!\n"
-                       . "The CodeCodex Team";
+                       . "The Webibo Team";
         
         $mail->send();
         return true;

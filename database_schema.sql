@@ -1,10 +1,6 @@
--- Webibo Database Schema
--- Run this in phpMyAdmin or MySQL command line
-
-CREATE DATABASE IF NOT EXISTS webibo;
+CREATE DATABASE webibo;
 USE webibo;
 
--- Users Table
 CREATE TABLE `users` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `username` VARCHAR(50) NOT NULL UNIQUE,
@@ -17,7 +13,6 @@ CREATE TABLE `users` (
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- User Stats Table
 CREATE TABLE `user_stats` (
     `user_id` INT UNSIGNED NOT NULL PRIMARY KEY,
     `xp_points` INT UNSIGNED NOT NULL DEFAULT 0,
@@ -26,20 +21,12 @@ CREATE TABLE `user_stats` (
     `last_login_date` DATE NULL
 ) ENGINE=InnoDB;
 
--- Courses Table
 CREATE TABLE `courses` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `title` VARCHAR(100) NOT NULL,
     `description` TEXT NULL
 ) ENGINE=InnoDB;
 
--- Insert courses
-INSERT INTO courses (title, description) VALUES
-('HTML Basics', 'Learn the fundamentals of HTML'),
-('CSS Styling', 'Master CSS for beautiful web designs'),
-('JavaScript Fundamentals', 'Learn JavaScript programming basics');
-
--- Levels Table
 CREATE TABLE `levels` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `course_id` INT UNSIGNED NOT NULL,
@@ -50,7 +37,6 @@ CREATE TABLE `levels` (
     `parent_level_id` INT UNSIGNED NULL
 ) ENGINE=InnoDB;
 
--- User Progress Table
 CREATE TABLE `user_progress` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT UNSIGNED NOT NULL,
@@ -59,7 +45,6 @@ CREATE TABLE `user_progress` (
     UNIQUE KEY `uk_user_level` (`user_id`, `level_id`)
 ) ENGINE=InnoDB;
 
--- Achievements Table
 CREATE TABLE `achievements` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `title` VARCHAR(100) NOT NULL,
@@ -67,7 +52,6 @@ CREATE TABLE `achievements` (
     `icon_path` VARCHAR(255) NULL
 ) ENGINE=InnoDB;
 
--- User Achievements Table
 CREATE TABLE `user_achievements` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT UNSIGNED NOT NULL,
@@ -75,7 +59,6 @@ CREATE TABLE `user_achievements` (
     `earned_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- Email Verifications Table
 CREATE TABLE `email_verifications` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT UNSIGNED NOT NULL,
@@ -83,7 +66,6 @@ CREATE TABLE `email_verifications` (
     `expires_at` TIMESTAMP NOT NULL
 ) ENGINE=InnoDB;
 
--- Password Resets Table
 CREATE TABLE `password_resets` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT UNSIGNED NOT NULL,
@@ -91,7 +73,6 @@ CREATE TABLE `password_resets` (
     `expires_at` TIMESTAMP NOT NULL
 ) ENGINE=InnoDB;
 
--- Foreign Key Constraints
 ALTER TABLE `user_stats` ADD CONSTRAINT `fk_stats_user` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE;
 ALTER TABLE `levels` ADD CONSTRAINT `fk_level_course` FOREIGN KEY (`course_id`) REFERENCES `courses`(`id`);
 ALTER TABLE `levels` ADD CONSTRAINT `fk_level_parent` FOREIGN KEY (`parent_level_id`) REFERENCES `levels`(`id`) ON DELETE SET NULL;
