@@ -6,7 +6,7 @@
  * This is a temporary mock model that simulates database operations using a static array.
  * This will be replaced with actual database operations in the future.
  */
-class UserModela
+class UserModel
 {
     /**
      * Mock database - Static array to simulate user storage
