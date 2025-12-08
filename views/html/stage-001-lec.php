@@ -3,7 +3,7 @@ session_start();
 
 // Check if user is logged in
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit;
 }
 ?>
@@ -14,8 +14,8 @@ if (!isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML Basics - Lecture - WebQuest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/activity.css">
-    <link rel="stylesheet" href="../assets/css/lecture.css">
+    <link rel="stylesheet" href="../../assets/css/activity.css">
+    <link rel="stylesheet" href="../../assets/css/lecture.css">
 </head>
 <body>
     <!-- Header -->
@@ -40,8 +40,8 @@ if (!isset($_SESSION['user'])) {
     <div class="main-content">
         <div class="lecture-container">
             <!-- Wiza Teacher Section -->
-            <div class="teacher-section-lecture">
-                <img src="../assets/img/wiza/wiza-teach.png" alt="Wiza Teacher" class="teacher-image-lecture" id="wizaImage">
+            <div class="teacher-section-lecture fade-up">
+                <img src="../../assets/img/wiza/wiza-teach.png" alt="Wiza Teacher" class="teacher-image-lecture" id="wizaImage">
                 <div class="teacher-bubble-lecture">
                     <div class="teacher-name-lecture">Wiza</div>
                     <div class="teacher-instruction-lecture" id="lectureText">
@@ -66,7 +66,7 @@ if (!isset($_SESSION['user'])) {
     <!-- Exit Confirmation Modal -->
     <div class="modal-overlay" id="exitModal">
         <div class="modal-content">
-            <img src="../assets/img/wiza/wiza-sad.png" alt="Wiza Sad" class="modal-image">
+            <img src="../../assets/img/wiza/wiza-sad.png" alt="Wiza Sad" class="modal-image">
             <h2 class="modal-title">Hold on! Leaving now will reset your current progress.</h2>
             <p class="modal-message">Do you still want to end this session?</p>
             <div class="modal-buttons">
@@ -76,7 +76,7 @@ if (!isset($_SESSION['user'])) {
         </div>
     </div>
 
-    <script src="../assets/js/lecture.js"></script>
+    <script src="../../assets/js/lecture.js"></script>
 </body>
 </html>
 

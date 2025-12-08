@@ -321,7 +321,7 @@
             if (config.hasEnemy !== false) {
                 const enemyImage = document.getElementById('enemyImage');
                 if (enemyImage) {
-                    enemyImage.src = '../assets/img/enemies/fox-angry.png';
+                    enemyImage.src = '../../assets/img/enemies/fox-angry.png';
                 }
 
                 // Decrease enemy HP
@@ -338,7 +338,7 @@
             if (config.hasEnemy !== false) {
                 const enemyImage = document.getElementById('enemyImage');
                 if (enemyImage) {
-                    enemyImage.src = '../assets/img/enemies/fox-angry.png';
+                    enemyImage.src = '../../assets/img/enemies/bear-angry.png';
                 }
 
                 // Decrease enemy HP
@@ -471,7 +471,14 @@
     };
 
     window.exitToDashboard = function() {
-        window.location.href = 'dashboard.php';
+        // Get current path and navigate to dashboard (one level up from html folder)
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/');
+        // Remove the html folder and filename, then add dashboard.php
+        const basePath = pathParts.slice(0, -2).join('/');
+        // Show loading screen before navigating to dashboard
+        const loadingUrl = `${basePath}/loading_screen.php?redirect=${encodeURIComponent('dashboard.php')}`;
+        window.location.href = loadingUrl;
     };
 
     // Setup exit modal handlers

@@ -34,7 +34,7 @@ body {
 .top-btn {
     background-color: #2d3949;
     border: 2px solid #2d3949;
-    width: 72px;
+    min-width: 48px;
     height: 48px;
     border-radius: 16px;
     display: flex;
@@ -47,6 +47,7 @@ body {
     font-size: 18px;
     box-shadow: 0 4px 0 #1e2633;
     padding: 0 12px;
+    white-space: nowrap;
 }
 
 .top-btn:hover {
@@ -59,16 +60,16 @@ body {
     font-size: 20px;
 }
 
-.lessons-btn i {
-    color: #e34c26;
+.xp-btn i {
+    color: #ffc800;
 }
 
 .streak-btn i {
     color: #ff9600;
 }
 
-.hearts-btn i {
-    color: #ff4b4b;
+.badges-btn i {
+    color: #fbbf24;
 }
 
 .btn-count {
@@ -110,78 +111,37 @@ body {
     margin-bottom: 16px;
 }
 
-/* Lessons Popup */
-.course-list {
+/* XP Popup */
+.xp-display {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 16px;
 }
 
-.course-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    background-color: #2d3949;
-    border-radius: 12px;
-    transition: all 0.2s;
-    cursor: pointer;
-}
-
-.course-item:hover {
-    background-color: #3d4a5c;
-    transform: translateX(4px);
-}
-
-.course-icon {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-}
-
-.course-item:nth-child(1) .course-icon {
-    color: #e34c26;
-}
-
-.course-item:nth-child(2) .course-icon {
-    color: #1572b6;
-}
-
-.course-item:nth-child(3) .course-icon {
-    color: #f7df1e;
-}
-
-.course-name {
-    font-size: 15px;
+.xp-number {
+    font-size: 32px;
     font-weight: 700;
-    color: #ffffff;
+    color: #ffc800;
 }
 
-.add-course-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: transparent;
-    border: 2px dashed #3d4a5c;
-    border-radius: 12px;
-    color: #8b95a5;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
+.xp-icon {
+    width: 56px;
+    height: 56px;
+    background-color: #2d3949;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    font-size: 28px;
+    color: #ffc800;
 }
 
-.add-course-btn:hover {
-    border-color: #1cb0f6;
-    color: #1cb0f6;
-    background-color: rgba(28, 176, 246, 0.1);
+.xp-message {
+    font-size: 14px;
+    color: #8b95a5;
+    text-align: center;
+    line-height: 1.4;
 }
 
 /* Streak Popup */
@@ -314,7 +274,7 @@ body {
     color: #6b7280;
 }
 
-/* Hearts Popup */
+/* Badges Popup */
 .popup-title {
     font-size: 22px;
     font-weight: 700;
@@ -323,38 +283,32 @@ body {
     margin-bottom: 20px;
 }
 
-.hearts-display {
+.badges-display {
     display: flex;
-    justify-content: center;
-    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 16px;
 }
 
-.hearts-display i {
+.badges-number {
     font-size: 32px;
-}
-
-.hearts-display i.filled {
-    color: #ff4b4b;
-}
-
-.hearts-display i.empty {
-    color: #3d4a5c;
-}
-
-.next-heart {
-    font-size: 16px;
     font-weight: 700;
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 12px;
+    color: #fbbf24;
 }
 
-.heart-timer {
-    color: #ff9600;
+.badges-icon {
+    width: 56px;
+    height: 56px;
+    background-color: #2d3949;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #fbbf24;
 }
 
-.hearts-message {
+.badges-message {
     font-size: 14px;
     color: #8b95a5;
     text-align: center;
@@ -772,7 +726,7 @@ body {
     }
 
     .top-btn {
-        width: 64px;
+        min-width: 48px;
         height: 44px;
     }
 }
@@ -843,7 +797,7 @@ body {
     }
 
     .top-btn {
-        width: 58px;
+        min-width: 44px;
         height: 40px;
     }
 
@@ -931,7 +885,8 @@ body {
     }
 
     .top-btn {
-        width: 56px;
+        min-width: 40px;
         height: 38px;
+        padding: 0 8px;
     }
 }
