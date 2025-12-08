@@ -3,7 +3,7 @@ session_start();
 
 // Check if user is logged in
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit;
 }
 
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($submitted_code === $correct_code) {
             // Correct answer - move to next question
             $_SESSION['current_question'] = $current_question + 1;
-            header("Location: activity2.php");
+            header("Location: stage-006-act.php");
             exit;
         } else {
             // Wrong answer - decrease hearts
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hearts = $_SESSION['hearts'];
             if ($hearts <= 0) {
                 // Game over
-                header("Location: gameover.php");
+                header("Location: ../gameover.php");
                 exit;
             }
         }
@@ -37,12 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hearts = $_SESSION['hearts'];
 
         if ($hearts <= 0) {
-            header("Location: gameover.php");
+            header("Location: ../gameover.php");
             exit;
         }
 
         $_SESSION['current_question'] = $current_question + 1;
-        header("Location: activity2.php");
+        header("Location: stage-006-act.php");
         exit;
     }
 }
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The HTML Forest - Level 2 - WebQuest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/activity.css">
+    <link rel="stylesheet" href="../../assets/css/activity.css">
 </head>
 <body>
     <!-- Header -->
@@ -79,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="main-content code-editor">
         <div class="quiz-container code-editor">
             <!-- Wiza Teacher Section -->
-            <div class="teacher-section">
-                <img src="../assets/img/wiza/wiza-teach.png" alt="Wiza Teacher" class="teacher-image">
+            <div class="teacher-section fade-up">
+                <img src="../../assets/img/wiza/wiza-teach.png" alt="Wiza Teacher" class="teacher-image">
                 <div class="teacher-bubble">
                     <div class="teacher-name">Wiza</div>
                     <div class="teacher-instruction">
@@ -90,8 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <!-- Code Editor Section -->
-            <div class="editor-section">
-                <h2 class="question-title">Write your first HTML heading</h2>
+            <div class="editor-section fade-up">
+                <h2 class="question-title fade-up">Write your first HTML heading</h2>
                 
                 <form method="POST" action="" id="quizForm">
                     <!-- Code Editor -->
@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Exit Confirmation Modal -->
     <div class="modal-overlay" id="exitModal">
         <div class="modal-content">
-            <img src="../assets/img/wiza/wiza-sad.png" alt="Wiza Sad" class="modal-image">
+            <img src="../../assets/img/wiza/wiza-sad.png" alt="Wiza Sad" class="modal-image">
             <h2 class="modal-title">Hold on! Leaving now will reset your current progress.</h2>
             <p class="modal-message">Do you still want to end this session?</p>
             <div class="modal-buttons">
@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             correctAnswer: '<?php echo $correct_code; ?>',
             currentHearts: <?php echo $hearts; ?>,
             currentProgress: <?php echo $current_question - 1; ?>, // Progress out of 10 (0-10)
-            redirectUrl: 'activity2.php',
+            redirectUrl: 'stage-006-ac.php',
             enemyHP: 10,
             hasEnemy: false,
             correctTitle: 'Excellent work!',
@@ -181,6 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             `
         };
     </script>
-    <script src="../assets/js/activity.js"></script>
+    <script src="../../assets/js/activity.js"></script>
 </body>
 </html>
+

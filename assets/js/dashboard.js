@@ -2,15 +2,33 @@
 document.addEventListener('DOMContentLoaded', function() {
     const levelNodes = document.querySelectorAll('.level-node');
     
+    // Map node indices to HTML files in order
+    const nodeFileMap = [
+        'html/stage-001-lec.php',
+        'html/stage-002-mc.php',
+        'html/stage-003-lec.php',
+        'html/stage-004-fb.php',
+        'html/stage-005-lec.php',
+        'html/stage-006-ac.php',
+        'html/stage-007-lec.php'
+    ];
+    
+    // Helper: route through loading screen for a brief delay
+    function redirectWithLoading(targetPath) {
+        const loadingUrl = `loading_screen.php?redirect=${encodeURIComponent(targetPath)}`;
+        window.location.href = loadingUrl;
+    }
+    
     levelNodes.forEach((node, index) => {
-        // Only make clickable if not locked
-        if (!node.classList.contains('locked')) {
-            node.style.cursor = 'pointer';
-            node.addEventListener('click', function() {
-                const adventureNumber = index + 1;
-                window.location.href = `adventure${adventureNumber}.php`;
-            });
-        }
+        // Always enable nodes and show them as completed
+        node.classList.remove('locked', 'current');
+        node.classList.add('completed');
+        node.style.cursor = 'pointer';
+        node.addEventListener('click', function() {
+            // Use the mapped file if available, otherwise fallback to index-based naming
+            const filePath = nodeFileMap[index] || `html/stage-${String(index + 1).padStart(3, '0')}-act.php`;
+            redirectWithLoading(filePath);
+        });
     });
 
     // Scroll to current level node on mobile view

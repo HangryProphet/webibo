@@ -13,27 +13,21 @@
 
     <!-- Top Right Buttons -->
     <div class="top-right-buttons">
-        <!-- Lessons Button -->
+        <!-- XP Button -->
         <div class="top-btn-wrapper">
-            <button class="top-btn lessons-btn">
-                <i class="fab fa-html5"></i>
+            <button class="top-btn xp-btn">
+                <i class="fas fa-star"></i>
+                <span class="btn-count"><?php echo number_format($userStats['total_xp'] ?? 0); ?></span>
             </button>
-            <div class="hover-popup lessons-popup">
-                <div class="popup-header">MY COURSES</div>
-                <div class="course-list">
-                    <?php if (!empty($userStats['courses'])): ?>
-                        <?php foreach ($userStats['courses'] as $course): ?>
-                            <?php if ($course['enrolled']): ?>
-                                <div class="course-item">
-                                    <div class="course-icon">
-                                        <i class="fab <?php echo htmlspecialchars($course['icon']); ?>"></i>
-                                    </div>
-                                    <span class="course-name"><?php echo htmlspecialchars($course['name']); ?></span>
-                                </div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
+            <div class="hover-popup xp-popup">
+                <div class="popup-header">TOTAL XP EARNED</div>
+                <div class="xp-display">
+                    <div class="xp-number"><?php echo number_format($userStats['total_xp'] ?? 0); ?></div>
+                    <div class="xp-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
                 </div>
+                <div class="xp-message">Keep learning to earn more XP!</div>
             </div>
         </div>
 
@@ -72,25 +66,21 @@
             </div>
         </div>
 
-        <!-- Hearts Button -->
+        <!-- Badges Button -->
         <div class="top-btn-wrapper">
-            <button class="top-btn hearts-btn">
-                <i class="fas fa-heart"></i>
-                <span class="btn-count"><?php echo htmlspecialchars($userStats['hearts']['current']); ?></span>
+            <button class="top-btn badges-btn">
+                <i class="fas fa-trophy"></i>
+                <span class="btn-count"><?php echo htmlspecialchars($userStats['total_badges'] ?? 0); ?></span>
             </button>
-            <div class="hover-popup hearts-popup">
-                <div class="popup-title">Hearts</div>
-                <div class="hearts-display">
-                    <?php 
-                    $maxHearts = 5; // Display max 5 hearts in UI
-                    $currentHearts = $userStats['hearts']['current'];
-                    for ($i = 0; $i < $maxHearts; $i++): 
-                    ?>
-                        <i class="fas fa-heart <?php echo ($i < $currentHearts) ? 'filled' : 'empty'; ?>"></i>
-                    <?php endfor; ?>
+            <div class="hover-popup badges-popup">
+                <div class="popup-title">Total Badges Earned</div>
+                <div class="badges-display">
+                    <div class="badges-number"><?php echo htmlspecialchars($userStats['total_badges'] ?? 0); ?></div>
+                    <div class="badges-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
                 </div>
-                <div class="next-heart">Next heart in <span class="heart-timer"><?php echo formatTimeRemaining($userStats['hearts']['next_heart_in_seconds']); ?></span></div>
-                <div class="hearts-message">You still have hearts left! Keep on learning</div>
+                <div class="badges-message">Complete achievements to earn more badges!</div>
             </div>
         </div>
     </div>
@@ -102,7 +92,7 @@
             </button>
             
             <div class="lesson-title-wrapper">
-                <div class="lesson-subtitle">SECTION 1, UNIT 1</div>
+                <div class="lesson-subtitle">SECTION 1</div>
                 <div class="lesson-title">The HTML Forest</div>
             </div>
             
@@ -115,7 +105,8 @@
             <div class="roadmap">
                 <?php if (!empty($userProgress)): ?>
                     <?php foreach ($userProgress as $level): ?>
-                        <div class="level-node <?php echo htmlspecialchars($level['status']); ?>" 
+                        <?php $status = 'completed'; ?>
+                        <div class="level-node <?php echo htmlspecialchars($status); ?>" 
                              style="left: <?php echo htmlspecialchars($level['position']['left']); ?>px; top: <?php echo htmlspecialchars($level['position']['top']); ?>px;"
                              data-level-id="<?php echo htmlspecialchars($level['level_id']); ?>">
                             <i class="fas <?php echo getLevelIcon($level['type']); ?>"></i>

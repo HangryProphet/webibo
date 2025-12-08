@@ -1,16 +1,16 @@
 // Lecture stages
-const lectureStages = [
+let lectureStages = [
     {
         text: "Hello! Are you ready to learn HTML?"
     },
     {
-        text: "HTML stands for <strong>HyperText Markup Language</strong>. It is the standard markup language for creating web pages and web applications."
+        text: "blah blah blah"
     },
     {
-        text: "Let's learn first the basics of HTML. HTML uses <strong>tags</strong> to structure content. Tags are written with angle brackets like <code>&lt;tag&gt;</code>."
+        text: "blah blah blah"
     },
     {
-        text: "Most HTML tags come in pairs: an opening tag and a closing tag. For example, <code>&lt;h1&gt;</code> opens a heading, and <code>&lt;/h1&gt;</code> closes it. The content goes between them!"
+        text: "blah blah blah"
     },
     {
         text: "Great! Now you understand the basics. HTML is the foundation of every webpage. Ready to practice? Let's start coding!"
@@ -32,12 +32,26 @@ const wizaImages = [
     'wiza-teach.png'
 ];
 
+// Load any per-page configuration
+let lectureConfig = window.lectureConfig || {};
+
+function applyLectureConfig() {
+    // Allow pages to override stages or other settings
+    if (window.lectureConfig) {
+        lectureConfig = window.lectureConfig;
+    }
+    if (lectureConfig.stages && Array.isArray(lectureConfig.stages) && lectureConfig.stages.length) {
+        lectureStages = lectureConfig.stages;
+    }
+}
+
 // Initialize progress bar
 function initProgressBar() {
     const progressFill = document.getElementById('progressFill');
     if (progressFill) {
-        // Set progress based on current stage (0-4 stages, so 0-80% for lecture)
-        const progress = (currentStage / 5) * 100;
+        // Set progress based on current stage and total slides
+        const totalStages = Math.max(1, lectureStages.length);
+        const progress = (currentStage / totalStages) * 100;
         progressFill.style.width = progress + '%';
     }
 }
@@ -187,13 +201,44 @@ function skipAnimation() {
     // Update next button text if on last stage
     const nextBtn = document.getElementById('nextBtn');
     if (nextBtn && currentStage === lectureStages.length - 1) {
-        nextBtn.textContent = 'START PRACTICE';
+        nextBtn.textContent = 'FINISH';
     }
+}
+
+// Helper function to convert lecture filename to activity filename
+function getActivityFromLecture(lectureFileName) {
+    // First, check if a target is explicitly specified in window.lectureConfig
+    // This allows each lecture file to specify its target activity for edge cases
+    if (window.lectureConfig && window.lectureConfig.targetActivity) {
+        return window.lectureConfig.targetActivity;
+    }
+    
+    // Pattern-based approach: Extract stage number from lecture file
+    // Supports: stage-XXX-lec.php -> stage-XXX-act.php or stage-YYY-act.php
+    const match = lectureFileName.match(/^stage-(\d+)-lec\.php$/);
+    if (match) {
+        const stageNum = parseInt(match[1]);
+        
+        // Check if there's an offset config (for cases where numbers don't match)
+        if (window.lectureConfig && window.lectureConfig.activityStageOffset !== undefined) {
+            const targetStageNum = stageNum + window.lectureConfig.activityStageOffset;
+            return `stage-${String(targetStageNum).padStart(3, '0')}-act.php`;
+        }
+        
+        // Lecture stage number + 1 = Activity stage number
+        // stage-001-lec -> stage-002-act, stage-003-lec -> stage-004-act, etc.
+        const targetStageNum = stageNum + 1;
+        return `stage-${String(targetStageNum).padStart(3, '0')}-act.php`;
+    }
+    
+    // Fallback: simple string replacement for any naming pattern
+    return lectureFileName.replace('-lec.php', '-act.php');
 }
 
 // Skip lecture function - redirects to activity
 function skipLecture() {
-    window.location.href = 'adventure1.php';
+    // On skip, return to dashboard instead of jumping to an activity
+    exitToDashboard();
 }
 
 // Previous stage function
@@ -228,8 +273,8 @@ function nextStage() {
         updateProgressBar();
         updateButtonStates();
     } else {
-        // Last stage - redirect to activity or next page
-        window.location.href = 'adventure1.php';
+        // Last stage - send learner back to dashboard
+        exitToDashboard();
     }
 }
 
@@ -259,14 +304,30 @@ function updateButtonStates() {
 function updateLectureContent() {
     const typewriterText = document.getElementById('typewriterText');
     const nextBtn = document.getElementById('nextBtn');
+    const cursor = document.getElementById('typewriterCursor');
     
     if (typewriterText && currentStage < lectureStages.length) {
         const text = lectureStages[currentStage].text;
+        
+        // Static mode: render content immediately without animation
+        if (lectureConfig && lectureConfig.disableAnimation) {
+            typewriterText.innerHTML = text;
+            if (cursor) {
+                cursor.style.display = 'none';
+            }
+            isTyping = false;
+            if (nextBtn && currentStage === lectureStages.length - 1) {
+                nextBtn.textContent = 'FINISH';
+            }
+            updateButtonStates();
+            return;
+        }
+
         // Speed will be calculated automatically based on text length
         typeWriter(text, typewriterText, 30, function() {
             // Update button text on last stage after typing completes
             if (nextBtn && currentStage === lectureStages.length - 1) {
-                nextBtn.textContent = 'START PRACTICE';
+                nextBtn.textContent = 'FINISH';
             }
             updateButtonStates();
         });
@@ -277,7 +338,8 @@ function updateLectureContent() {
 function updateProgressBar() {
     const progressFill = document.getElementById('progressFill');
     if (progressFill) {
-        const progress = ((currentStage + 1) / lectureStages.length) * 100;
+        const totalStages = Math.max(1, lectureStages.length);
+        const progress = ((currentStage + 1) / totalStages) * 100;
         progressFill.style.width = progress + '%';
     }
 }
@@ -286,7 +348,7 @@ function updateProgressBar() {
 function updateWizaImage() {
     const wizaImage = document.getElementById('wizaImage');
     if (wizaImage && currentStage < wizaImages.length) {
-        wizaImage.src = '../assets/img/wiza/' + wizaImages[currentStage];
+        wizaImage.src = '../../assets/img/wiza/' + wizaImages[currentStage];
     }
 }
 
@@ -306,7 +368,14 @@ function closeModal() {
 }
 
 function exitToDashboard() {
-    window.location.href = 'dashboard.php';
+    // Get current path and navigate to dashboard (one level up from html folder)
+    const currentPath = window.location.pathname;
+    const pathParts = currentPath.split('/');
+    // Remove the html folder and filename, then add dashboard.php
+    const basePath = pathParts.slice(0, -2).join('/');
+    // Route through loading screen for a brief pause
+    const loadingUrl = `${basePath}/loading_screen.php?redirect=${encodeURIComponent('dashboard.php')}`;
+    window.location.href = loadingUrl;
 }
 
 // Setup exit modal handlers
@@ -331,6 +400,7 @@ function setupExitModal() {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
+    applyLectureConfig();
     initProgressBar();
     setupExitModal();
     updateButtonStates();
