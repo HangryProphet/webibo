@@ -458,3 +458,148 @@ input[type="submit"].signup-btn:active {
     line-height: 1.5;
 }
 
+/* ============================================
+   OTP / EMAIL VERIFICATION PAGE
+   ============================================ */
+.logo-section {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.logo-icon {
+    font-size: 64px;
+    color: #1cb0f6;
+    margin-bottom: 16px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 15px;
+    color: #8b95a5;
+    margin-bottom: 8px;
+}
+
+.email-display {
+    text-align: center;
+    font-size: 16px;
+    color: #1cb0f6;
+    font-weight: 700;
+    margin-bottom: 32px;
+}
+
+.info-box {
+    background-color: rgba(28, 176, 246, 0.1);
+    border: 2px solid rgba(28, 176, 246, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.info-box i {
+    font-size: 24px;
+    color: #1cb0f6;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.info-box strong {
+    color: #1cb0f6;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.info-box ol {
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.expiry-notice {
+    background-color: rgba(245, 158, 11, 0.1);
+    border: 2px solid rgba(245, 158, 11, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 14px;
+    color: #fbbf24;
+}
+
+.expiry-notice i {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.help-section {
+    background-color: #2d3949;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.help-section p {
+    font-size: 14px;
+    color: #8b95a5;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.help-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.help-section ul li {
+    font-size: 13px;
+    color: #ffffff;
+    padding: 8px 0;
+    padding-left: 24px;
+    position: relative;
+}
+
+.help-section ul li:before {
+    content: "•";
+    position: absolute;
+    left: 8px;
+    color: #1cb0f6;
+    font-size: 16px;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.btn-secondary {
+    flex: 1;
+    padding: 16px;
+    background-color: transparent;
+    border: 2px solid #3d4a5c;
+    border-radius: 12px;
+    color: #8b95a5;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.1s;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(61, 74, 92, 0.3);
+    border-color: #4b5768;
+    color: #9ca3af;
+}

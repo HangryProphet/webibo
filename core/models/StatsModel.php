@@ -1,192 +1,213 @@
 <?php
 
 /**
- * StatsModel - Mock Stats Model (Prototype)
+ * StatsModel - Database-Driven Stats Model
  * 
- * This is a temporary mock model that simulates user statistics using a static array.
- * Handles hearts, streak, and course enrollment data.
- * This will be replaced with actual database operations in the future.
+ * Handles user statistics (hearts, streaks, courses) with database operations
  */
 class StatsModel
 {
     /**
-     * Mock database - Static array to simulate user stats storage
-     * Matches the stats API output structure from the frontend analysis
-     */
-    private static $userStats = [
-        1 => [ // User ID 1 (demo user)
-            "hearts" => [
-                "current" => 10,
-                "max" => 10,
-                "next_heart_in_seconds" => 7200 // 2 hours
-            ],
-            "streak" => [
-                "current_days" => 3,
-                "reset_in_seconds" => 10800, // 3 hours
-                "weekly_progress" => [true, true, true, false, false, false, false],
-                "target_days" => 30
-            ],
-            "courses" => [
-                [
-                    "id" => 1,
-                    "name" => "HTML Basics",
-                    "icon" => "fa-html5",
-                    "enrolled" => true
-                ],
-                [
-                    "id" => 2,
-                    "name" => "CSS Styling",
-                    "icon" => "fa-css3-alt",
-                    "enrolled" => true
-                ],
-                [
-                    "id" => 3,
-                    "name" => "JavaScript Fundamentals",
-                    "icon" => "fa-js",
-                    "enrolled" => false
-                ]
-            ]
-        ]
-    ];
-
-    /**
      * Get user statistics by user ID
      * 
+     * @param PDO $pdo Database connection
      * @param int $userId User's ID
      * @return array|false User stats array if found, false otherwise
      */
-    public static function getStatsByUserId(int $userId): array|false
+    public static function getStatsByUserId(PDO $pdo, int $userId): array|false
     {
-        return self::$userStats[$userId] ?? false;
+        try {
+            // Get user stats
+            $sql = "SELECT * FROM user_stats WHERE user_id = :user_id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':user_id' => $userId]);
+            $stats = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$stats) {
+                // Create default stats if not found
+                self::createDefaultStats($pdo, $userId);
+                return self::getStatsByUserId($pdo, $userId);
+            }
+
+            // Get all courses for display
+            $sql = "SELECT id, title as name, description FROM courses";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $allCourses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Calculate streak reset time (based on last login)
+            $lastLogin = $stats['last_login_date'] ? strtotime($stats['last_login_date'] . ' +1 day') : time();
+            $resetIn = max(0, $lastLogin - time());
+
+            // Generate weekly progress (simplified - all false for now)
+            $weeklyProgress = array_fill(0, 7, false);
+
+            return [
+                "hearts" => [
+                    "current" => 10,
+                    "max" => 10,
+                    "next_heart_in_seconds" => 0
+                ],
+                "streak" => [
+                    "current_days" => (int) $stats['current_streak'],
+                    "reset_in_seconds" => $resetIn,
+                    "weekly_progress" => $weeklyProgress,
+                    "target_days" => 30
+                ],
+                "courses" => $allCourses,
+                "xp_points" => (int) $stats['xp_points'],
+                "longest_streak" => (int) $stats['longest_streak']
+            ];
+
+        } catch (PDOException $e) {
+            error_log("StatsModel::getStatsByUserId Error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Create default stats for a new user
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User's ID
+     * @return bool True on success
+     */
+    private static function createDefaultStats(PDO $pdo, int $userId): bool
+    {
+        try {
+            $sql = "INSERT INTO user_stats (user_id, xp_points, current_streak, longest_streak, last_login_date) 
+                    VALUES (:user_id, 0, 0, 0, CURDATE())";
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([':user_id' => $userId]);
+        } catch (PDOException $e) {
+            error_log("StatsModel::createDefaultStats Error: " . $e->getMessage());
+            return false;
+        }
     }
 
     /**
      * Update user hearts count
      * 
+     * @param PDO $pdo Database connection
      * @param int $userId User's ID
      * @param int $hearts New hearts count
-     * @return bool True on success, false if user not found
+     * @return bool True on success
      */
-    public static function updateHearts(int $userId, int $hearts): bool
+    public static function updateHearts(PDO $pdo, int $userId, int $hearts): bool
     {
-        if (!isset(self::$userStats[$userId])) {
+        try {
+            $sql = "UPDATE user_stats 
+                    SET hearts_current = :hearts, last_heart_regen = NOW() 
+                    WHERE user_id = :user_id";
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([
+                ':hearts' => max(0, $hearts),
+                ':user_id' => $userId
+            ]);
+        } catch (PDOException $e) {
+            error_log("StatsModel::updateHearts Error: " . $e->getMessage());
             return false;
         }
-
-        $hearts = max(0, min($hearts, self::$userStats[$userId]['hearts']['max']));
-        self::$userStats[$userId]['hearts']['current'] = $hearts;
-
-        return true;
     }
 
     /**
-     * Decrease user hearts by one (for wrong answers/skips)
+     * Decrease user hearts by one
      * 
+     * @param PDO $pdo Database connection
      * @param int $userId User's ID
-     * @return bool True on success, false if user not found or no hearts left
+     * @return bool True on success
      */
-    public static function decreaseHearts(int $userId): bool
+    public static function decreaseHearts(PDO $pdo, int $userId): bool
     {
-        if (!isset(self::$userStats[$userId])) {
+        try {
+            $sql = "UPDATE user_stats 
+                    SET hearts_current = GREATEST(hearts_current - 1, 0) 
+                    WHERE user_id = :user_id AND hearts_current > 0";
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([':user_id' => $userId]);
+        } catch (PDOException $e) {
+            error_log("StatsModel::decreaseHearts Error: " . $e->getMessage());
             return false;
         }
-
-        if (self::$userStats[$userId]['hearts']['current'] <= 0) {
-            return false;
-        }
-
-        self::$userStats[$userId]['hearts']['current']--;
-
-        return true;
     }
 
     /**
      * Update user streak
      * 
+     * @param PDO $pdo Database connection
      * @param int $userId User's ID
      * @param int $days New streak days count
-     * @return bool True on success, false if user not found
+     * @return bool True on success
      */
-    public static function updateStreak(int $userId, int $days): bool
+    public static function updateStreak(PDO $pdo, int $userId, int $days): bool
     {
-        if (!isset(self::$userStats[$userId])) {
+        try {
+            $sql = "UPDATE user_stats 
+                    SET streak_days = :days, last_activity_date = CURDATE() 
+                    WHERE user_id = :user_id";
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([
+                ':days' => max(0, $days),
+                ':user_id' => $userId
+            ]);
+        } catch (PDOException $e) {
+            error_log("StatsModel::updateStreak Error: " . $e->getMessage());
             return false;
         }
-
-        self::$userStats[$userId]['streak']['current_days'] = max(0, $days);
-
-        return true;
     }
 
     /**
-     * Update weekly progress for streak tracking
+     * Update weekly progress pattern
      * 
+     * @param PDO $pdo Database connection
      * @param int $userId User's ID
-     * @param array $weeklyProgress Array of 7 booleans representing each day
-     * @return bool True on success, false if user not found
+     * @param array $weeklyProgress Array of 7 booleans
+     * @return bool True on success
      */
-    public static function updateWeeklyProgress(int $userId, array $weeklyProgress): bool
+    public static function updateWeeklyProgress(PDO $pdo, int $userId, array $weeklyProgress): bool
     {
-        if (!isset(self::$userStats[$userId]) || count($weeklyProgress) !== 7) {
+        try {
+            if (count($weeklyProgress) !== 7) {
+                return false;
+            }
+
+            // Convert boolean array to string (e.g., [true, false, true] => "101")
+            $pattern = implode('', array_map(fn($v) => $v ? '1' : '0', $weeklyProgress));
+
+            $sql = "UPDATE user_stats SET weekly_streak_pattern = :pattern WHERE user_id = :user_id";
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([
+                ':pattern' => $pattern,
+                ':user_id' => $userId
+            ]);
+        } catch (PDOException $e) {
+            error_log("StatsModel::updateWeeklyProgress Error: " . $e->getMessage());
             return false;
         }
-
-        self::$userStats[$userId]['streak']['weekly_progress'] = $weeklyProgress;
-
-        return true;
     }
 
     /**
-     * Get all user stats (for debugging purposes)
+     * Add XP to user's total
      * 
-     * @return array All user stats in the mock database
+     * @param PDO $pdo Database connection
+     * @param int $userId User's ID
+     * @param int $xpAmount Amount of XP to add
+     * @return bool True on success
      */
-    public static function getAllStats(): array
+    public static function addXP(PDO $pdo, int $userId, int $xpAmount): bool
     {
-        return self::$userStats;
-    }
-
-    /**
-     * Reset mock database to initial state (useful for testing)
-     * 
-     * @return void
-     */
-    public static function resetDatabase(): void
-    {
-        self::$userStats = [
-            1 => [
-                "hearts" => [
-                    "current" => 10,
-                    "max" => 10,
-                    "next_heart_in_seconds" => 7200
-                ],
-                "streak" => [
-                    "current_days" => 3,
-                    "reset_in_seconds" => 10800,
-                    "weekly_progress" => [true, true, true, false, false, false, false],
-                    "target_days" => 30
-                ],
-                "courses" => [
-                    [
-                        "id" => 1,
-                        "name" => "HTML Basics",
-                        "icon" => "fa-html5",
-                        "enrolled" => true
-                    ],
-                    [
-                        "id" => 2,
-                        "name" => "CSS Styling",
-                        "icon" => "fa-css3-alt",
-                        "enrolled" => true
-                    ],
-                    [
-                        "id" => 3,
-                        "name" => "JavaScript Fundamentals",
-                        "icon" => "fa-js",
-                        "enrolled" => false
-                    ]
-                ]
-            ]
-        ];
+        try {
+            $sql = "UPDATE user_stats 
+                    SET xp_points = xp_points + :xp_amount 
+                    WHERE user_id = :user_id";
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([
+                ':xp_amount' => max(0, $xpAmount),
+                ':user_id' => $userId
+            ]);
+        } catch (PDOException $e) {
+            error_log("StatsModel::addXP Error: " . $e->getMessage());
+            return false;
+        }
     }
 }

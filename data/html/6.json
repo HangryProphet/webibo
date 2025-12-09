@@ -1,0 +1,26 @@
+{
+  "instruction": "Write your first HTML heading",
+  "starter_code": "",
+  "correct_code": "<h1>Hello World!</h1>",
+  "hint": "Use the <code>&lt;h1&gt;</code> tag to create a heading that says 'Hello World!'",
+  "enemy": null,
+  "teacher": {
+    "name": "Wiza",
+    "image": "assets/img/wiza/wiza-teach.png"
+  },
+  "feedback": {
+    "correct": {
+      "title": "Excellent Work! 🎉",
+      "details": "You've successfully created your first HTML heading! The <code>&lt;h1&gt;</code> tag is one of the most important elements in HTML. It tells browsers and search engines what your page is about."
+    },
+    "wrong": {
+      "title": "Not quite! 🤔",
+      "details": "Remember, you need to use the <code>&lt;h1&gt;</code> tag with the text 'Hello World!' inside. Make sure to include both the opening tag <code>&lt;h1&gt;</code> and closing tag <code>&lt;/h1&gt;</code>."
+    }
+  },
+  "validation": {
+    "type": "exact_match",
+    "case_sensitive": false,
+    "ignore_whitespace": true
+  }
+}

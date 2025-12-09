@@ -24,9 +24,6 @@ if (!isset($_SESSION['user'])) {
             <!-- Wiza Image -->
             <img src="../assets/img/wiza/wiza-flying.gif" alt="Wiza Loading" class="loading-image">
 
-            <!-- Loading Text -->
-            <h2 class="loading-text">Loading...</h2>
-
             <!-- Progress Bar -->
             <div class="loading-progress-container">
                 <div class="loading-progress-bar">

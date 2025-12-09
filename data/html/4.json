@@ -1,0 +1,21 @@
+{
+  "question": "Fill in the blank to apply a style only when the screen is below 600px",
+  "code_template": "@media (max-width: ___ px) {\n  body {\n    background-color: lightblue;\n  }\n}",
+  "blank_position": 1,
+  "correct_answer": "600",
+  "enemy": {
+    "name": "Bear",
+    "hp": 10,
+    "image": "assets/img/enemies/bear-happy.png"
+  },
+  "feedback": {
+    "correct": {
+      "title": "Perfect! 🎯",
+      "details": "The <code>@media</code> rule with <code>max-width: 600px</code> creates a responsive design that applies specific styles when the viewport width is 600 pixels or less. This is essential for mobile-friendly websites!"
+    },
+    "wrong": {
+      "title": "Not quite right! 📱",
+      "details": "The <code>@media</code> rule with <code>max-width: 600px</code> applies styles when the viewport width is 600 pixels or less. This is a key technique in responsive web design to make sites look good on mobile devices."
+    }
+  }
+}

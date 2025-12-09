@@ -3,7 +3,7 @@
  * Dashboard Controller
  * 
  * Prepares data for the dashboard view
- * Loads user stats and progress from mock models
+ * Loads user stats and progress from database models
  */
 
 // Load helper functions
@@ -11,6 +11,9 @@ require_once __DIR__ . '/../core/functions.php';
 
 // Require user to be logged in
 require_login();
+
+// Load database connection
+$pdo = require_once __DIR__ . '/../core/db_connect.php';
 
 // Load required models
 require_once __DIR__ . '/../core/models/StatsModel.php';
@@ -25,10 +28,10 @@ $firstName = $_SESSION['first_name'] ?? 'User';
 $lastName = $_SESSION['last_name'] ?? '';
 
 // Fetch user statistics from model
-$userStats = StatsModel::getStatsByUserId($userId);
+$userStats = StatsModel::getStatsByUserId($pdo, $userId);
 
 // Fetch user progress from model
-$userProgress = ProgressModel::getProgressByUserId($userId);
+$userProgress = ProgressModel::getProgressByUserId($pdo, $userId);
 
 // Handle case where user data is not found
 if (!$userStats) {

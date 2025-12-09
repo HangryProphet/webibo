@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Foundations - Level 1</title>
+    <link rel="stylesheet" href="../assets/css/lecture-content.css">
+</head>
+<body>
+    <!-- PAGE 1 -->
+    <div class="page-header">
+        <div class="page-number">Page 1/4</div>
+        <h1>👋 Welcome to HTML!</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Hello, aspiring web developer! 👋 I'm Wiza, and I'll be your guide through the magical world of HTML. Welcome to Webibo - where we turn curious minds into confident coders!"
+    </div>
+
+    <p>Today, we begin with <strong>HTML (HyperText Markup Language)</strong>, the foundation of every website you've ever visited. Think of HTML as the skeleton of a webpage. Just like your skeleton gives your body structure, HTML gives a webpage its basic form and organization.</p>
+
+    <h2>Quick Facts:</h2>
+    <ul>
+        <li>HTML is <strong>NOT</strong> a programming language</li>
+        <li>It's a markup language for structuring content</li>
+        <li>Every browser understands HTML</li>
+        <li>It works on phones, tablets, and computers</li>
+    </ul>
+
+    <p><strong>Ready to build something amazing? Let's start simple!</strong></p>
+
+    <!-- PAGE 2 -->
+    <div class="page-break">
+        <div class="page-number">Page 2/4</div>
+        <h1>The HTML Document Structure</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Every HTML document follows a specific structure. Here's the basic blueprint:"
+    </div>
+
+    <div class="example-card">
+        <h3>Basic HTML Structure</h3>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;!-- Behind-the-scenes info --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- Visible content --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <h2>Let's break this down:</h2>
+    <p><strong>1.</strong> <code>&lt;!DOCTYPE html&gt;</code> - This tells the browser, 'Hey, I'm using modern HTML!'</p>
+    <p><strong>2.</strong> <code>&lt;html&gt;</code> - The root element that wraps EVERYTHING else</p>
+    <p><strong>3.</strong> <code>&lt;head&gt;</code> - Contains invisible information (metadata, title, links)</p>
+    <p><strong>4.</strong> <code>&lt;body&gt;</code> - Contains ALL visible content</p>
+
+    <h2>Think of it like a house:</h2>
+    <ul>
+        <li><code>&lt;!DOCTYPE html&gt;</code> = Building permit</li>
+        <li><code>&lt;html&gt;</code> = The entire property</li>
+        <li><code>&lt;head&gt;</code> = Blueprints (invisible to visitors)</li>
+        <li><code>&lt;body&gt;</code> = The actual house (what people see)</li>
+    </ul>
+
+    <!-- PAGE 3 -->
+    <div class="page-break">
+        <div class="page-number">Page 3/4</div>
+        <h1>The Head vs Body Sections</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Let's explore the difference between &lt;head&gt; and &lt;body&gt; with an example:"
+    </div>
+
+    <div class="example-card">
+        <h3>Head vs Body Example</h3>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My First Webpage&lt;/title&gt;
+    &lt;!-- This text WON'T appear on the page! --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Welcome to my website!&lt;/p&gt;
+    &lt;!-- This text WILL appear on the page! --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <h2>Key Difference:</h2>
+    
+    <p><strong>&lt;head&gt; content:</strong> Never visible on the page itself</p>
+    <ul>
+        <li>Page title (shown in browser tab)</li>
+        <li>Character encoding</li>
+        <li>Links to CSS files</li>
+        <li>Meta descriptions</li>
+    </ul>
+
+    <p><strong>&lt;body&gt; content:</strong> ALWAYS visible to visitors</p>
+    <ul>
+        <li>Text paragraphs</li>
+        <li>Images</li>
+        <li>Buttons</li>
+        <li>Videos</li>
+        <li>Headings</li>
+    </ul>
+
+    <div class="tip">
+        <strong>Pro Tip:</strong> Right-click any webpage and select 'View Page Source' to see real HTML in action!
+    </div>
+
+    <!-- PAGE 4 -->
+    <div class="page-break">
+        <div class="page-number">Page 4/4</div>
+        <h1>Let's Practice Visualization</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Before we test your knowledge, let's visualize what happens with this code:"
+    </div>
+
+    <div class="example-card">
+        <h3>Cookie Shop Example</h3>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Wiza's Cookie Shop&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Fresh Cookies Daily!&lt;/h1&gt;
+    &lt;p&gt;Come try our chocolate chip special!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <h2>What the browser shows:</h2>
+    <div class="visual-box">
+[Browser Tab: Wiza's Cookie Shop]
+┌─────────────────────────────────┐
+│ Fresh Cookies Daily!            │
+│                                 │
+│ Come try our chocolate chip     │
+│ special!                        │
+└─────────────────────────────────┘
+    </div>
+
+    <h2>What the browser doesn't show:</h2>
+    <ul>
+        <li>The <code>&lt;title&gt;</code> tag content</li>
+        <li>The <code>&lt;head&gt;</code> section</li>
+        <li>The HTML tags themselves</li>
+    </ul>
+
+    <p><strong>Ready for some practice questions? You've got this! 💪</strong></p>
+</body>
+</html>

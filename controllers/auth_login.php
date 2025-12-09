@@ -10,6 +10,9 @@
 // Load helper functions
 require_once __DIR__ . '/../core/functions.php';
 
+// Load database connection
+$pdo = require_once __DIR__ . '/../core/db_connect.php';
+
 // Only process POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect('../views/login.php');
@@ -25,37 +28,44 @@ require_once __DIR__ . '/../core/models/UserModel.php';
 $identifier = trim($_POST['username'] ?? ''); // Can be username or email
 $password = $_POST['password'] ?? '';
 
+error_log("=== LOGIN ATTEMPT START ===");
+error_log("Identifier: $identifier");
+error_log("Password length: " . strlen($password));
+
 // Validation: Check if fields are filled
 if (empty($identifier) || empty($password)) {
+    error_log("Login failed: Empty fields");
     set_error('Please fill in all fields');
     redirect('../views/login.php');
 }
 
 // Attempt to get user by username or email
-$user = UserModel::getUserByUsernameOrEmail($identifier);
+$user = UserModel::getUserByUsernameOrEmail($pdo, $identifier);
 
 // Check if user exists
 if (!$user) {
+    error_log("Login failed: User not found for identifier: $identifier");
     set_error('Invalid username/email or password');
     redirect('../views/login.php');
 }
 
-// Verify password
-// Note: In mock model, passwords are stored as plain text
-// In production, this would use password_verify() with hashed passwords
-if ($password !== $user['password']) {
+// Debug logging
+error_log("Login attempt - User found: " . $user['username']);
+error_log("Password from DB (first 20 chars): " . substr($user['password_hash'], 0, 20));
+error_log("Is verified: " . ($user['is_verified'] ? 'true' : 'false'));
+
+// Verify password using secure password_verify()
+if (!password_verify($password, $user['password_hash'])) {
+    error_log("Login failed: Password verification failed for user: " . $user['username']);
     set_error('Invalid username/email or password');
     redirect('../views/login.php');
 }
 
-// Optional: Check if user's email is verified
-// Uncomment when OTP verification is fully implemented
-// if (!$user['is_verified']) {
-//     $_SESSION['error'] = 'Please verify your email before logging in';
-//     $_SESSION['email'] = $user['email'];
-//     header('Location: ../views/otp.php');
-//     exit;
-// }
+// CRITICAL: Check if user's email is verified
+if (!$user['is_verified']) {
+    set_error('Your account is not verified. Please check your email for the verification link.');
+    redirect('../views/login.php');
+}
 
 // Login successful - Set session variables
 $_SESSION['user'] = $user['username'];
