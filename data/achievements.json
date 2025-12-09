@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "title": "Hello, World!",
+    "description": "Create your account and start your coding adventure",
+    "icon_path": "fa-user-plus",
+    "category": "onboarding"
+  },
+  {
+    "id": 2,
+    "title": "Verified!",
+    "description": "Verify your email address and secure your account",
+    "icon_path": "fa-check-circle",
+    "category": "onboarding"
+  },
+  {
+    "id": 3,
+    "title": "First Commit",
+    "description": "Complete your very first level",
+    "icon_path": "fa-flag-checkered",
+    "category": "onboarding"
+  },
+  {
+    "id": 4,
+    "title": "The Architect",
+    "description": "Master the essential HTML tags",
+    "icon_path": "fa-code",
+    "category": "html_course"
+  },
+  {
+    "id": 5,
+    "title": "Blank Slate",
+    "description": "Ace your first Fill-in-the-Blanks challenge",
+    "icon_path": "fa-pen",
+    "category": "html_course"
+  },
+  {
+    "id": 6,
+    "title": "Syntax Seal of Approval",
+    "description": "Complete your first Coding Challenge",
+    "icon_path": "fa-code-branch",
+    "category": "html_course"
+  },
+  {
+    "id": 7,
+    "title": "Heading in the Right Direction",
+    "description": "Master the art of headings and paragraphs",
+    "icon_path": "fa-heading",
+    "category": "html_course"
+  },
+  {
+    "id": 8,
+    "title": "Chain Link",
+    "description": "Learn how to connect the web with links",
+    "icon_path": "fa-link",
+    "category": "html_course"
+  },
+  {
+    "id": 9,
+    "title": "A Pretty Picture",
+    "description": "Master the img tag and the importance of alt text",
+    "icon_path": "fa-image",
+    "category": "html_course"
+  },
+  {
+    "id": 10,
+    "title": "List-o-mania",
+    "description": "Become a pro at organizing content with lists",
+    "icon_path": "fa-list",
+    "category": "html_course"
+  },
+  {
+    "id": 11,
+    "title": "HTML Foundation Master",
+    "description": "Complete the entire HTML Learning Path",
+    "icon_path": "fa-trophy",
+    "category": "html_course"
+  }
+]

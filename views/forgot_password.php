@@ -11,40 +11,30 @@ $success = get_success();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log in - WebQuest</title>
+    <title>Forgot Password - WebQuest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/auth.css">
 </head>
 <body>
-    <a href="../index.php" class="close-btn">✕</a>
-    <a href="signup.php" class="signup-btn">SIGN UP</a>
+    <a href="login.php" class="close-btn">✕</a>
 
     <div class="login-container">
-        <h1>Log in</h1>
+        <h1>Reset Password</h1>
+        <p style="text-align: center; color: #8b95a5; margin-bottom: 24px; font-size: 14px;">
+            Enter your email address and we'll send you a link to reset your password.
+        </p>
 
-        <form method="POST" action="../controllers/auth_login.php">
+        <form method="POST" action="../controllers/forgot_password_handler.php">
             <div class="input-group">
-                <i class="fas fa-user input-icon"></i>
+                <i class="fas fa-envelope input-icon"></i>
                 <input 
-                    type="text" 
-                    name="username" 
-                    id="username" 
-                    placeholder="Email or username" 
-                    autocomplete="username"
-                    value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>"
+                    type="email" 
+                    name="email" 
+                    id="email" 
+                    placeholder="Email address" 
+                    required
+                    value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>"
                 >
-            </div>
-
-            <div class="input-group">
-                <i class="fas fa-lock input-icon"></i>
-                <input 
-                    type="password" 
-                    name="password" 
-                    id="password" 
-                    placeholder="Password" 
-                    autocomplete="current-password"
-                >
-                <a href="forgot_password.php" class="forgot-link">FORGOT?</a>
             </div>
 
             <?php if ($error): ?>
@@ -61,8 +51,14 @@ $success = get_success();
                 </div>
             <?php endif; ?>
 
-            <button type="submit" class="login-btn">LOG IN</button>
+            <button type="submit" class="login-btn">SEND RESET LINK</button>
         </form>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="login.php" style="color: #1cb0f6; text-decoration: none; font-weight: 600;">
+                ← Back to Login
+            </a>
+        </div>
 
         <div class="footer-text">
             By signing in to Webibo, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.<br><br>
@@ -72,4 +68,3 @@ $success = get_success();
     </div>
 </body>
 </html>
-

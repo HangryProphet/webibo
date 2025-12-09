@@ -149,4 +149,91 @@ class ProgressModel
             return false;
         }
     }
+
+    /**
+     * Get count of completed levels for a user
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User's ID
+     * @return int Count of completed levels
+     */
+    public static function getCompletedLevelsCount(PDO $pdo, int $userId): int
+    {
+        try {
+            $sql = "SELECT COUNT(*) as count 
+                    FROM user_progress 
+                    WHERE user_id = :user_id";
+            
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':user_id' => $userId]);
+            
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int)$result['count'];
+
+        } catch (PDOException $e) {
+            error_log("ProgressModel::getCompletedLevelsCount Error: " . $e->getMessage());
+            return 0;
+        }
+    }
+
+    /**
+     * Mark a level as completed (alias for completeLevel for backward compatibility)
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User's ID
+     * @param int $levelId Level ID to complete
+     * @return bool True on success
+     */
+    public static function markLevelComplete(PDO $pdo, int $userId, int $levelId): bool
+    {
+        return self::completeLevel($pdo, $userId, $levelId);
+    }
+
+    /**
+     * Count total completed levels for a user
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User's ID
+     * @return int Count of completed levels
+     */
+    public static function countCompletedLevels(PDO $pdo, int $userId): int
+    {
+        return self::getCompletedLevelsCount($pdo, $userId);
+    }
+
+    /**
+     * Get recent activity (completed levels) for a user
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User's ID
+     * @param int $limit Number of recent activities to return (default 5)
+     * @return array Array of recent activity with level details
+     */
+    public static function getRecentActivity(PDO $pdo, int $userId, int $limit = 5): array
+    {
+        try {
+            $sql = "SELECT 
+                        up.level_id, 
+                        up.completed_at,
+                        l.title as level_title,
+                        l.level_type,
+                        l.xp_reward
+                    FROM user_progress up
+                    LEFT JOIN levels l ON up.level_id = l.id
+                    WHERE up.user_id = :user_id 
+                    ORDER BY up.completed_at DESC
+                    LIMIT :limit";
+            
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $e) {
+            error_log("ProgressModel::getRecentActivity Error: " . $e->getMessage());
+            return [];
+        }
+    }
 }

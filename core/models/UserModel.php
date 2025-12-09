@@ -220,4 +220,134 @@ class UserModel
             return false;
         }
     }
+
+    /**
+     * Verify user's current password
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User ID
+     * @param string $password Plain text password to verify
+     * @return bool True if password matches, false otherwise
+     */
+    public static function verifyPassword(PDO $pdo, int $userId, string $password): bool
+    {
+        try {
+            $sql = "SELECT password_hash FROM users WHERE id = :user_id LIMIT 1";
+            
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':user_id' => $userId]);
+            
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if (!$user) {
+                return false;
+            }
+            
+            return password_verify($password, $user['password_hash']);
+
+        } catch (PDOException $e) {
+            error_log("UserModel::verifyPassword Error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Update user profile information (first name, last name, username)
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User ID
+     * @param array $data Associative array with keys: first_name, last_name, username
+     * @return bool True on success, false otherwise
+     */
+    public static function updateUserProfile(PDO $pdo, int $userId, array $data): bool
+    {
+        try {
+            $updates = [];
+            $params = [':user_id' => $userId];
+            
+            if (isset($data['first_name'])) {
+                $updates[] = "first_name = :first_name";
+                $params[':first_name'] = $data['first_name'];
+            }
+            
+            if (isset($data['last_name'])) {
+                $updates[] = "last_name = :last_name";
+                $params[':last_name'] = $data['last_name'];
+            }
+            
+            if (isset($data['username'])) {
+                $updates[] = "username = :username";
+                $params[':username'] = $data['username'];
+            }
+            
+            if (empty($updates)) {
+                return false;
+            }
+            
+            $sql = "UPDATE users SET " . implode(', ', $updates) . " WHERE id = :user_id";
+            
+            $stmt = $pdo->prepare($sql);
+            $success = $stmt->execute($params);
+            
+            return $success && $stmt->rowCount() > 0;
+
+        } catch (PDOException $e) {
+            error_log("UserModel::updateUserProfile Error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Update user avatar path
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User ID
+     * @param string $avatarPath Path to avatar image
+     * @return bool True on success, false otherwise
+     */
+    public static function updateUserAvatar(PDO $pdo, int $userId, string $avatarPath): bool
+    {
+        try {
+            $sql = "UPDATE users SET avatar_path = :avatar_path WHERE id = :user_id";
+            
+            $stmt = $pdo->prepare($sql);
+            $success = $stmt->execute([
+                ':avatar_path' => $avatarPath,
+                ':user_id' => $userId
+            ]);
+            
+            return $success && $stmt->rowCount() > 0;
+
+        } catch (PDOException $e) {
+            error_log("UserModel::updateUserAvatar Error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Check if username is taken by another user (excluding current user)
+     * 
+     * @param PDO $pdo Database connection
+     * @param string $username Username to check
+     * @param int $excludeUserId User ID to exclude from check
+     * @return bool True if username is taken by another user, false otherwise
+     */
+    public static function isUsernameTakenByOther(PDO $pdo, string $username, int $excludeUserId): bool
+    {
+        try {
+            $sql = "SELECT COUNT(*) FROM users WHERE username = :username AND id != :user_id";
+            
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':username' => $username,
+                ':user_id' => $excludeUserId
+            ]);
+            
+            return $stmt->fetchColumn() > 0;
+
+        } catch (PDOException $e) {
+            error_log("UserModel::isUsernameTakenByOther Error: " . $e->getMessage());
+            return false;
+        }
+    }
 }

@@ -20,6 +20,7 @@ require_once __DIR__ . '/../core/models/UserModel.php';
 require_once __DIR__ . '/../core/models/UserModel.php';
 require_once __DIR__ . '/../core/models/TokenModel.php';
 require_once __DIR__ . '/../core/helpers/email_helper.php';
+require_once __DIR__ . '/../core/services/AchievementService.php';
 
 // Only process POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -80,6 +81,9 @@ if (!$userId) {
     set_error('An error occurred during registration. Please try again.');
     redirect('../views/signup.php');
 }
+
+// Award "Hello, World!" achievement for registration
+AchievementService::checkAchievementsOnEvent($pdo, $userId, 'user_registered');
 
 // DEVELOPMENT MODE: Auto-verify users (skip email verification)
 $appEnv = $_ENV['APP_ENV'] ?? 'production';

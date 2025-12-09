@@ -1,29 +1,6 @@
 <?php
-session_start();
-
-// Check if user is logged in
-if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
-    exit;
-}
-
-$username = $_SESSION['user'];
-$hearts = $_SESSION['hearts'] ?? 10;
-$total_xp = $_SESSION['total_xp'] ?? 7305;
-$day_streak = $_SESSION['day_streak'] ?? 264;
-$hours_learning = $_SESSION['hours_learning'] ?? 42;
-$lessons_completed = $_SESSION['lessons_completed'] ?? 18;
-$challenges_completed = $_SESSION['challenges_completed'] ?? 12;
-
-// Sample recent activities (in a real app, this would come from a database)
-$recent_activities = [
-    ['type' => 'badge', 'text' => 'Earned a 3 Day Streak badge', 'icon' => 'fa-fire', 'time' => '2 hours ago'],
-    ['type' => 'stage', 'text' => 'Completed Stage 3', 'icon' => 'fa-check-circle', 'time' => '5 hours ago'],
-    ['type' => 'lesson', 'text' => 'Completed HTML Basics lesson', 'icon' => 'fa-book', 'time' => '1 day ago'],
-    ['type' => 'badge', 'text' => 'Earned Early Bird badge', 'icon' => 'fa-sun', 'time' => '2 days ago'],
-    ['type' => 'stage', 'text' => 'Completed Stage 2', 'icon' => 'fa-check-circle', 'time' => '3 days ago'],
-    ['type' => 'milestone', 'text' => 'Reached 7000 XP milestone', 'icon' => 'fa-bolt', 'time' => '4 days ago'],
-];
+// Include the profile handler to fetch dynamic data
+require_once __DIR__ . '/../controllers/profile_handler.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,12 +22,27 @@ $recent_activities = [
             </a>
             
             <div class="avatar">
-                <i class="fas fa-user"></i>
+                <?php if (!empty($avatarPath) && $avatarPath !== '/assets/img/avatars/default.png' && file_exists($_SERVER['DOCUMENT_ROOT'] . $avatarPath)): ?>
+                    <img src="<?php echo htmlspecialchars($avatarPath); ?>" alt="<?php echo htmlspecialchars($username); ?>" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                <?php else: ?>
+                    <i class="fas fa-user"></i>
+                <?php endif; ?>
             </div>
             
             <h1 class="username"><?php echo htmlspecialchars($username); ?></h1>
-            <div class="user-handle"><?php echo htmlspecialchars($username); ?>14</div>
-            <div class="join-date">Joined December 2024</div>
+            <div class="user-handle">@<?php echo htmlspecialchars($username); ?></div>
+            <div class="join-date">Joined <?php echo htmlspecialchars($joinDate); ?></div>
+            
+            <!-- Level Progress Bar -->
+            <div class="level-progress" style="margin-top: 20px; width: 100%; max-width: 400px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="font-weight: 600; color: #333;">Level <?php echo $current_level; ?></span>
+                    <span style="color: #666; font-size: 14px;"><?php echo $current_xp; ?> / <?php echo $next_level_xp; ?> XP</span>
+                </div>
+                <div style="background: #e0e0e0; border-radius: 10px; height: 12px; overflow: hidden;">
+                    <div style="background: linear-gradient(90deg, #4CAF50, #8BC34A); height: 100%; width: <?php echo $level_progress; ?>%; transition: width 0.3s ease;"></div>
+                </div>
+            </div>
             
             <div class="tech-badges">
                 <div class="tech-badge" title="HTML5">
@@ -89,16 +81,6 @@ $recent_activities = [
             </div>
 
             <div class="stat-card">
-                <div class="stat-icon clock">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <div class="stat-info">
-                    <div class="stat-value"><?php echo $hours_learning; ?></div>
-                    <div class="stat-label">Hours spent learning</div>
-                </div>
-            </div>
-
-            <div class="stat-card">
                 <div class="stat-icon book">
                     <i class="fas fa-book"></i>
                 </div>
@@ -122,13 +104,31 @@ $recent_activities = [
         <!-- Recent Activity -->
         <h2 class="section-title">Recent Activity</h2>
         <div class="activity-list">
-            <?php foreach ($recent_activities as $activity): ?>
+            <?php foreach ($activities as $activity): ?>
                 <div class="activity-item">
-                    <div class="activity-icon <?php echo $activity['type']; ?>">
-                        <i class="fas <?php echo $activity['icon']; ?>"></i>
+                    <div class="activity-icon <?php echo htmlspecialchars($activity['type']); ?>">
+                        <?php
+                        // Determine icon based on activity type
+                        $iconClass = 'fa-book';
+                        if ($activity['type'] === 'lecture') {
+                            $iconClass = 'fa-chalkboard-teacher';
+                        } elseif ($activity['type'] === 'practice') {
+                            $iconClass = 'fa-code';
+                        } elseif ($activity['type'] === 'challenge') {
+                            $iconClass = 'fa-trophy';
+                        } elseif ($activity['type'] === 'info') {
+                            $iconClass = 'fa-info-circle';
+                        }
+                        ?>
+                        <i class="fas <?php echo $iconClass; ?>"></i>
                     </div>
                     <div class="activity-content">
-                        <div class="activity-text"><?php echo htmlspecialchars($activity['text']); ?></div>
+                        <div class="activity-text">
+                            <?php echo htmlspecialchars($activity['text']); ?>
+                            <?php if ($activity['xp'] > 0): ?>
+                                <span style="color: #4CAF50; font-weight: 600; margin-left: 8px;">+<?php echo $activity['xp']; ?> XP</span>
+                            <?php endif; ?>
+                        </div>
                         <div class="activity-time"><?php echo htmlspecialchars($activity['time']); ?></div>
                     </div>
                 </div>

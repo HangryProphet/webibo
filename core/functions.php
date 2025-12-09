@@ -182,3 +182,76 @@ function get_success(): string
     unset($_SESSION['success']);
     return $success;
 }
+
+/**
+ * Calculate user level from total XP
+ * 
+ * XP required per level increases: 100, 200, 300, 400, etc.
+ * Level 1: 0-99 XP
+ * Level 2: 100-299 XP
+ * Level 3: 300-599 XP
+ * 
+ * @param int $xp Total XP points
+ * @return int User level
+ */
+function calculateLevelFromXp(int $xp): int
+{
+    $level = 1;
+    $xpNeeded = 0;
+    $increment = 100;
+    
+    while ($xp >= $xpNeeded + $increment) {
+        $xpNeeded += $increment;
+        $level++;
+        $increment += 100;
+    }
+    
+    return $level;
+}
+
+/**
+ * Calculate XP needed for next level
+ * 
+ * @param int $currentLevel Current user level
+ * @return int XP needed to reach next level
+ */
+function calculateXpForLevel(int $currentLevel): int
+{
+    $xpNeeded = 0;
+    $increment = 100;
+    
+    for ($i = 1; $i < $currentLevel; $i++) {
+        $xpNeeded += $increment;
+        $increment += 100;
+    }
+    
+    return $xpNeeded;
+}
+
+/**
+ * Calculate XP progress to next level
+ * 
+ * @param int $xp Total XP points
+ * @return array ['level' => int, 'current_xp' => int, 'next_level_xp' => int, 'progress_percent' => int]
+ */
+function calculateLevelProgress(int $xp): array
+{
+    $level = calculateLevelFromXp($xp);
+    $currentLevelXp = calculateXpForLevel($level);
+    $nextLevelXp = calculateXpForLevel($level + 1);
+    
+    $xpInCurrentLevel = $xp - $currentLevelXp;
+    $xpNeededForNextLevel = $nextLevelXp - $currentLevelXp;
+    
+    $progressPercent = ($xpNeededForNextLevel > 0) 
+        ? round(($xpInCurrentLevel / $xpNeededForNextLevel) * 100)
+        : 0;
+    
+    return [
+        'level' => $level,
+        'current_xp' => $xpInCurrentLevel,
+        'next_level_xp' => $xpNeededForNextLevel,
+        'progress_percent' => $progressPercent,
+        'total_xp' => $xp
+    ];
+}

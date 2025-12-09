@@ -8,6 +8,7 @@
 - ✅ **Unified Views** - 2 universal templates (`lecture.php` + `activity.php`) replace 7+ stage files
 - ✅ **Session Management** - Fixed critical session bugs, now uses `$_SESSION['user_id']` consistently
 - ✅ **UI/UX Overhaul** - Lecture pages redesigned with grid card layout, dark theme consistency
+- ✅ **Achievement System** - Complete database-driven achievement system with 11 achievements
 
 **What Stayed the Same:**
 - ✅ Database schema (9 tables unchanged)
@@ -96,6 +97,35 @@ $_SESSION = [
 - Enemy display with HP bar
 - Feedback panel for correct/wrong answers
 
+### 5️⃣ **Achievement System**
+
+Complete database-driven achievement tracking with event-based triggers.
+
+**Data Structure (`data/achievements.json`):**
+```json
+{
+  "id": 1,
+  "title": "Hello, World!",
+  "description": "Create your account and start your coding adventure",
+  "icon_path": "fa-user-plus",
+  "category": "onboarding"
+}
+```
+
+**11 Achievements:**
+- **Onboarding (3):** Hello World, Verified!, First Commit
+- **HTML Course (8):** The Architect, Blank Slate, Syntax Seal, Heading Direction, Chain Link, Pretty Picture, List-o-mania, HTML Foundation Master
+
+**Event Triggers:**
+- `user_registered` → "Hello, World!"
+- `email_verified` → "Verified!"
+- `level_completed` → Multiple achievements based on level_id
+
+**Integration Points:**
+- `auth_register.php` - Awards achievement on signup
+- `verify_email.php` - Awards achievement on email verification
+- `activity_handler.php` - Awards achievements on level completion
+
 ---
 
 ## 📂 Detailed File Changes
@@ -122,6 +152,21 @@ $_SESSION = [
 - **`data/html/5.html`** - Best Practices lecture
 - **`data/html/6.json`** - Code editor activity (validation rules, starter code)
 - **`data/html/7.html`** - Congratulations page
+- **`data/achievements.json`** - Achievement definitions (11 achievements)
+
+#### Scripts
+- **`scripts/seed_achievements.php`** - Seeds achievements table from JSON
+
+#### Services
+- **`core/services/AchievementService.php`** - Achievement business logic, event handling
+
+#### Models
+- **`core/models/AchievementModel.php`** - Achievement database operations
+- **`core/models/ProgressModel.php`** - Added `getCompletedLevelsCount()`, `markLevelComplete()`
+- **`core/models/TokenModel.php`** - Added `validateAndGetUserId()`
+
+#### Controllers
+- **`controllers/achievements.php`** - Fetches and prepares achievement data for view
 
 #### Documentation
 - **`HANDLERS_README.md`** - Controller documentation
@@ -142,6 +187,11 @@ $_SESSION = [
   - Added: iframe-based live code preview
   - Fixed: Variable access errors
 
+- **`views/achievements.php`**
+  - Old: Hardcoded placeholder achievements
+  - New: Dynamic achievement grid with earned/locked states
+  - Shows: Progress percentage, earned dates, completion status
+
 #### CSS (Complete Rewrites)
 - **`assets/css/lecture.css`** (366 lines → 340 lines)
   - Removed: Purple gradient, creamy panels, W3Schools style
@@ -152,6 +202,12 @@ $_SESSION = [
   - Added: Code editor two-panel layout
   - Added: `.editor-panel-container` grid (50/50 split)
   - Added: `.live-preview-frame` iframe styling
+
+- **`assets/css/achievements.css`**
+  - Added: Grid layout for achievement cards
+  - Added: Earned vs locked states
+  - Added: Completion stats display
+  - Added: Hover effects for earned achievements
 
 #### JavaScript
 - **`assets/js/activity.js`**
@@ -164,6 +220,20 @@ $_SESSION = [
   - Simplified: 300+ lines → 40 lines
   - Removed: Typewriter animation, quiz logic
   - Kept: Keyboard shortcuts, navigation
+
+#### Controllers (Modified)
+- **`controllers/auth_register.php`**
+  - Added: Achievement service integration
+  - Awards: "Hello, World!" achievement on registration
+
+- **`controllers/verify_email.php`**
+  - Added: Achievement service integration
+  - Awards: "Verified!" achievement on email verification
+
+- **`controllers/activity_handler.php`**
+  - Added: Achievement service integration
+  - Awards: Level-based achievements on completion
+  - Triggers: First Commit, The Architect, Blank Slate, etc.
 
 ### **Deleted Files (Old Stage Files)**
 
@@ -437,12 +507,153 @@ INSERT INTO levels VALUES
 
 ---
 
+## 🏆 Achievement System
+
+### **Architecture**
+
+The achievement system follows a clean event-driven architecture:
+
+```
+Event Trigger (Controller)
+    ↓
+AchievementService::checkAchievementsOnEvent()
+    ↓
+Check conditions & Award achievements
+    ↓
+AchievementModel::awardAchievement()
+    ↓
+Database: user_achievements table
+```
+
+### **Achievement Definitions**
+
+All achievements are stored in `/data/achievements.json`:
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Hello, World!",
+    "description": "Create your account and start your coding adventure",
+    "icon_path": "fa-user-plus",
+    "category": "onboarding"
+  }
+]
+```
+
+### **Seeding Achievements**
+
+Run the seeder script to populate the database:
+
+```bash
+php scripts/seed_achievements.php
+```
+
+Safe to run multiple times - uses `INSERT ... ON DUPLICATE KEY UPDATE`.
+
+### **Event Integration**
+
+**Registration Event:**
+```php
+// controllers/auth_register.php
+$userId = UserModel::createUser($pdo, $firstName, $lastName, $email, $username, $password);
+AchievementService::checkAchievementsOnEvent($pdo, $userId, 'user_registered');
+```
+
+**Email Verification Event:**
+```php
+// controllers/verify_email.php
+$userId = TokenModel::validateAndGetUserId($pdo, $token);
+AchievementService::checkAchievementsOnEvent($pdo, $userId, 'email_verified');
+```
+
+**Level Completion Event:**
+```php
+// controllers/activity_handler.php
+ProgressModel::completeLevel($pdo, $userId, $levelId);
+AchievementService::checkAchievementsOnEvent($pdo, $userId, 'level_completed', [
+    'level_id' => $levelId
+]);
+```
+
+### **Achievement Logic**
+
+The `AchievementService` handles all achievement logic:
+
+```php
+public static function checkAchievementsOnEvent(PDO $pdo, int $userId, string $event, array $context = []): array
+{
+    switch ($event) {
+        case 'user_registered':
+            // Award achievement #1
+            break;
+        case 'email_verified':
+            // Award achievement #2
+            break;
+        case 'level_completed':
+            // Check level-based achievements
+            break;
+    }
+}
+```
+
+**Level-Based Achievement Rules:**
+- **Achievement #3:** Complete any level (first completion)
+- **Achievement #4:** Complete level 2 (The Architect)
+- **Achievement #5:** Complete level 4 (Blank Slate - first fill-blank)
+- **Achievement #6:** Complete level 6 (Syntax Seal - first code-editor)
+- **Achievement #7:** Complete level 6 or 7 (Heading in Right Direction)
+- **Achievement #11:** Complete all 7 HTML levels (HTML Foundation Master)
+
+### **Frontend Display**
+
+The achievements page (`views/achievements.php`) shows:
+- Grid layout of all achievements
+- Earned vs locked states
+- Progress statistics
+- Earned dates
+
+**CSS States:**
+```css
+.achievement-card.earned {
+    border-color: #58cc02;
+}
+
+.achievement-card.locked {
+    opacity: 0.6;
+}
+```
+
+### **Adding New Achievements**
+
+1. Add to `data/achievements.json`:
+```json
+{
+  "id": 12,
+  "title": "New Achievement",
+  "description": "Description here",
+  "icon_path": "fa-star",
+  "category": "custom"
+}
+```
+
+2. Run seeder: `php scripts/seed_achievements.php`
+
+3. Add logic to `AchievementService.php`:
+```php
+if ($someCondition) {
+    self::awardAchievement($pdo, $userId, 12);
+}
+```
+
+---
+
 ## 🧪 Testing Checklist
 
 ### **Authentication Flow**
 - [ ] Login with valid credentials
-- [ ] Register new account
-- [ ] Email verification (development mode: auto-redirect)
+- [ ] Register new account → **Achievement #1: "Hello, World!"**
+- [ ] Email verification (development mode: auto-redirect) → **Achievement #2: "Verified!"**
 - [ ] Session persists across pages
 
 ### **Lecture Pages (1, 3, 5, 7)**
@@ -453,12 +664,23 @@ INSERT INTO levels VALUES
 - [ ] Progress bar updates correctly
 
 ### **Activity Pages (2, 4, 6)**
-- [ ] **Multiple Choice (2):** Radio buttons work, correct answer advances
-- [ ] **Fill-Blank (4):** Text input validates, code template displays
-- [ ] **Code Editor (6):** Live preview works, CHECK validates code
+- [ ] **Multiple Choice (2):** Radio buttons work, correct answer advances → **Achievement #4: "The Architect"**
+- [ ] **Fill-Blank (4):** Text input validates, code template displays → **Achievement #5: "Blank Slate"**
+- [ ] **Code Editor (6):** Live preview works, CHECK validates code → **Achievement #6: "Syntax Seal of Approval"**
 - [ ] Enemy displays correctly (image + HP bar)
 - [ ] Hearts decrease on wrong answer
 - [ ] Feedback panel shows after submission
+
+### **Achievement System**
+- [ ] Achievements page loads (`achievements.php`)
+- [ ] Grid displays all 11 achievements
+- [ ] Earned achievements show green border + checkmark
+- [ ] Locked achievements appear dimmed
+- [ ] Progress percentage displays correctly
+- [ ] Earned dates show for unlocked achievements
+- [ ] Achievement #3 awards on first level completion
+- [ ] Achievement #7 awards on completing level 6 or 7
+- [ ] Achievement #11 awards after completing all 7 HTML levels
 
 ### **Progression System**
 - [ ] Complete level 1 → redirects to level 2
@@ -492,6 +714,9 @@ mv views/html/stage-*.php backup/
 ```bash
 # Run migration script
 mysql -u root webibo < data_migration.sql
+
+# Seed achievements
+php scripts/seed_achievements.php
 ```
 
 ### **Step 3: Verify File Structure**
@@ -499,14 +724,27 @@ mysql -u root webibo < data_migration.sql
 webibo/
 ├── controllers/
 │   ├── lecture_handler.php
-│   └── activity_handler.php
+│   ├── activity_handler.php
+│   └── achievements.php
 ├── views/
 │   ├── lecture.php
-│   └── activity.php
-├── data/html/
-│   ├── 1.html, 2.json, 3.html, 4.json...
+│   ├── activity.php
+│   └── achievements.php
+├── core/
+│   ├── models/
+│   │   ├── AchievementModel.php
+│   │   └── ProgressModel.php (updated)
+│   └── services/
+│       └── AchievementService.php
+├── data/
+│   ├── html/ (1.html, 2.json, 3.html, 4.json...)
+│   └── achievements.json
+├── scripts/
+│   └── seed_achievements.php
 ├── assets/
-│   ├── css/lecture.css (new)
+│   ├── css/
+│   │   ├── lecture.css (new)
+│   │   └── achievements.css (updated)
 │   └── js/activity.js (updated)
 ```
 
