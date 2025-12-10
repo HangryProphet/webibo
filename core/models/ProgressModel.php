@@ -9,12 +9,10 @@
  */
 class ProgressModel
 {
-    /**
+/**
      * Get user learning progress by user ID
      * Returns mock roadmap data for dashboard compatibility
-     * Returns mock roadmap data for dashboard compatibility
      * 
-     * @param PDO $pdo Database connection
      * @param PDO $pdo Database connection
      * @param int $userId User's ID
      * @return array|false User progress array if found, false otherwise
@@ -34,10 +32,12 @@ class ProgressModel
             
             $completedIds = array_map(fn($l) => (int)$l['level_id'], $completedLevels);
 
-            // Create mock roadmap for dashboard (7 levels)
+            // Create mock roadmap for dashboard (10 levels)
             // This maintains backward compatibility with the existing dashboard view
             $mockRoadmap = [];
-            for ($i = 1; $i <= 7; $i++) {
+            $horizontalSpacing = 180; // Increased from 130 to make nodes wider apart
+            
+            for ($i = 1; $i <= 10; $i++) {
                 $isCompleted = in_array($i, $completedIds);
                 $nextLevel = count($completedIds) + 1;
                 
@@ -53,11 +53,11 @@ class ProgressModel
                 $mockRoadmap[] = [
                     'level_id' => $i,
                     'level_number' => $i,
-                    'type' => ($i == 2 || $i == 6) ? 'lecture' : 'practice',
+                    'type' => ($i == 2 || $i == 6 || $i == 9) ? 'lecture' : 'practice',
                     'status' => $status,
                     'position' => [
-                        'left' => ($i - 1) * 180,
-                        'top' => [280, 150, 80, 180, 300, 200, 120][$i - 1]
+                        'left' => ($i - 1) * $horizontalSpacing,
+                        'top' => [280, 150, 80, 180, 300, 200, 120, 250, 100, 320][$i - 1]
                     ]
                 ];
             }

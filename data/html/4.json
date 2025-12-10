@@ -1,22 +1,27 @@
 {
-  "title": "Media Query Blank",
-  "question": "Fill in the blank to apply a style only when the screen is below 600px",
-  "code_template": "@media (max-width: ___ px) {\n  body {\n    background-color: lightblue;\n  }\n}",
-  "blank_position": 1,
-  "correct_answer": "600",
-  "enemy": {
-    "name": "Bear",
-    "hp": 10,
-    "image": "assets/img/enemies/bear-happy.png"
+  "title": "Write Your First Heading",
+  "instruction": "Write your first HTML heading",
+  "starter_code": "",
+  "correct_code": "<h1>Hello World!</h1>",
+  "hint": "Use the <code>&lt;h1&gt;</code> tag to create a heading that says 'Hello World!'",
+  "enemy": null,
+  "teacher": {
+    "name": "Wiza",
+    "image": "assets/img/wiza/wiza-teach.png"
   },
   "feedback": {
     "correct": {
-      "title": "Perfect! 🎯",
-      "details": "The <code>@media</code> rule with <code>max-width: 600px</code> creates a responsive design that applies specific styles when the viewport width is 600 pixels or less. This is essential for mobile-friendly websites!"
+      "title": "Excellent Work! 🎉",
+      "details": "You've successfully created your first HTML heading! The <code>&lt;h1&gt;</code> tag is one of the most important elements in HTML. It tells browsers and search engines what your page is about."
     },
     "wrong": {
-      "title": "Not quite right! 📱",
-      "details": "The <code>@media</code> rule with <code>max-width: 600px</code> applies styles when the viewport width is 600 pixels or less. This is a key technique in responsive web design to make sites look good on mobile devices."
+      "title": "Not quite! 🤔",
+      "details": "Remember, you need to use the <code>&lt;h1&gt;</code> tag with the text 'Hello World!' inside. Make sure to include both the opening tag <code>&lt;h1&gt;</code> and closing tag <code>&lt;/h1&gt;</code>."
     }
+  },
+  "validation": {
+    "type": "exact_match",
+    "case_sensitive": false,
+    "ignore_whitespace": true
   }
 }

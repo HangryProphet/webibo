@@ -1,5 +1,31 @@
 // Add click handlers to roadmap nodes
 document.addEventListener('DOMContentLoaded', function() {
+    // Course module button click handler
+    const courseModuleWrapper = document.querySelector('.course-module-wrapper');
+    const courseModuleBtn = document.querySelector('.course-module-btn');
+    
+    if (courseModuleBtn && courseModuleWrapper) {
+        courseModuleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // Close all other popups
+            document.querySelectorAll('.hover-popup, .sidebar-hover-popup').forEach(p => {
+                p.style.opacity = '0';
+                p.style.visibility = 'hidden';
+            });
+            
+            // Toggle active class
+            courseModuleWrapper.classList.toggle('active');
+        });
+        
+        // Close popup when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!courseModuleWrapper.contains(e.target)) {
+                courseModuleWrapper.classList.remove('active');
+            }
+        });
+    }
+    
     const levelNodes = document.querySelectorAll('.level-node');
     const roadmap = document.querySelector('.roadmap');
     const trailSvg = document.querySelector('.roadmap-trail');
@@ -9,11 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const nodeFileMap = [
         'lecture.php?id=1',    // Level 1: Lecture
         'activity.php?id=2',   // Level 2: Multiple Choice
-        'lecture.php?id=3',    // Level 3: Lecture
-        'activity.php?id=4',   // Level 4: Fill-Blank
-        'lecture.php?id=5',    // Level 5: Lecture
-        'activity.php?id=6',   // Level 6: Code Editor
-        'lecture.php?id=7'     // Level 7: Lecture
+        'activity.php?id=3',   // Level 4: Fill-Blank
+        'activity.php?id=4',   // Level 6: Code Editor
+        'lecture.php?id=5'     // Level 7: Lecture
     ];
     
     // Helper: route through loading screen for a brief delay
@@ -76,15 +100,75 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     levelNodes.forEach((node, index) => {
-        // Always enable nodes and show them as completed
-        node.classList.remove('locked', 'current');
-        node.classList.add('completed');
-        node.style.cursor = 'pointer';
-        node.addEventListener('click', function() {
-            // Use the mapped file if available, otherwise fallback to index-based naming
-            const filePath = nodeFileMap[index] || `html/stage-${String(index + 1).padStart(3, '0')}-act.php`;
-            redirectWithLoading(filePath);
-        });
+        const levelId = parseInt(node.dataset.levelId || (index + 1));
+        
+        // Determine if this is a lecture node based on the actual file type
+        // Check the data-activity-type attribute which is set based on file existence (.html = Lecture, .json = Challenge/Activity)
+        const activityType = node.dataset.activityType || 'Lecture';
+        const isLecture = activityType === 'Lecture';
+        if (isLecture) {
+            node.classList.add('lecture-node');
+        }
+        
+        // Get icon element
+        const iconElement = node.querySelector('i');
+        
+        // Disable nodes 5 to 10 for UI purposes only
+        if (levelId >= 5 && levelId <= 10) {
+            node.classList.remove('completed', 'current');
+            node.classList.add('locked');
+            node.style.cursor = 'not-allowed';
+            
+            // Set lock icon for locked nodes
+            if (iconElement) {
+                iconElement.className = 'fas fa-lock';
+            }
+            
+            // Update hover popup content to '???' for locked nodes
+            const popupText = node.querySelector('.node-popup-text');
+            if (popupText) {
+                popupText.textContent = '???';
+            }
+            
+            // Don't add click handler for disabled nodes
+        } else {
+            // Set icon based on type for unlocked nodes
+            if (iconElement) {
+                if (isLecture) {
+                    // Alternate between lecture icon and book icon for lectures
+                    const lectureIcons = ['fa-chalkboard-teacher', 'fa-book'];
+                    const iconIndex = (levelId - 1) % 2;
+                    iconElement.className = 'fas ' + lectureIcons[iconIndex];
+                } else {
+                    // Alternate between code, task, and dumbbell icons for activities
+                    const activityIcons = ['fa-code', 'fa-tasks', 'fa-dumbbell'];
+                    const iconIndex = (levelId - 1) % 3;
+                    iconElement.className = 'fas ' + activityIcons[iconIndex];
+                }
+            }
+            
+            if (levelId === 4) {
+                // Set node 4 as current
+                node.classList.remove('locked', 'completed');
+                node.classList.add('current');
+                node.style.cursor = 'pointer';
+                node.addEventListener('click', function() {
+                    // Use the mapped file if available, otherwise fallback to index-based naming
+                    const filePath = nodeFileMap[index] || `html/stage-${String(index + 1).padStart(3, '0')}-act.php`;
+                    redirectWithLoading(filePath);
+                });
+            } else {
+                // Always enable nodes and show them as completed
+                node.classList.remove('locked', 'current');
+                node.classList.add('completed');
+                node.style.cursor = 'pointer';
+                node.addEventListener('click', function() {
+                    // Use the mapped file if available, otherwise fallback to index-based naming
+                    const filePath = nodeFileMap[index] || `html/stage-${String(index + 1).padStart(3, '0')}-act.php`;
+                    redirectWithLoading(filePath);
+                });
+            }
+        }
     });
 
     drawTrail();
@@ -158,6 +242,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
                 
+                // Close course module popup
+                if (courseModuleWrapper) {
+                    courseModuleWrapper.classList.remove('active');
+                }
+                
                 // Toggle current popup
                 if (popup.style.opacity === '1') {
                     popup.style.opacity = '0';
@@ -188,6 +277,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
                 
+                // Close course module popup
+                if (courseModuleWrapper) {
+                    courseModuleWrapper.classList.remove('active');
+                }
+                
                 // Toggle current popup
                 if (popup.style.opacity === '1') {
                     popup.style.opacity = '0';
@@ -201,11 +295,16 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Close popups when clicking outside
         document.addEventListener('click', function(e) {
-            if (!e.target.closest('.top-btn-wrapper') && !e.target.closest('.menu-item-wrapper')) {
+            if (!e.target.closest('.top-btn-wrapper') && !e.target.closest('.menu-item-wrapper') && !e.target.closest('.course-module-wrapper')) {
                 document.querySelectorAll('.hover-popup, .sidebar-hover-popup').forEach(popup => {
                     popup.style.opacity = '0';
                     popup.style.visibility = 'hidden';
                 });
+                
+                // Close course module popup
+                if (courseModuleWrapper) {
+                    courseModuleWrapper.classList.remove('active');
+                }
             }
         });
     }

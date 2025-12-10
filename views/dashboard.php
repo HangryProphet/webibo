@@ -11,6 +11,42 @@
 <body>
     <?php include 'header.php'; ?>
 
+    <!-- Course Module Card (Top Left) -->
+    <div class="course-module-wrapper">
+        <button class="course-module-btn">
+            <div class="course-icon-section">
+                <i class="fab fa-html5"></i>
+            </div>
+            <div class="course-text-section">
+                <div class="course-label">Module 1</div>
+                <div class="course-title">Introduction to HTML</div>
+            </div>
+        </button>
+        <div class="course-popup">
+            <div class="popup-header">SELECT COURSE</div>
+            <div class="course-icons-list">
+                <div class="course-icon-item">
+                    <div class="course-icon-circle html-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <div class="course-icon-label">HTML</div>
+                </div>
+                <div class="course-icon-item">
+                    <div class="course-icon-circle css-icon">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <div class="course-icon-label">CSS</div>
+                </div>
+                <div class="course-icon-item">
+                    <div class="course-icon-circle js-icon">
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <div class="course-icon-label">JavaScript</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Top Right Buttons -->
     <div class="top-right-buttons">
         <!-- XP Button -->
@@ -86,21 +122,6 @@
     </div>
 
     <div class="main-content">
-        <div class="lesson-header">
-            <button class="nav-arrow">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            
-            <div class="lesson-title-wrapper">
-                <div class="lesson-subtitle">SECTION 1</div>
-                <div class="lesson-title">The HTML Forest</div>
-            </div>
-            
-            <button class="nav-arrow">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
-
         <div class="roadmap-container">
             <div class="roadmap">
                 <svg class="roadmap-trail" preserveAspectRatio="none">
@@ -111,7 +132,8 @@
                         <?php $status = 'completed'; ?>
                         <div class="level-node <?php echo htmlspecialchars($status); ?>" 
                              style="left: <?php echo htmlspecialchars($level['position']['left']); ?>px; top: <?php echo htmlspecialchars($level['position']['top']); ?>px;"
-                             data-level-id="<?php echo htmlspecialchars($level['level_id']); ?>">
+                             data-level-id="<?php echo htmlspecialchars($level['level_id']); ?>"
+                             data-activity-type="<?php echo htmlspecialchars($level['activity_type'] ?? 'Lecture'); ?>">
                             <i class="fas <?php echo getLevelIcon($level['type']); ?>"></i>
                             <div class="node-hover-popup">
                                 <div class="node-popup-text">
