@@ -10,138 +10,7 @@ require_once __DIR__ . '/../controllers/edit_profile_handler.php';
     <title>Edit Profile - WebQuest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/auth.css">
-    <style>
-        .edit-profile-container {
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            margin: 60px 0;
-        }
-
-        .cancel-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: none;
-            border: none;
-            color: #6b7280;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 8px;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cancel-btn:hover {
-            color: #9ca3af;
-        }
-
-        .save-btn {
-            width: 100%;
-            padding: 18px;
-            background: none;
-            border: 2px solid #1cb0f6;
-            border-radius: 12px;
-            color: #1cb0f6;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 24px;
-            margin-bottom: 24px;
-            transition: all 0.1s;
-            box-shadow: 0 4px 0 #0d5a7a;
-        }
-
-        .save-btn:hover {
-            background-color: rgba(28, 176, 246, 0.1);
-        }
-
-        .save-btn:active {
-            box-shadow: 0 2px 0 #0d5a7a;
-            transform: translateY(2px);
-        }
-
-        .avatar-upload {
-            margin: 24px 0;
-            text-align: center;
-        }
-
-        .avatar-preview {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 16px;
-            background: #e5e7eb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .avatar-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .avatar-preview i {
-            font-size: 48px;
-            color: #6b7280;
-        }
-
-        .file-input-wrapper {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-        }
-
-        .file-input-wrapper input[type=file] {
-            position: absolute;
-            left: -9999px;
-        }
-
-        .file-input-label {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #1cb0f6;
-            color: white;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-
-        .file-input-label:hover {
-            background: #1899d6;
-        }
-
-        .error-message, .success-message {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .error-message {
-            background: #fee;
-            color: #c33;
-            border: 1px solid #fcc;
-        }
-
-        .success-message {
-            background: #efe;
-            color: #3c3;
-            border: 1px solid #cfc;
-        }
-
-        .email-readonly {
-            background: #f3f4f6;
-            cursor: not-allowed;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/edit_profile.css">
 </head>
 <body>
     <a href="profile.php" class="cancel-btn">✕</a>
@@ -173,17 +42,19 @@ require_once __DIR__ . '/../controllers/edit_profile_handler.php';
                     <?php else: ?>
                         <i class="fas fa-user" id="avatarIcon"></i>
                     <?php endif; ?>
+                    <label for="avatarInput" class="file-input-label avatar-btn">
+                        <i class="fas fa-camera"></i>
+                    </label>
                 </div>
                 <div class="file-input-wrapper">
                     <input type="file" name="avatar" id="avatarInput" accept="image/jpeg,image/jpg,image/png,image/gif" onchange="previewAvatar(this)">
-                    <label for="avatarInput" class="file-input-label">
-                        <i class="fas fa-camera"></i> Change Avatar
-                    </label>
                 </div>
-                <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">Max 5MB (JPEG, PNG, GIF)</p>
+                <p class="avatar-note">Max 5MB (JPEG, PNG, GIF)</p>
             </div>
 
+            <h1 class="section-title">Personal Information</h1>
             <div class="name-row">
+                
                 <div class="input-group">
                     <i class="fas fa-user input-icon"></i>
                     <input 
@@ -228,8 +99,8 @@ require_once __DIR__ . '/../controllers/edit_profile_handler.php';
                 >
             </div>
 
-            <hr style="margin: 30px 0; border: none; border-top: 1px solid #e5e7eb;">
-            <p style="text-align: center; color: #6b7280; margin-bottom: 20px; font-size: 14px;">
+            <h1 class="section-title">Security</h1>
+            <p class="password-note">
                 <strong>Change Password</strong> (optional)
             </p>
 

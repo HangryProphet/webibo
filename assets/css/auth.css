@@ -50,17 +50,17 @@ a.signup-btn {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: none;
-    border: 2px solid #1cb0f6;
-    color: #1cb0f6;
-    padding: 12px 28px;
-    border-radius: 12px;
+    background-color: #58cc02;
+    border: none;
+    color: #ffffff;
+    padding: 14px 30px;
+    border-radius: 16px;
     font-weight: 700;
     font-size: 14px;
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 0 #0d5a7a;
+    box-shadow: 0 4px 0 #3a7f02;
     transition: all 0.1s;
     text-decoration: none;
     display: inline-block;
@@ -68,12 +68,12 @@ a.signup-btn {
 
 .signup-btn-header:hover,
 a.signup-btn:hover {
-    background-color: rgba(28, 176, 246, 0.1);
+    filter: brightness(1.08);
 }
 
 .signup-btn-header:active,
 a.signup-btn:active {
-    box-shadow: 0 2px 0 #0d5a7a;
+    box-shadow: 0 2px 0 #3a7f02;
     transform: translateY(2px);
 }
 
@@ -81,28 +81,28 @@ a.signup-btn:active {
     position: absolute;
     top: 20px;
     right: 20px;
-    background: none;
-    border: 2px solid #1cb0f6;
-    color: #1cb0f6;
-    padding: 12px 28px;
-    border-radius: 12px;
+    background-color: #58cc02;
+    border: none;
+    color: #ffffff;
+    padding: 14px 30px;
+    border-radius: 16px;
     font-weight: 700;
     font-size: 14px;
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 0 #0d5a7a;
+    box-shadow: 0 4px 0 #3a7f02;
     transition: all 0.1s;
     text-decoration: none;
     display: inline-block;
 }
 
 .login-btn-header:hover {
-    background-color: rgba(28, 176, 246, 0.1);
+    filter: brightness(1.08);
 }
 
 .login-btn-header:active {
-    box-shadow: 0 2px 0 #0d5a7a;
+    box-shadow: 0 2px 0 #3a7f02;
     transform: translateY(2px);
 }
 
@@ -267,11 +267,11 @@ input::placeholder {
 .login-btn {
     width: 100%;
     padding: 18px;
-    background: none;
-    border: 2px solid #1cb0f6;
-    border-radius: 12px;
-    color: #1cb0f6;
-    font-size: 15px;
+    background-color: #1cb0f6;
+    border: none;
+    border-radius: 16px;
+    color: #ffffff;
+    font-size: 16px;
     font-weight: 700;
     cursor: pointer;
     text-transform: uppercase;
@@ -279,15 +279,15 @@ input::placeholder {
     margin-top: 24px;
     margin-bottom: 32px;
     transition: all 0.1s;
-    box-shadow: 0 4px 0 #0d5a7a;
+    box-shadow: 0 4px 0 #0e7fb0;
 }
 
 .login-btn:hover {
-    background-color: rgba(28, 176, 246, 0.1);
+    filter: brightness(1.08);
 }
 
 .login-btn:active {
-    box-shadow: 0 2px 0 #0d5a7a;
+    box-shadow: 0 2px 0 #0e7fb0;
     transform: translateY(2px);
 }
 
@@ -295,11 +295,11 @@ button.signup-btn,
 input[type="submit"].signup-btn {
     width: 100%;
     padding: 18px;
-    background: none;
-    border: 2px solid #1cb0f6;
-    border-radius: 12px;
-    color: #1cb0f6;
-    font-size: 15px;
+    background-color: #1cb0f6;
+    border: none;
+    border-radius: 16px;
+    color: #ffffff;
+    font-size: 16px;
     font-weight: 700;
     cursor: pointer;
     text-transform: uppercase;
@@ -307,18 +307,18 @@ input[type="submit"].signup-btn {
     margin-top: 24px;
     margin-bottom: 24px;
     transition: all 0.1s;
-    box-shadow: 0 4px 0 #0d5a7a;
+    box-shadow: 0 4px 0 #0e7fb0;
     position: static;
 }
 
 button.signup-btn:hover,
 input[type="submit"].signup-btn:hover {
-    background-color: rgba(28, 176, 246, 0.1);
+    filter: brightness(1.08);
 }
 
 button.signup-btn:active,
 input[type="submit"].signup-btn:active {
-    box-shadow: 0 2px 0 #0d5a7a;
+    box-shadow: 0 2px 0 #0e7fb0;
     transform: translateY(2px);
 }
 

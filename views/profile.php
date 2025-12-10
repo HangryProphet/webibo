@@ -34,13 +34,13 @@ require_once __DIR__ . '/../controllers/profile_handler.php';
             <div class="join-date">Joined <?php echo htmlspecialchars($joinDate); ?></div>
             
             <!-- Level Progress Bar -->
-            <div class="level-progress" style="margin-top: 20px; width: 100%; max-width: 400px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                    <span style="font-weight: 600; color: #333;">Level <?php echo $current_level; ?></span>
-                    <span style="color: #666; font-size: 14px;"><?php echo $current_xp; ?> / <?php echo $next_level_xp; ?> XP</span>
+            <div class="level-progress">
+                <div class="level-progress-meta">
+                    <span>Level <?php echo $current_level; ?></span>
+                    <span class="level-progress-xp"><?php echo $current_xp; ?> / <?php echo $next_level_xp; ?> XP</span>
                 </div>
-                <div style="background: #e0e0e0; border-radius: 10px; height: 12px; overflow: hidden;">
-                    <div style="background: linear-gradient(90deg, #4CAF50, #8BC34A); height: 100%; width: <?php echo $level_progress; ?>%; transition: width 0.3s ease;"></div>
+                <div class="level-progress-track">
+                    <div class="level-progress-fill" style="width: <?php echo $level_progress; ?>%;"></div>
                 </div>
             </div>
             

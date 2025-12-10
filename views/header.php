@@ -34,6 +34,7 @@ $isProfile = ($currentPage === 'profile.php');
     <!-- System Title on Left -->
     <div class="header-logo">
         <a href="dashboard.php" class="logo-link">
+            <img src="../assets/img/webibo/webibo-logo.png" alt="Webibo logo" class="logo-img">
             <div class="logo-text">Webibo</div>
         </a>
     </div>

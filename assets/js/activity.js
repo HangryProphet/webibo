@@ -25,6 +25,9 @@
     let enemyHP = config.enemyHP || 10; // Enemy HP out of 10
     const correctAnswer = config.correctAnswer || '';
     const redirectUrl = config.redirectUrl || 'activity.php';
+    // Paths are relative to views/* pages that include this script with ../assets/...
+    const correctSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/correct.mp3') : null;
+    const wrongSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/wrong.mp3') : null;
 
     // Initialize based on activity type
     function init() {
@@ -386,6 +389,7 @@
             skipBtn.style.display = 'none';
         }
 
+        playFeedbackSound(true);
         showFeedback(true);
     }
 
@@ -411,6 +415,7 @@
         // Decrease player hearts
         decreaseHearts();
 
+        playFeedbackSound(false);
         showFeedback(false);
     }
 
@@ -463,6 +468,22 @@
             title.textContent = config.wrongTitle || 'Correct answer:';
             details.innerHTML = config.wrongDetails || '';
             continueBtn.className = 'continue-btn wrong';
+        }
+    }
+
+    // Play sound for correct/wrong feedback
+    function playFeedbackSound(isCorrect) {
+        const sound = isCorrect ? correctSound : wrongSound;
+        if (!sound) return;
+
+        try {
+            sound.currentTime = 0;
+            const playPromise = sound.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(err => console.warn('Audio playback blocked:', err));
+            }
+        } catch (e) {
+            console.error('Error playing feedback sound:', e);
         }
     }
 
