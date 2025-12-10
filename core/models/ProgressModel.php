@@ -2,7 +2,9 @@
 
 /**
  * ProgressModel - Database-Driven Progress Model
+ * ProgressModel - Database-Driven Progress Model
  * 
+ * Handles user learning progress tracking with database operations
  * Handles user learning progress tracking with database operations
  */
 class ProgressModel
@@ -10,7 +12,9 @@ class ProgressModel
     /**
      * Get user learning progress by user ID
      * Returns mock roadmap data for dashboard compatibility
+     * Returns mock roadmap data for dashboard compatibility
      * 
+     * @param PDO $pdo Database connection
      * @param PDO $pdo Database connection
      * @param int $userId User's ID
      * @return array|false User progress array if found, false otherwise
@@ -96,6 +100,7 @@ class ProgressModel
     /**
      * Get all completed levels for a user
      * 
+     * @param PDO $pdo Database connection
      * @param PDO $pdo Database connection
      * @param int $userId User's ID
      * @return array Array of completed level data

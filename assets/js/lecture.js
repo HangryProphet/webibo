@@ -1,5 +1,5 @@
-// Lecture JavaScript - Simple Tutorial Mode
-// No typewriter, no animations - just clean navigation
+// Lecture JavaScript - PowerPoint-like Slide Navigation
+// Handles slide navigation with Next/Previous buttons
 
 (function() {
     'use strict';
@@ -9,25 +9,50 @@
         // Add smooth scroll behavior
         document.documentElement.style.scrollBehavior = 'smooth';
         
-        // Add keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Enter or Space = Mark Complete
-            if (e.key === 'Enter' || e.key === ' ') {
-                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
-                    e.preventDefault();
-                    const completeBtn = document.getElementById('completeBtn');
-                    if (completeBtn) completeBtn.click();
+        // Setup exit modal handlers
+        setupExitModal();
+        
+        console.log('Lecture page loaded with slide navigation');
+    });
+    
+    // Exit modal functions
+    window.showExitModal = function() {
+        const exitModal = document.getElementById('exitModal');
+        if (exitModal) {
+            exitModal.classList.add('active');
+        }
+    };
+    
+    window.closeModal = function() {
+        const exitModal = document.getElementById('exitModal');
+        if (exitModal) {
+            exitModal.classList.remove('active');
+        }
+    };
+    
+    window.exitToDashboard = function() {
+        // Redirect to dashboard
+        window.location.href = 'dashboard.php';
+    };
+    
+    function setupExitModal() {
+        const exitModal = document.getElementById('exitModal');
+        if (exitModal) {
+            // Close modal when clicking outside
+            exitModal.addEventListener('click', function(e) {
+                if (e.target === exitModal) {
+                    window.closeModal();
                 }
-            }
-            
-            // Escape = Go Back
+            });
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                window.history.back();
+                window.closeModal();
             }
         });
-        
-        console.log('Lecture page loaded in tutorial mode');
-    });
+    }
 
 })();
 

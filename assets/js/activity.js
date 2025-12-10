@@ -346,11 +346,13 @@
                 selectedBtn.classList.add('correct');
             }
 
-            // Change fox to angry if enemy exists
+            // Change enemy to angry if enemy exists
             if (config.hasEnemy !== false) {
                 const enemyImage = document.getElementById('enemyImage');
                 if (enemyImage) {
-                    enemyImage.src = '../../assets/img/enemies/fox-angry.png';
+                    // Keep same base path and swap -happy with -angry so relative URLs stay valid
+                    const angrySrc = enemyImage.src.replace('-happy', '-angry');
+                    enemyImage.src = angrySrc;
                 }
 
                 // Decrease enemy HP
@@ -363,11 +365,13 @@
                 answerInput.classList.add('correct');
             }
 
-            // Change fox to angry if enemy exists
+            // Change enemy to angry if enemy exists
             if (config.hasEnemy !== false) {
                 const enemyImage = document.getElementById('enemyImage');
                 if (enemyImage) {
-                    enemyImage.src = '../../assets/img/enemies/bear-angry.png';
+                    // Keep same base path and swap -happy with -angry so relative URLs stay valid
+                    const angrySrc = enemyImage.src.replace('-happy', '-angry');
+                    enemyImage.src = angrySrc;
                 }
 
                 // Decrease enemy HP

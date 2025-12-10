@@ -8,7 +8,10 @@
 - ✅ **Unified Views** - 2 universal templates (`lecture.php` + `activity.php`) replace 7+ stage files
 - ✅ **Session Management** - Fixed critical session bugs, now uses `$_SESSION['user_id']` consistently
 - ✅ **UI/UX Overhaul** - Lecture pages redesigned with grid card layout, dark theme consistency
+<<<<<<< HEAD
 - ✅ **Achievement System** - Complete database-driven achievement system with 11 achievements
+=======
+>>>>>>> origin/travis
 
 **What Stayed the Same:**
 - ✅ Database schema (9 tables unchanged)
@@ -97,6 +100,7 @@ $_SESSION = [
 - Enemy display with HP bar
 - Feedback panel for correct/wrong answers
 
+<<<<<<< HEAD
 ### 5️⃣ **Achievement System**
 
 Complete database-driven achievement tracking with event-based triggers.
@@ -126,6 +130,8 @@ Complete database-driven achievement tracking with event-based triggers.
 - `verify_email.php` - Awards achievement on email verification
 - `activity_handler.php` - Awards achievements on level completion
 
+=======
+>>>>>>> origin/travis
 ---
 
 ## 📂 Detailed File Changes
@@ -152,6 +158,7 @@ Complete database-driven achievement tracking with event-based triggers.
 - **`data/html/5.html`** - Best Practices lecture
 - **`data/html/6.json`** - Code editor activity (validation rules, starter code)
 - **`data/html/7.html`** - Congratulations page
+<<<<<<< HEAD
 - **`data/achievements.json`** - Achievement definitions (11 achievements)
 
 #### Scripts
@@ -167,6 +174,8 @@ Complete database-driven achievement tracking with event-based triggers.
 
 #### Controllers
 - **`controllers/achievements.php`** - Fetches and prepares achievement data for view
+=======
+>>>>>>> origin/travis
 
 #### Documentation
 - **`HANDLERS_README.md`** - Controller documentation
@@ -187,11 +196,14 @@ Complete database-driven achievement tracking with event-based triggers.
   - Added: iframe-based live code preview
   - Fixed: Variable access errors
 
+<<<<<<< HEAD
 - **`views/achievements.php`**
   - Old: Hardcoded placeholder achievements
   - New: Dynamic achievement grid with earned/locked states
   - Shows: Progress percentage, earned dates, completion status
 
+=======
+>>>>>>> origin/travis
 #### CSS (Complete Rewrites)
 - **`assets/css/lecture.css`** (366 lines → 340 lines)
   - Removed: Purple gradient, creamy panels, W3Schools style
@@ -203,12 +215,15 @@ Complete database-driven achievement tracking with event-based triggers.
   - Added: `.editor-panel-container` grid (50/50 split)
   - Added: `.live-preview-frame` iframe styling
 
+<<<<<<< HEAD
 - **`assets/css/achievements.css`**
   - Added: Grid layout for achievement cards
   - Added: Earned vs locked states
   - Added: Completion stats display
   - Added: Hover effects for earned achievements
 
+=======
+>>>>>>> origin/travis
 #### JavaScript
 - **`assets/js/activity.js`**
   - Fixed: `checkCode()` function (was stuck, no feedback)
@@ -221,6 +236,7 @@ Complete database-driven achievement tracking with event-based triggers.
   - Removed: Typewriter animation, quiz logic
   - Kept: Keyboard shortcuts, navigation
 
+<<<<<<< HEAD
 #### Controllers (Modified)
 - **`controllers/auth_register.php`**
   - Added: Achievement service integration
@@ -235,6 +251,8 @@ Complete database-driven achievement tracking with event-based triggers.
   - Awards: Level-based achievements on completion
   - Triggers: First Commit, The Architect, Blank Slate, etc.
 
+=======
+>>>>>>> origin/travis
 ### **Deleted Files (Old Stage Files)**
 
 These 7 files are now **REPLACED** by universal templates:
@@ -507,6 +525,7 @@ INSERT INTO levels VALUES
 
 ---
 
+<<<<<<< HEAD
 ## 🏆 Achievement System
 
 ### **Architecture**
@@ -648,12 +667,19 @@ if ($someCondition) {
 
 ---
 
+=======
+>>>>>>> origin/travis
 ## 🧪 Testing Checklist
 
 ### **Authentication Flow**
 - [ ] Login with valid credentials
+<<<<<<< HEAD
 - [ ] Register new account → **Achievement #1: "Hello, World!"**
 - [ ] Email verification (development mode: auto-redirect) → **Achievement #2: "Verified!"**
+=======
+- [ ] Register new account
+- [ ] Email verification (development mode: auto-redirect)
+>>>>>>> origin/travis
 - [ ] Session persists across pages
 
 ### **Lecture Pages (1, 3, 5, 7)**
@@ -664,13 +690,20 @@ if ($someCondition) {
 - [ ] Progress bar updates correctly
 
 ### **Activity Pages (2, 4, 6)**
+<<<<<<< HEAD
 - [ ] **Multiple Choice (2):** Radio buttons work, correct answer advances → **Achievement #4: "The Architect"**
 - [ ] **Fill-Blank (4):** Text input validates, code template displays → **Achievement #5: "Blank Slate"**
 - [ ] **Code Editor (6):** Live preview works, CHECK validates code → **Achievement #6: "Syntax Seal of Approval"**
+=======
+- [ ] **Multiple Choice (2):** Radio buttons work, correct answer advances
+- [ ] **Fill-Blank (4):** Text input validates, code template displays
+- [ ] **Code Editor (6):** Live preview works, CHECK validates code
+>>>>>>> origin/travis
 - [ ] Enemy displays correctly (image + HP bar)
 - [ ] Hearts decrease on wrong answer
 - [ ] Feedback panel shows after submission
 
+<<<<<<< HEAD
 ### **Achievement System**
 - [ ] Achievements page loads (`achievements.php`)
 - [ ] Grid displays all 11 achievements
@@ -682,6 +715,8 @@ if ($someCondition) {
 - [ ] Achievement #7 awards on completing level 6 or 7
 - [ ] Achievement #11 awards after completing all 7 HTML levels
 
+=======
+>>>>>>> origin/travis
 ### **Progression System**
 - [ ] Complete level 1 → redirects to level 2
 - [ ] Complete all 7 levels → redirects to dashboard
@@ -714,9 +749,12 @@ mv views/html/stage-*.php backup/
 ```bash
 # Run migration script
 mysql -u root webibo < data_migration.sql
+<<<<<<< HEAD
 
 # Seed achievements
 php scripts/seed_achievements.php
+=======
+>>>>>>> origin/travis
 ```
 
 ### **Step 3: Verify File Structure**
@@ -724,6 +762,7 @@ php scripts/seed_achievements.php
 webibo/
 ├── controllers/
 │   ├── lecture_handler.php
+<<<<<<< HEAD
 │   ├── activity_handler.php
 │   └── achievements.php
 ├── views/
@@ -745,6 +784,16 @@ webibo/
 │   ├── css/
 │   │   ├── lecture.css (new)
 │   │   └── achievements.css (updated)
+=======
+│   └── activity_handler.php
+├── views/
+│   ├── lecture.php
+│   └── activity.php
+├── data/html/
+│   ├── 1.html, 2.json, 3.html, 4.json...
+├── assets/
+│   ├── css/lecture.css (new)
+>>>>>>> origin/travis
 │   └── js/activity.js (updated)
 ```
 

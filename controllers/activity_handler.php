@@ -12,7 +12,6 @@ require_once __DIR__ . '/../core/db_connect.php';
 require_once __DIR__ . '/../core/models/LevelModel.php';
 require_once __DIR__ . '/../core/models/StatsModel.php';
 require_once __DIR__ . '/../core/models/ProgressModel.php';
-require_once __DIR__ . '/../core/services/AchievementService.php';
 
 // Get level ID from URL
 $levelId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -130,11 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Mark level as complete
         ProgressModel::completeLevel($pdo, $userId, $levelId);
-        
-        // Check and award achievements
-        AchievementService::checkAchievementsOnEvent($pdo, $userId, 'level_completed', [
-            'level_id' => $levelId
-        ]);
         
         // Redirect to next level or dashboard
         $nextLevel = LevelModel::getNextLevel($pdo, $levelId);

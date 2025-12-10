@@ -22,10 +22,7 @@ if (!isset($_SESSION['user'])) {
     <div class="main-content">
         <div class="loading-container">
             <!-- Wiza Image -->
-            <img src="../assets/img/wiza/wiza-heart-eyes.png" alt="Wiza Loading" class="loading-image">
-
-            <!-- Loading Text -->
-            <h2 class="loading-text">Loading...</h2>
+            <img src="../assets/img/wiza/wiza-flying.gif" alt="Wiza Loading" class="loading-image">
 
             <!-- Progress Bar -->
             <div class="loading-progress-container">

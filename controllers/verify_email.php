@@ -14,7 +14,6 @@ $pdo = require_once __DIR__ . '/../core/db_connect.php';
 
 // Load required models
 require_once __DIR__ . '/../core/models/TokenModel.php';
-require_once __DIR__ . '/../core/services/AchievementService.php';
 
 // Start session for messages
 start_session_securely();
@@ -28,13 +27,10 @@ if (empty($token)) {
 }
 
 // Validate the token
-$userId = TokenModel::validateAndGetUserId($pdo, $token);
+$isValid = TokenModel::validateVerificationToken($pdo, $token);
 
-if ($userId) {
-    // Token is valid - award "Verified!" achievement
-    AchievementService::checkAchievementsOnEvent($pdo, $userId, 'email_verified');
-    
-    // User is now verified
+if ($isValid) {
+    // Token is valid - user is now verified
     set_success('Email verified successfully! You can now log in to your account.');
     redirect('../views/login.php');
 } else {
