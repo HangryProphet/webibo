@@ -33,7 +33,25 @@ if (!isset($_SESSION['user'])) {
         </div>
     </div>
 
+    <!-- Magic sound on load -->
+    <audio id="magic-sound" src="../assets/sfx/magic-sound.mp3" preload="auto"></audio>
+
     <script src="../assets/js/loading.js"></script>
+    <script>
+        (function () {
+            const audio = document.getElementById('magic-sound');
+            if (!audio) return;
+            try {
+                audio.currentTime = 0;
+                const playPromise = audio.play();
+                if (playPromise && typeof playPromise.then === 'function') {
+                    playPromise.catch(() => {});
+                }
+            } catch (err) {
+                // Autoplay may fail; ignore
+            }
+        })();
+    </script>
 </body>
 </html>
 

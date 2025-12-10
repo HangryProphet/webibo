@@ -1,6 +1,9 @@
 // Add click handlers to roadmap nodes
 document.addEventListener('DOMContentLoaded', function() {
     const levelNodes = document.querySelectorAll('.level-node');
+    const roadmap = document.querySelector('.roadmap');
+    const trailSvg = document.querySelector('.roadmap-trail');
+    const trailPath = document.querySelector('.trail-path');
     
     // Map node indices to new universal view files with level IDs
     const nodeFileMap = [
@@ -18,6 +21,59 @@ document.addEventListener('DOMContentLoaded', function() {
         const loadingUrl = `loading_screen.php?redirect=${encodeURIComponent(targetPath)}`;
         window.location.href = loadingUrl;
     }
+
+    // Convert a list of points into a smooth Catmull-Rom spline path
+    function buildSmoothPath(points) {
+        if (points.length < 2) return '';
+
+        const p = points.map(pt => ({ x: pt.x, y: pt.y }));
+        let d = `M ${p[0].x} ${p[0].y}`;
+
+        for (let i = 0; i < p.length - 1; i++) {
+            const p0 = p[i - 1] || p[i];
+            const p1 = p[i];
+            const p2 = p[i + 1];
+            const p3 = p[i + 2] || p2;
+
+            const cp1x = p1.x + (p2.x - p0.x) / 6;
+            const cp1y = p1.y + (p2.y - p0.y) / 6;
+            const cp2x = p2.x - (p3.x - p1.x) / 6;
+            const cp2y = p2.y - (p3.y - p1.y) / 6;
+
+            d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`;
+        }
+
+        return d;
+    }
+
+    function getNodeCenter(node) {
+        const left = parseFloat(node.style.left) || 0;
+        const top = parseFloat(node.style.top) || 0;
+        return {
+            x: left + node.offsetWidth / 2,
+            y: top + node.offsetHeight / 2
+        };
+    }
+
+    function drawTrail() {
+        if (!roadmap || !trailSvg || !trailPath) return;
+        if (!levelNodes.length) return;
+
+        // Match the SVG viewBox to the roadmap area for pixel-perfect alignment
+        const width = roadmap.clientWidth;
+        const height = roadmap.clientHeight;
+        trailSvg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+        trailSvg.setAttribute('width', width);
+        trailSvg.setAttribute('height', height);
+
+        const points = Array.from(levelNodes)
+            .sort((a, b) => parseFloat(a.dataset.levelId || '0') - parseFloat(b.dataset.levelId || '0'))
+            .map(getNodeCenter)
+            .filter(pt => Number.isFinite(pt.x) && Number.isFinite(pt.y));
+
+        const pathData = buildSmoothPath(points);
+        trailPath.setAttribute('d', pathData);
+    }
     
     levelNodes.forEach((node, index) => {
         // Always enable nodes and show them as completed
@@ -30,6 +86,8 @@ document.addEventListener('DOMContentLoaded', function() {
             redirectWithLoading(filePath);
         });
     });
+
+    drawTrail();
 
     // Scroll to current level node on mobile view
     function scrollToCurrentNode() {
@@ -68,12 +126,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Scroll to current node on load (with a small delay to ensure DOM is ready)
     setTimeout(scrollToCurrentNode, 100);
+    // Re-draw trail after layout settles
+    setTimeout(drawTrail, 120);
 
     // Also scroll on window resize (in case orientation changes)
     let resizeTimeout;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(scrollToCurrentNode, 250);
+        resizeTimeout = setTimeout(() => {
+            scrollToCurrentNode();
+            drawTrail();
+        }, 250);
     });
 
     // Handle top button hover popups on mobile (tap to show/hide)

@@ -1,4 +1,5 @@
 {
+  "title": "Write Your First Heading",
   "instruction": "Write your first HTML heading",
   "starter_code": "",
   "correct_code": "<h1>Hello World!</h1>",

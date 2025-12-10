@@ -1,4 +1,5 @@
 {
+  "title": "Media Query Blank",
   "question": "Fill in the blank to apply a style only when the screen is below 600px",
   "code_template": "@media (max-width: ___ px) {\n  body {\n    background-color: lightblue;\n  }\n}",
   "blank_position": 1,

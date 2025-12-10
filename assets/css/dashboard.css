@@ -596,6 +596,25 @@ body {
     margin: 0 auto;
 }
 
+.roadmap-trail {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.roadmap-trail .trail-path {
+    fill: none;
+    stroke: #7a8794;
+    stroke-width: 6px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 14 10;
+    vector-effect: non-scaling-stroke;
+}
+
 
 /* ============================================
    LEVEL NODES
@@ -615,6 +634,38 @@ body {
     transition: all 0.2s;
     box-shadow: 0 6px 0 rgba(0, 0, 0, 0.4);
     z-index: 1;
+    overflow: visible;
+}
+
+.level-node .node-hover-popup {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translate(-50%, 10px);
+    background-color: #1e2633;
+    border: 2px solid #2d3949;
+    border-radius: 14px;
+    padding: 10px 14px;
+    min-width: 220px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.level-node:hover .node-hover-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.node-popup-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #e5e7eb;
 }
 
 .level-node.completed {
