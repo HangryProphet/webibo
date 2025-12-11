@@ -36,8 +36,8 @@
         <button type="button" class="nav-btn nav-btn-primary" id="nextBtn" onclick="nextSlide()">
             NEXT
         </button>
-        <button type="button" class="nav-btn nav-btn-primary" id="completeBtn" onclick="markComplete()" style="display: none;">
-            FINISH
+        <button type="button" class="nav-btn nav-btn-primary" id="completeBtn" onclick="showVictoryModal()" style="display: none;">
+            COMPLETE
         </button>
     </div>
 
@@ -184,8 +184,42 @@
             }
         }
         
-        function markComplete() {
-            window.location.href = window.redirectUrl;
+        function showVictoryModal() {
+            const victoryModal = document.getElementById('victoryModal');
+            const victoryMessage = document.getElementById('victoryMessage');
+            
+            if (victoryModal) {
+                // Customize message based on next level availability
+                if (window.hasNextLevel) {
+                    victoryMessage.textContent = 'Great job! You\'ve mastered this lesson! Ready for the next one?';
+                } else {
+                    victoryMessage.textContent = 'Incredible! You\'ve completed all lessons in this course! 🎓';
+                }
+                
+                victoryModal.classList.add('active');
+            }
+        }
+        
+        function completeLecture() {
+            // Submit completion form to save progress
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '';
+            
+            const completeInput = document.createElement('input');
+            completeInput.type = 'hidden';
+            completeInput.name = 'complete';
+            completeInput.value = '1';
+            
+            const levelIdInput = document.createElement('input');
+            levelIdInput.type = 'hidden';
+            levelIdInput.name = 'level_id';
+            levelIdInput.value = '<?php echo $levelId; ?>';
+            
+            form.appendChild(completeInput);
+            form.appendChild(levelIdInput);
+            document.body.appendChild(form);
+            form.submit();
         }
         
         // Initialize navigation and progress
@@ -201,7 +235,7 @@
             } else if (e.key === 'Enter' && currentSlideIndex === totalSlides - 1) {
                 if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
                     e.preventDefault();
-                    markComplete();
+                    showVictoryModal();
                 }
             }
         });
@@ -219,6 +253,29 @@
             </div>
         </div>
     </div>
+    
+    <!-- Victory Modal -->
+    <div class="modal-overlay" id="victoryModal">
+        <div class="modal-content">
+            <img src="../assets/img/wiza/wiza-heart-eyes.png" alt="Wiza Celebrating" class="modal-image">
+            <h2 class="modal-title" style="color: #58cc02;">Lecture Complete! 🎉</h2>
+            <p class="modal-message" id="victoryMessage">Great job! You've mastered this lesson!</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-primary" onclick="completeLecture()" id="nextLevelBtn">
+                    <?php echo $hasNextLevel ? 'CONTINUE TO NEXT LEVEL' : 'BACK TO MAP'; ?>
+                </button>
+                <?php if ($hasNextLevel): ?>
+                <button class="modal-btn modal-btn-secondary" onclick="exitToDashboard()">BACK TO MAP</button>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Pass next level data to JavaScript
+        window.hasNextLevel = <?php echo $hasNextLevel ? 'true' : 'false'; ?>;
+        window.nextLevelUrl = "<?php echo $nextLevelUrl; ?>";
+    </script>
     
     <script src="../assets/js/lecture.js"></script>
 </body>

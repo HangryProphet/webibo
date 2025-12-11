@@ -22,58 +22,191 @@
   },
   {
     "id": 4,
-    "title": "The Architect",
-    "description": "Master the essential HTML tags",
-    "icon_path": "fa-code",
-    "category": "html_course"
+    "title": "Picture Perfect",
+    "description": "Upload a custom profile picture",
+    "icon_path": "fa-camera",
+    "category": "onboarding"
   },
   {
     "id": 5,
-    "title": "Blank Slate",
-    "description": "Ace your first Fill-in-the-Blanks challenge",
-    "icon_path": "fa-pen",
+    "title": "The Architect",
+    "description": "Master the essential HTML document structure",
+    "icon_path": "fa-file-code",
     "category": "html_course"
   },
   {
     "id": 6,
-    "title": "Syntax Seal of Approval",
-    "description": "Complete your first Coding Challenge",
-    "icon_path": "fa-code-branch",
+    "title": "Multiple Victor",
+    "description": "Ace your first Multiple-Choice quiz",
+    "icon_path": "fa-tasks",
     "category": "html_course"
   },
   {
     "id": 7,
-    "title": "Heading in the Right Direction",
-    "description": "Master the art of headings and paragraphs",
-    "icon_path": "fa-heading",
+    "title": "Blank Slate",
+    "description": "Conquer a Fill-in-the-Blanks challenge",
+    "icon_path": "fa-pen",
     "category": "html_course"
   },
   {
     "id": 8,
-    "title": "Chain Link",
-    "description": "Learn how to connect the web with links",
-    "icon_path": "fa-link",
+    "title": "Syntax Seal of Approval",
+    "description": "Complete your first live Coding Challenge",
+    "icon_path": "fa-code-branch",
     "category": "html_course"
   },
   {
     "id": 9,
+    "title": "Heading in the Right Direction",
+    "description": "Master the hierarchy of headings and paragraphs",
+    "icon_path": "fa-heading",
+    "category": "html_course"
+  },
+  {
+    "id": 10,
+    "title": "Chain Link",
+    "description": "Learn how to connect the web with anchor tags",
+    "icon_path": "fa-link",
+    "category": "html_course"
+  },
+  {
+    "id": 11,
     "title": "A Pretty Picture",
     "description": "Master the img tag and the importance of alt text",
     "icon_path": "fa-image",
     "category": "html_course"
   },
   {
-    "id": 10,
+    "id": 12,
     "title": "List-o-mania",
     "description": "Become a pro at organizing content with lists",
     "icon_path": "fa-list",
     "category": "html_course"
   },
   {
-    "id": 11,
+    "id": 13,
+    "title": "Putting It All Together",
+    "description": "Complete the final portfolio project",
+    "icon_path": "fa-briefcase",
+    "category": "html_course"
+  },
+  {
+    "id": 14,
     "title": "HTML Foundation Master",
     "description": "Complete the entire HTML Learning Path",
     "icon_path": "fa-trophy",
     "category": "html_course"
+  },
+  {
+    "id": 15,
+    "title": "First Splash of Color",
+    "description": "Begin your journey into CSS",
+    "icon_path": "fa-palette",
+    "category": "css_course"
+  },
+  {
+    "id": 16,
+    "title": "Selector Selector",
+    "description": "Master element, class, and ID selectors",
+    "icon_path": "fa-crosshairs",
+    "category": "css_course"
+  },
+  {
+    "id": 17,
+    "title": "Hue Hero",
+    "description": "Learn the different ways to define colors",
+    "icon_path": "fa-paint-brush",
+    "category": "css_course"
+  },
+  {
+    "id": 18,
+    "title": "Box Model Boxer",
+    "description": "Understand the fundamentals of the CSS Box Model",
+    "icon_path": "fa-box",
+    "category": "css_course"
+  },
+  {
+    "id": 19,
+    "title": "CSS Styling Apprentice",
+    "description": "Complete the entire CSS Learning Path",
+    "icon_path": "fa-trophy",
+    "category": "css_course"
+  },
+  {
+    "id": 20,
+    "title": "The Spark of Interactivity",
+    "description": "Write your first line of JavaScript",
+    "icon_path": "fa-bolt",
+    "category": "js_course"
+  },
+  {
+    "id": 21,
+    "title": "Variable Virtuoso",
+    "description": "Master variables, constants, and data types",
+    "icon_path": "fa-database",
+    "category": "js_course"
+  },
+  {
+    "id": 22,
+    "title": "Operator Operator",
+    "description": "Conquer operators and build your first functions",
+    "icon_path": "fa-calculator",
+    "category": "js_course"
+  },
+  {
+    "id": 23,
+    "title": "DOM Dominator",
+    "description": "Learn how to manipulate HTML elements with JavaScript",
+    "icon_path": "fa-cogs",
+    "category": "js_course"
+  },
+  {
+    "id": 24,
+    "title": "JavaScript Interactivity Master",
+    "description": "Complete the entire JavaScript Learning Path",
+    "icon_path": "fa-trophy",
+    "category": "js_course"
+  },
+  {
+    "id": 25,
+    "title": "Warming Up",
+    "description": "Maintain a 3-day learning streak",
+    "icon_path": "fa-fire",
+    "category": "streaks"
+  },
+  {
+    "id": 26,
+    "title": "Weekly Warrior",
+    "description": "Maintain a 7-day learning streak",
+    "icon_path": "fa-fire-alt",
+    "category": "streaks"
+  },
+  {
+    "id": 27,
+    "title": "Perfect Score",
+    "description": "Complete a multi-question quiz level without any wrong answers",
+    "icon_path": "fa-star",
+    "category": "performance"
+  },
+  {
+    "id": 28,
+    "title": "Speed Demon",
+    "description": "Complete 5 levels in a single day",
+    "icon_path": "fa-rocket",
+    "category": "performance"
+  },
+  {
+    "id": 29,
+    "title": "Triple Threat",
+    "description": "Complete at least one level in HTML, CSS, and JavaScript",
+    "icon_path": "fa-layer-group",
+    "category": "performance"
+  },
+  {
+    "id": 30,
+    "title": "Knowledge Seeker",
+    "description": "Complete all lectures across all three courses",
+    "icon_path": "fa-book-open",
+    "category": "performance"
   }
 ]

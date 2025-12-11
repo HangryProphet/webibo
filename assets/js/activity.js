@@ -134,17 +134,13 @@
     // Initialize progress bar on page load
     function initProgressBar() {
         const progressFill = document.getElementById('progressFill');
-        console.log('initProgressBar - Element found:', !!progressFill);
-        console.log('isMultiQuestion:', isMultiQuestion, 'totalQuestions:', totalQuestions);
         if (progressFill) {
             // For multi-question activities, start at 0%
             // For single question, use the backend progress value
             if (isMultiQuestion) {
                 progressFill.style.width = '0%';
-                console.log('Multi-question mode - starting at 0%');
             } else {
                 progressFill.style.width = (currentProgress / 10 * 100) + '%';
-                console.log('Single question mode - starting at', (currentProgress / 10 * 100) + '%');
             }
         }
         
@@ -280,12 +276,6 @@
             }
         }
 
-        console.log('Answer comparison:', {
-            selectedAnswer,
-            correctAnswer,
-            isCorrect: selectedAnswer === correctAnswer
-        });
-        
         // Update progress bar (tracks question progression, not correctness)
         updateProgress();
 
@@ -430,31 +420,22 @@
     // Update progress bar (progress is out of 10)
     function updateProgress() {
         const progressFill = document.getElementById('progressFill');
-        console.log('updateProgress called - progressFill found:', !!progressFill);
         if (!progressFill) return;
         
         if (isMultiQuestion) {
             // For multi-question: calculate based on questions answered
             const progressPercentage = ((currentQuestionIndex + 1) / totalQuestions) * 100;
-            console.log('Multi-question progress:', {
-                currentQuestionIndex,
-                totalQuestions,
-                progressPercentage
-            });
             progressFill.style.width = progressPercentage + '%';
         } else {
             // For single question: use traditional progress (out of 10)
             currentProgress += 1;
             if (currentProgress > 10) currentProgress = 10;
-            console.log('Single question progress:', currentProgress, '%');
             progressFill.style.width = (currentProgress / 10 * 100) + '%';
         }
-        console.log('Progress bar width set to:', progressFill.style.width);
     }
 
     // Handle correct answer
     function handleCorrectAnswer() {
-        console.log('handleCorrectAnswer called');
         if (activityType === 'multiple-choice') {
             const selectedBtn = document.querySelector('.option-btn.selected');
             if (selectedBtn) {

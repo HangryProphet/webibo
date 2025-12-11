@@ -137,7 +137,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         StatsModel::addXP($pdo, $userId, $xpReward);
         
         // Mark level as complete
-        ProgressModel::completeLevel($pdo, $userId, $levelId);
+        $completionSuccess = ProgressModel::completeLevel($pdo, $userId, $levelId);
+        
+        // Award achievements for level completion
+        if ($completionSuccess) {
+            require_once __DIR__ . '/../core/services/AchievementService.php';
+            $awardedAchievements = AchievementService::checkAchievementsOnEvent(
+                $pdo, 
+                $userId, 
+                'level_completed', 
+                ['level_id' => $levelId]
+            );
+            
+            // Log awarded achievements for debugging
+            if (!empty($awardedAchievements)) {
+                error_log("User {$userId} earned achievements: " . implode(', ', $awardedAchievements));
+            }
+        }
         
         // Redirect to next level or dashboard
         $nextLevel = LevelModel::getNextLevel($pdo, $levelId);

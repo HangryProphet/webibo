@@ -73,6 +73,16 @@ $lastName = $_SESSION['last_name'] ?? '';
 // Fetch user statistics from model
 $userStats = StatsModel::getStatsByUserId($pdo, $userId);
 
+// Fetch achievement count
+require_once __DIR__ . '/../core/models/AchievementModel.php';
+$totalBadges = AchievementModel::getAchievementCount($pdo, $userId);
+
+// Add total_xp and total_badges to userStats
+if ($userStats && is_array($userStats)) {
+    $userStats['total_xp'] = $userStats['xp_points'] ?? 0;
+    $userStats['total_badges'] = $totalBadges;
+}
+
 // Fetch user progress from model
 $userProgress = ProgressModel::getProgressByUserId($pdo, $userId);
 
@@ -96,7 +106,9 @@ if (!$userStats) {
     $userStats = [
         "hearts" => ["current" => 10, "max" => 10, "next_heart_in_seconds" => 7200],
         "streak" => ["current_days" => 0, "reset_in_seconds" => 0, "weekly_progress" => [false, false, false, false, false, false, false], "target_days" => 30],
-        "courses" => []
+        "courses" => [],
+        "total_xp" => 0,
+        "total_badges" => 0
     ];
 }
 

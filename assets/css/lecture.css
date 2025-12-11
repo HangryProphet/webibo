@@ -473,6 +473,21 @@ body {
     transform: translateY(2px);
 }
 
+.modal-btn-secondary {
+    background-color: #374151;
+    color: #e5e7eb;
+    box-shadow: 0 4px 0 #1f2937;
+}
+
+.modal-btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+.modal-btn-secondary:active {
+    box-shadow: 0 2px 0 #1f2937;
+    transform: translateY(2px);
+}
+
 .fade-up {
     opacity: 0;
     transform: translateY(20px);

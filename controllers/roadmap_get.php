@@ -51,11 +51,6 @@ try {
         // Determine node status
         $status = determineNodeStatus($levelId, $level['parent_level_id'], $completedLevels);
         
-        // TEMPORARY: Force all locked levels to be 'current' for testing
-        if ($status === 'locked') {
-            $status = 'current';
-        }
-        
         // Calculate position
         $absoluteIndex = $orderInCourse - 1;
         $leftPosition = $absoluteIndex * $horizontalSpacing;

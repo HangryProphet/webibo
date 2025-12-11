@@ -81,6 +81,10 @@ if (!$userId) {
     redirect('../views/signup.php');
 }
 
+// Award achievement for registration
+require_once __DIR__ . '/../core/services/AchievementService.php';
+AchievementService::checkAchievementsOnEvent($pdo, $userId, 'user_registered');
+
 // DEVELOPMENT MODE: Auto-verify users (skip email verification)
 $appEnv = $_ENV['APP_ENV'] ?? 'production';
 if ($appEnv === 'development') {

@@ -26,13 +26,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Course selection handlers
+    const courseIcons = document.querySelectorAll('.course-icon-item');
+    courseIcons.forEach((icon, index) => {
+        icon.addEventListener('click', function() {
+            const courseId = index + 1; // 0=HTML(1), 1=CSS(2), 2=JS(3)
+            selectCourse(courseId);
+        });
+    });
+    
     const roadmap = document.querySelector('.roadmap');
     const trailSvg = document.querySelector('.roadmap-trail');
     const trailPath = document.querySelector('.trail-path');
     
+    // Get selected course from localStorage or default to HTML
+    let currentCourseId = parseInt(localStorage.getItem('selectedCourse')) || 1;
+    
     // Fetch levels from backend and render dynamically
-    const courseId = 1; // HTML course by default
-    fetchAndRenderLevels(courseId);
+    fetchAndRenderLevels(currentCourseId);
+    
+    // Update course button display
+    updateCourseButton(currentCourseId);
     
     // Initialize drag-to-scroll functionality
     initDragScroll();
@@ -46,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             const levels = await response.json();
-            console.log('Fetched levels:', levels); // Debug log
             
             // Render all levels
             renderLevels(levels);
@@ -68,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
         existingNodes.forEach(node => node.remove());
         
         levels.forEach((level, index) => {
-            console.log('Rendering level:', level); // Debug log
             const node = createLevelNode(level);
             roadmap.appendChild(node);
         });
@@ -82,9 +94,44 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     }
     
+    // Select and switch to a course
+    function selectCourse(courseId) {
+        // Save to localStorage
+        localStorage.setItem('selectedCourse', courseId);
+        currentCourseId = courseId;
+        
+        // Update UI
+        updateCourseButton(courseId);
+        
+        // Close popup
+        courseModuleWrapper.classList.remove('active');
+        
+        // Reload roadmap with new course
+        fetchAndRenderLevels(courseId);
+    }
+    
+    // Update course button display
+    function updateCourseButton(courseId) {
+        const iconSection = document.querySelector('.course-icon-section i');
+        const labelSection = document.querySelector('.course-label');
+        const titleSection = document.querySelector('.course-title');
+        
+        const courses = [
+            { icon: 'fab fa-html5', label: 'Module 1', title: 'Introduction to HTML' },
+            { icon: 'fab fa-css3-alt', label: 'Module 2', title: 'Introduction to CSS' },
+            { icon: 'fab fa-js', label: 'Module 3', title: 'Introduction to JavaScript' }
+        ];
+        
+        const course = courses[courseId - 1];
+        if (iconSection && labelSection && titleSection && course) {
+            iconSection.className = course.icon;
+            labelSection.textContent = course.label;
+            titleSection.textContent = course.title;
+        }
+    }
+    
     // Create a single level node element
     function createLevelNode(level) {
-        console.log('Creating node with status:', level.status); // Debug log
         const node = document.createElement('div');
         node.className = `level-node ${level.status}`;
         node.dataset.levelId = level.id;

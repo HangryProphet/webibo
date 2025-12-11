@@ -78,6 +78,29 @@ $_SESSION['email'] = $user['email'];
 $_SESSION['hearts'] = $_SESSION['hearts'] ?? 10;
 $_SESSION['current_question'] = $_SESSION['current_question'] ?? 1;
 
+// Load models for streak checking
+require_once __DIR__ . '/../core/models/StatsModel.php';
+require_once __DIR__ . '/../core/services/AchievementService.php';
+
+// Check and update daily streak
+$streakResult = StatsModel::checkAndUpdateStreak($pdo, $user['id']);
+error_log("Streak updated - Current: {$streakResult['current_streak']}, New: " . ($streakResult['is_new_streak'] ? 'Yes' : 'No'));
+
+// Check for streak achievements if streak was updated
+if ($streakResult['is_new_streak']) {
+    $currentStreak = $streakResult['current_streak'];
+    
+    // Check for 3-day streak achievement (ID 25)
+    if ($currentStreak >= 3) {
+        AchievementService::awardAchievement($pdo, $user['id'], 25);
+    }
+    
+    // Check for 7-day streak achievement (ID 26)
+    if ($currentStreak >= 7) {
+        AchievementService::awardAchievement($pdo, $user['id'], 26);
+    }
+}
+
 // Set success message
 set_success('Login successful! Welcome back, ' . $user['first_name'] . '!');
 
