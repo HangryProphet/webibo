@@ -36,6 +36,23 @@
     // Paths are relative to views/* pages that include this script with ../assets/...
     const correctSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/correct.mp3') : null;
     const wrongSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/wrong.mp3') : null;
+    
+    // Initialize volume from localStorage (default 70%)
+    function getVolume() {
+        const savedVolume = localStorage.getItem('webibo_sound_volume');
+        return savedVolume !== null ? parseInt(savedVolume) / 100 : 0.7;
+    }
+    
+    // Set initial volume
+    if (correctSound) correctSound.volume = getVolume();
+    if (wrongSound) wrongSound.volume = getVolume();
+    
+    // Listen for volume changes from settings page
+    window.addEventListener('volumeChange', function(e) {
+        const volume = e.detail.volume;
+        if (correctSound) correctSound.volume = volume;
+        if (wrongSound) wrongSound.volume = volume;
+    });
 
     // Load next question in multi-question activities
     function loadNextQuestion() {
