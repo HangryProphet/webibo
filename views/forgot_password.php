@@ -37,6 +37,8 @@ $success = get_success();
                 >
             </div>
 
+            <button type="submit" class="login-btn">SEND RESET LINK</button>
+
             <?php if ($error): ?>
                 <div class="feedback-message error">
                     <span class="feedback-icon">⚠</span>
@@ -50,8 +52,6 @@ $success = get_success();
                     <span><?php echo htmlspecialchars($success); ?></span>
                 </div>
             <?php endif; ?>
-
-            <button type="submit" class="login-btn">SEND RESET LINK</button>
         </form>
 
         <div style="text-align: center; margin-top: 20px;">

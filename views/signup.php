@@ -93,6 +93,8 @@ $success = get_success();
                     <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', this)">SHOW</button>
                 </div>
 
+                <button type="submit" class="signup-btn">SIGN UP</button>
+
                 <?php if ($error): ?>
                     <div class="feedback-message error">
                         <span class="feedback-icon">⚠</span>
@@ -106,8 +108,6 @@ $success = get_success();
                         <span><?php echo htmlspecialchars($success); ?></span>
                     </div>
                 <?php endif; ?>
-
-                <button type="submit" class="signup-btn">SIGN UP</button>
             </form>
             
             <div class="auth-switch">
