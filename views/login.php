@@ -51,8 +51,12 @@ $success = get_success();
                         placeholder="Password" 
                         autocomplete="current-password"
                     >
-                    <a href="forgot_password.php" class="forgot-link">FORGOT?</a>
+                    <button type="button" class="password-toggle" onclick="togglePassword('password', this)">SHOW</button>
                 </div>
+
+                <a href="forgot_password.php" class="forgot-link-inline">FORGOT PASSWORD?</a>
+
+                <button type="submit" class="login-btn">LOG IN</button>
 
                 <?php if ($error): ?>
                     <div class="feedback-message error">
@@ -67,8 +71,6 @@ $success = get_success();
                         <span><?php echo htmlspecialchars($success); ?></span>
                     </div>
                 <?php endif; ?>
-
-                <button type="submit" class="login-btn">LOG IN</button>
             </form>
 
             <div class="auth-switch">
@@ -80,6 +82,8 @@ $success = get_success();
             </div>
         </div>
     </div>
+
+    <script src="../assets/js/password_toggle.js"></script>
 </body>
 </html>
 

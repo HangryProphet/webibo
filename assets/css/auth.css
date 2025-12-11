@@ -320,6 +320,22 @@ input::placeholder {
     color: #9ca3af;
 }
 
+.forgot-link-inline {
+    display: block;
+    text-align: right;
+    margin: 6px 2px 16px;
+    color: #1cb0f6;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.forgot-link-inline:hover {
+    text-decoration: underline;
+}
+
 /* ============================================
    FEEDBACK MESSAGES
    ============================================ */

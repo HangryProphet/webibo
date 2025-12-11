@@ -522,6 +522,21 @@
             }
         }
 
+        // Show happy/neutral enemy state on wrong answer
+        if (config.hasEnemy !== false) {
+            const enemyImage = document.getElementById('enemyImage');
+            if (enemyImage) {
+                const src = enemyImage.src;
+                const match = src.match(/(.+?)(-angry|-happy|-neutral)?(\.[a-z]+)$/i);
+                if (match) {
+                    const [, base, , ext] = match;
+                    enemyImage.src = `${base}-happy${ext}`;
+                } else {
+                    enemyImage.src = `${src}-happy`;
+                }
+            }
+        }
+
         // Decrease player hearts
         decreaseHearts();
 
