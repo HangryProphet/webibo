@@ -21,7 +21,7 @@
 
     <div class="landing">
         <div class="hero-visual">
-            <img src="assets/img/wiza/wiza-flying.gif" alt="Wiza flying illustration">
+        <video src="assets/img/wiza/wiza-index.webm" autoplay loop muted playsinline></video>
         </div>
         <div class="hero-content">
             <div class="hero-title">Begin Your Webibo Spellbound Journey</div>

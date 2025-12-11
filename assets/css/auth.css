@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -28,21 +30,48 @@ h1 {
    HEADER BUTTONS
    ============================================ */
 .close-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
     background: none;
     border: none;
     color: #6b7280;
-    font-size: 24px;
+    font-size: 26px;
     cursor: pointer;
     padding: 8px;
     text-decoration: none;
     display: inline-block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 
 .close-btn:hover {
     color: #9ca3af;
+}
+
+.brand-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 14px;
+}
+
+.brand-logo {
+    width: 52px;
+    height: auto;
+    display: block;
+}
+
+.brand-name {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    font-size: 20px;
+    line-height: 1;
 }
 
 .signup-btn-header,
@@ -106,20 +135,81 @@ a.signup-btn:active {
     transform: translateY(2px);
 }
 
+.auth-switch {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+.auth-switch a {
+    color: #1cb0f6;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
 /* ============================================
-   CONTAINERS
+   CONTAINERS & LAYOUT
    ============================================ */
+.auth-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    width: 100%;
+    max-width: 960px;
+    padding: 20px 24px;
+    margin: 0 auto;
+}
+
+.auth-illustration {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-illustration img {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.35));
+}
+
 .login-container {
+    flex: 1;
     width: 100%;
     max-width: 400px;
     padding: 20px;
 }
 
 .signup-container {
+    flex: 1;
     width: 100%;
     max-width: 400px;
     padding: 20px;
     margin: 60px 0;
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.55s ease-out forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ============================================
@@ -276,8 +366,7 @@ input::placeholder {
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-top: 24px;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
     transition: all 0.1s;
     box-shadow: 0 4px 0 #0e7fb0;
 }
@@ -304,8 +393,7 @@ input[type="submit"].signup-btn {
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-top: 24px;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     transition: all 0.1s;
     box-shadow: 0 4px 0 #0e7fb0;
     position: static;
@@ -437,7 +525,7 @@ input[type="submit"].signup-btn:active {
     font-size: 12px;
     color: #6b7280;
     line-height: 1.6;
-    margin-top: 24px;
+    margin-top: 12px;
 }
 
 .footer-text a {
@@ -569,6 +657,19 @@ input[type="submit"].signup-btn:active {
     left: 8px;
     color: #1cb0f6;
     font-size: 16px;
+}
+
+@media (max-width: 900px) {
+    .auth-layout {
+        flex-direction: column;
+        gap: 8px;
+        padding: 20px;
+    }
+
+    .auth-illustration img {
+        max-width: 320px;
+        margin-top: 32px;
+    }
 }
 
 .button-group {

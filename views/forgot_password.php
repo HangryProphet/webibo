@@ -18,7 +18,7 @@ $success = get_success();
 <body>
     <a href="login.php" class="close-btn">✕</a>
 
-    <div class="login-container">
+    <div class="login-container fade-up">
         <h1>Reset Password</h1>
         <p style="text-align: center; color: #8b95a5; margin-bottom: 24px; font-size: 14px;">
             Enter your email address and we'll send you a link to reset your password.
@@ -61,9 +61,7 @@ $success = get_success();
         </div>
 
         <div class="footer-text">
-            By signing in to Webibo, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.<br><br>
-            This site is protected by reCAPTCHA Enterprise and the<br>
-            Google <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> apply.
+            By signing in to Webibo, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.<br>
         </div>
     </div>
 </body>

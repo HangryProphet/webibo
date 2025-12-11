@@ -39,12 +39,13 @@
     padding: 32px;
 }
 
-.hero-visual img {
-    width: 440px;
+.hero-visual video {
+    width: 500px;
     max-width: 100%;
     height: auto;
     display: block;
 }
+
 
 .hero-content {
     flex: 1;
