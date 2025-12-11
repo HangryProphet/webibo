@@ -17,8 +17,8 @@
     }
   },
   "enemy": {
-    "name": "Bat",
+    "name": "Fox",
     "hp": 8,
-    "image": "assets/img/enemies/bat-happy.png"
+    "image": "assets/img/enemies/fox-happy.png"
   }
 }

@@ -162,8 +162,8 @@
     }
   ],
   "enemy": {
-    "name": "Bat",
+    "name": "Skeleton",
     "hp": 8,
-    "image": "assets/img/enemies/bat-happy.png"
+    "image": "assets/img/enemies/skeleton-happy.png"
   }
 }

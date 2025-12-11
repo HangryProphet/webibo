@@ -240,5 +240,10 @@
         }
       }
     }
-  ]
+  ],
+  "enemy": {
+    "name": "Spider",
+    "hp": 10,
+    "image": "assets/img/enemies/spider-happy.png"
+  }
 }

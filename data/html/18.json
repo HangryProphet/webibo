@@ -240,5 +240,10 @@
         }
       }
     }
-  ]
+  ],
+  "enemy": {
+    "name": "Shark",
+    "hp": 10,
+    "image": "assets/img/enemies/shark-happy.png"
+  }
 }

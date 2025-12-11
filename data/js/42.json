@@ -162,8 +162,8 @@
     }
   ],
   "enemy": {
-    "name": "Skeleton",
+    "name": "Shark",
     "hp": 8,
-    "image": "assets/img/enemies/skeleton-happy.png"
+    "image": "assets/img/enemies/shark-happy.png"
   }
 }
