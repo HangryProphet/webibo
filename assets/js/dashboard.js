@@ -61,6 +61,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const levels = await response.json();
             
+            // DEBUG: Log fetched levels
+            console.log('Fetched levels for course', courseId, ':', levels);
+            console.log('First 3 levels status:', levels.slice(0, 3).map(l => ({id: l.id, status: l.status})));
+            
             // Render all levels
             renderLevels(levels);
             
@@ -136,6 +140,11 @@ document.addEventListener('DOMContentLoaded', function() {
         node.className = `level-node ${level.status}`;
         node.dataset.levelId = level.id;
         node.dataset.activityType = level.type === 'lecture' ? 'Lecture' : 'Challenge';
+        
+        // DEBUG: Log class application for first 3 nodes
+        if (level.id <= 3) {
+            console.log(`Creating level ${level.id}: status=${level.status}, className="${node.className}"`);
+        }
         
         // Position the node
         node.style.left = level.position.left + 'px';

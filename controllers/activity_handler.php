@@ -69,25 +69,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correctAnswer = $currentQuestionData['correct_answer'] ?? $currentQuestionData['correct_code'] ?? '';
     $enemyHP = isset($currentQuestionData['enemy']) ? ($currentQuestionData['enemy']['hp'] ?? 10) : 10;
     
-    // Get submitted answer
-    $submittedAnswer = '';
+    // Check if this is a level completion request (from victory modal)
+    $isCompletionRequest = isset($_POST['complete_level']) && $_POST['complete_level'] == '1';
     
-    if (isset($_POST['answer'])) {
-        $submittedAnswer = trim($_POST['answer']);
-    } elseif (isset($_POST['code'])) {
-        $submittedAnswer = trim($_POST['code']);
-    }
+    // DEBUG: Log completion request
+    error_log("Activity Handler - Level $levelId: complete_level flag = " . ($_POST['complete_level'] ?? 'NOT SET'));
+    error_log("Activity Handler - isCompletionRequest = " . ($isCompletionRequest ? 'TRUE' : 'FALSE'));
     
-    // Handle SKIP action
-    if (isset($_POST['skip'])) {
-        // Decrease hearts for skipping
-        $currentHearts = max(0, $currentHearts - 1);
-        $_SESSION['hearts'] = $currentHearts;
+    if ($isCompletionRequest) {
+        error_log("Activity Handler - Processing completion for Level $levelId, User $userId");
         
-        if ($currentHearts <= 0) {
-            header("Location: gameover.php");
-            exit;
-        }
+        // Level already completed client-side, just mark as complete and redirect
+        $xpReward = $level['xp_reward'] ?? 10;
+        StatsModel::addXP($pdo, $userId, $xpReward);
+        $completionResult = ProgressModel::completeLevel($pdo, $userId, $levelId);
+        
+        error_log("Activity Handler - ProgressModel::completeLevel result: " . ($completionResult ? 'SUCCESS' : 'FAILED'));
+        
+        // Award achievements
+        require_once __DIR__ . '/../core/services/AchievementService.php';
+        AchievementService::checkAchievementsOnEvent($pdo, $userId, 'level_completed', ['level_id' => $levelId]);
         
         // Redirect to next level or dashboard
         $nextLevel = LevelModel::getNextLevel($pdo, $levelId);
@@ -101,6 +102,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: dashboard.php");
         }
         exit;
+    }
+    
+    // Get submitted answer
+    $submittedAnswer = '';
+    
+    if (isset($_POST['answer'])) {
+        $submittedAnswer = trim($_POST['answer']);
+    } elseif (isset($_POST['code'])) {
+        $submittedAnswer = trim($_POST['code']);
     }
     
     // Validate answer

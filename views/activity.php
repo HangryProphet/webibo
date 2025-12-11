@@ -48,6 +48,7 @@
                             <?php endforeach; ?>
                         </div>
                         <input type="hidden" name="answer" id="selectedAnswer">
+                        <input type="hidden" name="complete_level" id="completeLevelInput" value="0">
                     </form>
                 </div>
 
@@ -96,6 +97,7 @@
                             ?>
                         </div>
                         <input type="hidden" name="answer" id="selectedAnswer">
+                        <input type="hidden" name="complete_level" id="completeLevelInput" value="0">
                     </form>
                 </div>
 
@@ -169,6 +171,7 @@
                         </div>
 
                         <input type="hidden" name="code" id="submittedCode">
+                        <input type="hidden" name="complete_level" id="completeLevelInput" value="0">
                     </form>
                 </div>
             <?php endif; ?>
@@ -178,9 +181,6 @@
 
     <!-- Footer Buttons -->
     <div class="footer-buttons">
-        <form method="POST" action="" style="display: inline;" id="skipForm">
-            <button type="button" name="skip" class="skip-btn" id="skipBtn" onclick="skipQuestion()">SKIP</button>
-        </form>
         <button type="button" class="check-btn" id="checkBtn" disabled onclick="<?php echo $activity_data['type'] === 'code-editor' ? 'checkCode()' : 'submitAnswer()'; ?>">CHECK</button>
     </div>
 
