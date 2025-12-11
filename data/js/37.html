@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operators and Functions</title>
+    <link rel="stylesheet" href="../../assets/css/lecture-content.css">
+</head>
+<body>
+    <div class="page-header">
+        <div class="page-number">Page 1 of 3</div>
+    </div>
+
+    <div class="wiza-intro">
+        <img src="../../assets/img/wiza/wiza-excited.png" alt="Wiza" class="wiza-img">
+        <div class="speech-bubble">
+            <p>Welcome to Module 2! 🧮</p>
+            <p>Now let's learn to work with data using operators and functions!</p>
+            <p>These are the tools that let you perform calculations, make comparisons, and create reusable code blocks.</p>
+        </div>
+    </div>
+
+    <h1>Operators and Functions</h1>
+
+    <h2>Arithmetic Operators</h2>
+    <div class="code-example">
+        <pre><code>let sum = 5 + 3;      // Addition: 8
+let difference = 10 - 4; // Subtraction: 6
+let product = 6 * 7;   // Multiplication: 42
+let quotient = 15 / 3; // Division: 5
+let remainder = 10 % 3; // Modulus (remainder): 1
+let power = 2 ** 3;    // Exponentiation: 8 (2³)</code></pre>
+    </div>
+
+    <h2>Assignment Operators</h2>
+    <div class="code-example">
+        <pre><code>let x = 10;     // Assign 10 to x
+x += 5;         // Add 5 to x (now 15)
+x -= 3;         // Subtract 3 from x (now 12)
+x *= 2;         // Multiply x by 2 (now 24)
+x /= 4;         // Divide x by 4 (now 6)</code></pre>
+    </div>
+
+    <h2>Comparison Operators</h2>
+    <div class="code-example">
+        <pre><code>let isEqual = 5 == "5";    // true (loose equality)
+let isStrictEqual = 5 === "5"; // false (strict equality)
+let isGreater = 10 > 5;    // true
+let isLess = 3 < 2;        // false
+let isNotEqual = 5 != 10;  // true</code></pre>
+    </div>
+
+    <div class="info-box">
+        <strong>Pro Tip:</strong> Always use <code>===</code> (strict equality) instead of <code>==</code> (loose equality) to avoid unexpected type coercion bugs!
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="page-header">
+        <div class="page-number">Page 2 of 3</div>
+    </div>
+
+    <h2>Introduction to Functions</h2>
+    <p>Functions are reusable blocks of code that perform specific tasks.</p>
+
+    <h3>Creating Functions:</h3>
+    <div class="code-example">
+        <pre><code>// Function declaration
+function sayHello() {
+  console.log("Hello!");
+}
+
+// Function with parameters
+function greet(name) {
+  console.log("Hello " + name + "!");
+}
+
+// Function that returns a value
+function add(a, b) {
+  return a + b;
+}</code></pre>
+    </div>
+
+    <h3>Using Functions:</h3>
+    <div class="code-example">
+        <pre><code>sayHello(); // Calls the function
+greet("Wiza"); // Passes "Wiza" as argument
+let result = add(5, 3); // Stores returned value (8)
+console.log(result);</code></pre>
+    </div>
+
+    <h3>Arrow Functions (Modern Syntax):</h3>
+    <div class="code-example">
+        <pre><code>const multiply = (a, b) => {
+  return a * b;
+};
+
+// Shorter version (single expression)
+const square = x => x * x;</code></pre>
+    </div>
+
+    <div class="info-box">
+        <strong>Why Functions?</strong> Functions help you organize code, avoid repetition, and make programs easier to understand and maintain.
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="page-header">
+        <div class="page-number">Page 3 of 3</div>
+    </div>
+
+    <h2>Practical Examples</h2>
+
+    <h3>Calculator Functions:</h3>
+    <div class="code-example">
+        <pre><code>function calculate(operation, a, b) {
+  if (operation === "add") {
+    return a + b;
+  } else if (operation === "subtract") {
+    return a - b;
+  } else if (operation === "multiply") {
+    return a * b;
+  } else if (operation === "divide") {
+    return a / b;
+  } else {
+    return "Invalid operation";
+  }
+}
+
+console.log(calculate("add", 10, 5)); // 15
+console.log(calculate("multiply", 4, 6)); // 24</code></pre>
+    </div>
+
+    <h3>Temperature Converter:</h3>
+    <div class="code-example">
+        <pre><code>function celsiusToFahrenheit(celsius) {
+  return (celsius * 9/5) + 32;
+}
+
+console.log("20°C is " + celsiusToFahrenheit(20) + "°F");</code></pre>
+    </div>
+
+    <h2>Remember:</h2>
+    <ul>
+        <li>Functions make code reusable and organized</li>
+        <li>Parameters are inputs, return values are outputs</li>
+        <li>Always test your functions with different inputs!</li>
+    </ul>
+
+    <div class="wiza-intro">
+        <img src="../../assets/img/wiza/wiza-happy.png" alt="Wiza" class="wiza-img">
+        <div class="speech-bubble">
+            <p>Great! Now you know how to perform operations and create functions! 💪</p>
+            <p>These are fundamental skills that you'll use in every JavaScript program you write!</p>
+        </div>
+    </div>
+</body>
+</html>

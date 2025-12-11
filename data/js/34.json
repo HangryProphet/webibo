@@ -1,0 +1,169 @@
+{
+  "questions": [
+    {
+      "question": "What is JavaScript mainly used for?",
+      "options": [
+        "Styling web pages",
+        "Structuring web content",
+        "Making web pages interactive",
+        "Creating database tables"
+      ],
+      "correct_answer": "Making web pages interactive",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "JavaScript is primarily used to make web pages interactive. It can respond to user actions, update content dynamically, and communicate with servers."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "JavaScript is primarily used to make web pages interactive. It can respond to user actions, update content dynamically, and communicate with servers."
+        }
+      }
+    },
+    {
+      "question": "Which keyword creates a variable that can be changed?",
+      "options": [
+        "const",
+        "let",
+        "var",
+        "variable"
+      ],
+      "correct_answer": "let",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>let</code> creates a variable that can be reassigned later. <code>const</code> creates a constant that cannot be changed after initialization."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>let</code> creates a variable that can be reassigned later. <code>const</code> creates a constant that cannot be changed after initialization."
+        }
+      }
+    },
+    {
+      "question": "What shows output in the browser console?",
+      "options": [
+        "alert()",
+        "print()",
+        "console.log()",
+        "display()"
+      ],
+      "correct_answer": "console.log()",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>console.log()</code> displays information in the browser's console, which is useful for debugging and testing code."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>console.log()</code> displays information in the browser's console, which is useful for debugging and testing code."
+        }
+      }
+    },
+    {
+      "question": "Which data type represents true/false values?",
+      "options": [
+        "String",
+        "Number",
+        "Boolean",
+        "Array"
+      ],
+      "correct_answer": "Boolean",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Boolean is the data type that represents logical values: true or false. Named after mathematician George Boole."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Boolean is the data type that represents logical values: true or false. Named after mathematician George Boole."
+        }
+      }
+    },
+    {
+      "question": "What's the best way to add JavaScript to a website?",
+      "options": [
+        "Inline in HTML attributes",
+        "Internal in <script> tags",
+        "External JavaScript file",
+        "All are equally good"
+      ],
+      "correct_answer": "External JavaScript file",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "External JavaScript files are best because they separate code from HTML, making it easier to maintain and reuse across multiple pages."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "External JavaScript files are best because they separate code from HTML, making it easier to maintain and reuse across multiple pages."
+        }
+      }
+    },
+    {
+      "question": "How do you write a single-line comment in JavaScript?",
+      "options": [
+        "<!-- comment -->",
+        "/* comment */",
+        "// comment",
+        "# comment"
+      ],
+      "correct_answer": "// comment",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>//</code> creates a single-line comment in JavaScript. For multi-line comments, use <code>/* comment */</code>."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>//</code> creates a single-line comment in JavaScript. For multi-line comments, use <code>/* comment */</code>."
+        }
+      }
+    },
+    {
+      "question": "Which is NOT a valid variable name?",
+      "options": [
+        "myVariable",
+        "_temp",
+        "2ndPlace",
+        "$price"
+      ],
+      "correct_answer": "2ndPlace",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Variable names cannot start with numbers. They must start with a letter, underscore (_), or dollar sign ($)."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Variable names cannot start with numbers. They must start with a letter, underscore (_), or dollar sign ($)."
+        }
+      }
+    },
+    {
+      "question": "What does \"case-sensitive\" mean in JavaScript?",
+      "options": [
+        "Variables must be uppercase",
+        "Uppercase and lowercase letters are different",
+        "Code must be written in specific cases",
+        "Only lowercase is allowed"
+      ],
+      "correct_answer": "Uppercase and lowercase letters are different",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "JavaScript is case-sensitive, meaning myVariable, MyVariable, and MYVARIABLE are three different variable names."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "JavaScript is case-sensitive, meaning myVariable, MyVariable, and MYVARIABLE are three different variable names."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Slime",
+    "hp": 8,
+    "image": "assets/img/enemies/slime-happy.png"
+  }
+}

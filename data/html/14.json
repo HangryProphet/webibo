@@ -1,0 +1,244 @@
+{
+  "questions": [
+    {
+      "question": "Which tag adds images to a webpage?",
+      "options": [
+        "<picture>",
+        "<image>",
+        "<img>",
+        "<photo>"
+      ],
+      "correct_answer": "<img>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;img&gt;</code> tag (short for \"image\") inserts images into HTML. It's a self-closing tag - no separate closing tag needed!"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;img&gt;</code> tag (short for \"image\") inserts images into HTML. It's a self-closing tag - no separate closing tag needed!"
+        }
+      }
+    },
+    {
+      "question": "What does the src attribute specify?",
+      "options": [
+        "Image size",
+        "Image file location",
+        "Alternative text",
+        "Image border"
+      ],
+      "correct_answer": "Image file location",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "src stands for source and specifies the file location of the image. It can be a local file path or a web URL."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "src stands for source and specifies the file location of the image. It can be a local file path or a web URL."
+        }
+      }
+    },
+    {
+      "question": "Which attribute provides text description for screen readers?",
+      "options": [
+        "title",
+        "alt",
+        "description",
+        "text"
+      ],
+      "correct_answer": "alt",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The alt attribute (alternative text) provides descriptions for screen readers and displays when images fail to load."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The alt attribute (alternative text) provides descriptions for screen readers and displays when images fail to load."
+        }
+      }
+    },
+    {
+      "question": "The <img> tag is:",
+      "options": [
+        "A paired tag with closing </img>",
+        "A self-closing tag",
+        "An empty tag that needs no attributes",
+        "Only for background images"
+      ],
+      "correct_answer": "A self-closing tag",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;img&gt;</code> is a self-closing tag - it doesn't have content between opening and closing tags, so it closes itself with /&gt;."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;img&gt;</code> is a self-closing tag - it doesn't have content between opening and closing tags, so it closes itself with /&gt;."
+        }
+      }
+    },
+    {
+      "question": "Good alt text should:",
+      "options": [
+        "Always say \"image of...\"",
+        "Describe the image's content and function",
+        "Be as short as possible",
+        "Match the filename"
+      ],
+      "correct_answer": "Describe the image's content and function",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Good alt text should describe the image's content and function. Ask: \"What information does this image convey?\""
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Good alt text should describe the image's content and function. Ask: \"What information does this image convey?\""
+        }
+      }
+    },
+    {
+      "question": "Which shows correct image syntax?",
+      "options": [
+        "<img \"photo.jpg\">",
+        "<img src=\"photo.jpg\">",
+        "<img src=\"photo.jpg\" alt=\"A beautiful sunset\">",
+        "<img alt=\"photo.jpg\">"
+      ],
+      "correct_answer": "<img src=\"photo.jpg\" alt=\"A beautiful sunset\">",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Correct syntax includes both src (image source) and alt (alternative text). Always include meaningful alt text!"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Correct syntax includes both src (image source) and alt (alternative text). Always include meaningful alt text!"
+        }
+      }
+    },
+    {
+      "question": "For purely decorative images, use:",
+      "options": [
+        "alt=\"decorative\"",
+        "alt=\"image\"",
+        "alt=\"\"",
+        "No alt attribute"
+      ],
+      "correct_answer": "alt=\"\"",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "For purely decorative images that don't convey information, use alt=\"\" (empty). This tells screen readers to skip the image."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "For purely decorative images that don't convey information, use alt=\"\" (empty). This tells screen readers to skip the image."
+        }
+      }
+    },
+    {
+      "question": "Which format supports transparency?",
+      "options": [
+        ".jpg",
+        ".png",
+        ".bmp",
+        "All formats"
+      ],
+      "correct_answer": ".png",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "PNG format supports transparency (alpha channel), making it perfect for logos, icons, and graphics with transparent backgrounds."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "PNG format supports transparency (alpha channel), making it perfect for logos, icons, and graphics with transparent backgrounds."
+        }
+      }
+    },
+    {
+      "question": "What does width=\"300\" do?",
+      "options": [
+        "Sets file size in KB",
+        "Sets display width to 300 pixels",
+        "Limits download speed",
+        "Sets image quality"
+      ],
+      "correct_answer": "Sets display width to 300 pixels",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "width=\"300\" sets the display width to 300 pixels. It's better to use CSS for responsive images, but HTML width works too."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "width=\"300\" sets the display width to 300 pixels. It's better to use CSS for responsive images, but HTML width works too."
+        }
+      }
+    },
+    {
+      "question": "Images without alt text are problematic because:",
+      "options": [
+        "They load slower",
+        "Screen reader users can't understand them",
+        "They appear pixelated",
+        "They can't be styled"
+      ],
+      "correct_answer": "Screen reader users can't understand them",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Images without alt text are inaccessible to screen reader users, who hear \"[image]\" with no description of what it shows."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Images without alt text are inaccessible to screen reader users, who hear \"[image]\" with no description of what it shows."
+        }
+      }
+    },
+    {
+      "question": "Which creates an image from an external website?",
+      "options": [
+        "<img src=\"/image.jpg\">",
+        "<img src=\"image.jpg\">",
+        "<img src=\"https://website.com/image.jpg\">",
+        "<img link=\"https://website.com/image.jpg\">"
+      ],
+      "correct_answer": "<img src=\"https://website.com/image.jpg\">",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "For external images, use the full URL with https://. Remember that external images depend on other servers being available."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "For external images, use the full URL with https://. Remember that external images depend on other servers being available."
+        }
+      }
+    },
+    {
+      "question": "The title attribute in images:",
+      "options": [
+        "Is required for all images",
+        "Shows tooltip on hover",
+        "Replaces alt text",
+        "Changes image file"
+      ],
+      "correct_answer": "Shows tooltip on hover",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The title attribute shows a tooltip when users hover over the image. It's optional and shouldn't replace alt text."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The title attribute shows a tooltip when users hover over the image. It's optional and shouldn't replace alt text."
+        }
+      }
+    }
+  ]
+}

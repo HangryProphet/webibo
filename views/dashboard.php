@@ -127,28 +127,7 @@
                 <svg class="roadmap-trail" preserveAspectRatio="none">
                     <path class="trail-path" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
-                <?php if (!empty($userProgress)): ?>
-                    <?php foreach ($userProgress as $level): ?>
-                        <?php $status = 'completed'; ?>
-                        <div class="level-node <?php echo htmlspecialchars($status); ?>" 
-                             style="left: <?php echo htmlspecialchars($level['position']['left']); ?>px; top: <?php echo htmlspecialchars($level['position']['top']); ?>px;"
-                             data-level-id="<?php echo htmlspecialchars($level['level_id']); ?>"
-                             data-activity-type="<?php echo htmlspecialchars($level['activity_type'] ?? 'Lecture'); ?>">
-                            <i class="fas <?php echo getLevelIcon($level['type']); ?>"></i>
-                            <div class="node-hover-popup">
-                                <div class="node-popup-text">
-                                    <?php 
-                                        $activityLabel = $level['activity_type'] ?? 'Lecture';
-                                        $title = $level['title'] ?? ('Level ' . ($level['level_id'] ?? ''));
-                                        echo htmlspecialchars($activityLabel . ': ' . $title);
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p style="text-align: center; color: #888; padding: 50px;">No levels available yet. Start your journey!</p>
-                <?php endif; ?>
+                <!-- Level nodes will be dynamically loaded here by JavaScript -->
             </div>
         </div>
     </div>

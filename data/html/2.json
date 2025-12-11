@@ -1,25 +1,207 @@
 {
-  "title": "Heading Size Quiz",
-  "question": "Which tag is used for the largest heading?",
-  "options": [
-    "<h1>",
-    "<h3>",
-    "<head>"
+  "questions": [
+    {
+      "question": "What does HTML stand for?",
+      "options": [
+        "Hyper Transfer Markup Language",
+        "High Tech Modern Language",
+        "Hyper Tool Markup Language",
+        "Hyper Text Markup Language"
+      ],
+      "correct_answer": "Hyper Text Markup Language",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "HTML stands for Hyper Text Markup Language. It's called 'Hyper Text' because it can contain links to other documents, and 'Markup Language' because it uses tags to structure content."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "HTML stands for Hyper Text Markup Language. It's called 'Hyper Text' because it can contain links to other documents, and 'Markup Language' because it uses tags to structure content."
+        }
+      }
+    },
+    {
+      "question": "Which tag contains ALL other HTML elements?",
+      "options": [
+        "<body>",
+        "<container>",
+        "<html>",
+        "<main>"
+      ],
+      "correct_answer": "<html>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;html&gt;</code> tag is the root element that wraps EVERYTHING else in an HTML document. All other tags must be inside it."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;html&gt;</code> tag is the root element that wraps EVERYTHING else in an HTML document. All other tags must be inside it."
+        }
+      }
+    },
+    {
+      "question": "Where does visible webpage content go?",
+      "options": [
+        "In the <head> section",
+        "Between <!DOCTYPE> and <html>",
+        "In the <body> section",
+        "In the <content> section"
+      ],
+      "correct_answer": "In the <body> section",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;body&gt;</code> section contains ALL visible content that users see in their browser window. The <code>&lt;head&gt;</code> contains invisible metadata."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;body&gt;</code> section contains ALL visible content that users see in their browser window. The <code>&lt;head&gt;</code> contains invisible metadata."
+        }
+      }
+    },
+    {
+      "question": "What is the purpose of <!DOCTYPE html>?",
+      "options": [
+        "To create the main heading",
+        "To contain the page content",
+        "To declare the document type",
+        "To add a title to the page"
+      ],
+      "correct_answer": "To declare the document type",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;!DOCTYPE html&gt;</code> tells the browser that this is an HTML5 document and helps it render the page correctly. It's a declaration, not a tag!"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;!DOCTYPE html&gt;</code> tells the browser that this is an HTML5 document and helps it render the page correctly. It's a declaration, not a tag!"
+        }
+      }
+    },
+    {
+      "question": "Which section contains the page title?",
+      "options": [
+        "<body>",
+        "<footer>",
+        "<header>",
+        "<head>"
+      ],
+      "correct_answer": "<head>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;title&gt;</code> tag, which sets what appears in the browser tab, goes inside the <code>&lt;head&gt;</code> section along with other metadata."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;title&gt;</code> tag, which sets what appears in the browser tab, goes inside the <code>&lt;head&gt;</code> section along with other metadata."
+        }
+      }
+    },
+    {
+      "question": "True or False: Content inside <head> appears on the webpage.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correct_answer": "False",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "False! Content inside the <code>&lt;head&gt;</code> section is never visible on the webpage itself. It's for behind-the-scenes information like page titles, character encoding, and CSS links."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "False! Content inside the <code>&lt;head&gt;</code> section is never visible on the webpage itself. It's for behind-the-scenes information like page titles, character encoding, and CSS links."
+        }
+      }
+    },
+    {
+      "question": "What appears in the browser tab?",
+      "options": [
+        "Content from <h1> tags",
+        "Content from <p> tags",
+        "Content from <title> tags",
+        "Content from <body> tags"
+      ],
+      "correct_answer": "Content from <title> tags",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The text inside the <code>&lt;title&gt;</code> tag appears in the browser tab, bookmarks, and search engine results. It's like the name tag for your webpage!"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The text inside the <code>&lt;title&gt;</code> tag appears in the browser tab, bookmarks, and search engine results. It's like the name tag for your webpage!"
+        }
+      }
+    },
+    {
+      "question": "Which comes first in an HTML document?",
+      "options": [
+        "<head>",
+        "<body>",
+        "<!DOCTYPE html>",
+        "<html>"
+      ],
+      "correct_answer": "<!DOCTYPE html>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;!DOCTYPE html&gt;</code> always comes first in an HTML document. The order is: &lt;!DOCTYPE&gt;, then &lt;html&gt;, then &lt;head&gt;, then &lt;body&gt;."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;!DOCTYPE html&gt;</code> always comes first in an HTML document. The order is: &lt;!DOCTYPE&gt;, then &lt;html&gt;, then &lt;head&gt;, then &lt;body&gt;."
+        }
+      }
+    },
+    {
+      "question": "HTML is primarily used for:",
+      "options": [
+        "Making websites interactive",
+        "Styling webpages",
+        "Structuring webpage content",
+        "Creating animations"
+      ],
+      "correct_answer": "Structuring webpage content",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "HTML's main job is to provide structure and content to webpages. For styling, we use CSS, and for interactivity, we use JavaScript."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "HTML's main job is to provide structure and content to webpages. For styling, we use CSS, and for interactivity, we use JavaScript."
+        }
+      }
+    },
+    {
+      "question": "Which tag pair is ALWAYS required in HTML?",
+      "options": [
+        "<head> and </head>",
+        "<title> and </title>",
+        "<html> and </html>",
+        "<body> and </body>"
+      ],
+      "correct_answer": "<html> and </html>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "While <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> are important, technically only <code>&lt;html&gt;</code> is absolutely required. However, good HTML should include all three!"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "While <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> are important, technically only <code>&lt;html&gt;</code> is absolutely required. However, good HTML should include all three!"
+        }
+      }
+    }
   ],
-  "correct_answer": "<h1>",
   "enemy": {
     "name": "Fox",
     "hp": 10,
     "image": "assets/img/enemies/fox-happy.png"
-  },
-  "feedback": {
-    "correct": {
-      "title": "Correct! 🎉",
-      "details": "The <code>&lt;h1&gt;</code> tag defines the most important heading on a webpage. It's typically used for the main title of your page."
-    },
-    "wrong": {
-      "title": "Not quite! 🤔",
-      "details": "The <code>&lt;h1&gt;</code> tag defines the most important heading. HTML has 6 heading levels (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>), where <code>&lt;h1&gt;</code> is the largest and most important, and <code>&lt;h6&gt;</code> is the smallest."
-    }
   }
 }

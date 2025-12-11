@@ -69,28 +69,30 @@
             // Split content by page-header and page-break
             const allChildren = Array.from(contentRoot.children);
             let currentSlide = null;
-            let foundFirstPageBreak = false;
             
             allChildren.forEach((child, index) => {
-                if (child.classList.contains('page-header') || child.classList.contains('page-break')) {
-                    // Start a new slide when we encounter a page break
+                if (child.classList.contains('page-header')) {
+                    // Start a new slide when we encounter a page header
                     if (currentSlide) {
                         slides.push(currentSlide);
                     }
                     currentSlide = document.createElement('div');
                     currentSlide.className = 'lecture-slide';
                     currentSlide.appendChild(child.cloneNode(true));
-                    foundFirstPageBreak = true;
-                } else if (foundFirstPageBreak && currentSlide) {
-                    // Only add to current slide if we've already found the first page break
-                    // This ensures we skip any content before the first page break
+                } else if (child.classList.contains('page-break')) {
+                    // Page break marks the end of a slide, don't include it
+                    if (currentSlide) {
+                        slides.push(currentSlide);
+                        currentSlide = null;
+                    }
+                } else if (currentSlide) {
+                    // Add content to current slide
                     currentSlide.appendChild(child.cloneNode(true));
                 }
-                // Ignore any content before the first page break
             });
             
-            // Add the last slide (only if we found at least one page break)
-            if (currentSlide && foundFirstPageBreak) {
+            // Add the last slide if there's content
+            if (currentSlide) {
                 slides.push(currentSlide);
             }
         } else if (slideDivs.length > 0) {

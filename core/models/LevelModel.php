@@ -123,7 +123,22 @@ class LevelModel
     public static function getContentFilePath(int $levelId, string $levelType): string
     {
         $extension = ($levelType === 'lecture') ? 'html' : 'json';
-        return __DIR__ . "/../../data/html/{$levelId}.{$extension}";
+        $dataDir = __DIR__ . '/../../data';
+        
+        // Determine which folder based on level ID
+        // HTML: 1-20, CSS: 21-32, JS: 33-44
+        if ($levelId >= 1 && $levelId <= 20) {
+            $folder = 'html';
+        } elseif ($levelId >= 21 && $levelId <= 32) {
+            $folder = 'css';
+        } elseif ($levelId >= 33 && $levelId <= 44) {
+            $folder = 'js';
+        } else {
+            // Default to html for unknown ranges
+            $folder = 'html';
+        }
+        
+        return "{$dataDir}/{$folder}/{$levelId}.{$extension}";
     }
 
     /**
@@ -163,5 +178,58 @@ class LevelModel
         }
         
         return $contents;
+    }
+
+    /**
+     * Get levels for a course with pagination
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $courseId Course ID
+     * @param int $limit Number of levels per page
+     * @param int $offset Starting offset
+     * @return array Array of levels ordered by order_in_course
+     */
+    public static function getLevelsByCourseWithPagination(PDO $pdo, int $courseId, int $limit = 10, int $offset = 0): array
+    {
+        try {
+            $sql = "SELECT * FROM levels 
+                    WHERE course_id = :course_id 
+                    ORDER BY order_in_course ASC
+                    LIMIT :limit OFFSET :offset";
+            
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':course_id', $courseId, PDO::PARAM_INT);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("LevelModel::getLevelsByCourseWithPagination() - Error: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Count total levels for a course
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $courseId Course ID
+     * @return int Total number of levels
+     */
+    public static function countLevelsByCourse(PDO $pdo, int $courseId): int
+    {
+        try {
+            $sql = "SELECT COUNT(*) as total FROM levels WHERE course_id = :course_id";
+            
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['course_id' => $courseId]);
+            
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int)($result['total'] ?? 0);
+        } catch (PDOException $e) {
+            error_log("LevelModel::countLevelsByCourse() - Error: " . $e->getMessage());
+            return 0;
+        }
     }
 }

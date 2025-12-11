@@ -1,0 +1,137 @@
+{
+  "questions": [
+    {
+      "question": "Fill in the blank: The % operator gives the ______ after division.",
+      "options": ["QUOTIENT", "REMAINDER", "RESULT", "ANSWER"],
+      "correct_answer": "REMAINDER",
+      "code_template": "let result = 10 % 3; // Gets the ______",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "The modulus operator % returns the remainder of a division operation. For example, 7 % 2 equals 1."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The modulus operator % returns the remainder of a division operation. For example, 7 % 2 equals 1."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Functions make code ______ and organized.",
+      "options": ["FASTER", "REUSABLE", "PRETTY", "COMPLEX"],
+      "correct_answer": "REUSABLE",
+      "code_template": "/* Functions make code ______ */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Functions allow you to write code once and use it multiple times, reducing repetition and making code easier to maintain."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Functions allow you to write code once and use it multiple times, reducing repetition and making code easier to maintain."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: === checks for ______ equality (value and type).",
+      "options": ["LOOSE", "STRICT", "PARTIAL", "SIMPLE"],
+      "correct_answer": "STRICT",
+      "code_template": "if (x === y) // ______ equality check",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Strict equality (===) requires both the value and data type to be the same. 5 === \"5\" is false because types differ."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Strict equality (===) requires both the value and data type to be the same. 5 === \"5\" is false because types differ."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Use ______ to send a value back from a function.",
+      "options": ["RETURN", "SEND", "BACK", "OUTPUT"],
+      "correct_answer": "RETURN",
+      "code_template": "function add(a, b) {\n  ______ a + b;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "The return statement ends function execution and specifies the value to be returned to the function caller."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The return statement ends function execution and specifies the value to be returned to the function caller."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: x *= 3 means x = x ______ 3.",
+      "options": ["PLUS", "MINUS", "TIMES", "DIVIDE"],
+      "correct_answer": "TIMES",
+      "code_template": "x *= 3; // x = x ______ 3",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>*=</code> is the multiplication assignment operator. x *= 3 is equivalent to x = x * 3."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>*=</code> is the multiplication assignment operator. x *= 3 is equivalent to x = x * 3."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Function ______ are placeholders for input values.",
+      "options": ["ARGUMENTS", "PARAMETERS", "VARIABLES", "INPUTS"],
+      "correct_answer": "PARAMETERS",
+      "code_template": "function greet(name) // 'name' is a ______",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Parameters are the names listed in the function definition. Arguments are the actual values passed when calling the function."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Parameters are the names listed in the function definition. Arguments are the actual values passed when calling the function."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: 5 + \"5\" results in ______.",
+      "options": ["10", "55", "\"55\"", "ERROR"],
+      "correct_answer": "\"55\"",
+      "code_template": "let result = 5 + \"5\"; // result is ______",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "When mixing numbers and strings with +, JavaScript converts the number to a string and concatenates them."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "When mixing numbers and strings with +, JavaScript converts the number to a string and concatenates them."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Arrow functions use the ______ symbol.",
+      "options": ["->", "=>", "<-", "<="],
+      "correct_answer": "=>",
+      "code_template": "const add = (a, b) ______ a + b;",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Arrow functions use => syntax. For example: <code>const add = (a, b) => a + b;</code>"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Arrow functions use => syntax. For example: <code>const add = (a, b) => a + b;</code>"
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Goblin",
+    "hp": 8,
+    "image": "assets/img/enemies/goblin-happy.png"
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "questions": [
+    {
+      "question": "Fill in the blank: CSS stands for _____ Style Sheets.",
+      "options": ["Cascading", "Creating", "Computer", "Colorful"],
+      "correct_answer": "Cascading",
+      "code_template": "/* CSS stands for _____ Style Sheets */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "CSS stands for Cascading Style Sheets. The 'cascading' part refers to how styles flow down and inherit from parent elements."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "CSS stands for Cascading Style Sheets. The 'cascading' part refers to how styles flow down and inherit from parent elements."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: A class selector starts with a _____.",
+      "options": [".", "#", "@", ":"],
+      "correct_answer": ".",
+      "code_template": "/* Class selectors start with: _____ */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Class selectors start with a dot (.). For example: <code>.button</code> selects all elements with <code>class=\"button\"</code>."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Class selectors start with a dot (.). For example: <code>.button</code> selects all elements with <code>class=\"button\"</code>."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: An ID selector starts with a _____.",
+      "options": ["#", ".", "@", "*"],
+      "correct_answer": "#",
+      "code_template": "/* ID selectors start with: _____ */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "ID selectors start with a hash (#). For example: <code>#header</code> selects the element with <code>id=\"header\"</code>."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "ID selectors start with a hash (#). For example: <code>#header</code> selects the element with <code>id=\"header\"</code>."
+        }
+      }
+    },
+    {
+      "question": "Complete the syntax: selector { property: _____; }",
+      "options": ["value", "style", "rule", "color"],
+      "correct_answer": "value",
+      "code_template": "selector { property: _____; }",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "CSS syntax is: <code>selector { property: value; }</code>. The value specifies what the property should be set to."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "CSS syntax is: <code>selector { property: value; }</code>. The value specifies what the property should be set to."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: To style all h1 elements, use _____.",
+      "options": ["h1 { }", ".h1 { }", "#h1 { }", "h1( )"],
+      "correct_answer": "h1 { }",
+      "code_template": "/* Select all h1 elements: _____ */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Element selectors use just the tag name: <code>h1 { }</code> selects all <code>&lt;h1&gt;</code> elements."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Element selectors use just the tag name: <code>h1 { }</code> selects all <code>&lt;h1&gt;</code> elements."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: External CSS is written in a _____ file.",
+      "options": [".css", ".html", ".style", ".js"],
+      "correct_answer": ".css",
+      "code_template": "/* External CSS files end with: _____ */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "External stylesheets are saved with the <code>.css</code> extension, like <code>style.css</code>."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "External stylesheets are saved with the <code>.css</code> extension, like <code>style.css</code>."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Inline CSS is added using the _____ attribute.",
+      "options": ["style", "css", "class", "id"],
+      "correct_answer": "style",
+      "code_template": "<p _____=\"color: red;\">Text</p>",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Inline CSS uses the <code>style</code> attribute: <code>&lt;p style=\"color: red;\"&gt;</code>"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Inline CSS uses the <code>style</code> attribute: <code>&lt;p style=\"color: red;\"&gt;</code>"
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: To style elements with class=\"highlight\", use _____.",
+      "options": [".highlight { }", "#highlight { }", "highlight { }", "class=\"highlight\" { }"],
+      "correct_answer": ".highlight { }",
+      "code_template": "/* Select class='highlight': _____ */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Class selectors use a dot: <code>.highlight { }</code> styles all elements with <code>class=\"highlight\"</code>."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Class selectors use a dot: <code>.highlight { }</code> styles all elements with <code>class=\"highlight\"</code>."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Spider",
+    "hp": 8,
+    "image": "assets/img/enemies/spider-happy.png"
+  }
+}

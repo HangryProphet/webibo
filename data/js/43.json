@@ -1,0 +1,137 @@
+{
+  "questions": [
+    {
+      "question": "Fill in the blank: DOM stands for Document ______ Model.",
+      "options": ["OBJECT", "ORDER", "OUTPUT", "ONLINE"],
+      "correct_answer": "OBJECT",
+      "code_template": "/* DOM = Document ______ Model */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "The Document Object Model represents HTML documents as a tree of objects that can be manipulated with JavaScript."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The Document Object Model represents HTML documents as a tree of objects that can be manipulated with JavaScript."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Use document.______() to select by ID.",
+      "options": ["QUERYSELECTOR", "GETELEMENTBYID", "GETBYID", "SELECTID"],
+      "correct_answer": "GETELEMENTBYID",
+      "code_template": "let element = document.______('myId');",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>getElementById()</code> is the most direct way to select an element by its unique ID attribute."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>getElementById()</code> is the most direct way to select an element by its unique ID attribute."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: element.______ = \"new text\" changes element content.",
+      "options": ["TEXT", "CONTENT", "TEXTCONTENT", "INNERTEXT"],
+      "correct_answer": "TEXTCONTENT",
+      "code_template": "element.______ = \"Hello\";",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>textContent</code> sets or returns the text content of an element, ignoring any HTML tags within."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>textContent</code> sets or returns the text content of an element, ignoring any HTML tags within."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: addEventListener(\"______\") responds to clicks.",
+      "options": ["CLICK", "PRESS", "TAP", "BUTTON"],
+      "correct_answer": "CLICK",
+      "code_template": "button.addEventListener(\"______\", function() {});",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "The \"click\" event fires when an element is clicked with a mouse or tapped on a touchscreen device."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The \"click\" event fires when an element is clicked with a mouse or tapped on a touchscreen device."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: element.style.______ = \"red\" changes text color.",
+      "options": ["COLOR", "TEXTCOLOR", "FONTCOLOR", "FORECOLOR"],
+      "correct_answer": "COLOR",
+      "code_template": "element.style.______ = \"blue\";",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>style.color</code> changes the text color. CSS property names in JavaScript use camelCase instead of hyphens."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>style.color</code> changes the text color. CSS property names in JavaScript use camelCase instead of hyphens."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: classList.______(\"active\") adds a CSS class.",
+      "options": ["ADD", "CREATE", "INSERT", "APPEND"],
+      "correct_answer": "ADD",
+      "code_template": "element.classList.______(\"highlight\");",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>classList.add()</code> adds one or more CSS classes to an element without affecting existing classes."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>classList.add()</code> adds one or more CSS classes to an element without affecting existing classes."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: querySelector() uses ______ selectors.",
+      "options": ["HTML", "CSS", "JAVASCRIPT", "JSON"],
+      "correct_answer": "CSS",
+      "code_template": "/* querySelector uses ______ selectors */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>querySelector()</code> accepts any valid CSS selector, making it very flexible for selecting elements."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>querySelector()</code> accepts any valid CSS selector, making it very flexible for selecting elements."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Events make web pages ______.",
+      "options": ["PRETTY", "INTERACTIVE", "FAST", "STRUCTURED"],
+      "correct_answer": "INTERACTIVE",
+      "code_template": "/* Events make pages ______ */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Event listeners allow web pages to respond to user actions like clicks, typing, and scrolling, creating interactive experiences."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Event listeners allow web pages to respond to user actions like clicks, typing, and scrolling, creating interactive experiences."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Skeleton",
+    "hp": 8,
+    "image": "assets/img/enemies/skeleton-happy.png"
+  }
+}

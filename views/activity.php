@@ -209,6 +209,32 @@
         </div>
     </div>
 
+    <!-- Game Over Modal -->
+    <div class="modal-overlay" id="gameOverModal">
+        <div class="modal-content">
+            <img src="../assets/img/wiza/wiza-sad.png" alt="Wiza Defeated" class="modal-image">
+            <h2 class="modal-title" style="color: #ff4757;">Out of Hearts! 💔</h2>
+            <p class="modal-message">Don't give up! Every mistake is a step toward mastery. Ready to try again?</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-primary" onclick="retryLevel()">TRY AGAIN</button>
+                <button class="modal-btn modal-btn-secondary" onclick="exitToDashboard()">BACK TO MAP</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div class="modal-overlay" id="victoryModal">
+        <div class="modal-content">
+            <img src="../assets/img/wiza/wiza-heart-eyes.png" alt="Wiza Celebrating" class="modal-image">
+            <h2 class="modal-title" style="color: #58cc02;">Level Complete! 🎉</h2>
+            <p class="modal-message" id="victoryMessage">Amazing work! You've mastered this challenge!</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-primary" onclick="goToNextLevel()" id="nextLevelBtn">CONTINUE TO NEXT LEVEL</button>
+                <button class="modal-btn modal-btn-secondary" onclick="exitToDashboard()">BACK TO MAP</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Activity Configuration -->
     <script>
         window.activityConfig = <?php echo json_encode($activity_data, JSON_HEX_TAG | JSON_HEX_QUOT); ?>;

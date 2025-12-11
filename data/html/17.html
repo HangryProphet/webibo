@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lists - Level 17</title>
+    <link rel="stylesheet" href="../../assets/css/lecture-content.css">
+</head>
+<body>
+    <!-- PAGE 1 -->
+    <div class="page-header">
+        <div class="page-number">Page 1/3</div>
+        <h1>📋 Introduction to Lists</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Welcome to Module 5! Today, we organize content with lists. 📋"
+    </div>
+
+    <p>HTML offers three types of lists:</p>
+
+    <h2>1. Unordered Lists (Bulleted) - &lt;ul&gt;</h2>
+    <div class="code-example">
+        <pre><code>&lt;ul&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+  &lt;li&gt;Eggs&lt;/li&gt;
+  &lt;li&gt;Bread&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+    </div>
+    <ul>
+        <li>Shows bullets (default)</li>
+        <li>For items without specific order</li>
+    </ul>
+
+    <h2>2. Ordered Lists (Numbered) - &lt;ol&gt;</h2>
+    <div class="code-example">
+        <pre><code>&lt;ol&gt;
+  &lt;li&gt;Preheat oven&lt;/li&gt;
+  &lt;li&gt;Mix ingredients&lt;/li&gt;
+  &lt;li&gt;Bake for 30 minutes&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+    </div>
+    <ol>
+        <li>Shows numbers (1, 2, 3...)</li>
+        <li>For steps, rankings, sequences</li>
+    </ol>
+
+    <h2>3. Description Lists - &lt;dl&gt; (less common)</h2>
+    <div class="code-example">
+        <pre><code>&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;Structures web content&lt;/dd&gt;
+  &lt;dt&gt;CSS&lt;/dt&gt;
+  &lt;dd&gt;Styles web content&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 2 -->
+    <div class="page-header">
+        <div class="page-number">Page 2/3</div>
+        <h1>🔗 Nesting and Styling Lists</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "<strong>Nested Lists</strong> (Lists inside lists):"
+    </div>
+
+    <div class="code-example">
+        <pre><code>&lt;ul&gt;
+  &lt;li&gt;Fruits
+    &lt;ul&gt;
+      &lt;li&gt;Apples&lt;/li&gt;
+      &lt;li&gt;Bananas&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Vegetables
+    &lt;ul&gt;
+      &lt;li&gt;Carrots&lt;/li&gt;
+      &lt;li&gt;Broccoli&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+    </div>
+
+    <h2>List Styling Attributes (Deprecated but good to know):</h2>
+    <div class="code-example">
+        <pre><code>&lt;!-- Type of bullet --&gt;
+&lt;ul type="square"&gt;  &lt;!-- circle, square, disc --&gt;
+  
+&lt;!-- Start numbering from --&gt;
+&lt;ol start="5"&gt;  &lt;!-- Starts at 5 --&gt;
+  
+&lt;!-- Numbering type --&gt;
+&lt;ol type="A"&gt;  &lt;!-- A, a, I, i, 1 --&gt;</code></pre>
+    </div>
+
+    <p><strong>Modern Approach:</strong> Use CSS for styling instead of these attributes!</p>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 3 -->
+    <div class="page-header">
+        <div class="page-number">Page 3/3</div>
+        <h1>💡 Practical List Examples</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Real-World List Examples:"
+    </div>
+
+    <h2>Recipe Page:</h2>
+    <div class="code-example">
+        <pre><code>&lt;h1&gt;Chocolate Chip Cookies&lt;/h1&gt;
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;2 cups flour&lt;/li&gt;
+  &lt;li&gt;1 cup sugar&lt;/li&gt;
+  &lt;li&gt;Chocolate chips&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Instructions&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Preheat oven to 350°F&lt;/li&gt;
+  &lt;li&gt;Mix dry ingredients&lt;/li&gt;
+  &lt;li&gt;Add wet ingredients
+    &lt;ol type="a"&gt;
+      &lt;li&gt;Eggs first&lt;/li&gt;
+      &lt;li&gt;Vanilla second&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Bake for 10-12 minutes&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+    </div>
+
+    <h2>Navigation Menu (common use):</h2>
+    <div class="code-example">
+        <pre><code>&lt;nav&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+    </div>
+
+    <h2>Pro Tips:</h2>
+    <ol>
+        <li>Always use &lt;li&gt; inside &lt;ul&gt; or &lt;ol&gt;</li>
+        <li>Nest properly with indentation</li>
+        <li>Use semantic meaning: steps = ordered, features = unordered</li>
+        <li>Lists improve SEO and accessibility</li>
+    </ol>
+
+    <p><strong>Lists help users scan content quickly - perfect for recipes, instructions, features, and navigation! 🗒️</strong></p>
+</body>
+</html>

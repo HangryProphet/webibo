@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working with HTML Elements</title>
+    <link rel="stylesheet" href="../../assets/css/lecture-content.css">
+</head>
+<body>
+    <div class="page-header">
+        <div class="page-number">Page 1 of 3</div>
+    </div>
+
+    <div class="wiza-intro">
+        <img src="../../assets/img/wiza/wiza-excited.png" alt="Wiza" class="wiza-img">
+        <div class="speech-bubble">
+            <p>Welcome to Module 3! 🌐</p>
+            <p>Now let's learn to control web pages with JavaScript!</p>
+            <p>This is where the magic happens - you'll make pages come alive!</p>
+        </div>
+    </div>
+
+    <h1>Working with HTML Elements</h1>
+
+    <h2>What is the DOM?</h2>
+    <p>The DOM (Document Object Model) is JavaScript's interface to HTML. It represents the page as objects that JavaScript can manipulate.</p>
+
+    <h3>Selecting Elements:</h3>
+    <div class="code-example">
+        <pre><code>// Select by ID
+let header = document.getElementById("main-header");
+
+// Select by class (returns array-like object)
+let items = document.getElementsByClassName("item");
+
+// Select by tag name
+let paragraphs = document.getElementsByTagName("p");
+
+// Modern method (CSS selector)
+let element = document.querySelector(".special"); // First match
+let allElements = document.querySelectorAll("div"); // All matches</code></pre>
+    </div>
+
+    <h3>Example HTML:</h3>
+    <div class="code-example">
+        <pre><code>&lt;h1 id="title"&gt;Hello World&lt;/h1&gt;
+&lt;p class="info"&gt;Welcome to my site&lt;/p&gt;
+&lt;div class="container"&gt;
+  &lt;button&gt;Click me&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="info-box">
+        <strong>Pro Tip:</strong> <code>querySelector()</code> and <code>querySelectorAll()</code> are the most flexible methods because they accept any CSS selector!
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="page-header">
+        <div class="page-number">Page 2 of 3</div>
+    </div>
+
+    <h2>Changing Content and Styles</h2>
+    <p>Now let's change what users see on the page!</p>
+
+    <h3>Changing Content:</h3>
+    <div class="code-example">
+        <pre><code>let title = document.getElementById("title");
+title.textContent = "New Title"; // Change text
+title.innerHTML = "&lt;em&gt;Emphasized&lt;/em&gt; Text"; // Change HTML
+
+let button = document.querySelector("button");
+button.innerHTML = "Click Here!";</code></pre>
+    </div>
+
+    <h3>Changing Styles:</h3>
+    <div class="code-example">
+        <pre><code>let box = document.querySelector(".box");
+box.style.color = "blue"; // Text color
+box.style.backgroundColor = "yellow"; // Background
+box.style.fontSize = "20px"; // Font size
+box.style.display = "none"; // Hide element
+box.style.display = "block"; // Show element</code></pre>
+    </div>
+
+    <h3>Adding/Removing Classes:</h3>
+    <div class="code-example">
+        <pre><code>let element = document.querySelector(".my-element");
+element.classList.add("active"); // Add class
+element.classList.remove("old-class"); // Remove class
+element.classList.toggle("hidden"); // Toggle class</code></pre>
+    </div>
+
+    <div class="info-box">
+        <strong>Important:</strong> Use <code>textContent</code> for plain text and <code>innerHTML</code> for HTML content. CSS properties in JavaScript use camelCase (backgroundColor, not background-color).
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="page-header">
+        <div class="page-number">Page 3 of 3</div>
+    </div>
+
+    <h2>Responding to Events</h2>
+    <p>Let's make pages respond to user actions!</p>
+
+    <h3>Event Listeners:</h3>
+    <div class="code-example">
+        <pre><code>let button = document.querySelector("#myButton");
+
+// Method 1: addEventListener (recommended)
+button.addEventListener("click", function() {
+  alert("Button clicked!");
+});
+
+// Method 2: onclick property
+button.onclick = function() {
+  console.log("Button was clicked");
+};
+
+// With arrow function
+button.addEventListener("click", () => {
+  button.style.backgroundColor = "green";
+});</code></pre>
+    </div>
+
+    <h3>Common Events:</h3>
+    <ul>
+        <li><code>click</code> - Mouse click</li>
+        <li><code>mouseover</code> - Mouse enters element</li>
+        <li><code>mouseout</code> - Mouse leaves element</li>
+        <li><code>keydown</code> - Key is pressed</li>
+        <li><code>load</code> - Page finishes loading</li>
+        <li><code>change</code> - Form input changes</li>
+    </ul>
+
+    <h3>Complete Example:</h3>
+    <div class="code-example">
+        <pre><code>// When page loads
+document.addEventListener("DOMContentLoaded", function() {
+  let button = document.getElementById("colorButton");
+  let text = document.getElementById("message");
+  
+  button.addEventListener("click", function() {
+    text.textContent = "Button clicked!";
+    text.style.color = "red";
+  });
+});</code></pre>
+    </div>
+
+    <div class="wiza-intro">
+        <img src="../../assets/img/wiza/wiza-happy.png" alt="Wiza" class="wiza-img">
+        <div class="speech-bubble">
+            <p>Amazing! You now know how to control web pages with JavaScript! 🎉</p>
+            <p>This is the power of DOM manipulation - you can change anything on the page in response to user actions!</p>
+        </div>
+    </div>
+</body>
+</html>

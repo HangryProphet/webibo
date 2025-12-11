@@ -241,4 +241,46 @@ class ProgressModel
             return [];
         }
     }
+
+    /**
+     * Get array of completed level IDs for a user in a specific course
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User's ID
+     * @param int|null $courseId Optional course ID to filter by
+     * @return array Array of completed level IDs
+     */
+    public static function getCompletedLevelIds(PDO $pdo, int $userId, ?int $courseId = null): array
+    {
+        try {
+            if ($courseId !== null) {
+                $sql = "SELECT up.level_id 
+                        FROM user_progress up
+                        JOIN levels l ON up.level_id = l.id
+                        WHERE up.user_id = :user_id AND l.course_id = :course_id
+                        ORDER BY up.completed_at ASC";
+                
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    ':user_id' => $userId,
+                    ':course_id' => $courseId
+                ]);
+            } else {
+                $sql = "SELECT level_id 
+                        FROM user_progress 
+                        WHERE user_id = :user_id 
+                        ORDER BY completed_at ASC";
+                
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([':user_id' => $userId]);
+            }
+            
+            $results = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            return array_map('intval', $results);
+
+        } catch (PDOException $e) {
+            error_log("ProgressModel::getCompletedLevelIds Error: " . $e->getMessage());
+            return [];
+        }
+    }
 }

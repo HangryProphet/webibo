@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with CSS - Level 21</title>
+    <link rel="stylesheet" href="../../assets/css/lecture-content.css">
+</head>
+<body>
+    <!-- PAGE 1 -->
+    <div class="page-header">
+        <div class="page-number">Page 1/3</div>
+        <h1>🎨 Welcome to CSS!</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Welcome to the colorful world of CSS! 🎨 I'm Wiza, and I'm so excited to show you how to make your websites beautiful!"
+    </div>
+
+    <p><strong>CSS stands for Cascading Style Sheets.</strong> If HTML is the skeleton of a webpage, CSS is the skin, clothes, and makeup! It controls how everything looks.</p>
+
+    <h2>Quick Facts:</h2>
+    <ul>
+        <li>CSS is <strong>NOT</strong> a programming language</li>
+        <li>It's a styling language that works with HTML</li>
+        <li>Every browser understands CSS</li>
+        <li>You can change colors, sizes, layouts, and more!</li>
+    </ul>
+
+    <p><strong>Ready to add some style to your web pages? Let's begin!</strong></p>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 2 -->
+    <div class="page-header">
+        <div class="page-number">Page 2/3</div>
+        <h1>⚙️ How CSS Works</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "CSS works by selecting HTML elements and applying styles to them. Here's the basic structure:"
+    </div>
+
+    <div class="code-example">
+        <pre><code>selector {
+  property: value;
+  property: value;
+}</code></pre>
+    </div>
+
+    <h2>Example:</h2>
+    <div class="code-example">
+        <pre><code>h1 {
+  color: blue;
+  font-size: 32px;
+}</code></pre>
+    </div>
+
+    <p>This means: <strong>"Make ALL &lt;h1&gt; elements blue and 32 pixels large."</strong></p>
+
+    <h2>Three Ways to Add CSS:</h2>
+
+    <h3>1. Inline CSS (directly on an element)</h3>
+    <div class="code-example">
+        <pre><code>&lt;p style="color: red;"&gt;This is red text&lt;/p&gt;</code></pre>
+    </div>
+
+    <h3>2. Internal CSS (in the &lt;head&gt; section)</h3>
+    <div class="code-example">
+        <pre><code>&lt;head&gt;
+  &lt;style&gt;
+    p { color: blue; }
+  &lt;/style&gt;
+&lt;/head&gt;</code></pre>
+    </div>
+
+    <h3>3. External CSS (separate file - best practice!)</h3>
+    <div class="code-example">
+        <pre><code>&lt;head&gt;
+  &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;</code></pre>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 3 -->
+    <div class="page-header">
+        <div class="page-number">Page 3/3</div>
+        <h1>🎯 CSS Selectors Basics</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Selectors tell CSS which elements to style. Here are the most common:"
+    </div>
+
+    <h2>1. Element Selector (tags)</h2>
+    <div class="code-example">
+        <pre><code>p { color: black; } /* All paragraphs */
+h2 { color: green; } /* All h2 headings */</code></pre>
+    </div>
+
+    <h2>2. Class Selector (starts with .)</h2>
+    <div class="code-example">
+        <pre><code>.special { color: purple; }</code></pre>
+    </div>
+    <p><strong>HTML:</strong></p>
+    <div class="code-example">
+        <pre><code>&lt;p class="special"&gt;This is purple!&lt;/p&gt;</code></pre>
+    </div>
+
+    <h2>3. ID Selector (starts with #)</h2>
+    <div class="code-example">
+        <pre><code>#main-title { font-size: 48px; }</code></pre>
+    </div>
+    <p><strong>HTML:</strong></p>
+    <div class="code-example">
+        <pre><code>&lt;h1 id="main-title"&gt;Big Title&lt;/h1&gt;</code></pre>
+    </div>
+
+    <h2>Remember:</h2>
+    <ul>
+        <li>Classes can be used on <strong>MANY</strong> elements</li>
+        <li>IDs should be used only <strong>ONCE</strong> per page</li>
+        <li>External CSS is the cleanest way to style!</li>
+    </ul>
+
+    <p class="motivational"><strong>Ready for some practice? Let's go! 💪</strong></p>
+</body>
+</html>

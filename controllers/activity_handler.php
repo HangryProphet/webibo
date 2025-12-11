@@ -57,8 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Failed to load activity content");
     }
     
-    $correctAnswer = $activityContent['correct_answer'] ?? $activityContent['correct_code'] ?? '';
-    $enemyHP = isset($activityContent['enemy']) ? ($activityContent['enemy']['hp'] ?? 10) : 10;
+    // Handle multi-question format
+    $currentQuestionData = $activityContent;
+    if (isset($activityContent['questions']) && is_array($activityContent['questions']) && !empty($activityContent['questions'])) {
+        $currentQuestionData = $activityContent['questions'][0];
+        if (isset($activityContent['enemy'])) {
+            $currentQuestionData['enemy'] = $activityContent['enemy'];
+        }
+    }
+    
+    $correctAnswer = $currentQuestionData['correct_answer'] ?? $currentQuestionData['correct_code'] ?? '';
+    $enemyHP = isset($currentQuestionData['enemy']) ? ($currentQuestionData['enemy']['hp'] ?? 10) : 10;
     
     // Get submitted answer
     $submittedAnswer = '';
@@ -104,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $isCorrect = (strtolower($submittedAnswer) === strtolower($correctAnswer));
     } elseif ($level['level_type'] === 'code-editor') {
         // For code editor, use the validation rules from JSON
-        $validation = $activityContent['validation'] ?? [];
+        $validation = $currentQuestionData['validation'] ?? [];
         $userCode = $submittedAnswer;
         $expectedCode = $correctAnswer;
         
@@ -172,52 +181,89 @@ if (!$activityContent) {
     die("Failed to load activity content for level {$levelId}");
 }
 
-// Determine next level URL for redirect after completion
-$nextLevel = LevelModel::getNextLevel($pdo, $levelId);
-$redirectUrl = '';
-if ($nextLevel) {
-    if ($nextLevel['level_type'] === 'lecture') {
-        $redirectUrl = "lecture.php?id={$nextLevel['id']}";
-    } else {
-        $redirectUrl = "activity.php?id={$nextLevel['id']}";
+// ============================================
+// HANDLE MULTI-QUESTION FORMAT
+// ============================================
+// Check if this is a multi-question quiz (has "questions" array)
+$isMultiQuestion = isset($activityContent['questions']) && is_array($activityContent['questions']);
+$currentQuestionData = $activityContent;
+
+if ($isMultiQuestion) {
+    // For now, just use the first question
+    // TODO: In future, implement multi-question progression
+    if (!empty($activityContent['questions'])) {
+        $currentQuestionData = $activityContent['questions'][0];
+        // Keep the enemy data from the root level
+        if (isset($activityContent['enemy'])) {
+            $currentQuestionData['enemy'] = $activityContent['enemy'];
+        }
     }
-} else {
-    $redirectUrl = "dashboard.php";
 }
+
+// Always redirect to dashboard after level completion
+$redirectUrl = 'dashboard.php';
 
 // ============================================
 // BUILD ACTIVITY DATA ARRAY
 // This must match window.activityConfig exactly!
 // ============================================
 
+// Calculate adaptive enemy HP (2 HP per question)
+$totalQuestions = $isMultiQuestion ? count($activityContent['questions']) : 1;
+$adaptiveEnemyHP = $totalQuestions * 2; // 2 HP damage per correct answer
+
+// Get next level information
+$nextLevel = LevelModel::getNextLevel($pdo, $levelId);
+$hasNextLevel = ($nextLevel !== false);
+$nextLevelUrl = '';
+if ($hasNextLevel) {
+    if ($nextLevel['level_type'] === 'lecture') {
+        $nextLevelUrl = 'lecture.php?id=' . $nextLevel['id'];
+    } else {
+        $nextLevelUrl = 'activity.php?id=' . $nextLevel['id'];
+    }
+}
+
 $activity_data = [
     'type' => $level['level_type'],
-    'correctAnswer' => $activityContent['correct_answer'] ?? $activityContent['correct_code'] ?? '',
+    'question' => $currentQuestionData['question'] ?? $currentQuestionData['instruction'] ?? '',
+    'options' => $currentQuestionData['options'] ?? [],
+    'correctAnswer' => $currentQuestionData['correct_answer'] ?? $currentQuestionData['correct_code'] ?? '',
     'currentHearts' => $currentHearts,
     'currentProgress' => $currentProgress,
     'redirectUrl' => $redirectUrl,
-    'enemyHP' => 10,
-    'hasEnemy' => isset($activityContent['enemy']) && $activityContent['enemy'] !== null,
-    'correctTitle' => $activityContent['feedback']['correct']['title'] ?? 'Correct!',
-    'correctDetails' => $activityContent['feedback']['correct']['details'] ?? '',
-    'wrongTitle' => $activityContent['feedback']['wrong']['title'] ?? 'Not quite!',
-    'wrongDetails' => $activityContent['feedback']['wrong']['details'] ?? '',
-    'validation' => $activityContent['validation'] ?? null
+    'enemyHP' => $adaptiveEnemyHP,
+    'maxEnemyHP' => $adaptiveEnemyHP,
+    'hasEnemy' => isset($currentQuestionData['enemy']) && $currentQuestionData['enemy'] !== null,
+    'enemy' => $currentQuestionData['enemy'] ?? null,
+    'correctTitle' => ($currentQuestionData['feedback']['correct']['title'] ?? null) ?: 'Correct!',
+    'correctDetails' => ($currentQuestionData['feedback']['correct']['details'] ?? null) ?: '',
+    'wrongTitle' => ($currentQuestionData['feedback']['wrong']['title'] ?? null) ?: 'Not quite!',
+    'wrongDetails' => ($currentQuestionData['feedback']['wrong']['details'] ?? null) ?: '',
+    'validation' => $currentQuestionData['validation'] ?? null,
+    'codeTemplate' => $currentQuestionData['code_template'] ?? '',
+    'starterCode' => $currentQuestionData['starter_code'] ?? '',
+    'hint' => $currentQuestionData['hint'] ?? '',
+    'teacher' => $currentQuestionData['teacher'] ?? null,
+    // Multi-question support
+    'isMultiQuestion' => $isMultiQuestion,
+    'allQuestions' => $isMultiQuestion ? $activityContent['questions'] : [],
+    'totalQuestions' => $totalQuestions,
+    'currentQuestionIndex' => 0,
+    // Next level information
+    'hasNextLevel' => $hasNextLevel,
+    'nextLevelUrl' => $nextLevelUrl,
+    'nextLevelTitle' => $hasNextLevel ? $nextLevel['title'] : ''
 ];
 
-// Update enemy HP if enemy exists
-if ($activity_data['hasEnemy'] && isset($activityContent['enemy']['hp'])) {
-    $activity_data['enemyHP'] = $activityContent['enemy']['hp'];
-}
-
 // Extract other activity-specific data for the view
-$question = $activityContent['question'] ?? $activityContent['instruction'] ?? '';
-$options = $activityContent['options'] ?? [];
-$enemy = $activityContent['enemy'] ?? null;
-$codeTemplate = $activityContent['code_template'] ?? '';
-$starterCode = $activityContent['starter_code'] ?? '';
-$hint = $activityContent['hint'] ?? '';
-$teacher = $activityContent['teacher'] ?? null;
+$question = $currentQuestionData['question'] ?? $currentQuestionData['instruction'] ?? '';
+$options = $currentQuestionData['options'] ?? [];
+$enemy = $currentQuestionData['enemy'] ?? null;
+$codeTemplate = $currentQuestionData['code_template'] ?? '';
+$starterCode = $currentQuestionData['starter_code'] ?? '';
+$hint = $currentQuestionData['hint'] ?? '';
+$teacher = $currentQuestionData['teacher'] ?? null;
 
 // Controller logic complete - all data prepared for view
 // No HTML output here - this is pure controller logic
