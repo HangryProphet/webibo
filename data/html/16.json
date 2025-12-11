@@ -1,0 +1,19 @@
+{
+  "instruction": "Add an image using the &lt;img&gt; tag with any image URL you like. Important: Set the alt text exactly to: \"A random picture\"",
+  "starter_code": "",
+  "correct_code": "<img src=\"your-image-link-here\" alt=\"A random picture\">",
+  "validation": {
+    "ignore_whitespace": true,
+    "case_sensitive": false
+  },
+  "feedback": {
+    "correct": {
+      "title": "Perfect! 🎉",
+      "details": "You've successfully added an image with proper alt text! The <code>&lt;img&gt;</code> tag with src and alt attributes is essential for accessible web design."
+    },
+    "wrong": {
+      "title": "Not quite! 🤔",
+      "details": "Remember: Use <code>&lt;img src=\"YOUR_IMAGE_URL_HERE\" alt=\"A random picture\"&gt;</code>. Make sure to include both the src attribute (with any image URL) and the alt attribute with the exact text \"A random picture\"."
+    }
+  }
+}

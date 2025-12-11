@@ -63,9 +63,8 @@ $isProfile = ($currentPage === 'profile.php');
                 <span class="nav-text">More</span>
             </a>
             <div class="header-hover-popup more-popup">
-                <div class="popup-header">MORE OPTIONS</div>
                 <div class="header-menu-list">
-                    <a href="#" class="header-menu-item">
+                    <a href="settings.php" class="header-menu-item">
                         <div class="header-menu-icon">
                             <i class="fas fa-cog"></i>
                         </div>

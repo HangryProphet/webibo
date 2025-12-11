@@ -1,0 +1,169 @@
+{
+  "questions": [
+    {
+      "question": "What does the + operator do with numbers?",
+      "options": [
+        "Combines them as text",
+        "Adds them together",
+        "Multiplies them",
+        "Compares them"
+      ],
+      "correct_answer": "Adds them together",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "With numbers, + performs addition. With strings, it concatenates (joins) them together."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "With numbers, + performs addition. With strings, it concatenates (joins) them together."
+        }
+      }
+    },
+    {
+      "question": "Which operator gives the remainder of division?",
+      "options": [
+        "/",
+        "%",
+        "//",
+        "&"
+      ],
+      "correct_answer": "%",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The modulus operator % returns the remainder after division. For example, 10 % 3 equals 1."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The modulus operator % returns the remainder after division. For example, 10 % 3 equals 1."
+        }
+      }
+    },
+    {
+      "question": "What does === check for?",
+      "options": [
+        "Loose equality",
+        "Strict equality",
+        "Assignment",
+        "Greater than"
+      ],
+      "correct_answer": "Strict equality",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>===</code> checks for strict equality - both value AND type must be the same. 5 === \"5\" is false."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>===</code> checks for strict equality - both value AND type must be the same. 5 === \"5\" is false."
+        }
+      }
+    },
+    {
+      "question": "Which creates a reusable block of code?",
+      "options": [
+        "Variable",
+        "Function",
+        "Operator",
+        "Comment"
+      ],
+      "correct_answer": "Function",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Functions are reusable blocks of code that perform specific tasks. They help organize code and avoid repetition."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Functions are reusable blocks of code that perform specific tasks. They help organize code and avoid repetition."
+        }
+      }
+    },
+    {
+      "question": "What does return do in a function?",
+      "options": [
+        "Stops the function",
+        "Sends a value back",
+        "Shows an alert",
+        "Creates a variable"
+      ],
+      "correct_answer": "Sends a value back",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>return</code> sends a value back from the function to where it was called. Functions without return give undefined."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>return</code> sends a value back from the function to where it was called. Functions without return give undefined."
+        }
+      }
+    },
+    {
+      "question": "What is x in function double(x) { ... }?",
+      "options": [
+        "Return value",
+        "Parameter",
+        "Variable",
+        "Operator"
+      ],
+      "correct_answer": "Parameter",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "x is a parameter - a placeholder for the value that will be passed into the function when it's called."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "x is a parameter - a placeholder for the value that will be passed into the function when it's called."
+        }
+      }
+    },
+    {
+      "question": "Which is correct function syntax?",
+      "options": [
+        "function myFunction {}",
+        "function = myFunction() {}",
+        "function myFunction() {}",
+        "myFunction function() {}"
+      ],
+      "correct_answer": "function myFunction() {}",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The correct syntax for function declaration is <code>function functionName() {}</code> with parentheses after the name."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The correct syntax for function declaration is <code>function functionName() {}</code> with parentheses after the name."
+        }
+      }
+    },
+    {
+      "question": "What does x += 5 mean?",
+      "options": [
+        "x = 5",
+        "x = x + 5",
+        "x = 5 + 5",
+        "x = x == 5"
+      ],
+      "correct_answer": "x = x + 5",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>x += 5</code> is shorthand for <code>x = x + 5</code>. It adds 5 to the current value of x and assigns the result back to x."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>x += 5</code> is shorthand for <code>x = x + 5</code>. It adds 5 to the current value of x and assigns the result back to x."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Goblin",
+    "hp": 8,
+    "image": "assets/img/enemies/goblin-happy.png"
+  }
+}

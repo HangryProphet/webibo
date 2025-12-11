@@ -22,13 +22,98 @@
     let currentProgress = config.currentProgress || 0; // Progress out of 10 (0-10)
     let pendingSkip = false;
     let isCorrect = false;
-    let enemyHP = config.enemyHP || 10; // Enemy HP out of 10
-    const correctAnswer = config.correctAnswer || '';
-    const redirectUrl = config.redirectUrl || 'activity.php';
+    let enemyHP = config.enemyHP || 10;
+    const maxEnemyHP = config.maxEnemyHP || enemyHP;
+    let correctAnswer = config.correctAnswer || '';
+    const redirectUrl = config.redirectUrl || 'dashboard.php';
+    
+    // Multi-question support
+    const isMultiQuestion = config.isMultiQuestion || false;
+    const allQuestions = config.allQuestions || [];
+    const totalQuestions = config.totalQuestions || 1;
+    let currentQuestionIndex = config.currentQuestionIndex || 0;
+    let questionsAnswered = 0;
     // Paths are relative to views/* pages that include this script with ../assets/...
     const correctSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/correct.mp3') : null;
     const wrongSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/wrong.mp3') : null;
 
+    // Load next question in multi-question activities
+    function loadNextQuestion() {
+        if (!isMultiQuestion || currentQuestionIndex >= allQuestions.length) return;
+        
+        const nextQuestion = allQuestions[currentQuestionIndex];
+        
+        // Update current question data
+        correctAnswer = nextQuestion.correct_answer || nextQuestion.correct_code || '';
+        config.correctTitle = nextQuestion.feedback?.correct?.title || 'Correct! 🎉';
+        config.correctDetails = nextQuestion.feedback?.correct?.details || '';
+        config.wrongTitle = nextQuestion.feedback?.wrong?.title || 'Not quite! 🤔';
+        config.wrongDetails = nextQuestion.feedback?.wrong?.details || '';
+        
+        // Hide feedback panel
+        const panel = document.getElementById('feedbackPanel');
+        if (panel) {
+            panel.classList.remove('active');
+        }
+        
+        // Reset state
+        selectedAnswer = null;
+        isCorrect = false;
+        
+        // Update UI based on activity type
+        if (activityType === 'multiple-choice') {
+            // Update question text
+            const questionTitle = document.querySelector('.question-title');
+            if (questionTitle) {
+                questionTitle.textContent = nextQuestion.question;
+            }
+            
+            // Update options
+            const optionsContainer = document.getElementById('optionsContainer');
+            if (optionsContainer && nextQuestion.options) {
+                optionsContainer.innerHTML = '';
+                nextQuestion.options.forEach(option => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'option-btn';
+                    btn.setAttribute('data-answer', option);
+                    btn.textContent = option;
+                    btn.onclick = function() { selectOption(this); };
+                    optionsContainer.appendChild(btn);
+                });
+            }
+        } else if (activityType === 'fill-blank') {
+            // Update question text
+            const questionTitle = document.querySelector('.question-title');
+            if (questionTitle) {
+                questionTitle.textContent = nextQuestion.question;
+            }
+            
+            // Clear input
+            const answerInput = document.getElementById('answerInput');
+            if (answerInput) {
+                answerInput.value = '';
+                answerInput.disabled = false;
+                answerInput.classList.remove('correct', 'wrong');
+                answerInput.focus();
+            }
+        }
+        
+        // Re-enable buttons
+        const checkBtn = document.getElementById('checkBtn');
+        if (checkBtn) {
+            checkBtn.disabled = true;
+        }
+        
+        const skipBtn = document.getElementById('skipBtn');
+        if (skipBtn) {
+            skipBtn.disabled = false;
+            skipBtn.style.display = 'inline-block';
+        }
+        
+        // Progress will be updated after user answers the next question
+    }
+    
     // Initialize based on activity type
     function init() {
         // Initialize progress bar
@@ -50,8 +135,13 @@
     function initProgressBar() {
         const progressFill = document.getElementById('progressFill');
         if (progressFill) {
-            // Convert progress (0-10) to percentage
-            progressFill.style.width = (currentProgress / 10 * 100) + '%';
+            // For multi-question activities, start at 0%
+            // For single question, use the backend progress value
+            if (isMultiQuestion) {
+                progressFill.style.width = '0%';
+            } else {
+                progressFill.style.width = (currentProgress / 10 * 100) + '%';
+            }
         }
         
         // Initialize enemy HP display
@@ -186,7 +276,7 @@
             }
         }
 
-        // Update progress bar
+        // Update progress bar (tracks question progression, not correctness)
         updateProgress();
 
         if (selectedAnswer === correctAnswer) {
@@ -219,9 +309,6 @@
         if (submittedCode) {
             submittedCode.value = userCode;
         }
-
-        // Update progress bar
-        updateProgress();
 
         // Validate the code
         let codeToCheck = userCode;
@@ -332,11 +419,17 @@
 
     // Update progress bar (progress is out of 10)
     function updateProgress() {
-        currentProgress += 1; // Increment by 1 (out of 10)
-        if (currentProgress > 10) currentProgress = 10;
         const progressFill = document.getElementById('progressFill');
-        if (progressFill) {
-            // Convert to percentage: (currentProgress / 10) * 100
+        if (!progressFill) return;
+        
+        if (isMultiQuestion) {
+            // For multi-question: calculate based on questions answered
+            const progressPercentage = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+            progressFill.style.width = progressPercentage + '%';
+        } else {
+            // For single question: use traditional progress (out of 10)
+            currentProgress += 1;
+            if (currentProgress > 10) currentProgress = 10;
             progressFill.style.width = (currentProgress / 10 * 100) + '%';
         }
     }
@@ -419,6 +512,9 @@
         showFeedback(false);
     }
 
+    // Track game over state
+    let isGameOver = false;
+    
     // Decrease hearts
     function decreaseHearts() {
         currentHearts = Math.max(0, currentHearts - 1);
@@ -426,19 +522,41 @@
         if (heartsCount) {
             heartsCount.textContent = currentHearts;
         }
+        
+        // Check for game over
+        if (currentHearts <= 0) {
+            isGameOver = true;
+            
+            // Disable continue button
+            const continueBtn = document.getElementById('continueBtn');
+            if (continueBtn) {
+                continueBtn.disabled = true;
+                continueBtn.style.opacity = '0.5';
+                continueBtn.style.cursor = 'not-allowed';
+            }
+            
+            // Hide feedback panel and show game over after delay
+            setTimeout(() => {
+                const feedbackPanel = document.getElementById('feedbackPanel');
+                if (feedbackPanel) {
+                    feedbackPanel.classList.remove('active');
+                }
+                showGameOverModal();
+            }, 1500);
+        }
     }
 
     // Update enemy HP
     function updateEnemyHP() {
-        const percentage = (enemyHP / 10) * 100;
+        const percentage = (enemyHP / maxEnemyHP) * 100;
         const hpFill = document.getElementById('enemyHPFill');
         const hpLabel = document.getElementById('enemyHPLabel');
         
         if (hpFill) {
-            hpFill.style.width = percentage + '%';
+            hpFill.style.width = Math.max(0, percentage) + '%';
         }
         if (hpLabel) {
-            hpLabel.textContent = `HP: ${enemyHP} / 10`;
+            hpLabel.textContent = `HP: ${Math.max(0, enemyHP)} / ${maxEnemyHP}`;
         }
     }
 
@@ -461,6 +579,14 @@
             title.textContent = config.correctTitle || 'Awesome!';
             details.innerHTML = config.correctDetails || '';
             continueBtn.className = 'continue-btn correct';
+            
+            // Update button text based on whether there are more questions
+            if (isMultiQuestion && currentQuestionIndex < totalQuestions - 1) {
+                continueBtn.textContent = 'NEXT QUESTION';
+            } else {
+                // Last question or single question
+                continueBtn.textContent = 'COMPLETE';
+            }
         } else {
             icon.className = 'feedback-icon wrong';
             icon.innerHTML = '<i class="fas fa-times"></i>';
@@ -468,6 +594,7 @@
             title.textContent = config.wrongTitle || 'Correct answer:';
             details.innerHTML = config.wrongDetails || '';
             continueBtn.className = 'continue-btn wrong';
+            continueBtn.textContent = 'CONTINUE';
         }
     }
 
@@ -489,6 +616,11 @@
 
     // Continue to next question
     window.continueToNext = function() {
+        // Don't allow continue if game is over
+        if (isGameOver) {
+            return;
+        }
+        
         if (pendingSkip) {
             const skipForm = document.getElementById('skipForm');
             if (skipForm) {
@@ -496,20 +628,80 @@
                 return;
             }
         }
-
-        if (activityType === 'code-editor' && isCorrect) {
-            const quizForm = document.getElementById('quizForm');
-            if (quizForm) {
-                quizForm.submit();
-                return;
-            }
+        
+        // Check if this is a multi-question activity and there are more questions
+        if (isMultiQuestion && currentQuestionIndex < totalQuestions - 1) {
+            // Move to next question
+            currentQuestionIndex++;
+            loadNextQuestion();
+            return;
         }
-
-        // Reload or go to next question
-        window.location.href = redirectUrl;
+        
+        // Last question - show victory modal (only if not game over)
+        if (!isGameOver) {
+            showVictoryModal();
+        }
+        return;
     };
 
-    // Exit Modal Functions
+    // Show game over modal
+    function showGameOverModal() {
+        const gameOverModal = document.getElementById('gameOverModal');
+        if (gameOverModal) {
+            gameOverModal.classList.add('active');
+        }
+    }
+    
+    // Retry level from game over
+    window.retryLevel = function() {
+        window.location.reload();
+    };
+    
+    // Show victory modal
+    function showVictoryModal() {
+        const victoryModal = document.getElementById('victoryModal');
+        const victoryMessage = document.getElementById('victoryMessage');
+        const nextLevelBtn = document.getElementById('nextLevelBtn');
+        
+        if (victoryModal) {
+            // Customize message and button based on next level availability
+            if (config.hasNextLevel) {
+                if (victoryMessage) {
+                    victoryMessage.textContent = `Amazing work! You've mastered this challenge! Ready for the next one?`;
+                }
+                if (nextLevelBtn) {
+                    nextLevelBtn.textContent = 'CONTINUE TO NEXT LEVEL';
+                    nextLevelBtn.style.display = 'block';
+                }
+            } else {
+                if (victoryMessage) {
+                    victoryMessage.textContent = `Incredible! You've completed all levels in this course! 🎓`;
+                }
+                if (nextLevelBtn) {
+                    nextLevelBtn.style.display = 'none';
+                }
+            }
+            
+            victoryModal.classList.add('active');
+        }
+    }
+    
+    // Go to next level from victory modal
+    window.goToNextLevel = function() {
+        // Submit the completion form to trigger backend logic
+        const quizForm = document.getElementById('quizForm');
+        if (quizForm) {
+            quizForm.submit();
+        } else if (config.nextLevelUrl) {
+            // Direct navigation to next level
+            window.location.href = config.nextLevelUrl;
+        } else {
+            // Fallback: redirect to dashboard
+            window.location.href = 'dashboard.php';
+        }
+    };
+    
+    // Exit modal functions
     window.showExitModal = function() {
         const exitModal = document.getElementById('exitModal');
         if (exitModal) {

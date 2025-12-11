@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Colors and Text</title>
+    <link rel="stylesheet" href="../../assets/css/lecture-content.css">
+</head>
+<body>
+    <div class="page-header">
+        <div class="page-number">Page 1 of 3</div>
+    </div>
+
+    <div class="wiza-intro">
+        <img src="../../assets/img/wiza/wiza-neutral.png" alt="Wiza" class="wiza-img">
+        <div class="speech-bubble">
+            <p>Welcome back, young developer! 🎨</p>
+            <p>Now that you understand CSS basics, let's dive into one of the most exciting parts: <strong>colors and text styling</strong>!</p>
+            <p>Colors bring your website to life, and text styling makes content readable and beautiful.</p>
+        </div>
+    </div>
+
+    <h1>CSS Colors and Text</h1>
+
+    <h2>Why Colors Matter</h2>
+    <p>Colors are more than just decoration—they:</p>
+    <ul>
+        <li>Guide users' attention to important content</li>
+        <li>Create mood and emotion on your website</li>
+        <li>Make text easier to read</li>
+        <li>Help with branding and identity</li>
+    </ul>
+
+    <div class="info-box">
+        <strong>Quick Fact:</strong> The human eye can distinguish about 10 million different colors! But most websites use a carefully chosen palette of just 3-5 main colors.
+    </div>
+
+    <h2>Color Properties</h2>
+    <p>CSS has two main color properties:</p>
+    <ul>
+        <li><code>color</code> - Changes the text color</li>
+        <li><code>background-color</code> - Changes the background color</li>
+    </ul>
+
+    <div class="code-example">
+        <pre><code>p {
+  color: blue;
+  background-color: lightgray;
+}</code></pre>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="page-header">
+        <div class="page-number">Page 2 of 3</div>
+    </div>
+
+    <h2>Ways to Specify Colors</h2>
+    <p>CSS gives you several ways to define colors:</p>
+
+    <h3>1. Color Names</h3>
+    <p>CSS recognizes 140 color names like <code>red</code>, <code>blue</code>, <code>green</code>, etc.</p>
+    <div class="code-example">
+        <pre><code>h1 {
+  color: crimson;
+  background-color: lightyellow;
+}</code></pre>
+    </div>
+
+    <h3>2. Hex Colors</h3>
+    <p>Hex codes start with # and use 6 characters (0-9, A-F):</p>
+    <div class="code-example">
+        <pre><code>p {
+  color: #FF5733;        /* Orange-red */
+  background-color: #F0F0F0;  /* Light gray */
+}</code></pre>
+    </div>
+
+    <h3>3. RGB Colors</h3>
+    <p>RGB uses red, green, and blue values (0-255):</p>
+    <div class="code-example">
+        <pre><code>.highlight {
+  color: rgb(255, 87, 51);
+  background-color: rgb(240, 240, 240);
+}</code></pre>
+    </div>
+
+    <div class="info-box">
+        <strong>Pro Tip:</strong> Hex codes are most common in web design. You can use online color pickers to find the perfect hex code for your design!
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="page-header">
+        <div class="page-number">Page 3 of 3</div>
+    </div>
+
+    <h2>Text Styling Properties</h2>
+    <p>Beyond colors, CSS offers many ways to style text:</p>
+
+    <h3>Font Family</h3>
+    <p>Changes the font (typeface):</p>
+    <div class="code-example">
+        <pre><code>body {
+  font-family: Arial, sans-serif;
+}</code></pre>
+    </div>
+
+    <h3>Font Size</h3>
+    <p>Controls how big the text appears:</p>
+    <div class="code-example">
+        <pre><code>h1 {
+  font-size: 32px;
+}
+
+p {
+  font-size: 16px;
+}</code></pre>
+    </div>
+
+    <h3>Font Weight</h3>
+    <p>Makes text bold or light:</p>
+    <div class="code-example">
+        <pre><code>.important {
+  font-weight: bold;  /* or use numbers: 700 */
+}
+
+.light {
+  font-weight: 300;
+}</code></pre>
+    </div>
+
+    <h3>Text Alignment</h3>
+    <p>Controls horizontal positioning:</p>
+    <div class="code-example">
+        <pre><code>h1 {
+  text-align: center;
+}
+
+p {
+  text-align: left;   /* default */
+}
+
+.footer {
+  text-align: right;
+}</code></pre>
+    </div>
+
+    <div class="info-box">
+        <strong>Best Practice:</strong> Always ensure good contrast between text and background colors. Dark text on light backgrounds (or vice versa) is easiest to read!
+    </div>
+
+    <div class="wiza-intro">
+        <img src="../../assets/img/wiza/wiza-happy.png" alt="Wiza" class="wiza-img">
+        <div class="speech-bubble">
+            <p>Wonderful! You now know how to add colors and style text! 🎨</p>
+            <p>These properties will make your websites much more visually appealing. Time to practice!</p>
+        </div>
+    </div>
+</body>
+</html>

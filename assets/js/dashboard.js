@@ -1,4 +1,4 @@
-// Add click handlers to roadmap nodes
+// Dynamic Dashboard with Database-Driven Roadmap
 document.addEventListener('DOMContentLoaded', function() {
     // Course module button click handler
     const courseModuleWrapper = document.querySelector('.course-module-wrapper');
@@ -26,19 +26,157 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    const levelNodes = document.querySelectorAll('.level-node');
+    // Course selection handlers
+    const courseIcons = document.querySelectorAll('.course-icon-item');
+    courseIcons.forEach((icon, index) => {
+        icon.addEventListener('click', function() {
+            const courseId = index + 1; // 0=HTML(1), 1=CSS(2), 2=JS(3)
+            selectCourse(courseId);
+        });
+    });
+    
     const roadmap = document.querySelector('.roadmap');
     const trailSvg = document.querySelector('.roadmap-trail');
     const trailPath = document.querySelector('.trail-path');
     
-    // Map node indices to new universal view files with level IDs
-    const nodeFileMap = [
-        'lecture.php?id=1',    // Level 1: Lecture
-        'activity.php?id=2',   // Level 2: Multiple Choice
-        'activity.php?id=3',   // Level 4: Fill-Blank
-        'activity.php?id=4',   // Level 6: Code Editor
-        'lecture.php?id=5'     // Level 7: Lecture
-    ];
+    // Get selected course from localStorage or default to HTML
+    let currentCourseId = parseInt(localStorage.getItem('selectedCourse')) || 1;
+    
+    // Fetch levels from backend and render dynamically
+    fetchAndRenderLevels(currentCourseId);
+    
+    // Update course button display
+    updateCourseButton(currentCourseId);
+    
+    // Initialize drag-to-scroll functionality
+    initDragScroll();
+    
+    // Fetch levels from API and render them
+    async function fetchAndRenderLevels(courseId) {
+        try {
+            const response = await fetch(`../controllers/roadmap_get.php?course_id=${courseId}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch levels');
+            }
+            
+            const levels = await response.json();
+            
+            // Render all levels
+            renderLevels(levels);
+            
+            // Draw trail after rendering
+            setTimeout(drawTrail, 100);
+            
+        } catch (error) {
+            console.error('Error fetching levels:', error);
+            // Show error message to user
+            roadmap.innerHTML = '<div style="color: red; padding: 20px;">Failed to load levels. Please refresh the page.</div>';
+        }
+    }
+    
+    // Render level nodes dynamically
+    function renderLevels(levels) {
+        // Clear existing nodes
+        const existingNodes = roadmap.querySelectorAll('.level-node');
+        existingNodes.forEach(node => node.remove());
+        
+        levels.forEach((level, index) => {
+            const node = createLevelNode(level);
+            roadmap.appendChild(node);
+        });
+        
+        // Re-query level nodes after rendering
+        levelNodes = document.querySelectorAll('.level-node');
+        
+        // Draw trail after nodes are in DOM
+        setTimeout(() => {
+            drawTrail();
+        }, 100);
+    }
+    
+    // Select and switch to a course
+    function selectCourse(courseId) {
+        // Save to localStorage
+        localStorage.setItem('selectedCourse', courseId);
+        currentCourseId = courseId;
+        
+        // Update UI
+        updateCourseButton(courseId);
+        
+        // Close popup
+        courseModuleWrapper.classList.remove('active');
+        
+        // Reload roadmap with new course
+        fetchAndRenderLevels(courseId);
+    }
+    
+    // Update course button display
+    function updateCourseButton(courseId) {
+        const iconSection = document.querySelector('.course-icon-section i');
+        const labelSection = document.querySelector('.course-label');
+        const titleSection = document.querySelector('.course-title');
+        
+        const courses = [
+            { icon: 'fab fa-html5', label: 'Module 1', title: 'Introduction to HTML' },
+            { icon: 'fab fa-css3-alt', label: 'Module 2', title: 'Introduction to CSS' },
+            { icon: 'fab fa-js', label: 'Module 3', title: 'Introduction to JavaScript' }
+        ];
+        
+        const course = courses[courseId - 1];
+        if (iconSection && labelSection && titleSection && course) {
+            iconSection.className = course.icon;
+            labelSection.textContent = course.label;
+            titleSection.textContent = course.title;
+        }
+    }
+    
+    // Create a single level node element
+    function createLevelNode(level) {
+        const node = document.createElement('div');
+        node.className = `level-node ${level.status}`;
+        node.dataset.levelId = level.id;
+        node.dataset.activityType = level.type === 'lecture' ? 'Lecture' : 'Challenge';
+        
+        // Position the node
+        node.style.left = level.position.left + 'px';
+        node.style.top = level.position.top + 'px';
+        
+        // Add lecture class if it's a lecture
+        if (level.type === 'lecture') {
+            node.classList.add('lecture-node');
+        }
+        
+        // Create node content
+        const iconClass = 'fas ' + level.icon;
+        node.innerHTML = `
+            <i class="${iconClass}"></i>
+            <div class="node-popup">
+                <div class="node-popup-text">${level.title}</div>
+                <div class="node-popup-type">${level.type === 'lecture' ? 'Lecture' : 'Challenge'}</div>
+                <div class="node-popup-xp">${level.xp_reward} XP</div>
+            </div>
+        `;
+        
+        // Add click handler (only for non-locked nodes)
+        if (level.status !== 'locked') {
+            node.style.cursor = 'pointer';
+            node.addEventListener('click', function() {
+                const targetPage = level.type === 'lecture' 
+                    ? `lecture.php?id=${level.id}` 
+                    : `activity.php?id=${level.id}`;
+                redirectWithLoading(targetPage);
+            });
+        } else {
+            node.style.cursor = 'not-allowed';
+            // Update popup text for locked nodes
+            const popupText = node.querySelector('.node-popup-text');
+            if (popupText) {
+                popupText.textContent = '???';
+            }
+        }
+        
+        return node;
+    }
     
     // Helper: route through loading screen for a brief delay
     function redirectWithLoading(targetPath) {
@@ -98,80 +236,81 @@ document.addEventListener('DOMContentLoaded', function() {
         const pathData = buildSmoothPath(points);
         trailPath.setAttribute('d', pathData);
     }
-    
-    levelNodes.forEach((node, index) => {
-        const levelId = parseInt(node.dataset.levelId || (index + 1));
-        
-        // Determine if this is a lecture node based on the actual file type
-        // Check the data-activity-type attribute which is set based on file existence (.html = Lecture, .json = Challenge/Activity)
-        const activityType = node.dataset.activityType || 'Lecture';
-        const isLecture = activityType === 'Lecture';
-        if (isLecture) {
-            node.classList.add('lecture-node');
-        }
-        
-        // Get icon element
-        const iconElement = node.querySelector('i');
-        
-        // Disable nodes 5 to 10 for UI purposes only
-        if (levelId >= 5 && levelId <= 10) {
-            node.classList.remove('completed', 'current');
-            node.classList.add('locked');
-            node.style.cursor = 'not-allowed';
-            
-            // Set lock icon for locked nodes
-            if (iconElement) {
-                iconElement.className = 'fas fa-lock';
-            }
-            
-            // Update hover popup content to '???' for locked nodes
-            const popupText = node.querySelector('.node-popup-text');
-            if (popupText) {
-                popupText.textContent = '???';
-            }
-            
-            // Don't add click handler for disabled nodes
-        } else {
-            // Set icon based on type for unlocked nodes
-            if (iconElement) {
-                if (isLecture) {
-                    // Alternate between lecture icon and book icon for lectures
-                    const lectureIcons = ['fa-chalkboard-teacher', 'fa-book'];
-                    const iconIndex = (levelId - 1) % 2;
-                    iconElement.className = 'fas ' + lectureIcons[iconIndex];
-                } else {
-                    // Alternate between code, task, and dumbbell icons for activities
-                    const activityIcons = ['fa-code', 'fa-tasks', 'fa-dumbbell'];
-                    const iconIndex = (levelId - 1) % 3;
-                    iconElement.className = 'fas ' + activityIcons[iconIndex];
-                }
-            }
-            
-            if (levelId === 4) {
-                // Set node 4 as current
-                node.classList.remove('locked', 'completed');
-                node.classList.add('current');
-                node.style.cursor = 'pointer';
-                node.addEventListener('click', function() {
-                    // Use the mapped file if available, otherwise fallback to index-based naming
-                    const filePath = nodeFileMap[index] || `html/stage-${String(index + 1).padStart(3, '0')}-act.php`;
-                    redirectWithLoading(filePath);
-                });
-            } else {
-                // Always enable nodes and show them as completed
-                node.classList.remove('locked', 'current');
-                node.classList.add('completed');
-                node.style.cursor = 'pointer';
-                node.addEventListener('click', function() {
-                    // Use the mapped file if available, otherwise fallback to index-based naming
-                    const filePath = nodeFileMap[index] || `html/stage-${String(index + 1).padStart(3, '0')}-act.php`;
-                    redirectWithLoading(filePath);
-                });
-            }
-        }
-    });
 
-    drawTrail();
+    // Drag-to-scroll functionality
+    function initDragScroll() {
+        const container = document.querySelector('.roadmap-container');
+        if (!container) return;
+
+        let isDown = false;
+        let isDragging = false;
+        let startX;
+        let scrollLeft;
+        let startTime;
+        const dragThreshold = 5; // pixels to move before considering it a drag
+
+        container.addEventListener('mousedown', (e) => {
+            // Only start drag on the container itself or the roadmap, not on nodes
+            if (e.target.closest('.level-node')) return;
+            
+            isDown = true;
+            isDragging = false;
+            startTime = Date.now();
+            container.classList.add('dragging');
+            startX = e.pageX - container.offsetLeft;
+            scrollLeft = container.scrollLeft;
+            container.style.cursor = 'grabbing';
+            container.style.userSelect = 'none';
+        });
+
+        container.addEventListener('mouseleave', () => {
+            if (isDown) {
+                isDown = false;
+                isDragging = false;
+                container.classList.remove('dragging');
+                container.style.cursor = 'grab';
+                container.style.userSelect = '';
+            }
+        });
+
+        container.addEventListener('mouseup', (e) => {
+            if (isDown) {
+                const endTime = Date.now();
+                const timeDiff = endTime - startTime;
+                
+                // If it was a quick click (not a drag), don't prevent other interactions
+                if (!isDragging && timeDiff < 200) {
+                    // This was just a click, not a drag
+                }
+                
+                isDown = false;
+                isDragging = false;
+                container.classList.remove('dragging');
+                container.style.cursor = 'grab';
+                container.style.userSelect = '';
+            }
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            
+            const x = e.pageX - container.offsetLeft;
+            const walk = (x - startX) * 1.5; // Scroll speed multiplier
+            
+            // Check if we've moved enough to consider this a drag
+            if (Math.abs(walk) > dragThreshold) {
+                isDragging = true;
+            }
+            
+            if (isDragging) {
+                container.scrollLeft = scrollLeft - walk;
+            }
+        });
+
+        // Set initial cursor
+        container.style.cursor = 'grab';
+    }
 
     // Scroll to current level node on mobile view
     function scrollToCurrentNode() {

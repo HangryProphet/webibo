@@ -11,11 +11,26 @@ require_once __DIR__ . '/../controllers/edit_profile_handler.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/auth.css">
     <link rel="stylesheet" href="../assets/css/edit_profile.css">
+    <style>
+        .fade-up {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeUp 0.6s ease forwards;
+            animation-delay: 0.05s;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
     <a href="profile.php" class="cancel-btn">✕</a>
 
-    <div class="edit-profile-container">
+    <div class="edit-profile-container fade-up">
         <h1>Edit Profile</h1>
 
         <?php

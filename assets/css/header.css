@@ -14,7 +14,7 @@
     justify-content: space-between;
     padding: 0 30px;
     z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
 }
 
 .header-logo {
@@ -131,6 +131,7 @@
     transition: all 0.3s ease;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     z-index: 1000;
+    padding-top: 16px;
 }
 
 .nav-item-wrapper:hover .header-hover-popup {
@@ -143,6 +144,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin: 0;
 }
 
 .header-menu-item {

@@ -1,0 +1,24 @@
+{
+  "instruction": "Create a CSS class called 'button' that:\n1. Has width of 200px and height of 50px\n2. Has blue background color\n3. Has white text color\n4. Has 10px padding\n5. Has 8px border-radius (rounded corners)\n6. Is centered using margin: 0 auto",
+  "starter_code": "/* Create the .button class */\n",
+  "correct_code": ".button {\n  width: 200px;\n  height: 50px;\n  background-color: blue;\n  color: white;\n  padding: 10px;\n  border-radius: 8px;\n  margin: 0 auto;\n}",
+  "validation": {
+    "ignore_whitespace": true,
+    "case_sensitive": false
+  },
+  "feedback": {
+    "success": {
+      "title": "🎉 Incredible! You've Mastered CSS!",
+      "details": "You've created a perfectly styled button using the box model! You now understand how to control size, spacing, colors, and borders. These are the fundamental building blocks of beautiful web design. Congratulations on completing the CSS course! 🎊"
+    },
+    "error": {
+      "title": "Almost there!",
+      "details": "Remember to include all properties:\n• width: 200px;\n• height: 50px;\n• background-color: blue;\n• color: white;\n• padding: 10px;\n• border-radius: 8px;\n• margin: 0 auto;\n\nDouble-check your syntax and try again!"
+    }
+  },
+  "enemy": {
+    "name": "Ghost",
+    "hp": 8,
+    "image": "assets/img/enemies/ghost-happy.png"
+  }
+}

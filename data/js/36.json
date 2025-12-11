@@ -1,0 +1,24 @@
+{
+  "instruction": "Complete the given code:\n1. Create a variable called 'greeting' with value 'Hello World'\n2. Display it in the console",
+  "starter_code": "let greeting = \"Goodbye\";\nconsole.log();",
+  "correct_code": "let greeting = \"Hello World\";\nconsole.log(greeting);",
+  "validation": {
+    "ignore_whitespace": true,
+    "case_sensitive": false
+  },
+  "feedback": {
+    "success": {
+      "title": "🎉 Excellent! Your First JavaScript!",
+      "details": "You've successfully created a variable and logged it to the console! This is the foundation of JavaScript programming. You're now ready to build more complex programs!"
+    },
+    "error": {
+      "title": "Not quite right!",
+      "details": "Remember to:\n• Set greeting = \"Hello World\"\n• Pass the greeting variable to console.log()\n\nDouble-check your code and try again!"
+    }
+  },
+  "enemy": {
+    "name": "Slime",
+    "hp": 8,
+    "image": "assets/img/enemies/slime-happy.png"
+  }
+}

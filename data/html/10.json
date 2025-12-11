@@ -1,25 +1,189 @@
 {
-  "title": "Heading Size Quiz",
-  "question": "Which tag is used for the largest heading?",
-  "options": [
-    "<h1>",
-    "<h3>",
-    "<head>"
-  ],
-  "correct_answer": "<h1>",
-  "enemy": {
-    "name": "Fox",
-    "hp": 10,
-    "image": "assets/img/enemies/fox-happy.png"
-  },
-  "feedback": {
-    "correct": {
-      "title": "Correct! 🎉",
-      "details": "The <code>&lt;h1&gt;</code> tag defines the most important heading on a webpage. It's typically used for the main title of your page."
+  "questions": [
+    {
+      "question": "Which tag creates a hyperlink?",
+      "options": ["<link>", "<href>", "<a>", "<hyper>"],
+      "correct_answer": "<a>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;a&gt;</code> tag (short for 'anchor') creates hyperlinks. It's called 'anchor' because it anchors or connects one document to another."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;a&gt;</code> tag (short for 'anchor') creates hyperlinks. It's called 'anchor' because it anchors or connects one document to another."
+        }
+      }
     },
-    "wrong": {
-      "title": "Not quite! 🤔",
-      "details": "The <code>&lt;h1&gt;</code> tag defines the most important heading. HTML has 6 heading levels (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>), where <code>&lt;h1&gt;</code> is the largest and most important, and <code>&lt;h6&gt;</code> is the smallest."
+    {
+      "question": "What does 'href' stand for in <a href=\"...\">?",
+      "options": ["Hyper Reference", "Hypertext Reference", "Home Reference", "Hyperlink Ref"],
+      "correct_answer": "Hypertext Reference",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "href stands for Hypertext Reference. It's the attribute that specifies the destination URL of the link."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "href stands for Hypertext Reference. It's the attribute that specifies the destination URL of the link."
+        }
+      }
+    },
+    {
+      "question": "Which attribute makes a link open in a new tab?",
+      "options": ["new=\"_tab\"", "open=\"new\"", "target=\"_blank\"", "window=\"new\""],
+      "correct_answer": "target=\"_blank\"",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>target=\"_blank\"</code> makes a link open in a new tab or window. This keeps your website open while users explore the linked content."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>target=\"_blank\"</code> makes a link open in a new tab or window. This keeps your website open while users explore the linked content."
+        }
+      }
+    },
+    {
+      "question": "What is WRONG with this link: <a>Click here</a>?",
+      "options": ["Missing closing tag", "Missing href attribute", "Wrong tag name", "Nothing, it's fine"],
+      "correct_answer": "Missing href attribute",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "This link is missing the href attribute! Without href, the link has no destination - it's just text that looks like a link but doesn't go anywhere."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "This link is missing the href attribute! Without href, the link has no destination - it's just text that looks like a link but doesn't go anywhere."
+        }
+      }
+    },
+    {
+      "question": "Which creates an email link?",
+      "options": ["<a href=\"email:...\">", "<a href=\"mail:...\">", "<a href=\"mailto:...\">", "<a href=\"sendto:...\">"],
+      "correct_answer": "<a href=\"mailto:...\">",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>mailto:</code> creates an email link that opens the user's default email program with the recipient's address already filled in."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>mailto:</code> creates an email link that opens the user's default email program with the recipient's address already filled in."
+        }
+      }
+    },
+    {
+      "question": "Good link text should:",
+      "options": ["Always say \"click here\"", "Describe where the link goes", "Be as short as possible", "Match the URL exactly"],
+      "correct_answer": "Describe where the link goes",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Good link text should describe where the link goes. This helps screen reader users understand the link's purpose and improves accessibility."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Good link text should describe where the link goes. This helps screen reader users understand the link's purpose and improves accessibility."
+        }
+      }
+    },
+    {
+      "question": "What does #contact in a link do?",
+      "options": ["Sends an email", "Jumps to section with id=\"contact\"", "Creates a new page", "Searches the page"],
+      "correct_answer": "Jumps to section with id=\"contact\"",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>#contact</code> creates an anchor link that jumps to an element with <code>id=\"contact\"</code> on the same page. The # indicates an ID selector."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>#contact</code> creates an anchor link that jumps to an element with <code>id=\"contact\"</code> on the same page. The # indicates an ID selector."
+        }
+      }
+    },
+    {
+      "question": "Which creates a link to Google?",
+      "options": ["<a link=\"https://google.com\">Google</a>", "<a>https://google.com</a>", "<a href=\"https://google.com\">Google</a>", "<link href=\"https://google.com\">Google</link>"],
+      "correct_answer": "<a href=\"https://google.com\">Google</a>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Correct link syntax uses the <code>&lt;a&gt;</code> tag with href attribute containing the full URL. Always include https:// for external websites."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Correct link syntax uses the <code>&lt;a&gt;</code> tag with href attribute containing the full URL. Always include https:// for external websites."
+        }
+      }
+    },
+    {
+      "question": "Links without href attribute are called:",
+      "options": ["Broken links", "Placeholder links", "Invisible links", "Style links"],
+      "correct_answer": "Placeholder links",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Links without href are placeholder links - they look like links but don't go anywhere. Useful during development before you have the actual URLs."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Links without href are placeholder links - they look like links but don't go anywhere. Useful during development before you have the actual URLs."
+        }
+      }
+    },
+    {
+      "question": "What color are unvisited links typically?",
+      "options": ["Red", "Blue", "Green", "Black"],
+      "correct_answer": "Blue",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Unvisited links are typically blue by default in most browsers. Visited links are usually purple, and active links (being clicked) are red."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Unvisited links are typically blue by default in most browsers. Visited links are usually purple, and active links (being clicked) are red."
+        }
+      }
+    },
+    {
+      "question": "To link to a file in same folder called 'about.html':",
+      "options": ["<a href=\"https://about.html\">About</a>", "<a href=\"/about.html\">About</a>", "<a href=\"about.html\">About</a>", "<a href=\"#about.html\">About</a>"],
+      "correct_answer": "<a href=\"about.html\">About</a>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "For files in the same folder, just use the filename without https:// or /. This is called a relative path."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "For files in the same folder, just use the filename without https:// or /. This is called a relative path."
+        }
+      }
+    },
+    {
+      "question": "Why avoid 'click here' link text?",
+      "options": ["It's too long", "It's not descriptive for screen readers", "It doesn't work", "It's old-fashioned"],
+      "correct_answer": "It's not descriptive for screen readers",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "\"Click here\" is not descriptive for screen reader users who often navigate by links. Instead, use descriptive text like \"Download the PDF guide\"."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "\"Click here\" is not descriptive for screen reader users who often navigate by links. Instead, use descriptive text like \"Download the PDF guide\"."
+        }
+      }
     }
+  ],
+  "enemy": {
+    "name": "Owl",
+    "hp": 12,
+    "image": "assets/img/enemies/owl-happy.png"
   }
 }

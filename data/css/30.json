@@ -1,0 +1,169 @@
+{
+  "questions": [
+    {
+      "question": "What are the four parts of the box model (from inside to outside)?",
+      "options": [
+        "Content, Padding, Border, Margin",
+        "Margin, Border, Padding, Content",
+        "Content, Border, Padding, Margin",
+        "Padding, Content, Border, Margin"
+      ],
+      "correct_answer": "Content, Padding, Border, Margin",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The box model layers from inside to outside are: Content (text/images), Padding (space inside), Border (the frame), and Margin (space outside)."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The box model layers from inside to outside are: Content (text/images), Padding (space inside), Border (the frame), and Margin (space outside)."
+        }
+      }
+    },
+    {
+      "question": "Which property adds space INSIDE an element?",
+      "options": [
+        "margin",
+        "padding",
+        "spacing",
+        "border"
+      ],
+      "correct_answer": "padding",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>padding</code> adds space inside an element, between the content and the border. It's like cushioning around your content."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>padding</code> adds space inside an element, between the content and the border. It's like cushioning around your content."
+        }
+      }
+    },
+    {
+      "question": "Which property adds space OUTSIDE an element?",
+      "options": [
+        "padding",
+        "margin",
+        "border",
+        "spacing"
+      ],
+      "correct_answer": "margin",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>margin</code> adds space outside an element, creating distance between it and other elements. Think of it as personal space!"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>margin</code> adds space outside an element, creating distance between it and other elements. Think of it as personal space!"
+        }
+      }
+    },
+    {
+      "question": "What does 'border-radius' do?",
+      "options": [
+        "Changes border thickness",
+        "Creates rounded corners",
+        "Changes border color",
+        "Adds a border"
+      ],
+      "correct_answer": "Creates rounded corners",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>border-radius</code> rounds the corners of an element. Higher values create more rounded corners. Use 50% for a perfect circle!"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>border-radius</code> rounds the corners of an element. Higher values create more rounded corners. Use 50% for a perfect circle!"
+        }
+      }
+    },
+    {
+      "question": "How do you center an element horizontally?",
+      "options": [
+        "padding: auto;",
+        "margin: 0 auto;",
+        "border: center;",
+        "align: center;"
+      ],
+      "correct_answer": "margin: 0 auto;",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>margin: 0 auto;</code> centers a block element horizontally. The '0' sets top/bottom margin, and 'auto' automatically calculates equal left/right margins."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>margin: 0 auto;</code> centers a block element horizontally. The '0' sets top/bottom margin, and 'auto' automatically calculates equal left/right margins."
+        }
+      }
+    },
+    {
+      "question": "What does 'border: 2px solid black;' create?",
+      "options": [
+        "A 2px black dashed border",
+        "A 2px black solid border",
+        "A 2px dotted border",
+        "A black background"
+      ],
+      "correct_answer": "A 2px black solid border",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "This shorthand creates a solid black border that's 2 pixels thick. The format is: <code>border: width style color;</code>"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "This shorthand creates a solid black border that's 2 pixels thick. The format is: <code>border: width style color;</code>"
+        }
+      }
+    },
+    {
+      "question": "Which unit is commonly used for padding/margin?",
+      "options": [
+        "inches",
+        "px",
+        "meters",
+        "degrees"
+      ],
+      "correct_answer": "px",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Pixels (px) are the most common unit for padding and margin. Other units like em, rem, and % are also used for responsive designs."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Pixels (px) are the most common unit for padding and margin. Other units like em, rem, and % are also used for responsive designs."
+        }
+      }
+    },
+    {
+      "question": "What does 'padding: 10px 20px;' mean?",
+      "options": [
+        "10px all sides, 20px left/right",
+        "10px top/bottom, 20px left/right",
+        "10px left, 20px right",
+        "10px padding, 20px margin"
+      ],
+      "correct_answer": "10px top/bottom, 20px left/right",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "When using two values, the first applies to top/bottom and the second to left/right. This is a handy shorthand for symmetric padding!"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "When using two values, the first applies to top/bottom and the second to left/right. This is a handy shorthand for symmetric padding!"
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Ghost",
+    "hp": 8,
+    "image": "assets/img/enemies/ghost-happy.png"
+  }
+}

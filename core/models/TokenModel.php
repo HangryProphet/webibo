@@ -53,9 +53,9 @@ class TokenModel
      * 
      * @param PDO $pdo Database connection
      * @param string $token The raw token from the URL
-     * @return bool True if token is valid and user verified, false otherwise
+     * @return array|false Array with user_id if valid, false otherwise
      */
-    public static function validateVerificationToken(PDO $pdo, string $token): bool
+    public static function validateVerificationToken(PDO $pdo, string $token): array|false
     {
         try {
             // Get all non-expired tokens
@@ -84,7 +84,7 @@ class TokenModel
                     $deleteStmt = $pdo->prepare("DELETE FROM email_verifications WHERE id = ?");
                     $deleteStmt->execute([$row['id']]);
                     
-                    return true;
+                    return ['user_id' => $row['user_id']];
                 }
             }
             

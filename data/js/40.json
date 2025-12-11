@@ -1,0 +1,24 @@
+{
+  "instruction": "Complete the given code:\n1. Create a function that multiplies two numbers\n2. Call the function with 4 and 5",
+  "starter_code": "function multiply(a, b) {\n  // Complete this function\n}\n\n// Call the function here",
+  "correct_code": "function multiply(a, b) {\n  return a * b;\n}\n\nmultiply(4, 5);",
+  "validation": {
+    "ignore_whitespace": true,
+    "case_sensitive": false
+  },
+  "feedback": {
+    "success": {
+      "title": "🎉 Perfect Function!",
+      "details": "You've successfully created a function that multiplies numbers and called it correctly! Functions are the building blocks of complex programs. Great job! 💪"
+    },
+    "error": {
+      "title": "Not quite right!",
+      "details": "Remember to:\n• Use return a * b; inside the function\n• Call multiply(4, 5); after the function\n\nCheck your syntax and try again!"
+    }
+  },
+  "enemy": {
+    "name": "Goblin",
+    "hp": 8,
+    "image": "assets/img/enemies/goblin-happy.png"
+  }
+}

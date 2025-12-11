@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
     background-color: #131F24;
     color: #ffffff;
     display: flex;
@@ -733,21 +733,54 @@ body {
     align-items: center;
     justify-content: flex-start;
     overflow-x: auto;
-    overflow-y: visible;
-    padding: 0;
+    overflow-y: hidden;
+    padding: 40px;
     padding-left: 40px;
+    padding-right: 40px;
     position: relative;
     width: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: #2d3949 #131F24;
+}
+
+.roadmap-container::-webkit-scrollbar {
+    height: 12px;
+}
+
+.roadmap-container::-webkit-scrollbar-track {
+    background: #131F24;
+    border-radius: 6px;
+}
+
+.roadmap-container::-webkit-scrollbar-thumb {
+    background: #2d3949;
+    border-radius: 6px;
+    border: 2px solid #131F24;
+}
+
+.roadmap-container::-webkit-scrollbar-thumb:hover {
+    background: #3d4a5c;
+}
+
+/* Drag cursor for roadmap container */
+.roadmap-container.dragging {
+    cursor: grabbing !important;
+    user-select: none;
+}
+
+.roadmap-container.dragging * {
+    cursor: grabbing !important;
 }
 
 .roadmap {
     position: relative;
-    width: 1800px;
+    width: 3800px;
     height: 500px;
     display: flex;
     align-items: center;
     margin: 0;
     flex-shrink: 0;
+    min-width: 3800px;
 }
 
 .roadmap-trail {
@@ -865,6 +898,48 @@ body {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, 0);
+}
+
+/* New popup structure from JavaScript */
+.level-node .node-popup {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translate(-50%, 10px);
+    background-color: #1e2633;
+    border: 2px solid #2d3949;
+    border-radius: 14px;
+    padding: 10px 14px;
+    min-width: 220px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.level-node:hover .node-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.node-popup-type {
+    font-size: 11px;
+    font-weight: 600;
+    color: #8b95a5;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+
+.node-popup-xp {
+    font-size: 12px;
+    font-weight: 600;
+    color: #fbbf24;
+    margin-top: 4px;
 }
 
 .node-popup-text {

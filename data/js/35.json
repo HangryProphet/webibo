@@ -1,0 +1,137 @@
+{
+  "questions": [
+    {
+      "question": "Fill in the blank: JavaScript makes websites ______.",
+      "options": ["BEAUTIFUL", "INTERACTIVE", "STRUCTURED", "FAST"],
+      "correct_answer": "INTERACTIVE",
+      "code_template": "/* JavaScript makes websites ______ */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "JavaScript adds interactivity to web pages, allowing them to respond to user actions like clicks, typing, and scrolling."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "JavaScript adds interactivity to web pages, allowing them to respond to user actions like clicks, typing, and scrolling."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Use ______ to create a constant value.",
+      "options": ["LET", "CONST", "VAR", "FIXED"],
+      "correct_answer": "CONST",
+      "code_template": "______ pi = 3.14;",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>const</code> declares a constant - a variable that cannot be reassigned after it's created. Use it for values that shouldn't change."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>const</code> declares a constant - a variable that cannot be reassigned after it's created. Use it for values that shouldn't change."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Text values are called ______ in JavaScript.",
+      "options": ["TEXT", "STRINGS", "WORDS", "CHARACTERS"],
+      "correct_answer": "STRINGS",
+      "code_template": "let name = \"Wiza\"; // This is a ______",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Strings are sequences of characters used to represent text. They're created by enclosing text in single or double quotes."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Strings are sequences of characters used to represent text. They're created by enclosing text in single or double quotes."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: The ______ shows JavaScript output and errors.",
+      "options": ["ALERT", "CONSOLE", "WINDOW", "SCREEN"],
+      "correct_answer": "CONSOLE",
+      "code_template": "______.log('Hello World');",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "The browser console is a tool where JavaScript can output messages, warnings, and errors for debugging purposes."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The browser console is a tool where JavaScript can output messages, warnings, and errors for debugging purposes."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: let count = 10; creates a ______ variable.",
+      "options": ["STRING", "NUMBER", "BOOLEAN", "ARRAY"],
+      "correct_answer": "NUMBER",
+      "code_template": "let count = 10; // This is a ______",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Numbers in JavaScript can be integers (like 10) or decimals (like 3.14). They don't need quotes around them."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Numbers in JavaScript can be integers (like 10) or decimals (like 3.14). They don't need quotes around them."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Use ______ to separate JavaScript from HTML.",
+      "options": ["<STYLE>", "<SCRIPT>", "<LINK>", "<JS>"],
+      "correct_answer": "<SCRIPT>",
+      "code_template": "______ tags contain JavaScript code",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "The <code>&lt;script&gt;</code> tag is used to include JavaScript code in HTML, either directly between the tags or via a src attribute."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;script&gt;</code> tag is used to include JavaScript code in HTML, either directly between the tags or via a src attribute."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Boolean values can be ______ or false.",
+      "options": ["TRUE", "YES", "ON", "CORRECT"],
+      "correct_answer": "TRUE",
+      "code_template": "let isActive = ______; // Boolean value",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Boolean is a logical data type that can only have one of two values: true or false. Named after George Boole."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Boolean is a logical data type that can only have one of two values: true or false. Named after George Boole."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: JavaScript is ______-sensitive (uppercase/lowercase matters).",
+      "options": ["CASE", "LETTER", "TEXT", "CODE"],
+      "correct_answer": "CASE",
+      "code_template": "/* JavaScript is ______-sensitive */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "JavaScript is case-sensitive, meaning that myVariable and myvariable would be treated as two different identifiers."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "JavaScript is case-sensitive, meaning that myVariable and myvariable would be treated as two different identifiers."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Slime",
+    "hp": 8,
+    "image": "assets/img/enemies/slime-happy.png"
+  }
+}

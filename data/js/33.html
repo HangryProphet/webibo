@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with JavaScript</title>
+    <link rel="stylesheet" href="../../assets/css/lecture-content.css">
+</head>
+<body>
+    <div class="page-header">
+        <div class="page-number">Page 1 of 3</div>
+    </div>
+
+    <div class="wiza-intro">
+        <img src="../../assets/img/wiza/wiza-excited.png" alt="Wiza" class="wiza-img">
+        <div class="speech-bubble">
+            <p>Welcome to the interactive world of JavaScript! ⚡</p>
+            <p>Good job mastering HTML and CSS! Now we will bring life to your web with JavaScript.</p>
+            <p>JavaScript is a programming language that makes web pages interactive. If HTML is the skeleton and CSS is the skin, <strong>JavaScript is the muscles and brain!</strong></p>
+        </div>
+    </div>
+
+    <h1>Getting Started with JavaScript</h1>
+
+    <h2>Quick Facts About JavaScript:</h2>
+    <ul>
+        <li>JavaScript <strong>IS</strong> a programming language</li>
+        <li>It runs in your web browser</li>
+        <li>It can change HTML and CSS dynamically</li>
+        <li>It responds to user actions (clicks, typing, etc.)</li>
+        <li>It's <strong>NOT</strong> the same as Java!</li>
+    </ul>
+
+    <div class="info-box">
+        <strong>Fun Fact:</strong> JavaScript was created in just 10 days in 1995 by Brendan Eich at Netscape. Today, it's one of the most popular programming languages in the world!
+    </div>
+
+    <div class="wiza-intro">
+        <img src="../../assets/img/wiza/wiza-happy.png" alt="Wiza" class="wiza-img">
+        <div class="speech-bubble">
+            <p>Ready to add interactivity to your web pages? Let's begin!</p>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="page-header">
+        <div class="page-number">Page 2 of 3</div>
+    </div>
+
+    <h2>How JavaScript Works</h2>
+    <p>JavaScript works by manipulating HTML elements and responding to events. Here's how to add it to your page:</p>
+
+    <h3>Three Ways to Add JavaScript:</h3>
+
+    <h4>1. Inline JavaScript (directly in HTML - not recommended)</h4>
+    <div class="code-example">
+        <pre><code>&lt;button onclick="alert('Hello!')"&gt;Click me&lt;/button&gt;</code></pre>
+    </div>
+
+    <h4>2. Internal JavaScript (in &lt;script&gt; tags)</h4>
+    <div class="code-example">
+        <pre><code>&lt;script&gt;
+  alert('Welcome to my page!');
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <h4>3. External JavaScript (separate file - best practice!)</h4>
+    <div class="code-example">
+        <pre><code>&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+    </div>
+
+    <h3>Basic JavaScript Syntax:</h3>
+    <div class="code-example">
+        <pre><code>// This is a single-line comment
+console.log('Hello World!'); // Shows in browser console</code></pre>
+    </div>
+
+    <div class="info-box">
+        <strong>The Console:</strong> Press F12 in your browser to open Developer Tools, then click "Console" to see JavaScript output and errors. This is your debugging best friend!
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="page-header">
+        <div class="page-number">Page 3 of 3</div>
+    </div>
+
+    <h2>Variables and Data Types</h2>
+    <p>Variables store data so we can use it later in our code.</p>
+
+    <h3>Declaring Variables:</h3>
+    <div class="code-example">
+        <pre><code>let message = "Hello"; // Can be changed later
+const pi = 3.14; // Cannot be changed
+var oldWay = "Not recommended"; // Old method</code></pre>
+    </div>
+
+    <h3>Basic Data Types:</h3>
+    <div class="code-example">
+        <pre><code>let text = "Hello"; // String (text)
+let number = 42; // Number
+let isTrue = true; // Boolean (true/false)
+let nothing = null; // Empty value
+let notDefined; // undefined</code></pre>
+    </div>
+
+    <h3>Using Variables:</h3>
+    <div class="code-example">
+        <pre><code>let name = "Wiza";
+let age = 25;
+console.log("My name is " + name); // String concatenation
+console.log("I am " + age + " years old");</code></pre>
+    </div>
+
+    <h2>Remember:</h2>
+    <ul>
+        <li>Use <code>let</code> for variables that change</li>
+        <li>Use <code>const</code> for constants that don't change</li>
+        <li>Strings use quotes (single or double)</li>
+        <li>JavaScript is case-sensitive!</li>
+    </ul>
+
+    <div class="wiza-intro">
+        <img src="../../assets/img/wiza/wiza-happy.png" alt="Wiza" class="wiza-img">
+        <div class="speech-bubble">
+            <p>Ready for some practice? Let's go! 💪</p>
+        </div>
+    </div>
+</body>
+</html>

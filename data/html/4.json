@@ -1,27 +1,19 @@
 {
-  "title": "Write Your First Heading",
-  "instruction": "Write your first HTML heading",
+  "instruction": "Create an &lt;h1&gt; heading that says: \"Hello World!\"",
   "starter_code": "",
   "correct_code": "<h1>Hello World!</h1>",
-  "hint": "Use the <code>&lt;h1&gt;</code> tag to create a heading that says 'Hello World!'",
-  "enemy": null,
-  "teacher": {
-    "name": "Wiza",
-    "image": "assets/img/wiza/wiza-teach.png"
+  "validation": {
+    "ignore_whitespace": true,
+    "case_sensitive": false
   },
   "feedback": {
     "correct": {
-      "title": "Excellent Work! 🎉",
-      "details": "You've successfully created your first HTML heading! The <code>&lt;h1&gt;</code> tag is one of the most important elements in HTML. It tells browsers and search engines what your page is about."
+      "title": "Perfect! 🎉",
+      "details": "You've created your first HTML element! The <code>&lt;h1&gt;</code> tag creates the largest heading. Great job!"
     },
     "wrong": {
       "title": "Not quite! 🤔",
-      "details": "Remember, you need to use the <code>&lt;h1&gt;</code> tag with the text 'Hello World!' inside. Make sure to include both the opening tag <code>&lt;h1&gt;</code> and closing tag <code>&lt;/h1&gt;</code>."
+      "details": "Remember: Use <code>&lt;h1&gt;</code> to open the heading, write \"Hello World!\", then close with <code>&lt;/h1&gt;</code>. Make sure your code looks like: <code>&lt;h1&gt;Hello World!&lt;/h1&gt;</code>"
     }
-  },
-  "validation": {
-    "type": "exact_match",
-    "case_sensitive": false,
-    "ignore_whitespace": true
   }
 }

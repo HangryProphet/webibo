@@ -1,0 +1,167 @@
+{
+  "questions": [
+    {
+      "question": "What does CSS stand for?",
+      "options": [
+        "Creative Style System",
+        "Cascading Style Sheets",
+        "Computer Styling Software",
+        "Colorful Style Script"
+      ],
+      "correct_answer": "Cascading Style Sheets",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "CSS stands for Cascading Style Sheets. It's called 'cascading' because styles can flow from parent to child elements, and multiple style rules can apply to the same element with a specific order of priority."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "CSS stands for Cascading Style Sheets. It's called 'cascading' because styles can flow from parent to child elements, and multiple style rules can apply to the same element with a specific order of priority."
+        }
+      }
+    },
+    {
+      "question": "Which part of CSS contains the style rules?",
+      "options": [
+        "The selector",
+        "The property and value",
+        "The HTML tag",
+        "The comment"
+      ],
+      "correct_answer": "The property and value",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The property and value (like <code>color: blue;</code>) contain the actual style rules that change how elements look. The selector just tells CSS which elements to apply the rules to."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The property and value (like <code>color: blue;</code>) contain the actual style rules that change how elements look. The selector just tells CSS which elements to apply the rules to."
+        }
+      }
+    },
+    {
+      "question": "How do you select ALL paragraphs in CSS?",
+      "options": [
+        ".paragraph { }",
+        "#paragraph { }",
+        "paragraph { }",
+        "p { }"
+      ],
+      "correct_answer": "p { }",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>p { }</code> selects all paragraph elements. Element selectors use the tag name without any symbols. The dot (.) is for classes and hash (#) is for IDs."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>p { }</code> selects all paragraph elements. Element selectors use the tag name without any symbols. The dot (.) is for classes and hash (#) is for IDs."
+        }
+      }
+    },
+    {
+      "question": "Which symbol is used for class selectors?",
+      "options": [
+        "#",
+        ".",
+        "@",
+        ":"
+      ],
+      "correct_answer": ".",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Class selectors start with a dot: <code>.className</code>. Classes are reusable and can be applied to multiple elements on the same page."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Class selectors start with a dot: <code>.className</code>. Classes are reusable and can be applied to multiple elements on the same page."
+        }
+      }
+    },
+    {
+      "question": "What's the best way to add CSS to a website?",
+      "options": [
+        "Inline styling",
+        "Internal styling",
+        "External stylesheet",
+        "All are equal"
+      ],
+      "correct_answer": "External stylesheet",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "External stylesheets are best because they keep HTML and CSS separate, making code cleaner, easier to maintain, and allowing the same styles to be used across multiple pages."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "External stylesheets are best because they keep HTML and CSS separate, making code cleaner, easier to maintain, and allowing the same styles to be used across multiple pages."
+        }
+      }
+    },
+    {
+      "question": "Which selects an element with id=\"header\"?",
+      "options": [
+        ".header { }",
+        "#header { }",
+        "header { }",
+        "id=\"header\" { }"
+      ],
+      "correct_answer": "#header { }",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "ID selectors use the hash symbol: <code>#header</code>. IDs should be unique on a page and are used for elements that appear only once."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "ID selectors use the hash symbol: <code>#header</code>. IDs should be unique on a page and are used for elements that appear only once."
+        }
+      }
+    },
+    {
+      "question": "Where do you put internal CSS?",
+      "options": [
+        "In the <body>",
+        "In the <head>",
+        "After </html>",
+        "In a separate file"
+      ],
+      "correct_answer": "In the <head>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Internal CSS goes inside <code>&lt;style&gt;</code> tags in the <code>&lt;head&gt;</code> section of your HTML document. This keeps all styling information together at the top of the page."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Internal CSS goes inside <code>&lt;style&gt;</code> tags in the <code>&lt;head&gt;</code> section of your HTML document. This keeps all styling information together at the top of the page."
+        }
+      }
+    },
+    {
+      "question": "True or False: CSS can change text color.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correct_answer": "True",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "True! CSS can change text color using the color property, along with many other visual properties like font size, background color, borders, and layout."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "True! CSS can change text color using the color property, along with many other visual properties like font size, background color, borders, and layout."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Spider",
+    "hp": 8,
+    "image": "assets/img/enemies/spider-happy.png"
+  }
+}

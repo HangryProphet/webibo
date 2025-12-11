@@ -76,7 +76,7 @@ $success = get_success();
             </div>
 
             <div class="footer-text">
-                By signing in to Webibo, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.<br>
+                By signing in to Webibo, you agree to our <a href="terms.php">Terms</a> and <a href="privacy.php">Privacy Policy</a>.<br>
             </div>
         </div>
     </div>

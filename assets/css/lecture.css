@@ -10,7 +10,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
     background-color: #131F24;
     color: #ffffff;
     min-height: 100vh;
@@ -470,6 +470,21 @@ body {
 
 .modal-btn-danger:active {
     box-shadow: 0 2px 0 #cc3c3c;
+    transform: translateY(2px);
+}
+
+.modal-btn-secondary {
+    background-color: #374151;
+    color: #e5e7eb;
+    box-shadow: 0 4px 0 #1f2937;
+}
+
+.modal-btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+.modal-btn-secondary:active {
+    box-shadow: 0 2px 0 #1f2937;
     transform: translateY(2px);
 }
 

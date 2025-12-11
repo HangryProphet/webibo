@@ -27,10 +27,14 @@ if (empty($token)) {
 }
 
 // Validate the token
-$isValid = TokenModel::validateVerificationToken($pdo, $token);
+$validationResult = TokenModel::validateVerificationToken($pdo, $token);
 
-if ($isValid) {
+if ($validationResult) {
     // Token is valid - user is now verified
+    // Award achievement for email verification
+    require_once __DIR__ . '/../core/services/AchievementService.php';
+    AchievementService::checkAchievementsOnEvent($pdo, $validationResult['user_id'], 'email_verified');
+    
     set_success('Email verified successfully! You can now log in to your account.');
     redirect('../views/login.php');
 } else {

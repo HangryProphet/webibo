@@ -210,4 +210,84 @@ class StatsModel
             return false;
         }
     }
+
+    /**
+     * Check and update user's daily streak on login
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User's ID
+     * @return array Result with streak info ['current_streak' => int, 'is_new_streak' => bool]
+     */
+    public static function checkAndUpdateStreak(PDO $pdo, int $userId): array
+    {
+        try {
+            // Get current stats
+            $sql = "SELECT current_streak, longest_streak, last_login_date FROM user_stats WHERE user_id = :user_id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':user_id' => $userId]);
+            $stats = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$stats) {
+                return ['current_streak' => 0, 'is_new_streak' => false];
+            }
+
+            $currentStreak = (int) $stats['current_streak'];
+            $longestStreak = (int) $stats['longest_streak'];
+            $lastLoginDate = $stats['last_login_date'];
+            $today = date('Y-m-d');
+            $isNewStreak = false;
+
+            // First time login or last_login_date is null
+            if (empty($lastLoginDate)) {
+                $currentStreak = 1;
+                $isNewStreak = true;
+            }
+            // Already logged in today - no change
+            elseif ($lastLoginDate === $today) {
+                // No update needed
+                return ['current_streak' => $currentStreak, 'is_new_streak' => false];
+            }
+            // Check if yesterday (consecutive day)
+            else {
+                $lastLogin = strtotime($lastLoginDate);
+                $yesterday = strtotime('-1 day', strtotime($today));
+                
+                if (date('Y-m-d', $lastLogin) === date('Y-m-d', $yesterday)) {
+                    // Consecutive day - increment streak
+                    $currentStreak++;
+                    $isNewStreak = true;
+                } else {
+                    // Streak broken - reset to 1
+                    $currentStreak = 1;
+                    $isNewStreak = true;
+                }
+            }
+
+            // Update longest streak if current exceeds it
+            $newLongestStreak = max($longestStreak, $currentStreak);
+
+            // Update database
+            $sql = "UPDATE user_stats 
+                    SET current_streak = :current_streak, 
+                        longest_streak = :longest_streak, 
+                        last_login_date = CURDATE() 
+                    WHERE user_id = :user_id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':current_streak' => $currentStreak,
+                ':longest_streak' => $newLongestStreak,
+                ':user_id' => $userId
+            ]);
+
+            return [
+                'current_streak' => $currentStreak,
+                'longest_streak' => $newLongestStreak,
+                'is_new_streak' => $isNewStreak
+            ];
+
+        } catch (PDOException $e) {
+            error_log("StatsModel::checkAndUpdateStreak Error: " . $e->getMessage());
+            return ['current_streak' => 0, 'is_new_streak' => false];
+        }
+    }
 }

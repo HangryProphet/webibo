@@ -1,0 +1,19 @@
+{
+  "instruction": "Make an &lt;a&gt; anchor with text \"Google\" that redirects to https://www.google.com when clicked",
+  "starter_code": "",
+  "correct_code": "<a href=\"https://www.google.com\">Google</a>",
+  "validation": {
+    "ignore_whitespace": true,
+    "case_sensitive": false
+  },
+  "feedback": {
+    "correct": {
+      "title": "Perfect! 🎉",
+          "details": "You've created a proper link! The <code>&lt;a&gt;</code> tag with <code>href</code> attribute connects to Google. Great job!"
+    },
+    "wrong": {
+      "title": "Not quite! 🤔",
+      "details": "Remember: <code>&lt;a href=\"https://www.google.com\"&gt;Google&lt;/a&gt;</code><br>Make sure you have the href attribute with the full URL!"
+    }
+  }
+}

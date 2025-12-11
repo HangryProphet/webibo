@@ -7,11 +7,26 @@
     <title>All Achievements - Webibo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/achievements.css">
+    <style>
+        .fade-up {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeUp 0.6s ease forwards;
+            animation-delay: 0.05s;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
     <?php include 'header.php'; ?>
     
-    <div class="container">
+    <div class="container fade-up">
         <div class="page-header">
             <h1 class="page-title">All Achievements</h1>
             <div class="achievement-stats">

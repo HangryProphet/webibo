@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding Images - Level 13</title>
+    <link rel="stylesheet" href="../../assets/css/lecture-content.css">
+</head>
+<body>
+    <!-- PAGE 1 -->
+    <div class="page-header">
+        <div class="page-number">Page 1/3</div>
+        <h1>🌅 The Image Tag</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Welcome to the visual side of web development! 🌅 Today, we learn to add images with the &lt;img&gt; tag."
+    </div>
+
+    <p><strong>Important:</strong> The <code>&lt;img&gt;</code> tag is <strong>self-closing</strong> - it doesn't have a separate closing tag!</p>
+
+    <h2>Basic Syntax:</h2>
+    <div class="code-example">
+        <pre><code>&lt;img src="puppy.jpg" alt="A cute golden retriever puppy"&gt;</code></pre>
+    </div>
+
+    <h2>The Two Required Attributes:</h2>
+    <ol>
+        <li><code>src</code> (source) - Path to the image file</li>
+        <li><code>alt</code> (alternative text) - Description for accessibility</li>
+    </ol>
+
+    <h2>Image Path Types:</h2>
+    <ul>
+        <li>Same folder: <code>src="logo.png"</code></li>
+        <li>Subfolder: <code>src="images/photo.jpg"</code></li>
+        <li>External URL: <code>src="https://website.com/image.jpg"</code></li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 2 -->
+    <div class="page-header">
+        <div class="page-number">Page 2/3</div>
+        <h1>🎨 Image Attributes and Best Practices</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Essential Image Attributes:"
+    </div>
+
+    <div class="code-example">
+        <pre><code>&lt;img 
+  src="landscape.jpg"
+  alt="Mountain landscape at sunset"
+  width="800"
+  height="600"
+  title="Click to enlarge"
+&gt;</code></pre>
+    </div>
+
+    <h2>Why alt text matters:</h2>
+    <ol>
+        <li>Screen readers read it to visually impaired users</li>
+        <li>Displayed if image fails to load</li>
+        <li>SEO - Search engines use it to understand images</li>
+    </ol>
+
+    <h2>Good vs Bad alt text:</h2>
+    <div class="info-box" style="border-color: #e74c3c;">
+        <p>❌ <code>&lt;img src="chart.jpg" alt="chart"&gt;</code></p>
+    </div>
+    <div class="info-box">
+        <p>✅ <code>&lt;img src="chart.jpg" alt="2024 revenue growth chart showing 15% increase"&gt;</code></p>
+    </div>
+
+    <h2>Image Formats:</h2>
+    <ul>
+        <li><strong>.jpg</strong> - Photos (supports millions of colors)</li>
+        <li><strong>.png</strong> - Graphics with transparency</li>
+        <li><strong>.gif</strong> - Simple animations</li>
+        <li><strong>.svg</strong> - Scalable vector graphics</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 3 -->
+    <div class="page-header">
+        <div class="page-number">Page 3/3</div>
+        <h1>📱 Responsive Images and Accessibility</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Responsive Images: For images that scale with screen size:"
+    </div>
+
+    <div class="code-example">
+        <pre><code>&lt;img 
+  src="hero-large.jpg"
+  srcset="hero-small.jpg 400w, hero-medium.jpg 800w, hero-large.jpg 1200w"
+  sizes="(max-width: 600px) 400px, (max-width: 900px) 800px, 1200px"
+  alt="Responsive hero image"
+&gt;</code></pre>
+    </div>
+
+    <h2>Accessibility Tips:</h2>
+    <ol>
+        <li>Always include meaningful alt text</li>
+        <li>Decorative images (purely visual): <code>alt=""</code></li>
+        <li>Complex images (charts, diagrams): Provide longer descriptions</li>
+    </ol>
+
+    <h2>Example Gallery:</h2>
+    <div class="code-example">
+        <pre><code>&lt;h1&gt;My Photo Gallery&lt;/h1&gt;
+&lt;div class="gallery"&gt;
+  &lt;img src="beach.jpg" alt="Sunset at Santa Monica Beach" width="300"&gt;
+  &lt;img src="hike.jpg" alt="Hiking trail in Yosemite National Park" width="300"&gt;
+  &lt;img src="city.jpg" alt="Downtown skyline at night" width="300"&gt;
+&lt;/div&gt;
+
+&lt;!-- Decorative divider image --&gt;
+&lt;img src="divider.png" alt="" width="100%"&gt;</code></pre>
+    </div>
+
+    <p class="motivational"><strong>Remember: Images make your page engaging, but they must be accessible to everyone! 👁️</strong></p>
+</body>
+</html>
