@@ -121,6 +121,11 @@
         </div>
     </div>
 
+    <!-- Bottom Left Idea Button -->
+    <button class="idea-node-btn" type="button" aria-label="Open guide" onclick="window.location.href='guide.php'">
+        <i class="fas fa-lightbulb"></i>
+    </button>
+
     <div class="main-content">
         <div class="roadmap-container">
             <div class="roadmap">

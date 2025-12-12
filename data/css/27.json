@@ -4,7 +4,7 @@
       "question": "Fill in the blank: The _____ property changes text color.",
       "options": ["color", "text-color", "font-color", "style"],
       "correct_answer": "color",
-      "code_template": "p {\n  _____: blue;\n}",
+      "code_template": " _____: blue;",
       "feedback": {
         "correct": {
           "title": "Perfect! 🎉",

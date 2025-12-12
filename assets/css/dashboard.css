@@ -63,7 +63,7 @@ body {
 
 .course-icon-section i {
     font-size: 32px;
-    color: #ff6b35;
+    color: #e34f26; /* HTML orange */
 }
 
 .course-text-section {
@@ -146,18 +146,31 @@ body {
 }
 
 .html-icon {
-    background-color: rgba(255, 107, 53, 0.2);
-    color: #ff6b35;
+    background-color: rgba(227, 79, 38, 0.18);
+    color: #e34f26;
 }
 
 .css-icon {
-    background-color: rgba(33, 150, 243, 0.2);
-    color: #2196f3;
+    background-color: rgba(21, 114, 182, 0.18);
+    color: #1572b6;
 }
 
 .js-icon {
-    background-color: rgba(255, 193, 7, 0.2);
-    color: #ffc107;
+    background-color: rgba(247, 223, 30, 0.18);
+    color: #f7df1e;
+}
+
+/* Ensure standalone icons match their brand colors */
+.course-icon-section .fa-html5 {
+    color: #e34f26;
+}
+
+.course-icon-section .fa-css3-alt {
+    color: #1572b6;
+}
+
+.course-icon-section .fa-js {
+    color: #f7df1e;
 }
 
 .course-icon-label {
@@ -180,6 +193,41 @@ body {
 
 .top-btn-wrapper {
     position: relative;
+}
+
+.idea-node-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 85px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #f7df1e;
+    border: 3px solid #f7df1e;
+    color: #814f07;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 6px 0 #c8a800;
+    z-index: 99;
+}
+
+.idea-node-btn:hover {
+    background-color: #ffe44d;
+    box-shadow: 0 8px 0 #c8a800;
+    transform: translateY(-2px);
+}
+
+.idea-node-btn:active {
+    box-shadow: 0 3px 0 #c8a800;
+    transform: translateY(3px);
+}
+
+.idea-node-btn i {
+    color: #814f07;
 }
 
 .top-btn {
@@ -824,6 +872,12 @@ body {
     overflow: visible;
 }
 
+/* Lift hovered/focused node above all other UI */
+.level-node:hover,
+.level-node:focus-visible {
+    z-index: 999;
+}
+
 /* Lecture nodes are bigger to indicate they are lecture parts */
 .level-node.lecture-node {
     width: 150px;
@@ -926,6 +980,22 @@ body {
     transform: translate(-50%, 0);
 }
 
+.node-label {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    color: #e5e7eb;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    width: 170px;
+    line-height: 1.3;
+    pointer-events: none;
+    padding: 4px 6px;
+}
+
 .node-popup-type {
     font-size: 11px;
     font-weight: 600;
@@ -1015,13 +1085,15 @@ body {
     }
 
     .roadmap-container {
-        padding-left: 30px;
+        padding-left: 16px;
+        padding-right: 16px;
     }
 
     .roadmap {
         max-width: 1000px;
         transform: scale(0.85);
-        transform-origin: center center;
+        transform-origin: left center;
+        margin-left: 0;
     }
 
     .level-node {
@@ -1038,6 +1110,12 @@ body {
         font-size: 48px;
         border-radius: 50%;
         transform: scale(1.176); /* Scale back up: 1/0.85 = 1.176 */
+    }
+
+    .node-label {
+        font-size: 12px;
+        width: 150px;
+        margin-top: 8px;
     }
 
     .level-node.completed:hover {
@@ -1122,7 +1200,8 @@ body {
     }
 
     .roadmap-container {
-        padding-left: 20px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
     .lesson-header {
@@ -1165,6 +1244,12 @@ body {
         font-size: 44px;
         border-radius: 50%;
         transform: scale(1.333); /* Scale back up: 1/0.75 = 1.333 */
+    }
+
+    .node-label {
+        font-size: 11px;
+        width: 130px;
+        margin-top: 6px;
     }
 
     .level-node.completed:hover {
@@ -1267,7 +1352,8 @@ body {
 
 @media (max-width: 480px) {
     .roadmap-container {
-        padding-left: 15px;
+        padding-left: 0;
+        padding-right: 0;
     }
 
     .logo-text {
@@ -1296,7 +1382,8 @@ body {
         max-width: 750px;
         height: 400px;
         transform: scale(0.6);
-        transform-origin: center center;
+        transform-origin: left center;
+        margin-left: 0;
     }
 
     .level-node {
@@ -1313,6 +1400,12 @@ body {
         font-size: 38px;
         border-radius: 50%;
         transform: scale(1.667); /* Scale back up: 1/0.6 = 1.667 */
+    }
+
+    .node-label {
+        font-size: 10px;
+        width: 115px;
+        margin-top: 6px;
     }
 
     .level-node.completed:hover {

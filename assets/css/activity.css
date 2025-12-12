@@ -17,6 +17,34 @@ body {
     position: relative;
 }
 
+.damage-flash {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 75, 75, 0.25), rgba(255, 75, 75, 0.4));
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1800;
+}
+
+.damage-flash.active {
+    animation: damageFlash 0.45s ease-out;
+}
+
+@keyframes damageFlash {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    20% {
+        opacity: 0.55;
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.04);
+    }
+}
+
 /* ============================================
    HEADER
    ============================================ */
@@ -197,10 +225,10 @@ body {
    CODE CONTAINER (Fill-in-the-blank)
    ============================================ */
 .code-container {
-    background-color: #1e2633;
-    border: 2px solid #2d3949;
+    background-color: transparent;
+    border: none;
     border-radius: 16px;
-    padding: 32px;
+    padding: 16px 0;
     margin-bottom: 24px;
 }
 
@@ -231,14 +259,14 @@ body {
 }
 
 .blank-input {
-    background-color: #2d3949;
+    background-color: #1e2633;
     border: 2px solid #3d4a5c;
-    border-radius: 8px;
+    border-radius: 10px;
     color: #ffffff;
     font-family: 'Courier New', monospace;
-    font-size: 20px;
-    padding: 8px 16px;
-    width: 150px;
+    font-size: 22px;
+    padding: 14px 20px;
+    width: 320px;
     text-align: center;
     transition: all 0.2s;
 }
@@ -858,7 +886,7 @@ body {
 .modal-btn-secondary {
     background-color: #374151;
     color: #e5e7eb;
-    box-shadow: 0 4px 0 #1f2937;
+    box-shadow: 0 4px 0 #272f3a;
 }
 
 .modal-btn-secondary:hover {
@@ -918,7 +946,7 @@ body {
     .blank-input {
         font-size: 16px;
         padding: 6px 12px;
-        width: 120px;
+        width: 180px;
     }
 
     .enemy-image {
