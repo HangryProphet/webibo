@@ -48,6 +48,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['complete'])) {
             }
         }
         
+        // Check if user wants to go to dashboard instead of next level
+        $redirectTo = $_POST['redirect_to'] ?? 'next';
+        
+        if ($redirectTo === 'dashboard') {
+            // User chose to go back to dashboard
+            header("Location: dashboard.php");
+            exit;
+        }
+        
         // Redirect to next level or dashboard
         $nextLevel = LevelModel::getNextLevel($pdo, $levelId);
         if ($nextLevel) {

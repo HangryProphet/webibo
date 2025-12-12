@@ -45,6 +45,10 @@ try {
     // Count completed levels
     $completedLevels = ProgressModel::countCompletedLevels($pdo, $userId);
     
+    // Get achievement/badge count
+    require_once __DIR__ . '/../core/models/AchievementModel.php';
+    $badgeCount = AchievementModel::getAchievementCount($pdo, $userId);
+    
     // Get recent activity (last 5 completed levels)
     $recentActivity = ProgressModel::getRecentActivity($pdo, $userId, 5);
     
@@ -63,7 +67,7 @@ try {
     $total_xp = (int)($stats['xp_points'] ?? 0);
     $day_streak = (int)($stats['current_streak'] ?? 0);
     $lessons_completed = $completedLevels;
-    $challenges_completed = 0; // Placeholder - implement when challenges table exists
+    $challenges_completed = $badgeCount; // Display badge/achievement count as "challenges completed"
     
     // Level information
     $current_level = $levelData['level'];

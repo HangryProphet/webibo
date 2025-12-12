@@ -271,11 +271,17 @@
     window.submitAnswer = function() {
         if (activityType === 'fill-blank') {
             const answerInput = document.getElementById('answerInput');
-            if (!answerInput || !answerInput.value.trim()) return;
+            if (!answerInput || !answerInput.value.trim()) {
+                // Don't submit empty answer - just return without doing anything
+                return;
+            }
             selectedAnswer = answerInput.value.trim();
         }
 
-        if (!selectedAnswer) return;
+        if (!selectedAnswer) {
+            // Don't submit if no answer selected
+            return;
+        }
 
         // Disable inputs and buttons
         disableInputs();
@@ -640,8 +646,9 @@
         }
     }
     
-    // Retry level from game over
+    // Retry level from game over (no progress saved)
     window.retryLevel = function() {
+        // Simply reload the page - no progress saved
         window.location.reload();
     };
     
@@ -776,10 +783,19 @@
     window.exitToDashboard = function() {
         // Check if we're in victory modal (level complete) - if so, save progress first
         const victoryModal = document.getElementById('victoryModal');
+        const gameOverModal = document.getElementById('gameOverModal');
         const completeLevelInput = document.getElementById('completeLevelInput');
         const redirectToInput = document.getElementById('redirectToInput');
         const quizForm = document.getElementById('quizForm');
         
+        // If game over modal is active, don't save progress - just go to dashboard
+        if (gameOverModal && gameOverModal.classList.contains('active')) {
+            console.log('DEBUG: Exiting from game over - no progress saved');
+            window.location.href = 'dashboard.php';
+            return;
+        }
+        
+        // If victory modal is active and level is complete, save progress
         if (victoryModal && victoryModal.classList.contains('active') && completeLevelInput && completeLevelInput.value === '1' && quizForm) {
             console.log('DEBUG: Saving progress before returning to dashboard');
             // Set redirect to dashboard

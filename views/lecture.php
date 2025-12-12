@@ -233,7 +233,7 @@
             }
         }
         
-        function completeLecture() {
+        function completeLecture(redirectTo = 'next') {
             // Submit completion form to save progress
             const form = document.createElement('form');
             form.method = 'POST';
@@ -249,10 +249,20 @@
             levelIdInput.name = 'level_id';
             levelIdInput.value = '<?php echo $levelId; ?>';
             
+            const redirectInput = document.createElement('input');
+            redirectInput.type = 'hidden';
+            redirectInput.name = 'redirect_to';
+            redirectInput.value = redirectTo;
+            
             form.appendChild(completeInput);
             form.appendChild(levelIdInput);
+            form.appendChild(redirectInput);
             document.body.appendChild(form);
             form.submit();
+        }
+        
+        function completeLectureAndGoToDashboard() {
+            completeLecture('dashboard');
         }
         
         // Initialize navigation and progress
@@ -298,7 +308,7 @@
                     <?php echo $hasNextLevel ? 'CONTINUE TO NEXT LEVEL' : 'BACK TO MAP'; ?>
                 </button>
                 <?php if ($hasNextLevel): ?>
-                <button class="modal-btn modal-btn-secondary" onclick="exitToDashboard()">BACK TO MAP</button>
+                <button class="modal-btn modal-btn-secondary" onclick="completeLectureAndGoToDashboard()">BACK TO MAP</button>
                 <?php endif; ?>
             </div>
         </div>

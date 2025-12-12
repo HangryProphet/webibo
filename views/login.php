@@ -2,6 +2,30 @@
 require_once '../core/functions.php';
 start_session_securely();
 
+// Handle logout
+if (isset($_GET['logout']) && $_GET['logout'] == '1') {
+    // Clear all session data
+    $_SESSION = array();
+    
+    // Destroy the session cookie
+    if (isset($_COOKIE[session_name()])) {
+        setcookie(session_name(), '', time() - 3600, '/');
+    }
+    
+    // Destroy the session
+    session_destroy();
+    
+    // Start a new clean session
+    session_start();
+    
+    // Set logout success message (will show on fresh login page)
+    $_SESSION['success'] = 'You have been logged out successfully.';
+    
+    // Redirect to login page without query params
+    header('Location: login.php');
+    exit;
+}
+
 // Retrieve any error or success messages from the session
 $error = get_error();
 $success = get_success();

@@ -111,7 +111,7 @@ require_once __DIR__ . '/../controllers/profile_handler.php';
                 </div>
                 <div class="stat-info">
                     <div class="stat-value"><?php echo $challenges_completed; ?></div>
-                    <div class="stat-label">Challenges completed</div>
+                    <div class="stat-label">Badges earned</div>
                 </div>
             </div>
         </div>

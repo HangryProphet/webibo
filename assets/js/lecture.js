@@ -31,7 +31,8 @@
     };
     
     window.exitToDashboard = function() {
-        // Redirect to dashboard
+        // Exit without completion (from exit modal during lecture)
+        // Victory modal buttons handle their own completion + redirect
         window.location.href = 'dashboard.php';
     };
     
