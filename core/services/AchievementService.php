@@ -116,44 +116,62 @@ class AchievementService {
     private static function checkHtmlCourseAchievements(PDO $pdo, int $userId, int $levelId, array $level): array {
         $awarded = [];
         
-        // Achievement #4: "The Architect" - Complete level 2 (first multiple-choice)
-        if ($levelId == 2) {
-            if (self::awardAchievement($pdo, $userId, 4)) {
-                $awarded[] = 4;
-            }
-        }
-        
-        // Achievement #5: "Blank Slate" - Complete first fill-blank (level 4)
-        if ($levelId == 4 && $level['level_type'] === 'fill-blank') {
-            if (self::awardAchievement($pdo, $userId, 5)) {
-                $awarded[] = 5;
-            }
-        }
-        
-        // Achievement #6: "Syntax Seal of Approval" - Complete first code-editor (level 6)
-        if ($levelId == 6 && $level['level_type'] === 'code-editor') {
+        // Achievement #6: "Multiple Victor" - Complete level 2 (first multiple-choice quiz)
+        if ($levelId == 2 && $level['level_type'] === 'multiple-choice') {
             if (self::awardAchievement($pdo, $userId, 6)) {
                 $awarded[] = 6;
             }
         }
         
-        // Achievement #7: "Heading in the Right Direction" - Complete level 6 or 7
-        if (in_array($levelId, [6, 7])) {
+        // Achievement #7: "Blank Slate" - Complete level 3 (first fill-blank)
+        if ($levelId == 3 && $level['level_type'] === 'fill-blank') {
             if (self::awardAchievement($pdo, $userId, 7)) {
                 $awarded[] = 7;
             }
         }
         
-        // Achievement #11: "HTML Foundation Master" - Complete all 7 levels of HTML course
-        $htmlLevelsCompleted = self::getHtmlCourseLevelsCompleted($pdo, $userId);
-        if ($htmlLevelsCompleted >= 7) {
+        // Achievement #8: "Syntax Seal of Approval" - Complete level 4 (first code-editor)
+        if ($levelId == 4 && $level['level_type'] === 'code-editor') {
+            if (self::awardAchievement($pdo, $userId, 8)) {
+                $awarded[] = 8;
+            }
+        }
+        
+        // Achievement #9: "Heading in the Right Direction" - Complete level 5 (Headings lecture)
+        if ($levelId == 5) {
+            if (self::awardAchievement($pdo, $userId, 9)) {
+                $awarded[] = 9;
+            }
+        }
+        
+        // Achievement #10: "Chain Link" - Complete level 9 (Links lecture)
+        if ($levelId == 9) {
+            if (self::awardAchievement($pdo, $userId, 10)) {
+                $awarded[] = 10;
+            }
+        }
+        
+        // Achievement #11: "A Pretty Picture" - Complete level 13 (Images lecture)
+        if ($levelId == 13) {
             if (self::awardAchievement($pdo, $userId, 11)) {
                 $awarded[] = 11;
             }
         }
         
-        // Note: Achievements #8 (Chain Link), #9 (A Pretty Picture), #10 (List-o-mania)
-        // are placeholders for future levels beyond level 7
+        // Achievement #12: "List-o-mania" - Complete level 17 (Lists lecture)
+        if ($levelId == 17) {
+            if (self::awardAchievement($pdo, $userId, 12)) {
+                $awarded[] = 12;
+            }
+        }
+        
+        // Achievement #14: "HTML Foundation Master" - Complete all 20 levels of HTML course
+        $htmlLevelsCompleted = self::getHtmlCourseLevelsCompleted($pdo, $userId);
+        if ($htmlLevelsCompleted >= 20) {
+            if (self::awardAchievement($pdo, $userId, 14)) {
+                $awarded[] = 14;
+            }
+        }
         
         return $awarded;
     }

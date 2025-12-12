@@ -528,7 +528,7 @@ body {
 .footer-buttons {
     padding: 30px 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     gap: 20px;
     background-color: #131F24;
@@ -646,7 +646,7 @@ body {
     background-color: #2d3949;
     display: none;
     align-items: center;
-    gap: 12px;
+    gap: 20px;
     z-index: 1000;
     border-top: 2px solid #3d4a5c;
     min-height: 110px;

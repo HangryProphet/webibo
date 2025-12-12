@@ -20,7 +20,6 @@
     let selectedAnswer = null;
     let currentHearts = config.currentHearts || 10;
     let currentProgress = config.currentProgress || 0; // Progress out of 10 (0-10)
-    let pendingSkip = false;
     let isCorrect = false;
     let enemyHP = config.enemyHP || 10;
     const maxEnemyHP = config.maxEnemyHP || enemyHP;
@@ -33,9 +32,27 @@
     const totalQuestions = config.totalQuestions || 1;
     let currentQuestionIndex = config.currentQuestionIndex || 0;
     let questionsAnswered = 0;
+    let correctAnswersCount = 0;
     // Paths are relative to views/* pages that include this script with ../assets/...
     const correctSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/correct.mp3') : null;
     const wrongSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/wrong.mp3') : null;
+    
+    // Initialize volume from localStorage (default 70%)
+    function getVolume() {
+        const savedVolume = localStorage.getItem('webibo_sound_volume');
+        return savedVolume !== null ? parseInt(savedVolume) / 100 : 0.7;
+    }
+    
+    // Set initial volume
+    if (correctSound) correctSound.volume = getVolume();
+    if (wrongSound) wrongSound.volume = getVolume();
+    
+    // Listen for volume changes from settings page
+    window.addEventListener('volumeChange', function(e) {
+        const volume = e.detail.volume;
+        if (correctSound) correctSound.volume = volume;
+        if (wrongSound) wrongSound.volume = volume;
+    });
 
     // Load next question in multi-question activities
     function loadNextQuestion() {
@@ -105,12 +122,6 @@
             checkBtn.disabled = true;
         }
         
-        const skipBtn = document.getElementById('skipBtn');
-        if (skipBtn) {
-            skipBtn.disabled = false;
-            skipBtn.style.display = 'inline-block';
-        }
-        
         // Progress will be updated after user answers the next question
     }
     
@@ -129,6 +140,9 @@
 
         // Setup exit modal handlers
         setupExitModal();
+        
+        // Setup Enter key handler for continue button
+        setupContinueKeyHandler();
     }
 
     // Initialize progress bar on page load
@@ -263,8 +277,6 @@
 
         if (!selectedAnswer) return;
 
-        pendingSkip = false;
-
         // Disable inputs and buttons
         disableInputs();
 
@@ -279,7 +291,15 @@
         // Update progress bar (tracks question progression, not correctness)
         updateProgress();
 
-        if (selectedAnswer === correctAnswer) {
+        // Case-insensitive comparison for fill-blank
+        let isCorrect = false;
+        if (activityType === 'fill-blank') {
+            isCorrect = (selectedAnswer.toLowerCase() === correctAnswer.toLowerCase());
+        } else {
+            isCorrect = (selectedAnswer === correctAnswer);
+        }
+
+        if (isCorrect) {
             handleCorrectAnswer();
         } else {
             handleWrongAnswer();
@@ -294,7 +314,6 @@
         const userCode = codeInput.value.trim();
         if (!userCode) return;
 
-        pendingSkip = false;
         selectedAnswer = userCode;
 
         // Disable textarea and check button
@@ -334,56 +353,6 @@
             isCorrect = false;
             handleWrongAnswer();
         }
-
-        // Hide skip button
-        const skipBtn = document.getElementById('skipBtn');
-        if (skipBtn) {
-            skipBtn.style.display = 'none';
-        }
-    };
-
-    // Skip question
-    window.skipQuestion = function() {
-        pendingSkip = true;
-
-        // Disable inputs and buttons
-        disableInputs();
-
-        if (activityType === 'fill-blank') {
-            const answerInput = document.getElementById('answerInput');
-            if (answerInput) {
-                answerInput.value = correctAnswer;
-                answerInput.classList.add('correct');
-            }
-        } else if (activityType === 'code-editor') {
-            const codeInput = document.getElementById('codeInput');
-            if (codeInput) {
-                codeInput.value = correctAnswer;
-            }
-
-            // Show correct output
-            const outputContainer = document.getElementById('outputContainer');
-            const outputDisplay = document.getElementById('outputDisplay');
-            if (outputContainer && outputDisplay) {
-                outputContainer.classList.add('active');
-                outputDisplay.className = 'output-display';
-                outputDisplay.innerHTML = correctAnswer;
-            }
-        } else {
-            // Multiple choice - reveal correct answer
-            const correctBtn = document.querySelector(`[data-answer="${correctAnswer}"]`);
-            if (correctBtn) {
-                correctBtn.classList.add('correct');
-            }
-        }
-
-        // Update progress
-        updateProgress();
-
-        // Decrease hearts
-        decreaseHearts();
-
-        showFeedback(false);
     };
 
     // Disable all inputs
@@ -409,11 +378,6 @@
         const checkBtn = document.getElementById('checkBtn');
         if (checkBtn) {
             checkBtn.disabled = true;
-        }
-
-        const skipBtn = document.getElementById('skipBtn');
-        if (skipBtn) {
-            skipBtn.disabled = true;
         }
     }
 
@@ -455,6 +419,7 @@
                 enemyHP = Math.max(0, enemyHP - 2);
                 updateEnemyHP();
             }
+            correctAnswersCount++;
         } else if (activityType === 'fill-blank') {
             const answerInput = document.getElementById('answerInput');
             if (answerInput) {
@@ -474,12 +439,14 @@
                 enemyHP = Math.max(0, enemyHP - 2);
                 updateEnemyHP();
             }
-        }
-
-        // Hide skip button
-        const skipBtn = document.getElementById('skipBtn');
-        if (skipBtn) {
-            skipBtn.style.display = 'none';
+            correctAnswersCount++;
+        } else if (activityType === 'code-editor') {
+            // Code editor: show victory modal immediately on correct answer
+            playFeedbackSound(true);
+            setTimeout(() => {
+                showVictoryModal();
+            }, 500);
+            return; // Don't show regular feedback
         }
 
         playFeedbackSound(true);
@@ -503,6 +470,12 @@
             if (answerInput) {
                 answerInput.classList.add('wrong');
             }
+        } else if (activityType === 'code-editor') {
+            // Code editor: show failure state immediately
+            // No hearts decrease, just show failure modal
+            playFeedbackSound(false);
+            showCodeEditorFailureModal();
+            return; // Don't show regular feedback
         }
 
         // Show happy/neutral enemy state on wrong answer
@@ -520,8 +493,10 @@
             }
         }
 
-        // Decrease player hearts
-        decreaseHearts();
+        // Decrease player hearts (not for code editor)
+        if (activityType !== 'code-editor') {
+            decreaseHearts();
+        }
 
         playFeedbackSound(false);
         showFeedback(false);
@@ -636,12 +611,10 @@
             return;
         }
         
-        if (pendingSkip) {
-            const skipForm = document.getElementById('skipForm');
-            if (skipForm) {
-                skipForm.submit();
-                return;
-            }
+        // Hide feedback panel
+        const feedbackPanel = document.getElementById('feedbackPanel');
+        if (feedbackPanel) {
+            feedbackPanel.classList.remove('active');
         }
         
         // Check if this is a multi-question activity and there are more questions
@@ -672,17 +645,48 @@
         window.location.reload();
     };
     
+    // Show code editor failure modal
+    function showCodeEditorFailureModal() {
+        const failureModal = document.getElementById('codeEditorFailureModal');
+        if (failureModal) {
+            failureModal.classList.add('active');
+        }
+    }
+    
+    // Retry code editor from failure
+    window.retryCodeEditor = function() {
+        window.location.reload();
+    };
+    
     // Show victory modal
     function showVictoryModal() {
+        // Show the victory modal first - progress will be saved when user clicks a button
         const victoryModal = document.getElementById('victoryModal');
         const victoryMessage = document.getElementById('victoryMessage');
         const nextLevelBtn = document.getElementById('nextLevelBtn');
         
         if (victoryModal) {
+            // Build score summary
+            let messageText = '';
+            
+            if (config.hasEnemy !== false) {
+                const totalQs = totalQuestions;
+                const isPerfectScore = enemyHP === 0;
+                
+                if (isPerfectScore) {
+                    messageText = `🎯 <strong>Perfect Score!</strong><br>Enemy Defeated! All ${totalQs} questions correct!<br><br>Flawless victory! `;
+                } else {
+                    const wrongAnswers = totalQs - correctAnswersCount;
+                    messageText = `✅ <strong>Level Complete!</strong><br>Score: ${correctAnswersCount}/${totalQs} Correct<br>Enemy HP Remaining: ${enemyHP}/${maxEnemyHP}<br><br>${wrongAnswers === 1 ? 'Just one mistake' : `${wrongAnswers} mistakes`} - you\'re getting better! `;
+                }
+            } else {
+                messageText = 'Amazing work! You\'ve mastered this challenge! ';
+            }
+            
             // Customize message and button based on next level availability
             if (config.hasNextLevel) {
                 if (victoryMessage) {
-                    victoryMessage.textContent = `Amazing work! You've mastered this challenge! Ready for the next one?`;
+                    victoryMessage.innerHTML = messageText + 'Ready for the next one?';
                 }
                 if (nextLevelBtn) {
                     nextLevelBtn.textContent = 'CONTINUE TO NEXT LEVEL';
@@ -690,11 +694,18 @@
                 }
             } else {
                 if (victoryMessage) {
-                    victoryMessage.textContent = `Incredible! You've completed all levels in this course! 🎓`;
+                    victoryMessage.innerHTML = messageText + `You've completed all levels in this course! 🎓`;
                 }
                 if (nextLevelBtn) {
                     nextLevelBtn.style.display = 'none';
                 }
+            }
+            
+            // Set the complete_level flag now, before showing modal
+            const completeLevelInput = document.getElementById('completeLevelInput');
+            if (completeLevelInput) {
+                completeLevelInput.value = '1';
+                console.log('DEBUG: Set complete_level flag to 1 before showing modal');
             }
             
             victoryModal.classList.add('active');
@@ -703,14 +714,45 @@
     
     // Go to next level from victory modal
     window.goToNextLevel = function() {
+        // Mark level as complete before submitting
+        const completeLevelInput = document.getElementById('completeLevelInput');
+        const redirectToInput = document.getElementById('redirectToInput');
+        
+        if (completeLevelInput) {
+            completeLevelInput.value = '1';
+            console.log('DEBUG: Set complete_level flag to 1');
+        } else {
+            console.error('DEBUG: completeLevelInput element not found!');
+        }
+        
+        // Ensure redirect goes to next level
+        if (redirectToInput) {
+            redirectToInput.value = 'next';
+            console.log('DEBUG: Set redirect_to to next');
+        }
+        
         // Submit the completion form to trigger backend logic
         const quizForm = document.getElementById('quizForm');
         if (quizForm) {
+            console.log('DEBUG: Found quizForm, complete_level=' + completeLevelInput?.value);
+            console.log('DEBUG: Form action:', quizForm.action);
+            console.log('DEBUG: Form method:', quizForm.method);
+            
+            // Check FormData to verify what will be sent
+            const formData = new FormData(quizForm);
+            console.log('DEBUG: FormData contents:');
+            for (let pair of formData.entries()) {
+                console.log('  ' + pair[0] + ': ' + pair[1]);
+            }
+            
+            // Submit the form
             quizForm.submit();
         } else if (config.nextLevelUrl) {
+            console.log('DEBUG: No quizForm found, using direct navigation');
             // Direct navigation to next level
             window.location.href = config.nextLevelUrl;
         } else {
+            console.log('DEBUG: No quizForm or nextLevelUrl, redirecting to dashboard');
             // Fallback: redirect to dashboard
             window.location.href = 'dashboard.php';
         }
@@ -732,8 +774,24 @@
     };
 
     window.exitToDashboard = function() {
-        // Simple redirect to dashboard
-        window.location.href = 'dashboard.php';
+        // Check if we're in victory modal (level complete) - if so, save progress first
+        const victoryModal = document.getElementById('victoryModal');
+        const completeLevelInput = document.getElementById('completeLevelInput');
+        const redirectToInput = document.getElementById('redirectToInput');
+        const quizForm = document.getElementById('quizForm');
+        
+        if (victoryModal && victoryModal.classList.contains('active') && completeLevelInput && completeLevelInput.value === '1' && quizForm) {
+            console.log('DEBUG: Saving progress before returning to dashboard');
+            // Set redirect to dashboard
+            if (redirectToInput) {
+                redirectToInput.value = 'dashboard';
+            }
+            // Submit form to save progress, which will redirect to dashboard
+            quizForm.submit();
+        } else {
+            // Normal exit without completion (from exit modal)
+            window.location.href = 'dashboard.php';
+        }
     };
 
     // Setup exit modal handlers
@@ -752,6 +810,40 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 window.closeModal();
+            }
+        });
+    }
+    
+    // Setup Enter key handler for check and continue buttons
+    function setupContinueKeyHandler() {
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                // Don't trigger if user is typing in an input field or textarea
+                // (except for fill-blank activities where we want Enter to submit)
+                const isInInput = e.target.tagName === 'INPUT' && activityType !== 'fill-blank';
+                const isInTextarea = e.target.tagName === 'TEXTAREA';
+                
+                if (isInInput || isInTextarea) {
+                    return;
+                }
+                
+                // Check if feedback panel is active (continue button visible)
+                const feedbackPanel = document.getElementById('feedbackPanel');
+                const continueBtn = document.getElementById('continueBtn');
+                const checkBtn = document.getElementById('checkBtn');
+                
+                // Priority 1: If feedback panel is active, trigger continue button
+                if (feedbackPanel && feedbackPanel.classList.contains('active')) {
+                    if (continueBtn && !continueBtn.disabled) {
+                        e.preventDefault();
+                        window.continueToNext();
+                    }
+                }
+                // Priority 2: If check button is enabled, trigger it
+                else if (checkBtn && !checkBtn.disabled) {
+                    e.preventDefault();
+                    checkBtn.click();
+                }
             }
         });
     }

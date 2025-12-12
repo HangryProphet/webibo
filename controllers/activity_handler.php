@@ -69,6 +69,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correctAnswer = $currentQuestionData['correct_answer'] ?? $currentQuestionData['correct_code'] ?? '';
     $enemyHP = isset($currentQuestionData['enemy']) ? ($currentQuestionData['enemy']['hp'] ?? 10) : 10;
     
+    // Check if this is a level completion request (from victory modal)
+    $isCompletionRequest = isset($_POST['complete_level']) && $_POST['complete_level'] == '1';
+    
+    // DEBUG: Log completion request
+    error_log("Activity Handler - Level $levelId: complete_level flag = " . ($_POST['complete_level'] ?? 'NOT SET'));
+    error_log("Activity Handler - isCompletionRequest = " . ($isCompletionRequest ? 'TRUE' : 'FALSE'));
+    
+    if ($isCompletionRequest) {
+        error_log("Activity Handler - Processing completion for Level $levelId, User $userId");
+        
+        // Level already completed client-side, just mark as complete and redirect
+        $xpReward = $level['xp_reward'] ?? 10;
+        StatsModel::addXP($pdo, $userId, $xpReward);
+        $completionResult = ProgressModel::completeLevel($pdo, $userId, $levelId);
+        
+        error_log("Activity Handler - ProgressModel::completeLevel result: " . ($completionResult ? 'SUCCESS' : 'FAILED'));
+        
+        // Award achievements
+        require_once __DIR__ . '/../core/services/AchievementService.php';
+        AchievementService::checkAchievementsOnEvent($pdo, $userId, 'level_completed', ['level_id' => $levelId]);
+        
+        // Check redirect preference
+        $redirectTo = isset($_POST['redirect_to']) ? $_POST['redirect_to'] : 'next';
+        
+        if ($redirectTo === 'dashboard') {
+            // User chose to go back to dashboard
+            header("Location: dashboard.php");
+        } else {
+            // User chose to continue to next level (default)
+            $nextLevel = LevelModel::getNextLevel($pdo, $levelId);
+            if ($nextLevel) {
+                if ($nextLevel['level_type'] === 'lecture') {
+                    header("Location: lecture.php?id={$nextLevel['id']}");
+                } else {
+                    header("Location: activity.php?id={$nextLevel['id']}");
+                }
+            } else {
+                header("Location: dashboard.php");
+            }
+        }
+        exit;
+    }
+    
     // Get submitted answer
     $submittedAnswer = '';
     
@@ -76,31 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $submittedAnswer = trim($_POST['answer']);
     } elseif (isset($_POST['code'])) {
         $submittedAnswer = trim($_POST['code']);
-    }
-    
-    // Handle SKIP action
-    if (isset($_POST['skip'])) {
-        // Decrease hearts for skipping
-        $currentHearts = max(0, $currentHearts - 1);
-        $_SESSION['hearts'] = $currentHearts;
-        
-        if ($currentHearts <= 0) {
-            header("Location: gameover.php");
-            exit;
-        }
-        
-        // Redirect to next level or dashboard
-        $nextLevel = LevelModel::getNextLevel($pdo, $levelId);
-        if ($nextLevel) {
-            if ($nextLevel['level_type'] === 'lecture') {
-                header("Location: lecture.php?id={$nextLevel['id']}");
-            } else {
-                header("Location: activity.php?id={$nextLevel['id']}");
-            }
-        } else {
-            header("Location: dashboard.php");
-        }
-        exit;
     }
     
     // Validate answer
@@ -171,13 +189,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
     } else {
         // WRONG ANSWER
-        // Decrease hearts
-        $currentHearts = max(0, $currentHearts - 1);
-        $_SESSION['hearts'] = $currentHearts;
         
-        if ($currentHearts <= 0) {
-            header("Location: gameover.php");
-            exit;
+        // For code-editor activities: one try only, no heart system
+        if ($level['level_type'] === 'code-editor') {
+            // Do NOT complete the level, do NOT decrease hearts
+            // Just let the page reload and show feedback
+            // JavaScript will show a failure modal with option to retry from scratch
+            $_SESSION['code_editor_failed'] = true;
+            // Stay on same page - JS will handle showing the failure state
+        } else {
+            // For other activity types: use heart system
+            // Decrease hearts
+            $currentHearts = max(0, $currentHearts - 1);
+            $_SESSION['hearts'] = $currentHearts;
+            
+            if ($currentHearts <= 0) {
+                header("Location: gameover.php");
+                exit;
+            }
         }
         
         // Reload the same activity (JavaScript will show feedback)

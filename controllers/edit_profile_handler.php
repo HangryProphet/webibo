@@ -25,7 +25,7 @@ try {
     
     if (!$user) {
         set_error("Unable to load profile data.");
-        redirect('/views/profile.php');
+        redirect('../views/profile.php');
         exit;
     }
     
@@ -34,12 +34,12 @@ try {
     $lastName = sanitize_output($user['last_name'] ?? '');
     $username = sanitize_output($user['username']);
     $email = sanitize_output($user['email']);
-    $currentAvatar = $user['avatar_path'] ?? '/assets/img/avatars/default.png';
+    $currentAvatar = $user['avatar_path'] ?? '../assets/img/avatars/default.png';
     
 } catch (PDOException $e) {
     error_log("Edit Profile Handler Error: " . $e->getMessage());
     set_error("An error occurred while loading your profile.");
-    redirect('/views/profile.php');
+    redirect('../views/profile.php');
     exit;
 }
 
@@ -58,14 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if (empty($currentPassword)) {
             set_error("Current password is required to change password.");
-            redirect('/views/edit_profile.php');
+            redirect('../views/edit_profile.php');
             exit;
         }
         
         // Verify current password
         if (!UserModel::verifyPassword($pdo, $userId, $currentPassword)) {
             set_error("Current password is incorrect.");
-            redirect('/views/edit_profile.php');
+            redirect('../views/edit_profile.php');
             exit;
         }
     }
@@ -104,10 +104,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 // Move uploaded file
                 if (move_uploaded_file($avatarFile['tmp_name'], $uploadPath)) {
-                    $avatarDbPath = '/assets/img/avatars/' . $newFileName;
+                    $avatarDbPath = '../assets/img/avatars/' . $newFileName;
                     
                     // Delete old avatar if not default
-                    if ($currentAvatar !== '/assets/img/avatars/default.png') {
+                    if ($currentAvatar !== '../assets/img/avatars/default.png' && strpos($currentAvatar, '../assets/img/avatars/') !== false) {
                         $oldAvatarPath = __DIR__ . '/..' . $currentAvatar;
                         if (file_exists($oldAvatarPath)) {
                             unlink($oldAvatarPath);
@@ -209,17 +209,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ============ DISPLAY RESULTS ============
     if (!empty($errors)) {
         set_error(implode(' ', $errors));
-        redirect('/views/edit_profile.php');
+        redirect('../views/edit_profile.php');
         exit;
     }
     
     if ($hasChanges) {
         set_success("Profile updated successfully!");
-        redirect('/views/profile.php');
+        redirect('../views/profile.php');
         exit;
     }
     
     set_error("No changes were made.");
-    redirect('/views/edit_profile.php');
+    redirect('../views/edit_profile.php');
     exit;
 }
