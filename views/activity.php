@@ -86,9 +86,7 @@
                                     $parts = explode('___', $line);
                             ?>
                                 <div class="code-line">
-                                    <span class="code-keyword"><?php echo htmlspecialchars($parts[0]); ?></span>
                                     <input type="text" class="blank-input" id="answerInput" autocomplete="off" maxlength="10">
-                                    <span class="code-value"><?php echo htmlspecialchars($parts[1] ?? ''); ?></span>
                                 </div>
                             <?php else: ?>
                                 <div class="code-line"><?php echo htmlspecialchars($line); ?></div>
