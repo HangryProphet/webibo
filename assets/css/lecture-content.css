@@ -106,3 +106,65 @@ pre code {
     padding: 0;
 }
 
+.wiza-bubble {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.wiza-avatar {
+    flex: 0 0 90px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 4px;
+}
+
+.wiza-avatar img {
+    width: 90px;
+    max-width: 100%;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.wiza-intro,
+.wiza-speech {
+    background: linear-gradient(135deg, #f0f7ff, #ffffff);
+    border: 1px solid #d6e9ff;
+    padding: 16px 18px;
+    border-radius: 14px;
+    position: relative;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.05);
+    color: #2c3e50;
+}
+
+.wiza-intro::after,
+.wiza-speech::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 10px solid #d6e9ff;
+}
+
+.wiza-intro::before,
+.wiza-speech::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 10px solid #f0f7ff;
+    z-index: 2;
+}
+

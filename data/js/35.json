@@ -130,8 +130,8 @@
     }
   ],
   "enemy": {
-    "name": "Slime",
+    "name": "Owl",
     "hp": 8,
-    "image": "assets/img/enemies/slime-happy.png"
+    "image": "assets/img/enemies/owl-happy.png"
   }
 }

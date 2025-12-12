@@ -130,8 +130,8 @@
     }
   ],
   "enemy": {
-    "name": "Ghost",
+    "name": "Tiger",
     "hp": 8,
-    "image": "assets/img/enemies/ghost-happy.png"
+    "image": "assets/img/enemies/tiger-happy.png"
   }
 }

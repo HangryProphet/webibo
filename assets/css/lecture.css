@@ -241,12 +241,62 @@ body {
     font-weight: 500;
 }
 
-.lecture-slide .wiza-intro {
-    background: #3d4a5c;
-    padding: 16px 20px;
-    border-radius: 12px;
+.lecture-slide .wiza-bubble {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
     margin: 20px 0;
-    border-left: 4px solid #1cb0f6;
+}
+
+.lecture-slide .wiza-avatar {
+    flex: 0 0 90px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 4px;
+}
+
+.lecture-slide .wiza-avatar img {
+    width: 90px;
+    max-width: 100%;
+}
+
+.lecture-slide .wiza-intro,
+.lecture-slide .wiza-speech {
+    background: linear-gradient(135deg, #1e2633, #18202c);
+    border: 1px solid #2d3a4d;
+    padding: 16px 18px;
+    border-radius: 14px;
+    position: relative;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25);
+    color: #e7ecf3;
+}
+
+.lecture-slide .wiza-intro::after,
+.lecture-slide .wiza-speech::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 10px solid #2d3a4d;
+}
+
+.lecture-slide .wiza-intro::before,
+.lecture-slide .wiza-speech::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 10px solid #1e2633;
+    z-index: 2;
 }
 
 .lecture-slide .example-card {

@@ -117,6 +117,39 @@
             slide.style.display = index === 0 ? 'block' : 'none';
             cardsContainer.appendChild(slide);
         });
+
+        // Apply Wiza avatars for all wiza-intro blocks without editing source files.
+        // Uses a fixed sequence so the order is predictable (no per-load randomness).
+        (function applyWizaAvatars() {
+            const avatarSequence = [
+                '../assets/img/wiza/wiza-teach.png',
+                '../assets/img/wiza/wiza-thinking.png',
+                '../assets/img/wiza/wiza-teach-happy.png',
+                '../assets/img/wiza/wiza-pointing.png'
+            ];
+
+            const intros = cardsContainer.querySelectorAll('.wiza-intro');
+            intros.forEach((intro, idx) => {
+                // Skip if already wrapped
+                if (intro.closest('.wiza-bubble')) return;
+
+                const bubble = document.createElement('div');
+                bubble.className = 'wiza-bubble';
+
+                const avatar = document.createElement('div');
+                avatar.className = 'wiza-avatar';
+
+                const img = document.createElement('img');
+                img.src = avatarSequence[idx % avatarSequence.length];
+                img.alt = 'Wiza avatar';
+
+                avatar.appendChild(img);
+                // Move the intro into the bubble
+                intro.replaceWith(bubble);
+                bubble.appendChild(avatar);
+                bubble.appendChild(intro);
+            });
+        })();
         
         // Slide navigation state
         let currentSlideIndex = 0;

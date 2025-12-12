@@ -240,8 +240,8 @@
     }
   ],
   "enemy": {
-    "name": "Wolf",
+    "name": "Tiger",
     "hp": 12,
-    "image": "assets/img/enemies/wolf-happy.png"
+    "image": "assets/img/enemies/tiger-happy.png"
   }
 }

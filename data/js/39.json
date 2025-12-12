@@ -130,8 +130,8 @@
     }
   ],
   "enemy": {
-    "name": "Goblin",
+    "name": "Spider",
     "hp": 8,
-    "image": "assets/img/enemies/goblin-happy.png"
+    "image": "assets/img/enemies/spider-happy.png"
   }
 }

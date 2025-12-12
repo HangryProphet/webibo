@@ -160,5 +160,10 @@
         }
       }
     }
-  ]
+  ],
+  "enemy": {
+    "name": "Bat",
+    "hp": 10,
+    "image": "assets/img/enemies/bat-happy.png"
+  }
 }
