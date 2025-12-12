@@ -4,6 +4,32 @@
 (function() {
     'use strict';
 
+    const victorySound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/victory.mp3') : null;
+
+    function getVolume() {
+        const savedVolume = localStorage.getItem('webibo_sound_volume');
+        return savedVolume !== null ? parseInt(savedVolume, 10) / 100 : 0.7;
+    }
+
+    function setVictoryVolume(volume) {
+        if (victorySound) {
+            victorySound.volume = volume;
+        }
+    }
+
+    function playVictorySound() {
+        if (!victorySound) return;
+        try {
+            victorySound.currentTime = 0;
+            const playPromise = victorySound.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(err => console.warn('Audio playback blocked:', err));
+            }
+        } catch (e) {
+            console.error('Error playing victory sound:', e);
+        }
+    }
+
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
         // Add smooth scroll behavior
@@ -11,6 +37,22 @@
         
         // Setup exit modal handlers
         setupExitModal();
+
+        // Set initial volume and listen for settings updates
+        setVictoryVolume(getVolume());
+        window.addEventListener('volumeChange', function(e) {
+            const volume = e.detail.volume;
+            setVictoryVolume(volume);
+        });
+
+        // Hook victory modal to play victory sound
+        const originalShowVictoryModal = window.showVictoryModal;
+        if (typeof originalShowVictoryModal === 'function') {
+            window.showVictoryModal = function() {
+                originalShowVictoryModal.apply(this, arguments);
+                playVictorySound();
+            };
+        }
         
         console.log('Lecture page loaded with slide navigation');
     });

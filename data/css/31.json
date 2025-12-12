@@ -4,7 +4,7 @@
       "question": "Fill in the blank: _____ adds space inside an element.",
       "options": ["padding", "margin", "border", "spacing"],
       "correct_answer": "padding",
-      "code_template": ".box {\n  _____: 20px;\n}",
+      "code_template": "\n  _____: 20px;\n",
       "feedback": {
         "correct": {
           "title": "Perfect! 🎉",
@@ -20,7 +20,7 @@
       "question": "Fill in the blank: _____ adds space outside an element.",
       "options": ["margin", "padding", "border", "spacing"],
       "correct_answer": "margin",
-      "code_template": ".box {\n  _____: 20px;\n}",
+      "code_template": "\n  _____: 20px;\n",
       "feedback": {
         "correct": {
           "title": "Perfect! 🎉",
@@ -36,7 +36,7 @@
       "question": "Fill in the blank: Use _____ to round corners.",
       "options": ["border-radius", "corner-radius", "round-border", "border-round"],
       "correct_answer": "border-radius",
-      "code_template": ".box {\n  _____: 10px;\n}",
+      "code_template": "\n  _____: 10px;\n",
       "feedback": {
         "correct": {
           "title": "Perfect! 🎉",

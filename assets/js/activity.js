@@ -36,23 +36,69 @@
     // Paths are relative to views/* pages that include this script with ../assets/...
     const correctSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/correct.mp3') : null;
     const wrongSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/wrong.mp3') : null;
+    const enemyDamageSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/enemy-damage.mp3') : null;
+    const playerDamageSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/player-damage.mp3') : null;
+    const victorySound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/victory.mp3') : null;
+    const gameOverSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/gameover.mp3') : null;
+    let damageFlashEl = null;
+    let successFlashEl = null;
     
     // Initialize volume from localStorage (default 70%)
     function getVolume() {
         const savedVolume = localStorage.getItem('webibo_sound_volume');
         return savedVolume !== null ? parseInt(savedVolume) / 100 : 0.7;
     }
+
+    function triggerSuccessFlash() {
+        if (!successFlashEl) {
+            successFlashEl = document.createElement('div');
+            successFlashEl.id = 'successFlash';
+            successFlashEl.className = 'success-flash';
+            document.body.appendChild(successFlashEl);
+        }
+
+        successFlashEl.classList.remove('active');
+        void successFlashEl.offsetWidth;
+        successFlashEl.classList.add('active');
+    }
     
+    function setSoundVolume(sound) {
+        if (sound) sound.volume = getVolume();
+    }
+
     // Set initial volume
-    if (correctSound) correctSound.volume = getVolume();
-    if (wrongSound) wrongSound.volume = getVolume();
+    setSoundVolume(correctSound);
+    setSoundVolume(wrongSound);
+    setSoundVolume(enemyDamageSound);
+    setSoundVolume(playerDamageSound);
+    setSoundVolume(victorySound);
+    setSoundVolume(gameOverSound);
     
     // Listen for volume changes from settings page
     window.addEventListener('volumeChange', function(e) {
         const volume = e.detail.volume;
         if (correctSound) correctSound.volume = volume;
         if (wrongSound) wrongSound.volume = volume;
+        if (enemyDamageSound) enemyDamageSound.volume = volume;
+        if (playerDamageSound) playerDamageSound.volume = volume;
+        if (victorySound) victorySound.volume = volume;
+        if (gameOverSound) gameOverSound.volume = volume;
     });
+
+    function triggerDamageFlash() {
+        if (!damageFlashEl) {
+            damageFlashEl = document.createElement('div');
+            damageFlashEl.id = 'damageFlash';
+            damageFlashEl.className = 'damage-flash';
+            document.body.appendChild(damageFlashEl);
+        }
+
+        // Restart animation
+        damageFlashEl.classList.remove('active');
+        // Force reflow
+        void damageFlashEl.offsetWidth;
+        damageFlashEl.classList.add('active');
+    }
 
     // Load next question in multi-question activities
     function loadNextQuestion() {
@@ -406,6 +452,8 @@
 
     // Handle correct answer
     function handleCorrectAnswer() {
+        triggerSuccessFlash();
+
         if (activityType === 'multiple-choice') {
             const selectedBtn = document.querySelector('.option-btn.selected');
             if (selectedBtn) {
@@ -461,6 +509,8 @@
 
     // Handle wrong answer
     function handleWrongAnswer() {
+        triggerDamageFlash();
+
         if (activityType === 'multiple-choice') {
             const selectedBtn = document.querySelector('.option-btn.selected');
             const correctBtn = document.querySelector(`[data-answer="${correctAnswer}"]`);
@@ -596,18 +646,26 @@
 
     // Play sound for correct/wrong feedback
     function playFeedbackSound(isCorrect) {
-        const sound = isCorrect ? correctSound : wrongSound;
-        if (!sound) return;
-
-        try {
-            sound.currentTime = 0;
-            const playPromise = sound.play();
-            if (playPromise && typeof playPromise.catch === 'function') {
-                playPromise.catch(err => console.warn('Audio playback blocked:', err));
-            }
-        } catch (e) {
-            console.error('Error playing feedback sound:', e);
+        const soundsToPlay = [];
+        if (isCorrect) {
+            if (correctSound) soundsToPlay.push(correctSound);
+            if (enemyDamageSound) soundsToPlay.push(enemyDamageSound);
+        } else {
+            if (wrongSound) soundsToPlay.push(wrongSound);
+            if (playerDamageSound) soundsToPlay.push(playerDamageSound);
         }
+
+        soundsToPlay.forEach(sound => {
+            try {
+                sound.currentTime = 0;
+                const playPromise = sound.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(err => console.warn('Audio playback blocked:', err));
+                }
+            } catch (e) {
+                console.error('Error playing feedback sound:', e);
+            }
+        });
     }
 
     // Continue to next question
@@ -643,6 +701,14 @@
         const gameOverModal = document.getElementById('gameOverModal');
         if (gameOverModal) {
             gameOverModal.classList.add('active');
+        }
+        if (gameOverSound) {
+            try {
+                gameOverSound.currentTime = 0;
+                gameOverSound.play();
+            } catch (e) {
+                console.error('Error playing game over sound:', e);
+            }
         }
     }
     
@@ -684,10 +750,44 @@
                 const isPerfectScore = enemyHP === 0;
                 
                 if (isPerfectScore) {
-                    messageText = `🎯 <strong>Perfect Score!</strong><br>Enemy Defeated! All ${totalQs} questions correct!<br><br>Flawless victory! `;
+                    messageText = `
+                        <div style="
+                            text-align: center;
+                            font-family: 'Poppins', sans-serif;
+                            line-height: 1.6;
+                        ">
+                            <h2 style="color:#4CAF50; margin-bottom:6px;">🎯 Perfect Score!</h2>
+                            <p style="font-size:16px; margin:0;">
+                                <strong>Enemy Defeated!</strong><br>
+                                All <strong>${totalQs}</strong> questions correct!
+                            </p>
+                            <p style="color:#888; margin-top:10px;">
+                                <em>Flawless victory!</em>
+                            </p>
+                        </div>
+                    `;
+
                 } else {
                     const wrongAnswers = totalQs - correctAnswersCount;
-                    messageText = `✅ <strong>Level Complete!</strong><br>Score: ${correctAnswersCount}/${totalQs} Correct<br>Enemy HP Remaining: ${enemyHP}/${maxEnemyHP}<br><br>${wrongAnswers === 1 ? 'Just one mistake' : `${wrongAnswers} mistakes`} - you\'re getting better! `;
+                    messageText = `
+                        <div style="
+                            text-align:center;
+                            line-height:1.6;
+                        ">
+                            <p style="font-size:16px; margin:0;">
+                                <strong>Score:</strong> ${correctAnswersCount}/${totalQs}<br>
+                                <strong>Enemy HP:</strong> ${enemyHP}/${maxEnemyHP}
+                            </p>
+
+                            <p style="color:#888; margin-top:12px;">
+                                ${wrongAnswers === 1 
+                                    ? 'Just <strong>one mistake</strong> — great job!' 
+                                    : `<strong>${wrongAnswers}</strong> mistakes — you’re getting better!`
+                                }
+                            </p>
+                        </div>
+                    `;
+
                 }
             } else {
                 messageText = 'Amazing work! You\'ve mastered this challenge! ';
@@ -719,6 +819,14 @@
             }
             
             victoryModal.classList.add('active');
+            if (victorySound) {
+                try {
+                    victorySound.currentTime = 0;
+                    victorySound.play();
+                } catch (e) {
+                    console.error('Error playing victory sound:', e);
+                }
+            }
         }
     }
     

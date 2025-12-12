@@ -301,7 +301,7 @@
     <div class="modal-overlay" id="victoryModal">
         <div class="modal-content">
             <img src="../assets/img/wiza/wiza-heart-eyes.png" alt="Wiza Celebrating" class="modal-image">
-            <h2 class="modal-title" style="color: #58cc02;">Lecture Complete! 🎉</h2>
+            <h2 class="modal-title" style="color: #58cc02;">Lecture Complete!</h2>
             <p class="modal-message" id="victoryMessage">Great job! You've mastered this lesson!</p>
             <div class="modal-buttons">
                 <button class="modal-btn modal-btn-primary" onclick="completeLecture()" id="nextLevelBtn">

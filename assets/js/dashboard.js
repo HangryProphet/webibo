@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Draw trail after rendering
             setTimeout(drawTrail, 100);
+        setTimeout(scrollToCurrentNode, 120);
             
         } catch (error) {
             console.error('Error fetching levels:', error);
@@ -91,10 +92,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Re-query level nodes after rendering
         levelNodes = document.querySelectorAll('.level-node');
+        ensureCurrentNodeExists();
         
         // Draw trail after nodes are in DOM
         setTimeout(() => {
             drawTrail();
+            scrollToCurrentNode();
         }, 100);
     }
     
@@ -157,10 +160,16 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Create node content
         const iconClass = 'fas ' + level.icon;
+        const lockIconHtml = '<i class="fas fa-lock"></i>';
+        const displayTitle = level.status === 'locked' ? lockIconHtml : level.title;
+        const popupTitleHtml = level.status === 'locked'
+            ? `<div class="node-popup-text">${lockIconHtml}</div>`
+            : '';
         node.innerHTML = `
             <i class="${iconClass}"></i>
+            <div class="node-label">${displayTitle}</div>
             <div class="node-popup">
-                <div class="node-popup-text">${level.title}</div>
+                ${popupTitleHtml}
                 <div class="node-popup-type">${level.type === 'lecture' ? 'Lecture' : 'Challenge'}</div>
                 <div class="node-popup-xp">${level.xp_reward} XP</div>
             </div>
@@ -180,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update popup text for locked nodes
             const popupText = node.querySelector('.node-popup-text');
             if (popupText) {
-                popupText.textContent = '???';
+                popupText.innerHTML = lockIconHtml;
             }
         }
         
@@ -244,6 +253,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const pathData = buildSmoothPath(points);
         trailPath.setAttribute('d', pathData);
+    }
+
+    // Make sure there's always a current (blue) node to guide the user
+    function ensureCurrentNodeExists() {
+        if (!levelNodes || !levelNodes.length) return;
+        
+        const hasCurrent = Array.from(levelNodes).some(node => node.classList.contains('current'));
+        if (hasCurrent) return;
+
+        // Prefer the first non-locked node; otherwise fallback to the first node
+        const firstUnlocked = Array.from(levelNodes).find(node => !node.classList.contains('locked'));
+        const targetNode = firstUnlocked || levelNodes[0];
+        if (targetNode) {
+            targetNode.classList.add('current');
+        }
     }
 
     // Drag-to-scroll functionality
@@ -321,38 +345,42 @@ document.addEventListener('DOMContentLoaded', function() {
         container.style.cursor = 'grab';
     }
 
-    // Scroll to current level node on mobile view
+    // Scroll to current level node on all views
     function scrollToCurrentNode() {
-        if (window.innerWidth <= 1024) {
-            const currentNode = document.querySelector('.level-node.current');
-            const roadmapContainer = document.querySelector('.roadmap-container');
-            const roadmap = document.querySelector('.roadmap');
+        const currentNode = document.querySelector('.level-node.current');
+        const roadmapContainer = document.querySelector('.roadmap-container');
+        const roadmap = document.querySelector('.roadmap');
+        
+        if (currentNode && roadmapContainer && roadmap) {
+            // Get the scale factor based on screen size
+            const scale = window.innerWidth <= 480
+                ? 0.6
+                : window.innerWidth <= 768
+                    ? 0.75
+                    : window.innerWidth <= 1024
+                        ? 0.85
+                        : 1;
             
-            if (currentNode && roadmapContainer && roadmap) {
-                // Get the scale factor based on screen size
-                const scale = window.innerWidth <= 480 ? 0.6 : (window.innerWidth <= 768 ? 0.75 : 0.85);
-                
-                // Get the node's left position from inline style (relative to unscaled roadmap)
-                const nodeLeft = parseFloat(currentNode.style.left) || 0;
-                
-                // Get the node's actual rendered width (accounts for scale transform on node)
-                const nodeWidth = currentNode.offsetWidth;
-                
-                // Calculate the node's center position in the scaled roadmap coordinate system
-                // Roadmap is scaled, so node positions are scaled too
-                const nodeCenterInScaledRoadmap = (nodeLeft * scale) + (nodeWidth / 2);
-                
-                // Calculate scroll position to center the node
-                // We want the node center to align with the container center
-                const containerWidth = roadmapContainer.clientWidth;
-                const scrollLeft = nodeCenterInScaledRoadmap - (containerWidth / 2);
-                
-                // Smooth scroll to center the current node
-                roadmapContainer.scrollTo({
-                    left: Math.max(0, scrollLeft),
-                    behavior: 'smooth'
-                });
-            }
+            // Get the node's left position from inline style (relative to unscaled roadmap)
+            const nodeLeft = parseFloat(currentNode.style.left) || 0;
+            
+            // Get the node's actual rendered width (accounts for scale transform on node)
+            const nodeWidth = currentNode.offsetWidth;
+            
+            // Calculate the node's center position in the scaled roadmap coordinate system
+            // Roadmap is scaled, so node positions are scaled too
+            const nodeCenterInScaledRoadmap = (nodeLeft * scale) + (nodeWidth / 2);
+            
+            // Calculate scroll position to center the node
+            // We want the node center to align with the container center
+            const containerWidth = roadmapContainer.clientWidth;
+            const scrollLeft = nodeCenterInScaledRoadmap - (containerWidth / 2);
+            
+            // Smooth scroll to center the current node
+            roadmapContainer.scrollTo({
+                left: Math.max(0, scrollLeft),
+                behavior: 'smooth'
+            });
         }
     }
 
