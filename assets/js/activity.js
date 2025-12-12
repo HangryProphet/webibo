@@ -41,11 +41,25 @@
     const victorySound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/victory.mp3') : null;
     const gameOverSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/gameover.mp3') : null;
     let damageFlashEl = null;
+    let successFlashEl = null;
     
     // Initialize volume from localStorage (default 70%)
     function getVolume() {
         const savedVolume = localStorage.getItem('webibo_sound_volume');
         return savedVolume !== null ? parseInt(savedVolume) / 100 : 0.7;
+    }
+
+    function triggerSuccessFlash() {
+        if (!successFlashEl) {
+            successFlashEl = document.createElement('div');
+            successFlashEl.id = 'successFlash';
+            successFlashEl.className = 'success-flash';
+            document.body.appendChild(successFlashEl);
+        }
+
+        successFlashEl.classList.remove('active');
+        void successFlashEl.offsetWidth;
+        successFlashEl.classList.add('active');
     }
     
     function setSoundVolume(sound) {
@@ -438,6 +452,8 @@
 
     // Handle correct answer
     function handleCorrectAnswer() {
+        triggerSuccessFlash();
+
         if (activityType === 'multiple-choice') {
             const selectedBtn = document.querySelector('.option-btn.selected');
             if (selectedBtn) {

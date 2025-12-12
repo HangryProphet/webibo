@@ -30,6 +30,19 @@ body {
     animation: damageFlash 0.45s ease-out;
 }
 
+.success-flash {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(76, 175, 80, 0.25), rgba(76, 175, 80, 0.35));
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1800;
+}
+
+.success-flash.active {
+    animation: successFlash 0.45s ease-out;
+}
+
 @keyframes damageFlash {
     0% {
         opacity: 0;
@@ -37,6 +50,21 @@ body {
     }
     20% {
         opacity: 0.55;
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.04);
+    }
+}
+
+@keyframes successFlash {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    20% {
+        opacity: 0.5;
         transform: scale(1.02);
     }
     100% {
