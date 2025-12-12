@@ -75,7 +75,7 @@
                 <!-- Question Section -->
                 <div class="question-section fade-up">
                     <h2 class="question-title fade-up"><?php echo htmlspecialchars($question); ?></h2>
-                    <form method="POST" action="" id="quizForm">
+                    <form method="POST" action="" id="quizForm" onsubmit="return false;">
                         <div class="code-container fade-up">
                             <?php 
                             // Parse code template and create code lines
