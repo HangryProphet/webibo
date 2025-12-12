@@ -56,7 +56,7 @@ try {
     $firstName = sanitize_output($user['first_name'] ?? '');
     $lastName = sanitize_output($user['last_name'] ?? '');
     $email = sanitize_output($user['email']);
-    $avatarPath = $user['avatar_path'] ?? '/assets/img/avatars/default.png';
+    $avatarPath = $user['avatar_path'] ?? '../assets/img/avatars/default.png';
     $joinDate = date('F Y', strtotime($user['created_at']));
     
     // Profile stats

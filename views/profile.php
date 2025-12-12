@@ -37,7 +37,7 @@ require_once __DIR__ . '/../controllers/profile_handler.php';
             </a>
             
             <div class="avatar">
-                <?php if (!empty($avatarPath) && $avatarPath !== '/assets/img/avatars/default.png' && file_exists($_SERVER['DOCUMENT_ROOT'] . $avatarPath)): ?>
+                <?php if (!empty($avatarPath) && $avatarPath !== '../assets/img/avatars/default.png' && file_exists(__DIR__ . '/' . $avatarPath)): ?>
                     <img src="<?php echo htmlspecialchars($avatarPath); ?>" alt="<?php echo htmlspecialchars($username); ?>" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
                 <?php else: ?>
                     <i class="fas fa-user"></i>

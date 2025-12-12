@@ -52,7 +52,7 @@ require_once __DIR__ . '/../controllers/edit_profile_handler.php';
             <!-- Avatar Upload Section -->
             <div class="avatar-upload">
                 <div class="avatar-preview" id="avatarPreview">
-                    <?php if (!empty($currentAvatar) && $currentAvatar !== '/assets/img/avatars/default.png' && file_exists($_SERVER['DOCUMENT_ROOT'] . $currentAvatar)): ?>
+                    <?php if (!empty($currentAvatar) && $currentAvatar !== '../assets/img/avatars/default.png' && file_exists(__DIR__ . '/' . $currentAvatar)): ?>
                         <img src="<?php echo htmlspecialchars($currentAvatar); ?>" alt="Avatar" id="avatarImage">
                     <?php else: ?>
                         <i class="fas fa-user" id="avatarIcon"></i>
