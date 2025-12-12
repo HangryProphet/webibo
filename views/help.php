@@ -207,6 +207,78 @@ start_session_securely();
         document.querySelector('.back-btn')?.addEventListener('click', () => {
             window.history.back();
         });
+
+        // Feedback form submission
+        const feedbackForm = modal.querySelector('.modal-form');
+        const submitBtn = feedbackForm.querySelector('.modal-submit');
+        
+        submitBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const emailInput = document.getElementById('feedback-email');
+            const subjectInput = document.getElementById('feedback-subject');
+            const descriptionInput = document.getElementById('feedback-description');
+            
+            const email = emailInput.value.trim();
+            const subject = subjectInput.value.trim();
+            const description = descriptionInput.value.trim();
+            
+            // Validate fields
+            if (!email || !subject || !description) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            try {
+                const response = await fetch('../controllers/feedback_handler.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        subject: subject,
+                        description: description
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Show success message
+                    alert(result.message || 'Feedback sent successfully!');
+                    
+                    // Clear form
+                    emailInput.value = '';
+                    subjectInput.value = '';
+                    descriptionInput.value = '';
+                    
+                    // Close modal
+                    closeModal();
+                } else {
+                    alert(result.message || 'Failed to send feedback. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error sending feedback:', error);
+                alert('An error occurred while sending feedback. Please try again later.');
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit';
+            }
+        });
     </script>
 </body>
 </html>
