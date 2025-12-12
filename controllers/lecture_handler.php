@@ -40,11 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['complete'])) {
                     'level_completed', 
                     ['level_id' => $levelId]
                 );
-                
-                // Log awarded achievements for debugging
-                if (!empty($awardedAchievements)) {
-                    error_log("User {$userId} earned achievements: " . implode(', ', $awardedAchievements));
-                }
             }
         }
         

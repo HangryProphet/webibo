@@ -25,21 +25,23 @@
         <div class="course-popup">
             <div class="popup-header">SELECT COURSE</div>
             <div class="course-icons-list">
-                <div class="course-icon-item">
+                <div class="course-icon-item" data-course-id="1">
                     <div class="course-icon-circle html-icon">
                         <i class="fab fa-html5"></i>
                     </div>
                     <div class="course-icon-label">HTML</div>
                 </div>
-                <div class="course-icon-item">
+                <div class="course-icon-item<?php echo $courseLockStatus[2] ? ' locked' : ''; ?>" data-course-id="2" data-locked="<?php echo $courseLockStatus[2] ? 'true' : 'false'; ?>">
                     <div class="course-icon-circle css-icon">
                         <i class="fab fa-css3-alt"></i>
+                        <?php if ($courseLockStatus[2]): ?><i class="fas fa-lock lock-icon"></i><?php endif; ?>
                     </div>
                     <div class="course-icon-label">CSS</div>
                 </div>
-                <div class="course-icon-item">
+                <div class="course-icon-item<?php echo $courseLockStatus[3] ? ' locked' : ''; ?>" data-course-id="3" data-locked="<?php echo $courseLockStatus[3] ? 'true' : 'false'; ?>">
                     <div class="course-icon-circle js-icon">
                         <i class="fab fa-js"></i>
+                        <?php if ($courseLockStatus[3]): ?><i class="fas fa-lock lock-icon"></i><?php endif; ?>
                     </div>
                     <div class="course-icon-label">JavaScript</div>
                 </div>
@@ -133,6 +135,18 @@
                     <path class="trail-path" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
                 <!-- Level nodes will be dynamically loaded here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Locked Modal -->
+    <div class="modal-overlay" id="courseLockedModal">
+        <div class="modal-content">
+            <img src="../assets/img/wiza/wiza-sad.png" alt="Wiza Locked" class="modal-image">
+            <h2 class="modal-title" style="color: #ff4b4b;">🔒 Course Locked!</h2>
+            <p class="modal-message" id="courseLockedMessage">Complete all HTML levels to unlock this course.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-primary" onclick="closeCourseLockedModal()">GOT IT</button>
             </div>
         </div>
     </div>

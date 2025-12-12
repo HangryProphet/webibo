@@ -61,14 +61,14 @@ try {
     $mail->isSMTP();
     $mail->Host       = $_ENV['SMTP_HOST'] ?? 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = $_ENV['SMTP_USERNAME'] ?? '';
-    $mail->Password   = $_ENV['SMTP_PASSWORD'] ?? '';
+    $mail->Username   = $_ENV['SMTP_USER'] ?? '';
+    $mail->Password   = $_ENV['SMTP_PASS'] ?? '';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = (int)($_ENV['SMTP_PORT'] ?? 587);
 
     // Recipients
-    $mail->setFrom($_ENV['SMTP_FROM_EMAIL'] ?? 'noreply@webibo.local', $_ENV['SMTP_FROM_NAME'] ?? 'Webibo Feedback');
-    $mail->addAddress($_ENV['FEEDBACK_TO_EMAIL'] ?? $_ENV['SMTP_USERNAME'] ?? 'admin@webibo.local');
+    $mail->setFrom($_ENV['SMTP_FROM'] ?? 'noreply@webibo.local', 'Webibo Feedback');
+    $mail->addAddress($_ENV['SMTP_FROM'] ?? 'admin@webibo.local');
     $mail->addReplyTo($email, 'User Feedback');
 
     // Content

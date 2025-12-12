@@ -19,6 +19,11 @@
 
     function playVictorySound() {
         if (!victorySound) return;
+        
+        // Don't play if volume is 0
+        const currentVolume = getVolume();
+        if (currentVolume === 0) return;
+        
         try {
             victorySound.currentTime = 0;
             const playPromise = victorySound.play();
@@ -53,8 +58,6 @@
                 playVictorySound();
             };
         }
-        
-        console.log('Lecture page loaded with slide navigation');
     });
     
     // Exit modal functions

@@ -195,6 +195,44 @@ class ProgressModel
     }
 
     /**
+     * Check if a user has completed all levels in a course
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User's ID
+     * @param int $courseId Course ID to check
+     * @return bool True if all levels completed
+     */
+    public static function hasCourseCompleted(PDO $pdo, int $userId, int $courseId): bool
+    {
+        try {
+            // Get total levels in the course
+            $sqlTotal = "SELECT COUNT(*) as total FROM levels WHERE course_id = :course_id";
+            $stmtTotal = $pdo->prepare($sqlTotal);
+            $stmtTotal->execute([':course_id' => $courseId]);
+            $totalLevels = (int)$stmtTotal->fetch(PDO::FETCH_ASSOC)['total'];
+            
+            if ($totalLevels === 0) {
+                return false; // No levels in course
+            }
+            
+            // Get completed levels in this course
+            $sqlCompleted = "SELECT COUNT(DISTINCT up.level_id) as completed
+                            FROM user_progress up
+                            JOIN levels l ON up.level_id = l.id
+                            WHERE up.user_id = :user_id AND l.course_id = :course_id";
+            $stmtCompleted = $pdo->prepare($sqlCompleted);
+            $stmtCompleted->execute([':user_id' => $userId, ':course_id' => $courseId]);
+            $completedLevels = (int)$stmtCompleted->fetch(PDO::FETCH_ASSOC)['completed'];
+            
+            return $completedLevels >= $totalLevels;
+            
+        } catch (PDOException $e) {
+            error_log("ProgressModel::hasCourseCompleted Error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
      * Count total completed levels for a user
      * 
      * @param PDO $pdo Database connection

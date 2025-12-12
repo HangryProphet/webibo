@@ -83,6 +83,17 @@ if ($userStats && is_array($userStats)) {
     $userStats['total_badges'] = $totalBadges;
 }
 
+// Check course completion status for progression locks
+$htmlCompleted = ProgressModel::hasCourseCompleted($pdo, $userId, 1); // HTML = course 1
+$cssCompleted = ProgressModel::hasCourseCompleted($pdo, $userId, 2);  // CSS = course 2
+
+// Determine course lock status
+$courseLockStatus = [
+    1 => false,           // HTML always unlocked
+    2 => !$htmlCompleted, // CSS locked until HTML complete
+    3 => !$cssCompleted   // JS locked until CSS complete
+];
+
 // Fetch user progress from model
 $userProgress = ProgressModel::getProgressByUserId($pdo, $userId);
 

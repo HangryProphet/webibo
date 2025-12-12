@@ -72,19 +72,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if this is a level completion request (from victory modal)
     $isCompletionRequest = isset($_POST['complete_level']) && $_POST['complete_level'] == '1';
     
-    // DEBUG: Log completion request
-    error_log("Activity Handler - Level $levelId: complete_level flag = " . ($_POST['complete_level'] ?? 'NOT SET'));
-    error_log("Activity Handler - isCompletionRequest = " . ($isCompletionRequest ? 'TRUE' : 'FALSE'));
-    
     if ($isCompletionRequest) {
-        error_log("Activity Handler - Processing completion for Level $levelId, User $userId");
         
         // Level already completed client-side, just mark as complete and redirect
         $xpReward = $level['xp_reward'] ?? 10;
         StatsModel::addXP($pdo, $userId, $xpReward);
         $completionResult = ProgressModel::completeLevel($pdo, $userId, $levelId);
-        
-        error_log("Activity Handler - ProgressModel::completeLevel result: " . ($completionResult ? 'SUCCESS' : 'FAILED'));
         
         // Award achievements
         require_once __DIR__ . '/../core/services/AchievementService.php';
@@ -166,11 +159,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'level_completed', 
                 ['level_id' => $levelId]
             );
-            
-            // Log awarded achievements for debugging
-            if (!empty($awardedAchievements)) {
-                error_log("User {$userId} earned achievements: " . implode(', ', $awardedAchievements));
-            }
         }
         
         // Redirect to next level or dashboard

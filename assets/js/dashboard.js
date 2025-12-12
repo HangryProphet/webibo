@@ -28,9 +28,19 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Course selection handlers
     const courseIcons = document.querySelectorAll('.course-icon-item');
-    courseIcons.forEach((icon, index) => {
+    courseIcons.forEach((icon) => {
         icon.addEventListener('click', function() {
-            const courseId = index + 1; // 0=HTML(1), 1=CSS(2), 2=JS(3)
+            const courseId = parseInt(this.dataset.courseId);
+            const isLocked = this.dataset.locked === 'true';
+            
+            if (isLocked) {
+                // Show locked modal
+                const courseName = courseId === 2 ? 'CSS' : 'JavaScript';
+                const prerequisite = courseId === 2 ? 'HTML' : 'CSS';
+                showCourseLockedModal(courseName, prerequisite);
+                return;
+            }
+            
             selectCourse(courseId);
         });
     });
@@ -42,6 +52,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get selected course from localStorage or default to HTML
     let currentCourseId = parseInt(localStorage.getItem('selectedCourse')) || 1;
     
+    // Validate that the selected course is unlocked
+    const selectedCourseIcon = document.querySelector(`.course-icon-item[data-course-id="${currentCourseId}"]`);
+    if (selectedCourseIcon && selectedCourseIcon.dataset.locked === 'true') {
+        // Course is locked, reset to HTML
+        currentCourseId = 1;
+        localStorage.setItem('selectedCourse', 1);
+    }
+    
     // Fetch levels from backend and render dynamically
     fetchAndRenderLevels(currentCourseId);
     
@@ -50,6 +68,34 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize drag-to-scroll functionality
     initDragScroll();
+    
+    // Course locked modal functions
+    window.showCourseLockedModal = function(courseName, prerequisite) {
+        const modal = document.getElementById('courseLockedModal');
+        const message = document.getElementById('courseLockedMessage');
+        
+        if (modal && message) {
+            message.textContent = `Complete all ${prerequisite} levels to unlock ${courseName}.`;
+            modal.classList.add('active');
+        }
+    };
+    
+    window.closeCourseLockedModal = function() {
+        const modal = document.getElementById('courseLockedModal');
+        if (modal) {
+            modal.classList.remove('active');
+        }
+    };
+    
+    // Close modal when clicking outside
+    const courseLockedModal = document.getElementById('courseLockedModal');
+    if (courseLockedModal) {
+        courseLockedModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                window.closeCourseLockedModal();
+            }
+        });
+    }
     
     // Fetch levels from API and render them
     async function fetchAndRenderLevels(courseId) {
@@ -60,10 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             const levels = await response.json();
-            
-            // DEBUG: Log fetched levels
-            console.log('Fetched levels for course', courseId, ':', levels);
-            console.log('First 3 levels status:', levels.slice(0, 3).map(l => ({id: l.id, status: l.status})));
             
             // Render all levels
             renderLevels(levels);
@@ -144,11 +186,7 @@ document.addEventListener('DOMContentLoaded', function() {
         node.dataset.levelId = level.id;
         node.dataset.activityType = level.type === 'lecture' ? 'Lecture' : 'Challenge';
         
-        // DEBUG: Log class application for first 3 nodes
-        if (level.id <= 3) {
-            console.log(`Creating level ${level.id}: status=${level.status}, className="${node.className}"`);
-        }
-        
+
         // Position the node
         node.style.left = level.position.left + 'px';
         node.style.top = level.position.top + 'px';

@@ -39,10 +39,6 @@ try {
     // Get user's completed levels
     $completedLevels = ProgressModel::getCompletedLevelIds($pdo, $userId, $courseId);
     
-    // DEBUG: Log completion data
-    error_log("User ID: $userId, Course ID: $courseId");
-    error_log("Completed Level IDs: " . json_encode($completedLevels));
-    
     // Process each level and determine status
     $roadmapData = [];
     $horizontalSpacing = 180; // Horizontal spacing between nodes
@@ -54,11 +50,6 @@ try {
         
         // Determine node status
         $status = determineNodeStatus($levelId, $level['parent_level_id'], $completedLevels);
-        
-        // DEBUG: Log status determination for first few levels
-        if ($levelId <= 3) {
-            error_log("Level $levelId: parent={$level['parent_level_id']}, status=$status");
-        }
         
         // Calculate position
         $absoluteIndex = $orderInCourse - 1;

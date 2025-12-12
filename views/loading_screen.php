@@ -39,8 +39,23 @@ if (!isset($_SESSION['user'])) {
     <script src="../assets/js/loading.js"></script>
     <script>
         (function () {
+            // Check volume setting from localStorage
+            function getVolume() {
+                const savedVolume = localStorage.getItem('webibo_sound_volume');
+                return savedVolume !== null ? parseInt(savedVolume) / 100 : 0.7;
+            }
+            
+            const currentVolume = getVolume();
+            
+            // Don't play if volume is 0
+            if (currentVolume === 0) return;
+            
             const audio = document.getElementById('magic-sound');
             if (!audio) return;
+            
+            // Set volume
+            audio.volume = currentVolume;
+            
             try {
                 audio.currentTime = 0;
                 const playPromise = audio.play();

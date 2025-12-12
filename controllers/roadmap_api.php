@@ -31,7 +31,7 @@ require_once __DIR__ . '/../core/models/LevelModel.php';
 require_once __DIR__ . '/../core/models/ProgressModel.php';
 
 // Development mode flag - set to false in production
-define('DEVELOPMENT_MODE', true);
+define('DEVELOPMENT_MODE', false);
 
 // Get parameters
 $courseId = isset($_GET['course_id']) ? (int)$_GET['course_id'] : 1; // Default to HTML course

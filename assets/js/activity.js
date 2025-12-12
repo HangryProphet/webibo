@@ -85,6 +85,25 @@
         if (gameOverSound) gameOverSound.volume = volume;
     });
 
+    // Helper function to play any sound with volume check
+    function playSoundSafe(sound) {
+        if (!sound) return;
+        
+        // Don't play if volume is 0
+        const currentVolume = getVolume();
+        if (currentVolume === 0) return;
+        
+        try {
+            sound.currentTime = 0;
+            const playPromise = sound.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(err => console.warn('Audio playback blocked:', err));
+            }
+        } catch (e) {
+            console.error('Error playing sound:', e);
+        }
+    }
+
     function triggerDamageFlash() {
         if (!damageFlashEl) {
             damageFlashEl = document.createElement('div');
@@ -646,6 +665,10 @@
 
     // Play sound for correct/wrong feedback
     function playFeedbackSound(isCorrect) {
+        // Don't play if volume is 0
+        const currentVolume = getVolume();
+        if (currentVolume === 0) return;
+        
         const soundsToPlay = [];
         if (isCorrect) {
             if (correctSound) soundsToPlay.push(correctSound);
@@ -702,7 +725,10 @@
         if (gameOverModal) {
             gameOverModal.classList.add('active');
         }
-        if (gameOverSound) {
+        
+        // Don't play if volume is 0
+        const currentVolume = getVolume();
+        if (gameOverSound && currentVolume > 0) {
             try {
                 gameOverSound.currentTime = 0;
                 gameOverSound.play();
@@ -815,11 +841,13 @@
             const completeLevelInput = document.getElementById('completeLevelInput');
             if (completeLevelInput) {
                 completeLevelInput.value = '1';
-                console.log('DEBUG: Set complete_level flag to 1 before showing modal');
             }
             
             victoryModal.classList.add('active');
-            if (victorySound) {
+            
+            // Don't play if volume is 0
+            const currentVolume = getVolume();
+            if (victorySound && currentVolume > 0) {
                 try {
                     victorySound.currentTime = 0;
                     victorySound.play();
@@ -838,39 +866,22 @@
         
         if (completeLevelInput) {
             completeLevelInput.value = '1';
-            console.log('DEBUG: Set complete_level flag to 1');
-        } else {
-            console.error('DEBUG: completeLevelInput element not found!');
         }
         
         // Ensure redirect goes to next level
         if (redirectToInput) {
             redirectToInput.value = 'next';
-            console.log('DEBUG: Set redirect_to to next');
         }
         
         // Submit the completion form to trigger backend logic
         const quizForm = document.getElementById('quizForm');
         if (quizForm) {
-            console.log('DEBUG: Found quizForm, complete_level=' + completeLevelInput?.value);
-            console.log('DEBUG: Form action:', quizForm.action);
-            console.log('DEBUG: Form method:', quizForm.method);
-            
-            // Check FormData to verify what will be sent
-            const formData = new FormData(quizForm);
-            console.log('DEBUG: FormData contents:');
-            for (let pair of formData.entries()) {
-                console.log('  ' + pair[0] + ': ' + pair[1]);
-            }
-            
             // Submit the form
             quizForm.submit();
         } else if (config.nextLevelUrl) {
-            console.log('DEBUG: No quizForm found, using direct navigation');
             // Direct navigation to next level
             window.location.href = config.nextLevelUrl;
         } else {
-            console.log('DEBUG: No quizForm or nextLevelUrl, redirecting to dashboard');
             // Fallback: redirect to dashboard
             window.location.href = 'dashboard.php';
         }
@@ -908,7 +919,6 @@
         
         // If victory modal is active and level is complete, save progress
         if (victoryModal && victoryModal.classList.contains('active') && completeLevelInput && completeLevelInput.value === '1' && quizForm) {
-            console.log('DEBUG: Saving progress before returning to dashboard');
             // Set redirect to dashboard
             if (redirectToInput) {
                 redirectToInput.value = 'dashboard';

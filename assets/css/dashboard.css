@@ -135,6 +135,16 @@ body {
     transform: translateX(4px);
 }
 
+.course-icon-item.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.course-icon-item.locked:hover {
+    background-color: #2d3949;
+    transform: translateX(0);
+}
+
 .course-icon-circle {
     width: 48px;
     height: 48px;
@@ -143,6 +153,22 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 24px;
+    position: relative;
+}
+
+.course-icon-circle .lock-icon {
+    position: absolute;
+    font-size: 16px;
+    color: #ff4b4b;
+    background-color: #1e2633;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: -4px;
+    right: -4px;
 }
 
 .html-icon {
@@ -1497,4 +1523,92 @@ body {
     .course-icon-label {
         font-size: 14px;
     }
+}
+
+/* ============================================
+   MODALS
+   ============================================ */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #1e2633;
+    border: 2px solid #2d3949;
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+}
+
+.modal-image {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 24px;
+    object-fit: contain;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e5e7eb;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.modal-message {
+    font-size: 16px;
+    color: #9ca3af;
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-btn {
+    padding: 18px 32px;
+    border: none;
+    border-radius: 16px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.modal-btn-primary {
+    background-color: #1cb0f6;
+    color: #ffffff;
+    box-shadow: 0 4px 0 #0e7fb0;
+}
+
+.modal-btn-primary:hover {
+    background-color: #1ec5ff;
+}
+
+.modal-btn-primary:active {
+    box-shadow: 0 2px 0 #0e7fb0;
+    transform: translateY(2px);
 }

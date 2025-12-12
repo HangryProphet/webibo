@@ -28,13 +28,8 @@ require_once __DIR__ . '/../core/models/UserModel.php';
 $identifier = trim($_POST['username'] ?? ''); // Can be username or email
 $password = $_POST['password'] ?? '';
 
-error_log("=== LOGIN ATTEMPT START ===");
-error_log("Identifier: $identifier");
-error_log("Password length: " . strlen($password));
-
 // Validation: Check if fields are filled
 if (empty($identifier) || empty($password)) {
-    error_log("Login failed: Empty fields");
     set_error('Please fill in all fields');
     redirect('../views/login.php');
 }
@@ -44,19 +39,12 @@ $user = UserModel::getUserByUsernameOrEmail($pdo, $identifier);
 
 // Check if user exists
 if (!$user) {
-    error_log("Login failed: User not found for identifier: $identifier");
     set_error('Invalid username/email or password');
     redirect('../views/login.php');
 }
 
-// Debug logging
-error_log("Login attempt - User found: " . $user['username']);
-error_log("Password from DB (first 20 chars): " . substr($user['password_hash'], 0, 20));
-error_log("Is verified: " . ($user['is_verified'] ? 'true' : 'false'));
-
 // Verify password using secure password_verify()
 if (!password_verify($password, $user['password_hash'])) {
-    error_log("Login failed: Password verification failed for user: " . $user['username']);
     set_error('Invalid username/email or password');
     redirect('../views/login.php');
 }
@@ -84,7 +72,6 @@ require_once __DIR__ . '/../core/services/AchievementService.php';
 
 // Check and update daily streak
 $streakResult = StatsModel::checkAndUpdateStreak($pdo, $user['id']);
-error_log("Streak updated - Current: {$streakResult['current_streak']}, New: " . ($streakResult['is_new_streak'] ? 'Yes' : 'No'));
 
 // Check for streak achievements if streak was updated
 if ($streakResult['is_new_streak']) {
