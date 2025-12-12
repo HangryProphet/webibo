@@ -49,6 +49,7 @@
                         </div>
                         <input type="hidden" name="answer" id="selectedAnswer">
                         <input type="hidden" name="complete_level" id="completeLevelInput" value="0">
+                        <input type="hidden" name="redirect_to" id="redirectToInput" value="next">
                     </form>
                 </div>
 
@@ -98,6 +99,7 @@
                         </div>
                         <input type="hidden" name="answer" id="selectedAnswer">
                         <input type="hidden" name="complete_level" id="completeLevelInput" value="0">
+                        <input type="hidden" name="redirect_to" id="redirectToInput" value="next">
                     </form>
                 </div>
 
@@ -172,6 +174,7 @@
 
                         <input type="hidden" name="code" id="submittedCode">
                         <input type="hidden" name="complete_level" id="completeLevelInput" value="0">
+                        <input type="hidden" name="redirect_to" id="redirectToInput" value="next">
                     </form>
                 </div>
             <?php endif; ?>
@@ -230,6 +233,19 @@
             <p class="modal-message" id="victoryMessage">Amazing work! You've mastered this challenge!</p>
             <div class="modal-buttons">
                 <button class="modal-btn modal-btn-primary" onclick="goToNextLevel()" id="nextLevelBtn">CONTINUE TO NEXT LEVEL</button>
+                <button class="modal-btn modal-btn-secondary" onclick="exitToDashboard()">BACK TO MAP</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Code Editor Failure Modal -->
+    <div class="modal-overlay" id="codeEditorFailureModal">
+        <div class="modal-content">
+            <img src="../assets/img/wiza/wiza-sad.png" alt="Wiza Disappointed" class="modal-image">
+            <h2 class="modal-title" style="color: #ff4757;">Not Quite Right! 🤔</h2>
+            <p class="modal-message">Your code doesn't match the expected output. Review the instructions and try again from the beginning.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-primary" onclick="retryCodeEditor()">TRY AGAIN</button>
                 <button class="modal-btn modal-btn-secondary" onclick="exitToDashboard()">BACK TO MAP</button>
             </div>
         </div>

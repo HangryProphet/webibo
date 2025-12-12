@@ -90,16 +90,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         require_once __DIR__ . '/../core/services/AchievementService.php';
         AchievementService::checkAchievementsOnEvent($pdo, $userId, 'level_completed', ['level_id' => $levelId]);
         
-        // Redirect to next level or dashboard
-        $nextLevel = LevelModel::getNextLevel($pdo, $levelId);
-        if ($nextLevel) {
-            if ($nextLevel['level_type'] === 'lecture') {
-                header("Location: lecture.php?id={$nextLevel['id']}");
-            } else {
-                header("Location: activity.php?id={$nextLevel['id']}");
-            }
-        } else {
+        // Check redirect preference
+        $redirectTo = isset($_POST['redirect_to']) ? $_POST['redirect_to'] : 'next';
+        
+        if ($redirectTo === 'dashboard') {
+            // User chose to go back to dashboard
             header("Location: dashboard.php");
+        } else {
+            // User chose to continue to next level (default)
+            $nextLevel = LevelModel::getNextLevel($pdo, $levelId);
+            if ($nextLevel) {
+                if ($nextLevel['level_type'] === 'lecture') {
+                    header("Location: lecture.php?id={$nextLevel['id']}");
+                } else {
+                    header("Location: activity.php?id={$nextLevel['id']}");
+                }
+            } else {
+                header("Location: dashboard.php");
+            }
         }
         exit;
     }
@@ -181,13 +189,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
     } else {
         // WRONG ANSWER
-        // Decrease hearts
-        $currentHearts = max(0, $currentHearts - 1);
-        $_SESSION['hearts'] = $currentHearts;
         
-        if ($currentHearts <= 0) {
-            header("Location: gameover.php");
-            exit;
+        // For code-editor activities: one try only, no heart system
+        if ($level['level_type'] === 'code-editor') {
+            // Do NOT complete the level, do NOT decrease hearts
+            // Just let the page reload and show feedback
+            // JavaScript will show a failure modal with option to retry from scratch
+            $_SESSION['code_editor_failed'] = true;
+            // Stay on same page - JS will handle showing the failure state
+        } else {
+            // For other activity types: use heart system
+            // Decrease hearts
+            $currentHearts = max(0, $currentHearts - 1);
+            $_SESSION['hearts'] = $currentHearts;
+            
+            if ($currentHearts <= 0) {
+                header("Location: gameover.php");
+                exit;
+            }
         }
         
         // Reload the same activity (JavaScript will show feedback)

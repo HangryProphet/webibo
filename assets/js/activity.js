@@ -440,6 +440,13 @@
                 updateEnemyHP();
             }
             correctAnswersCount++;
+        } else if (activityType === 'code-editor') {
+            // Code editor: show victory modal immediately on correct answer
+            playFeedbackSound(true);
+            setTimeout(() => {
+                showVictoryModal();
+            }, 500);
+            return; // Don't show regular feedback
         }
 
         playFeedbackSound(true);
@@ -463,6 +470,12 @@
             if (answerInput) {
                 answerInput.classList.add('wrong');
             }
+        } else if (activityType === 'code-editor') {
+            // Code editor: show failure state immediately
+            // No hearts decrease, just show failure modal
+            playFeedbackSound(false);
+            showCodeEditorFailureModal();
+            return; // Don't show regular feedback
         }
 
         // Show happy/neutral enemy state on wrong answer
@@ -480,8 +493,10 @@
             }
         }
 
-        // Decrease player hearts
-        decreaseHearts();
+        // Decrease player hearts (not for code editor)
+        if (activityType !== 'code-editor') {
+            decreaseHearts();
+        }
 
         playFeedbackSound(false);
         showFeedback(false);
@@ -630,8 +645,22 @@
         window.location.reload();
     };
     
+    // Show code editor failure modal
+    function showCodeEditorFailureModal() {
+        const failureModal = document.getElementById('codeEditorFailureModal');
+        if (failureModal) {
+            failureModal.classList.add('active');
+        }
+    }
+    
+    // Retry code editor from failure
+    window.retryCodeEditor = function() {
+        window.location.reload();
+    };
+    
     // Show victory modal
     function showVictoryModal() {
+        // Show the victory modal first - progress will be saved when user clicks a button
         const victoryModal = document.getElementById('victoryModal');
         const victoryMessage = document.getElementById('victoryMessage');
         const nextLevelBtn = document.getElementById('nextLevelBtn');
@@ -672,6 +701,13 @@
                 }
             }
             
+            // Set the complete_level flag now, before showing modal
+            const completeLevelInput = document.getElementById('completeLevelInput');
+            if (completeLevelInput) {
+                completeLevelInput.value = '1';
+                console.log('DEBUG: Set complete_level flag to 1 before showing modal');
+            }
+            
             victoryModal.classList.add('active');
         }
     }
@@ -680,11 +716,19 @@
     window.goToNextLevel = function() {
         // Mark level as complete before submitting
         const completeLevelInput = document.getElementById('completeLevelInput');
+        const redirectToInput = document.getElementById('redirectToInput');
+        
         if (completeLevelInput) {
             completeLevelInput.value = '1';
             console.log('DEBUG: Set complete_level flag to 1');
         } else {
             console.error('DEBUG: completeLevelInput element not found!');
+        }
+        
+        // Ensure redirect goes to next level
+        if (redirectToInput) {
+            redirectToInput.value = 'next';
+            console.log('DEBUG: Set redirect_to to next');
         }
         
         // Submit the completion form to trigger backend logic
@@ -730,8 +774,24 @@
     };
 
     window.exitToDashboard = function() {
-        // Simple redirect to dashboard
-        window.location.href = 'dashboard.php';
+        // Check if we're in victory modal (level complete) - if so, save progress first
+        const victoryModal = document.getElementById('victoryModal');
+        const completeLevelInput = document.getElementById('completeLevelInput');
+        const redirectToInput = document.getElementById('redirectToInput');
+        const quizForm = document.getElementById('quizForm');
+        
+        if (victoryModal && victoryModal.classList.contains('active') && completeLevelInput && completeLevelInput.value === '1' && quizForm) {
+            console.log('DEBUG: Saving progress before returning to dashboard');
+            // Set redirect to dashboard
+            if (redirectToInput) {
+                redirectToInput.value = 'dashboard';
+            }
+            // Submit form to save progress, which will redirect to dashboard
+            quizForm.submit();
+        } else {
+            // Normal exit without completion (from exit modal)
+            window.location.href = 'dashboard.php';
+        }
     };
 
     // Setup exit modal handlers
@@ -754,20 +814,35 @@
         });
     }
     
-    // Setup Enter key handler for continue button
+    // Setup Enter key handler for check and continue buttons
     function setupContinueKeyHandler() {
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
+                // Don't trigger if user is typing in an input field or textarea
+                // (except for fill-blank activities where we want Enter to submit)
+                const isInInput = e.target.tagName === 'INPUT' && activityType !== 'fill-blank';
+                const isInTextarea = e.target.tagName === 'TEXTAREA';
+                
+                if (isInInput || isInTextarea) {
+                    return;
+                }
+                
                 // Check if feedback panel is active (continue button visible)
                 const feedbackPanel = document.getElementById('feedbackPanel');
                 const continueBtn = document.getElementById('continueBtn');
+                const checkBtn = document.getElementById('checkBtn');
                 
-                if (feedbackPanel && feedbackPanel.classList.contains('active') && continueBtn && !continueBtn.disabled) {
-                    // Don't trigger if user is typing in an input field
-                    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                // Priority 1: If feedback panel is active, trigger continue button
+                if (feedbackPanel && feedbackPanel.classList.contains('active')) {
+                    if (continueBtn && !continueBtn.disabled) {
                         e.preventDefault();
                         window.continueToNext();
                     }
+                }
+                // Priority 2: If check button is enabled, trigger it
+                else if (checkBtn && !checkBtn.disabled) {
+                    e.preventDefault();
+                    checkBtn.click();
                 }
             }
         });
