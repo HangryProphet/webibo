@@ -676,7 +676,10 @@
             // Build score summary
             let messageText = '';
             
-            if (config.hasEnemy !== false) {
+            // Skip score display for code-editor activities (single-attempt challenges)
+            if (activityType === 'code-editor') {
+                messageText = 'Amazing work! You\'ve mastered this challenge! ';
+            } else if (config.hasEnemy !== false) {
                 const totalQs = totalQuestions;
                 const isPerfectScore = enemyHP === 0;
                 

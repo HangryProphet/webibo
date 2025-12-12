@@ -257,6 +257,9 @@ $redirectUrl = 'dashboard.php';
 $totalQuestions = $isMultiQuestion ? count($activityContent['questions']) : 1;
 $adaptiveEnemyHP = $totalQuestions * 2; // 2 HP damage per correct answer
 
+// Calculate dynamic hearts based on question count (questions + 2 buffer)
+$dynamicHearts = $totalQuestions + 2;
+
 // Get next level information
 $nextLevel = LevelModel::getNextLevel($pdo, $levelId);
 $hasNextLevel = ($nextLevel !== false);
@@ -274,7 +277,7 @@ $activity_data = [
     'question' => $currentQuestionData['question'] ?? $currentQuestionData['instruction'] ?? '',
     'options' => $currentQuestionData['options'] ?? [],
     'correctAnswer' => $currentQuestionData['correct_answer'] ?? $currentQuestionData['correct_code'] ?? '',
-    'currentHearts' => $currentHearts,
+    'currentHearts' => $dynamicHearts,
     'currentProgress' => $currentProgress,
     'redirectUrl' => $redirectUrl,
     'enemyHP' => $adaptiveEnemyHP,
