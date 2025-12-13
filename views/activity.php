@@ -249,6 +249,34 @@
         </div>
     </div>
 
+    <!-- Enemy Introduction Modal -->
+    <?php if (($activity_data['type'] === 'multiple-choice' || $activity_data['type'] === 'fill-blank') && $activity_data['hasEnemy'] && $enemy): ?>
+    <div class="modal-overlay" id="enemyIntroductionModal">
+        <div class="modal-content enemy-intro-modal">
+            <img src="../<?php echo htmlspecialchars($enemy['image']); ?>" 
+                 alt="<?php echo htmlspecialchars($enemy['name']); ?>" 
+                 class="enemy-intro-image">
+            <h2 class="modal-title enemy-intro-title"><?php echo htmlspecialchars($enemy['name']); ?> Appears!</h2>
+            <p class="modal-message enemy-intro-message">
+                <?php 
+                if (isset($enemy['introduction'])) {
+                    echo htmlspecialchars($enemy['introduction']);
+                } else {
+                    echo 'A challenger has appeared! <strong>' . htmlspecialchars($enemy['name']) . '</strong> stands in your way.';
+                }
+                ?>
+            </p>
+            <p class="modal-message enemy-intro-challenge" style="color: #ffd93d; font-weight: 600; margin-top: 12px;">
+                Defeat them by answering correctly!
+            </p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-secondary" onclick="exitToDashboard()">BACK TO MAP</button>
+                <button class="modal-btn modal-btn-primary" onclick="closeEnemyIntroduction()">START BATTLE</button>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+
     <!-- Activity Configuration -->
     <script>
         window.activityConfig = <?php echo json_encode($activity_data, JSON_HEX_TAG | JSON_HEX_QUOT); ?>;

@@ -141,8 +141,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $isCorrect = ($userCode === $expectedCode);
     }
     
+    // Track correct answers count in session (for multi-question activities)
+    if (!isset($_SESSION['correct_answers_count'])) {
+        $_SESSION['correct_answers_count'] = 0;
+    }
+    if (!isset($_SESSION['total_questions_for_level'])) {
+        $_SESSION['total_questions_for_level'] = 0;
+    }
+    
+    // Get total questions for this level
+    $isMultiQuestionCheck = isset($activityContent['questions']) && is_array($activityContent['questions']);
+    $totalQuestionsForLevel = $isMultiQuestionCheck ? count($activityContent['questions']) : 1;
+    $_SESSION['total_questions_for_level'] = $totalQuestionsForLevel;
+    
     if ($isCorrect) {
         // CORRECT ANSWER
+        // Increment correct answers count
+        $_SESSION['correct_answers_count'] = ($_SESSION['correct_answers_count'] ?? 0) + 1;
+        
         // Award XP
         $xpReward = $level['xp_reward'] ?? 10;
         StatsModel::addXP($pdo, $userId, $xpReward);
@@ -187,14 +203,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Stay on same page - JS will handle showing the failure state
         } else {
             // For other activity types: use heart system
+            // Check if user has met minimum requirement before allowing game over
+            $correctAnswersCount = $_SESSION['correct_answers_count'] ?? 0;
+            $minimumCorrectNeeded = max(5, ceil($totalQuestionsForLevel * 0.5));
+            $hasMetMinimum = ($correctAnswersCount >= $minimumCorrectNeeded);
+            
             // Decrease hearts
             $currentHearts = max(0, $currentHearts - 1);
             $_SESSION['hearts'] = $currentHearts;
             
-            if ($currentHearts <= 0) {
+            // Only allow game over if hearts are 0 AND user hasn't met minimum requirement
+            if ($currentHearts <= 0 && !$hasMetMinimum) {
                 header("Location: gameover.php");
                 exit;
             }
+            // If hearts are 0 but user has met minimum, don't game over (they can continue)
         }
         
         // Reload the same activity (JavaScript will show feedback)
@@ -206,6 +229,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // ============================================
 // HANDLE GET REQUEST (Load Activity)
 // ============================================
+
+// Reset session tracking variables for new level (only on GET, not POST)
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $_SESSION['correct_answers_count'] = 0;
+    $_SESSION['total_questions_for_level'] = 0;
+}
 
 // Read activity content from JSON file
 $activityContent = LevelModel::readContentFile($levelId, $level['level_type'], true);
@@ -245,8 +274,8 @@ $redirectUrl = 'dashboard.php';
 $totalQuestions = $isMultiQuestion ? count($activityContent['questions']) : 1;
 $adaptiveEnemyHP = $totalQuestions * 2; // 2 HP damage per correct answer
 
-// Calculate dynamic hearts based on question count (questions + 2 buffer)
-$dynamicHearts = $totalQuestions + 2;
+// Static hearts: always 8 hearts regardless of question count
+$dynamicHearts = 8;
 
 // Get next level information
 $nextLevel = LevelModel::getNextLevel($pdo, $levelId);
@@ -286,6 +315,7 @@ $activity_data = [
     'allQuestions' => $isMultiQuestion ? $activityContent['questions'] : [],
     'totalQuestions' => $totalQuestions,
     'currentQuestionIndex' => 0,
+    'correctAnswersCount' => $_SESSION['correct_answers_count'] ?? 0,
     // Next level information
     'hasNextLevel' => $hasNextLevel,
     'nextLevelUrl' => $nextLevelUrl,

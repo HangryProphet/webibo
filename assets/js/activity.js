@@ -32,7 +32,7 @@
     const totalQuestions = config.totalQuestions || 1;
     let currentQuestionIndex = config.currentQuestionIndex || 0;
     let questionsAnswered = 0;
-    let correctAnswersCount = 0;
+    let correctAnswersCount = config.correctAnswersCount || 0;
     // Paths are relative to views/* pages that include this script with ../assets/...
     const correctSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/correct.mp3') : null;
     const wrongSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/wrong.mp3') : null;
@@ -208,6 +208,9 @@
         
         // Setup Enter key handler for continue button
         setupContinueKeyHandler();
+        
+        // Show enemy introduction modal if applicable
+        showEnemyIntroduction();
     }
 
     // Initialize progress bar on page load
@@ -589,25 +592,33 @@
         }
         
         // Check for game over
+        // User needs at least 5 correct answers OR 50% of total questions before losing
         if (currentHearts <= 0) {
-            isGameOver = true;
+            const minimumCorrectNeeded = Math.max(5, Math.ceil(totalQuestions * 0.5));
+            const hasMetMinimum = (correctAnswersCount >= minimumCorrectNeeded);
             
-            // Disable continue button
-            const continueBtn = document.getElementById('continueBtn');
-            if (continueBtn) {
-                continueBtn.disabled = true;
-                continueBtn.style.opacity = '0.5';
-                continueBtn.style.cursor = 'not-allowed';
-            }
-            
-            // Hide feedback panel and show game over after delay
-            setTimeout(() => {
-                const feedbackPanel = document.getElementById('feedbackPanel');
-                if (feedbackPanel) {
-                    feedbackPanel.classList.remove('active');
+            // Only show game over if user hasn't met minimum requirement
+            if (!hasMetMinimum) {
+                isGameOver = true;
+                
+                // Disable continue button
+                const continueBtn = document.getElementById('continueBtn');
+                if (continueBtn) {
+                    continueBtn.disabled = true;
+                    continueBtn.style.opacity = '0.5';
+                    continueBtn.style.cursor = 'not-allowed';
                 }
-                showGameOverModal();
-            }, 1500);
+                
+                // Hide feedback panel and show game over after delay
+                setTimeout(() => {
+                    const feedbackPanel = document.getElementById('feedbackPanel');
+                    if (feedbackPanel) {
+                        feedbackPanel.classList.remove('active');
+                    }
+                    showGameOverModal();
+                }, 1500);
+            }
+            // If hearts are 0 but user has met minimum, don't show game over (they can continue)
         }
     }
 
@@ -887,6 +898,25 @@
         }
     };
     
+    // Show enemy introduction modal
+    function showEnemyIntroduction() {
+        // Only show for multiple-choice and fill-blank activities with enemies
+        if ((activityType === 'multiple-choice' || activityType === 'fill-blank') && config.hasEnemy) {
+            const enemyIntroModal = document.getElementById('enemyIntroductionModal');
+            if (enemyIntroModal) {
+                enemyIntroModal.classList.add('active');
+            }
+        }
+    }
+    
+    // Close enemy introduction modal
+    window.closeEnemyIntroduction = function() {
+        const enemyIntroModal = document.getElementById('enemyIntroductionModal');
+        if (enemyIntroModal) {
+            enemyIntroModal.classList.remove('active');
+        }
+    };
+    
     // Exit modal functions
     window.showExitModal = function() {
         const exitModal = document.getElementById('exitModal');
@@ -942,10 +972,24 @@
                 }
             });
         }
+        
+        // Setup enemy introduction modal handlers
+        const enemyIntroModal = document.getElementById('enemyIntroductionModal');
+        if (enemyIntroModal) {
+            // Don't allow closing by clicking outside - user must click button
+            // But allow Escape key for accessibility
+        }
 
-        // Close modal with Escape key
+        // Close modals with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
+                // Close enemy introduction modal if open
+                const enemyIntroModal = document.getElementById('enemyIntroductionModal');
+                if (enemyIntroModal && enemyIntroModal.classList.contains('active')) {
+                    window.closeEnemyIntroduction();
+                    return;
+                }
+                // Close exit modal if open
                 window.closeModal();
             }
         });

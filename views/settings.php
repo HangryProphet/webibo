@@ -17,7 +17,7 @@ require_once 'header.php';
     <div class="container fade-up">
         <br><div class="page-header">
             <h1 class="title">Settings</h1>
-            <p class="subtitle">Adjust your preferences for this WebQuest session.</p>
+            <p class="subtitle">Adjust your preferences for this Webibo session.</p>
         </div>
 
         <div class="card">
@@ -39,7 +39,7 @@ require_once 'header.php';
             <div class="row" style="border-bottom: none; padding-bottom: 6px;">
                 <div class="label-block">
                     <span class="label">Tutorial</span>
-                    <span class="hint">Quick overview of how WebQuest works.</span>
+                    <span class="hint">Quick overview of how Webibo works.</span>
                 </div>
                 <a class="action-btn" href="how_to_play.php">Open</a>
             </div>

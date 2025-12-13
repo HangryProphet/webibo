@@ -7,7 +7,7 @@ require_once __DIR__ . '/../controllers/profile_handler.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - WebQuest</title>
+    <title>Profile - Webibo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/profile.css">
     <style>
@@ -44,7 +44,10 @@ require_once __DIR__ . '/../controllers/profile_handler.php';
                 <?php endif; ?>
             </div>
             
-            <h1 class="username"><?php echo htmlspecialchars($username); ?></h1>
+            <h1 class="username"><?php 
+                $displayName = trim(($firstName ?? '') . ' ' . ($lastName ?? ''));
+                echo htmlspecialchars(!empty($displayName) ? $displayName : $username); 
+            ?></h1>
             <div class="user-handle">@<?php echo htmlspecialchars($username); ?></div>
             <div class="join-date">Joined <?php echo htmlspecialchars($joinDate); ?></div>
             
