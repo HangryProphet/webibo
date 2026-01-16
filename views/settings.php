@@ -1,6 +1,10 @@
 <?php
 // Settings UI only; no backend functionality is wired here.
-require_once 'header.php';
+require_once '../core/functions.php';
+start_session_securely();
+if (!is_logged_in()) {
+    redirect('login.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,8 +67,8 @@ require_once 'header.php';
         </div>
 
         <div class="footer">
-            <a href="/views/terms.php">Terms of Service</a> |
-            <a href="/views/privacy.php">Privacy Policy</a>
+            <a href="terms.php">Terms of Service</a> |
+            <a href="privacy.php">Privacy Policy</a>
         </div>
     </div>
 </body>

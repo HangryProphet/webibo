@@ -122,10 +122,10 @@
         // Uses a fixed sequence so the order is predictable (no per-load randomness).
         (function applyWizaAvatars() {
             const avatarSequence = [
-                '../assets/img/wiza/wiza-teach.png',
-                '../assets/img/wiza/wiza-thinking.png',
-                '../assets/img/wiza/wiza-teach-happy.png',
-                '../assets/img/wiza/wiza-pointing.png'
+                '../assets/img/wiza/wiza-teach.webp',
+                '../assets/img/wiza/wiza-thinking.webp',
+                '../assets/img/wiza/wiza-teach-happy.webp',
+                '../assets/img/wiza/wiza-pointing.webp'
             ];
 
             const intros = cardsContainer.querySelectorAll('.wiza-intro');
@@ -287,7 +287,7 @@
     <!-- Exit Confirmation Modal -->
     <div class="modal-overlay" id="exitModal">
         <div class="modal-content">
-            <img src="../assets/img/wiza/wiza-sad.png" alt="Wiza Sad" class="modal-image">
+            <img src="../assets/img/wiza/wiza-sad.webp" alt="Wiza Sad" class="modal-image">
             <h2 class="modal-title">Hold on! Leaving now will reset your current progress.</h2>
             <p class="modal-message">Do you still want to end this session?</p>
             <div class="modal-buttons">
@@ -300,7 +300,7 @@
     <!-- Victory Modal -->
     <div class="modal-overlay" id="victoryModal">
         <div class="modal-content">
-            <img src="../assets/img/wiza/wiza-heart-eyes.png" alt="Wiza Celebrating" class="modal-image">
+            <img src="../assets/img/wiza/wiza-heart-eyes.webp" alt="Wiza Celebrating" class="modal-image">
             <h2 class="modal-title" style="color: #58cc02;">Lecture Complete!</h2>
             <p class="modal-message" id="victoryMessage">Great job! You've mastered this lesson!</p>
             <div class="modal-buttons">

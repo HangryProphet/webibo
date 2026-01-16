@@ -12,17 +12,15 @@
     height: auto;
     margin: 0 auto 20px;
     display: block;
-    animation: pulse 1.5s ease-in-out infinite;
+    animation: zoom 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
+@keyframes zoom {
     0%, 100% {
         transform: scale(1);
-        opacity: 1;
     }
     50% {
-        transform: scale(1.05);
-        opacity: 0.9;
+        transform: scale(1.1);
     }
 }
 

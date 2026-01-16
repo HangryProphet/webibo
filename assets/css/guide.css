@@ -165,17 +165,38 @@ a {
 .roadmap-preview {
     position: relative;
     width: 100%;
-    min-height: 300px;
+    /* Removed fixed height and auto overflow */
     background: #111a22;
     border: 1px solid #2f4150;
     border-radius: 16px;
-    padding: 32px 32px 72px;
-    overflow: auto; /* keep every node visible instead of cropping */
+    padding: 40px 20px;
     margin: 0 auto 12px;
+
+    /* Flexbox Layout */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 40px;
+}
+
+.node-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+    position: relative;
+    width: 120px;
+    /* Fixed width to ensure alignment */
 }
 
 .roadmap-preview .level-node {
-    position: absolute;
+    position: static;
+    /* Override absolute positioning */
+    margin: 0;
+    transform: scale(1.1);
+    /* Slightly larger for emphasis */
 }
 
 /* Keep hover visuals but suppress popups */
@@ -185,12 +206,20 @@ a {
 }
 
 .node-label {
-    position: absolute;
+    position: static;
+    /* Override absolute positioning */
+    transform: none;
+    /* Fix misalignment caused by translateX(-50%) */
+    margin: 0;
+    width: auto;
+    /* Allow natural width */
     color: #ffffff;
     font-weight: 700;
-    font-size: clamp(12px, 1.8vw, 14px);
+    font-size: clamp(13px, 1.8vw, 15px);
     pointer-events: none;
     white-space: nowrap;
+    text-align: center;
+    opacity: 0.9;
 }
 
 .guide-top-buttons {
@@ -258,7 +287,8 @@ a {
 }
 
 .activity-preview .heart i {
-    color: #c53030; /* unified dark red */
+    color: #c53030;
+    /* unified dark red */
 }
 
 .activity-preview .hearts-count {
@@ -266,7 +296,8 @@ a {
 }
 
 .activity-preview .enemy-hp-fill {
-    background: #c53030; /* unified dark red */
+    background: #c53030;
+    /* unified dark red */
 }
 
 .activity-preview .enemy-name {
@@ -282,18 +313,20 @@ a {
 .course-switcher-preview {
     display: flex;
     align-items: stretch;
-    gap: 12px;
+    justify-content: center;
+    gap: 20px;
     background: #111a22;
     border: 1px solid #2f4150;
     border-radius: 16px;
-    padding: clamp(12px, 2vw, 14px);
-    overflow-x: auto; /* allow scroll when extremely cramped */
-    flex-wrap: nowrap;
+    padding: 20px;
+    flex-wrap: wrap;
+    /* Allow wrapping */
 }
 
 .course-switcher-preview .course-module-wrapper {
     position: static;
-    flex: 0 0 280px;
+    flex: 1;
+    /* Make equal width to the icons list */
     display: flex;
 }
 
@@ -309,12 +342,14 @@ a {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-    flex-wrap: nowrap; /* keep icons side-by-side */
+    flex-wrap: nowrap;
+    /* keep icons side-by-side */
     gap: 8px;
     padding: 0;
     margin: 0;
     width: 100%;
-    flex: 1 1 auto;
+    flex: 1;
+    /* Make equal width to the module wrapper */
     height: 100%;
 }
 
@@ -326,7 +361,8 @@ a {
     justify-content: center;
     padding: 8px 6px;
     border-left: 1px solid #2f4150;
-    min-width: 0; /* allow shrink without wrapping */
+    min-width: 0;
+    /* allow shrink without wrapping */
 }
 
 .course-switcher-preview .course-icon-item:first-child {
@@ -384,6 +420,7 @@ a {
         opacity: 0;
         transform: translateY(12px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -393,25 +430,60 @@ a {
 @media (max-width: 720px) {
     .page-header {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        align-items: center;
+        /* Center align on mobile */
+        gap: 16px;
+    }
+
+    .content-card {
+        padding: 20px 16px;
+    }
+
+    .roadmap-preview {
+        gap: 24px;
+        padding: 24px 16px;
     }
 
     .course-switcher-preview {
-        justify-content: flex-start;
+        flex-direction: column;
+        align-items: center;
+        /* Center items */
+    }
+
+    .course-switcher-preview .course-module-wrapper {
+        flex: 1 1 auto;
+        width: 100%;
+        /* Full width on mobile */
+        max-width: 400px;
+        min-height: 80px;
+        /* Ensure wrapper respects new button height */
     }
 
     .course-switcher-preview .course-module-btn {
-        min-width: min(100%, 340px);
+        height: 80px !important;
+        /* Force taller height on mobile */
     }
 
     .course-switcher-preview .course-icons-list {
-        justify-content: flex-start;
+        width: 100%;
+        max-width: 400px;
+        justify-content: space-between;
     }
 
     .activity-preview .enemy-section {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        /* Center aligns better for stacked view */
+        text-align: center;
+    }
+
+    .activity-preview .enemy-image {
+        margin-right: 0;
+        margin-bottom: 10px;
+        max-width: 150px;
+    }
+
+    .guide-top-buttons {
+        justify-content: center;
     }
 }
-

@@ -65,7 +65,7 @@ try {
     
     // Profile stats
     $total_xp = (int)($stats['xp_points'] ?? 0);
-    $day_streak = (int)($stats['current_streak'] ?? 0);
+    $day_streak = (int)($stats['streak']['current_days'] ?? 0);
     $lessons_completed = $completedLevels;
     $challenges_completed = $badgeCount; // Display badge/achievement count as "challenges completed"
     

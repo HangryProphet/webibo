@@ -19,6 +19,6 @@
   "enemy": {
     "name": "Skeleton",
     "hp": 8,
-    "image": "assets/img/enemies/skeleton-happy.png"
+    "image": "assets/img/enemies/skeleton-happy.webp"
   }
 }

@@ -132,6 +132,6 @@
   "enemy": {
     "name": "Owl",
     "hp": 8,
-    "image": "assets/img/enemies/owl-happy.png"
+    "image": "assets/img/enemies/owl-happy.webp"
   }
 }

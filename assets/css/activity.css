@@ -48,10 +48,12 @@ body {
         opacity: 0;
         transform: scale(1);
     }
+
     20% {
         opacity: 0.55;
         transform: scale(1.02);
     }
+
     100% {
         opacity: 0;
         transform: scale(1.04);
@@ -63,10 +65,12 @@ body {
         opacity: 0;
         transform: scale(1);
     }
+
     20% {
         opacity: 0.5;
         transform: scale(1.02);
     }
+
     100% {
         opacity: 0;
         transform: scale(1.04);
@@ -128,7 +132,8 @@ body {
 .progress-fill {
     height: 100%;
     background-color: #58cc02;
-    width: 0%; /* Start at 0%, will be updated by JavaScript */
+    width: 0%;
+    /* Start at 0%, will be updated by JavaScript */
     transition: width 0.6s ease;
 }
 
@@ -365,7 +370,8 @@ body {
 .enemy-hp-fill {
     height: 100%;
     background-color: #ff4b4b;
-    width: 100%; /* Start at 100% (10/10), will be updated by JavaScript */
+    width: 100%;
+    /* Start at 100% (10/10), will be updated by JavaScript */
     transition: width 0.3s ease;
 }
 
@@ -496,9 +502,17 @@ body {
     border-radius: 50%;
 }
 
-.dot.red { background-color: #ff5f56; }
-.dot.yellow { background-color: #ffbd2e; }
-.dot.green { background-color: #27c93f; }
+.dot.red {
+    background-color: #ff5f56;
+}
+
+.dot.yellow {
+    background-color: #ffbd2e;
+}
+
+.dot.green {
+    background-color: #27c93f;
+}
 
 .code-editor {
     background-color: #0d1117;
@@ -812,6 +826,7 @@ body {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -834,6 +849,7 @@ body {
         transform: translateY(30px);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;
@@ -957,9 +973,11 @@ body {
         opacity: 0;
         transform: scale(0.5) translateY(-20px);
     }
+
     50% {
         transform: scale(1.1) translateY(0);
     }
+
     100% {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -996,6 +1014,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1006,9 +1025,13 @@ body {
    RESPONSIVE
    ============================================ */
 @media (max-width: 968px) {
+    .main-content {
+        padding-bottom: 140px;
+    }
+
     .quiz-container {
         flex-direction: column;
-        gap: 40px;
+        gap: 20px;
     }
 
     .question-title {
@@ -1036,9 +1059,37 @@ body {
         width: 180px;
     }
 
+    /* Enemy Section: Move to top and make compact row */
+    .enemy-section {
+        order: -1;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        padding: 10px 0;
+        gap: 20px;
+        margin-bottom: 10px;
+    }
+
     .enemy-image {
-        width: 200px;
-        height: 200px;
+        width: 110px;
+        height: 110px;
+        margin: 0;
+    }
+
+    .enemy-info {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .enemy-name {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .enemy-hp-bar {
+        width: 160px;
     }
 
     .teacher-section {
@@ -1060,7 +1111,7 @@ body {
         grid-template-columns: 1fr;
         gap: 15px;
     }
-    
+
     .editor-container,
     .output-container {
         height: 300px;
@@ -1071,8 +1122,19 @@ body {
     }
 
     .footer-buttons {
-        padding: 20px;
-        min-height: 96px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 15px 20px;
+        background-color: #131F24;
+        border-top: 1px solid #2d3949;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        /* Align button to right */
     }
 
     .skip-btn,
@@ -1098,6 +1160,20 @@ body {
         width: 56px;
         height: 56px;
         font-size: 32px;
+        margin-right: 0;
+    }
+
+    .feedback-title {
+        font-size: 22px;
+        margin-bottom: 6px;
+    }
+
+    .feedback-details {
+        font-size: 16px;
+    }
+
+    .feedback-text {
+        display: block;
     }
 
     .feedback-actions {
@@ -1107,7 +1183,11 @@ body {
 
     .continue-btn {
         width: 100%;
+        padding: 16px 40px;
+        font-size: 16px;
     }
+
+
 
     .modal-content {
         padding: 32px 24px;
@@ -1120,5 +1200,16 @@ body {
     .modal-message {
         font-size: 15px;
     }
-}
 
+    .modal-btn {
+        font-size: 14px;
+        padding: 14px 20px;
+        white-space: nowrap;
+        /* Force single line */
+    }
+
+    /* Stack buttons in enemy intro modal on mobile to prevent overflow */
+    .enemy-intro-modal .modal-buttons {
+        flex-direction: column;
+    }
+}

@@ -47,7 +47,7 @@ $success = get_success();
 
     <div class="auth-layout fade-up">
         <div class="auth-illustration">
-            <img src="../assets/img/wiza/wiza-login.png" alt="Wiza ready to log in" loading="lazy">
+            <img src="../assets/img/wiza/wiza-login.webp" alt="Wiza ready to log in" loading="lazy">
         </div>
 
         <div class="login-container">

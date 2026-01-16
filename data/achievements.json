@@ -7,13 +7,6 @@
     "category": "onboarding"
   },
   {
-    "id": 2,
-    "title": "Verified!",
-    "description": "Verify your email address and secure your account",
-    "icon_path": "fa-check-circle",
-    "category": "onboarding"
-  },
-  {
     "id": 3,
     "title": "First Commit",
     "description": "Complete your very first level",

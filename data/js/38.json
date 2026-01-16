@@ -164,6 +164,6 @@
   "enemy": {
     "name": "Raccoon",
     "hp": 8,
-    "image": "assets/img/enemies/raccoon-happy.png"
+    "image": "assets/img/enemies/raccoon-happy.webp"
   }
 }

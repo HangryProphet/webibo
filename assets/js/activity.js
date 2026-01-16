@@ -10,13 +10,13 @@
 //     hasEnemy: true/false
 // }
 
-(function() {
+(function () {
     'use strict';
 
     // Get configuration from window object (set by PHP)
     const config = window.activityConfig || {};
     const activityType = config.type || 'multiple-choice';
-    
+
     let selectedAnswer = null;
     let currentHearts = config.currentHearts || 10;
     let currentProgress = config.currentProgress || 0; // Progress out of 10 (0-10)
@@ -25,7 +25,7 @@
     const maxEnemyHP = config.maxEnemyHP || enemyHP;
     let correctAnswer = config.correctAnswer || '';
     const redirectUrl = config.redirectUrl || 'dashboard.php';
-    
+
     // Multi-question support
     const isMultiQuestion = config.isMultiQuestion || false;
     const allQuestions = config.allQuestions || [];
@@ -42,7 +42,7 @@
     const gameOverSound = (typeof Audio !== 'undefined') ? new Audio('../assets/sfx/gameover.mp3') : null;
     let damageFlashEl = null;
     let successFlashEl = null;
-    
+
     // Initialize volume from localStorage (default 70%)
     function getVolume() {
         const savedVolume = localStorage.getItem('webibo_sound_volume');
@@ -61,7 +61,7 @@
         void successFlashEl.offsetWidth;
         successFlashEl.classList.add('active');
     }
-    
+
     function setSoundVolume(sound) {
         if (sound) sound.volume = getVolume();
     }
@@ -73,9 +73,9 @@
     setSoundVolume(playerDamageSound);
     setSoundVolume(victorySound);
     setSoundVolume(gameOverSound);
-    
+
     // Listen for volume changes from settings page
-    window.addEventListener('volumeChange', function(e) {
+    window.addEventListener('volumeChange', function (e) {
         const volume = e.detail.volume;
         if (correctSound) correctSound.volume = volume;
         if (wrongSound) wrongSound.volume = volume;
@@ -88,11 +88,11 @@
     // Helper function to play any sound with volume check
     function playSoundSafe(sound) {
         if (!sound) return;
-        
+
         // Don't play if volume is 0
         const currentVolume = getVolume();
         if (currentVolume === 0) return;
-        
+
         try {
             sound.currentTime = 0;
             const playPromise = sound.play();
@@ -122,26 +122,29 @@
     // Load next question in multi-question activities
     function loadNextQuestion() {
         if (!isMultiQuestion || currentQuestionIndex >= allQuestions.length) return;
-        
+
         const nextQuestion = allQuestions[currentQuestionIndex];
-        
+
         // Update current question data
         correctAnswer = nextQuestion.correct_answer || nextQuestion.correct_code || '';
-        config.correctTitle = nextQuestion.feedback?.correct?.title || 'Correct! 🎉';
-        config.correctDetails = nextQuestion.feedback?.correct?.details || '';
-        config.wrongTitle = nextQuestion.feedback?.wrong?.title || 'Not quite! 🤔';
-        config.wrongDetails = nextQuestion.feedback?.wrong?.details || '';
-        
+        // Update current question data
+        correctAnswer = nextQuestion.correct_answer || nextQuestion.correct_code || '';
+
+        config.correctTitle = (nextQuestion.feedback && nextQuestion.feedback.correct && nextQuestion.feedback.correct.title) ? nextQuestion.feedback.correct.title : 'Correct! 🎉';
+        config.correctDetails = (nextQuestion.feedback && nextQuestion.feedback.correct && nextQuestion.feedback.correct.details) ? nextQuestion.feedback.correct.details : '';
+        config.wrongTitle = (nextQuestion.feedback && nextQuestion.feedback.wrong && nextQuestion.feedback.wrong.title) ? nextQuestion.feedback.wrong.title : 'Not quite! 🤔';
+        config.wrongDetails = (nextQuestion.feedback && nextQuestion.feedback.wrong && nextQuestion.feedback.wrong.details) ? nextQuestion.feedback.wrong.details : '';
+
         // Hide feedback panel
         const panel = document.getElementById('feedbackPanel');
         if (panel) {
             panel.classList.remove('active');
         }
-        
+
         // Reset state
         selectedAnswer = null;
         isCorrect = false;
-        
+
         // Update UI based on activity type
         if (activityType === 'multiple-choice') {
             // Update question text
@@ -149,7 +152,7 @@
             if (questionTitle) {
                 questionTitle.textContent = nextQuestion.question;
             }
-            
+
             // Update options
             const optionsContainer = document.getElementById('optionsContainer');
             if (optionsContainer && nextQuestion.options) {
@@ -160,7 +163,7 @@
                     btn.className = 'option-btn';
                     btn.setAttribute('data-answer', option);
                     btn.textContent = option;
-                    btn.onclick = function() { selectOption(this); };
+                    btn.onclick = function () { selectOption(this); };
                     optionsContainer.appendChild(btn);
                 });
             }
@@ -170,7 +173,7 @@
             if (questionTitle) {
                 questionTitle.textContent = nextQuestion.question;
             }
-            
+
             // Clear input
             const answerInput = document.getElementById('answerInput');
             if (answerInput) {
@@ -180,21 +183,21 @@
                 answerInput.focus();
             }
         }
-        
+
         // Re-enable buttons
         const checkBtn = document.getElementById('checkBtn');
         if (checkBtn) {
             checkBtn.disabled = true;
         }
-        
+
         // Progress will be updated after user answers the next question
     }
-    
+
     // Initialize based on activity type
     function init() {
         // Initialize progress bar
         initProgressBar();
-        
+
         if (activityType === 'fill-blank') {
             initFillBlank();
         } else if (activityType === 'code-editor') {
@@ -205,10 +208,10 @@
 
         // Setup exit modal handlers
         setupExitModal();
-        
+
         // Setup Enter key handler for continue button
         setupContinueKeyHandler();
-        
+
         // Show enemy introduction modal if applicable
         showEnemyIntroduction();
     }
@@ -225,7 +228,7 @@
                 progressFill.style.width = (currentProgress / 10 * 100) + '%';
             }
         }
-        
+
         // Initialize enemy HP display
         updateEnemyHP();
     }
@@ -241,7 +244,7 @@
         if (!answerInput) return;
 
         // Enable check button when user types
-        answerInput.addEventListener('input', function() {
+        answerInput.addEventListener('input', function () {
             const value = this.value.trim();
             const checkBtn = document.getElementById('checkBtn');
             if (checkBtn) {
@@ -251,7 +254,7 @@
         });
 
         // Allow Enter key to submit
-        answerInput.addEventListener('keypress', function(e) {
+        answerInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter' && this.value.trim() !== '') {
                 e.preventDefault();
                 submitAnswer();
@@ -259,7 +262,7 @@
         });
 
         // Focus on input when page loads
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             answerInput.focus();
         });
     }
@@ -268,24 +271,24 @@
     function initCodeEditor() {
         const codeInput = document.getElementById('codeInput');
         const livePreviewFrame = document.getElementById('livePreviewFrame');
-        
+
         if (!codeInput) return;
 
         // Setup live preview functionality
         if (livePreviewFrame) {
-            codeInput.addEventListener('input', function() {
+            codeInput.addEventListener('input', function () {
                 const userCode = codeInput.value;
                 const checkBtn = document.getElementById('checkBtn');
-                
+
                 // Enable/disable check button
                 if (checkBtn) {
                     checkBtn.disabled = userCode.trim() === '';
                 }
-                
+
                 // Update live preview in iframe
                 try {
                     const previewDocument = livePreviewFrame.contentDocument || livePreviewFrame.contentWindow.document;
-                    
+
                     // Write user code directly to iframe
                     previewDocument.open();
                     previewDocument.write(userCode);
@@ -296,7 +299,7 @@
             });
         } else {
             // Fallback if no iframe (old code)
-            codeInput.addEventListener('input', function() {
+            codeInput.addEventListener('input', function () {
                 const value = this.value.trim();
                 const checkBtn = document.getElementById('checkBtn');
                 if (checkBtn) {
@@ -306,28 +309,28 @@
         }
 
         // Focus on textarea when page loads
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             codeInput.focus();
         });
     }
 
     // Select option (for multiple choice)
-    window.selectOption = function(button) {
+    window.selectOption = function (button) {
         // Remove selected class from all options
         document.querySelectorAll('.option-btn').forEach(btn => {
             btn.classList.remove('selected');
         });
-        
+
         // Add selected class to clicked option
         button.classList.add('selected');
-        
+
         // Store the selected answer
         selectedAnswer = button.getAttribute('data-answer');
         const hiddenInput = document.getElementById('selectedAnswer');
         if (hiddenInput) {
             hiddenInput.value = selectedAnswer;
         }
-        
+
         // Enable check button
         const checkBtn = document.getElementById('checkBtn');
         if (checkBtn) {
@@ -336,52 +339,61 @@
     };
 
     // Submit answer (for multiple choice and fill-blank)
-    window.submitAnswer = function() {
-        if (activityType === 'fill-blank') {
-            const answerInput = document.getElementById('answerInput');
-            if (!answerInput || !answerInput.value.trim()) {
-                // Don't submit empty answer - just return without doing anything
+    // Submit answer (for multiple choice and fill-blank)
+    window.submitAnswer = function () {
+        try {
+            if (activityType === 'fill-blank') {
+                const answerInput = document.getElementById('answerInput');
+                if (!answerInput || !answerInput.value.trim()) {
+                    // Don't submit empty answer - just return without doing anything
+                    return;
+                }
+                selectedAnswer = answerInput.value.trim();
+            }
+
+            if (!selectedAnswer) {
+                // Don't submit if no answer selected
                 return;
             }
-            selectedAnswer = answerInput.value.trim();
-        }
 
-        if (!selectedAnswer) {
-            // Don't submit if no answer selected
-            return;
-        }
+            // Disable inputs and buttons
+            disableInputs();
 
-        // Disable inputs and buttons
-        disableInputs();
-
-        // Store answer for form submission
-        if (activityType === 'fill-blank') {
-            const hiddenInput = document.getElementById('selectedAnswer');
-            if (hiddenInput) {
-                hiddenInput.value = selectedAnswer;
+            // Store answer for form submission
+            if (activityType === 'fill-blank') {
+                const hiddenInput = document.getElementById('selectedAnswer');
+                if (hiddenInput) {
+                    hiddenInput.value = selectedAnswer;
+                }
             }
-        }
 
-        // Update progress bar (tracks question progression, not correctness)
-        updateProgress();
+            // Update progress bar (tracks question progression, not correctness)
+            updateProgress();
 
-        // Case-insensitive comparison for fill-blank
-        let isCorrect = false;
-        if (activityType === 'fill-blank') {
-            isCorrect = (selectedAnswer.toLowerCase() === correctAnswer.toLowerCase());
-        } else {
-            isCorrect = (selectedAnswer === correctAnswer);
-        }
+            // Case-insensitive comparison for fill-blank
+            let isCorrect = false;
+            if (activityType === 'fill-blank') {
+                isCorrect = (selectedAnswer.toLowerCase() === correctAnswer.toLowerCase());
+            } else {
+                isCorrect = (selectedAnswer === correctAnswer);
+            }
 
-        if (isCorrect) {
-            handleCorrectAnswer();
-        } else {
-            handleWrongAnswer();
+            if (isCorrect) {
+                handleCorrectAnswer();
+            } else {
+                handleWrongAnswer();
+            }
+        } catch (e) {
+            console.error('Error in submitAnswer:', e);
+            // Re-enable buttons if error occurred so user isn't stuck
+            const checkBtn = document.getElementById('checkBtn');
+            if (checkBtn) checkBtn.disabled = false;
+            alert('An error occurred during verification. Please try again. Details: ' + e.message);
         }
     };
 
     // Check code (for code editor)
-    window.checkCode = function() {
+    window.checkCode = function () {
         const codeInput = document.getElementById('codeInput');
         if (!codeInput) return;
 
@@ -459,7 +471,7 @@
     function updateProgress() {
         const progressFill = document.getElementById('progressFill');
         if (!progressFill) return;
-        
+
         if (isMultiQuestion) {
             // For multi-question: calculate based on questions answered
             const progressPercentage = ((currentQuestionIndex + 1) / totalQuestions) * 100;
@@ -535,8 +547,10 @@
 
         if (activityType === 'multiple-choice') {
             const selectedBtn = document.querySelector('.option-btn.selected');
-            const correctBtn = document.querySelector(`[data-answer="${correctAnswer}"]`);
-            
+            // FIX: Use Array.find instead of querySelector to avoid errors with special characters in the answer (like quotes)
+            const options = Array.from(document.querySelectorAll('.option-btn'));
+            const correctBtn = options.find(btn => btn.getAttribute('data-answer') === correctAnswer);
+
             if (selectedBtn) {
                 selectedBtn.classList.add('wrong');
             }
@@ -582,7 +596,7 @@
 
     // Track game over state
     let isGameOver = false;
-    
+
     // Decrease hearts
     function decreaseHearts() {
         currentHearts = Math.max(0, currentHearts - 1);
@@ -590,17 +604,17 @@
         if (heartsCount) {
             heartsCount.textContent = currentHearts;
         }
-        
+
         // Check for game over
         // User needs at least 5 correct answers OR 50% of total questions before losing
         if (currentHearts <= 0) {
             const minimumCorrectNeeded = Math.max(5, Math.ceil(totalQuestions * 0.5));
             const hasMetMinimum = (correctAnswersCount >= minimumCorrectNeeded);
-            
+
             // Only show game over if user hasn't met minimum requirement
             if (!hasMetMinimum) {
                 isGameOver = true;
-                
+
                 // Disable continue button
                 const continueBtn = document.getElementById('continueBtn');
                 if (continueBtn) {
@@ -608,7 +622,7 @@
                     continueBtn.style.opacity = '0.5';
                     continueBtn.style.cursor = 'not-allowed';
                 }
-                
+
                 // Hide feedback panel and show game over after delay
                 setTimeout(() => {
                     const feedbackPanel = document.getElementById('feedbackPanel');
@@ -627,7 +641,7 @@
         const percentage = (enemyHP / maxEnemyHP) * 100;
         const hpFill = document.getElementById('enemyHPFill');
         const hpLabel = document.getElementById('enemyHPLabel');
-        
+
         if (hpFill) {
             hpFill.style.width = Math.max(0, percentage) + '%';
         }
@@ -655,7 +669,7 @@
             title.textContent = config.correctTitle || 'Awesome!';
             details.innerHTML = config.correctDetails || '';
             continueBtn.className = 'continue-btn correct';
-            
+
             // Update button text based on whether there are more questions
             if (isMultiQuestion && currentQuestionIndex < totalQuestions - 1) {
                 continueBtn.textContent = 'NEXT QUESTION';
@@ -679,7 +693,7 @@
         // Don't play if volume is 0
         const currentVolume = getVolume();
         if (currentVolume === 0) return;
-        
+
         const soundsToPlay = [];
         if (isCorrect) {
             if (correctSound) soundsToPlay.push(correctSound);
@@ -703,18 +717,18 @@
     }
 
     // Continue to next question
-    window.continueToNext = function() {
+    window.continueToNext = function () {
         // Don't allow continue if game is over
         if (isGameOver) {
             return;
         }
-        
+
         // Hide feedback panel
         const feedbackPanel = document.getElementById('feedbackPanel');
         if (feedbackPanel) {
             feedbackPanel.classList.remove('active');
         }
-        
+
         // Check if this is a multi-question activity and there are more questions
         if (isMultiQuestion && currentQuestionIndex < totalQuestions - 1) {
             // Move to next question
@@ -722,7 +736,7 @@
             loadNextQuestion();
             return;
         }
-        
+
         // Last question - show victory modal (only if not game over)
         if (!isGameOver) {
             showVictoryModal();
@@ -736,7 +750,7 @@
         if (gameOverModal) {
             gameOverModal.classList.add('active');
         }
-        
+
         // Don't play if volume is 0
         const currentVolume = getVolume();
         if (gameOverSound && currentVolume > 0) {
@@ -748,13 +762,27 @@
             }
         }
     }
-    
+
     // Retry level from game over (no progress saved)
-    window.retryLevel = function() {
+    window.retryLevel = function () {
         // Simply reload the page - no progress saved
         window.location.reload();
     };
-    
+
+    // Go to next level (Submit form)
+    window.goToNextLevel = function () {
+        const form = document.getElementById('quizForm');
+        const completeInput = document.getElementById('completeLevelInput');
+        if (form && completeInput) {
+            completeInput.value = '1';
+            form.submit();
+        } else {
+            console.error('Quiz form not found for level completion');
+            // Fallback redirect
+            window.location.href = 'dashboard.php';
+        }
+    };
+
     // Show code editor failure modal
     function showCodeEditorFailureModal() {
         const failureModal = document.getElementById('codeEditorFailureModal');
@@ -762,30 +790,30 @@
             failureModal.classList.add('active');
         }
     }
-    
+
     // Retry code editor from failure
-    window.retryCodeEditor = function() {
+    window.retryCodeEditor = function () {
         window.location.reload();
     };
-    
+
     // Show victory modal
     function showVictoryModal() {
         // Show the victory modal first - progress will be saved when user clicks a button
         const victoryModal = document.getElementById('victoryModal');
         const victoryMessage = document.getElementById('victoryMessage');
         const nextLevelBtn = document.getElementById('nextLevelBtn');
-        
+
         if (victoryModal) {
             // Build score summary
             let messageText = '';
-            
+
             // Skip score display for code-editor activities (single-attempt challenges)
             if (activityType === 'code-editor') {
                 messageText = 'Amazing work! You\'ve mastered this challenge! ';
             } else if (config.hasEnemy !== false) {
                 const totalQs = totalQuestions;
                 const isPerfectScore = enemyHP === 0;
-                
+
                 if (isPerfectScore) {
                     messageText = `
                         <div style="
@@ -817,10 +845,10 @@
                             </p>
 
                             <p style="color:#888; margin-top:12px;">
-                                ${wrongAnswers === 1 
-                                    ? 'Just <strong>one mistake</strong> — great job!' 
-                                    : `<strong>${wrongAnswers}</strong> mistakes — you’re getting better!`
-                                }
+                                ${wrongAnswers === 1
+                            ? 'Just <strong>one mistake</strong> — great job!'
+                            : `<strong>${wrongAnswers}</strong> mistakes — you’re getting better!`
+                        }
                             </p>
                         </div>
                     `;
@@ -829,7 +857,7 @@
             } else {
                 messageText = 'Amazing work! You\'ve mastered this challenge! ';
             }
-            
+
             // Customize message and button based on next level availability
             if (config.hasNextLevel) {
                 if (victoryMessage) {
@@ -847,15 +875,15 @@
                     nextLevelBtn.style.display = 'none';
                 }
             }
-            
+
             // Set the complete_level flag now, before showing modal
             const completeLevelInput = document.getElementById('completeLevelInput');
             if (completeLevelInput) {
                 completeLevelInput.value = '1';
             }
-            
+
             victoryModal.classList.add('active');
-            
+
             // Don't play if volume is 0
             const currentVolume = getVolume();
             if (victorySound && currentVolume > 0) {
@@ -868,22 +896,22 @@
             }
         }
     }
-    
+
     // Go to next level from victory modal
-    window.goToNextLevel = function() {
+    window.goToNextLevel = function () {
         // Mark level as complete before submitting
         const completeLevelInput = document.getElementById('completeLevelInput');
         const redirectToInput = document.getElementById('redirectToInput');
-        
+
         if (completeLevelInput) {
             completeLevelInput.value = '1';
         }
-        
+
         // Ensure redirect goes to next level
         if (redirectToInput) {
             redirectToInput.value = 'next';
         }
-        
+
         // Submit the completion form to trigger backend logic
         const quizForm = document.getElementById('quizForm');
         if (quizForm) {
@@ -897,7 +925,7 @@
             window.location.href = 'dashboard.php';
         }
     };
-    
+
     // Show enemy introduction modal
     function showEnemyIntroduction() {
         // Only show for multiple-choice and fill-blank activities with enemies
@@ -908,45 +936,45 @@
             }
         }
     }
-    
+
     // Close enemy introduction modal
-    window.closeEnemyIntroduction = function() {
+    window.closeEnemyIntroduction = function () {
         const enemyIntroModal = document.getElementById('enemyIntroductionModal');
         if (enemyIntroModal) {
             enemyIntroModal.classList.remove('active');
         }
     };
-    
+
     // Exit modal functions
-    window.showExitModal = function() {
+    window.showExitModal = function () {
         const exitModal = document.getElementById('exitModal');
         if (exitModal) {
             exitModal.classList.add('active');
         }
     };
 
-    window.closeModal = function() {
+    window.closeModal = function () {
         const exitModal = document.getElementById('exitModal');
         if (exitModal) {
             exitModal.classList.remove('active');
         }
     };
 
-    window.exitToDashboard = function() {
+    window.exitToDashboard = function () {
         // Check if we're in victory modal (level complete) - if so, save progress first
         const victoryModal = document.getElementById('victoryModal');
         const gameOverModal = document.getElementById('gameOverModal');
         const completeLevelInput = document.getElementById('completeLevelInput');
         const redirectToInput = document.getElementById('redirectToInput');
         const quizForm = document.getElementById('quizForm');
-        
+
         // If game over modal is active, don't save progress - just go to dashboard
         if (gameOverModal && gameOverModal.classList.contains('active')) {
             console.log('DEBUG: Exiting from game over - no progress saved');
             window.location.href = 'dashboard.php';
             return;
         }
-        
+
         // If victory modal is active and level is complete, save progress
         if (victoryModal && victoryModal.classList.contains('active') && completeLevelInput && completeLevelInput.value === '1' && quizForm) {
             // Set redirect to dashboard
@@ -966,13 +994,13 @@
         const exitModal = document.getElementById('exitModal');
         if (exitModal) {
             // Close modal when clicking outside
-            exitModal.addEventListener('click', function(e) {
+            exitModal.addEventListener('click', function (e) {
                 if (e.target === this) {
                     window.closeModal();
                 }
             });
         }
-        
+
         // Setup enemy introduction modal handlers
         const enemyIntroModal = document.getElementById('enemyIntroductionModal');
         if (enemyIntroModal) {
@@ -981,7 +1009,7 @@
         }
 
         // Close modals with Escape key
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 // Close enemy introduction modal if open
                 const enemyIntroModal = document.getElementById('enemyIntroductionModal');
@@ -994,25 +1022,25 @@
             }
         });
     }
-    
+
     // Setup Enter key handler for check and continue buttons
     function setupContinueKeyHandler() {
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Enter') {
                 // Don't trigger if user is typing in an input field or textarea
                 // (except for fill-blank activities where we want Enter to submit)
                 const isInInput = e.target.tagName === 'INPUT' && activityType !== 'fill-blank';
                 const isInTextarea = e.target.tagName === 'TEXTAREA';
-                
+
                 if (isInInput || isInTextarea) {
                     return;
                 }
-                
+
                 // Check if feedback panel is active (continue button visible)
                 const feedbackPanel = document.getElementById('feedbackPanel');
                 const continueBtn = document.getElementById('continueBtn');
                 const checkBtn = document.getElementById('checkBtn');
-                
+
                 // Priority 1: If feedback panel is active, trigger continue button
                 if (feedbackPanel && feedbackPanel.classList.contains('active')) {
                     if (continueBtn && !continueBtn.disabled) {

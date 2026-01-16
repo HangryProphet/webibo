@@ -206,6 +206,7 @@ a.signup-btn:active {
         opacity: 0;
         transform: translateY(16px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -685,6 +686,13 @@ input[type="submit"].signup-btn:active {
     .auth-illustration img {
         max-width: 320px;
         margin-top: 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .auth-illustration img {
+        max-width: 150px;
+        margin-top: 20px;
     }
 }
 

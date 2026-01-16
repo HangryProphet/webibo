@@ -144,11 +144,11 @@
       "question": "Which format supports transparency?",
       "options": [
         ".jpg",
-        ".png",
+        ".webp",
         ".bmp",
         "All formats"
       ],
-      "correct_answer": ".png",
+      "correct_answer": ".webp",
       "feedback": {
         "correct": {
           "title": "Correct! 🎉",
@@ -244,6 +244,6 @@
   "enemy": {
     "name": "Spider",
     "hp": 10,
-    "image": "assets/img/enemies/spider-happy.png"
+    "image": "assets/img/enemies/spider-happy.webp"
   }
 }

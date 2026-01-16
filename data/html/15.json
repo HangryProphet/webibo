@@ -81,7 +81,7 @@
       }
     },
     {
-      "question": ".png files support ______ (clear backgrounds).",
+      "question": ".webp files support ______ (clear backgrounds).",
       "options": ["ANIMATION", "TRANSPARENCY", "SOUND", "LAYERS"],
       "correct_answer": "TRANSPARENCY",
       "code_template": "______",
@@ -164,6 +164,6 @@
   "enemy": {
     "name": "Bat",
     "hp": 10,
-    "image": "assets/img/enemies/bat-happy.png"
+    "image": "assets/img/enemies/bat-happy.webp"
   }
 }

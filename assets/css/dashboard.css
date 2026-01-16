@@ -63,7 +63,8 @@ body {
 
 .course-icon-section i {
     font-size: 32px;
-    color: #e34f26; /* HTML orange */
+    color: #e34f26;
+    /* HTML orange */
 }
 
 .course-text-section {
@@ -476,10 +477,13 @@ body {
 }
 
 @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 0.8;
         transform: translateY(-50%) scale(1);
     }
+
     50% {
         opacity: 1;
         transform: translateY(-50%) scale(1.2);
@@ -722,11 +726,12 @@ body {
 /* ============================================
    MAIN CONTENT
    ============================================ */
-   .main-content {
+.main-content {
     flex: 1;
     margin-left: 0;
     padding: 0;
-    padding-top: 120px; /* Account for fixed header */
+    padding-top: 120px;
+    /* Account for fixed header */
     background-color: #131F24;
     overflow-x: auto;
     overflow-y: auto;
@@ -801,7 +806,7 @@ body {
 /* ============================================
    ROADMAP CONTAINER
    ============================================ */
-   .roadmap-container {
+.roadmap-container {
     flex: 1;
     display: flex;
     align-items: center;
@@ -1127,7 +1132,8 @@ body {
         height: 75px;
         font-size: 34px;
         border-radius: 25%;
-        transform: scale(1.176); /* Scale back up: 1/0.85 = 1.176 */
+        transform: scale(1.176);
+        /* Scale back up: 1/0.85 = 1.176 */
     }
 
     .level-node.lecture-node {
@@ -1135,7 +1141,8 @@ body {
         height: 110px;
         font-size: 48px;
         border-radius: 50%;
-        transform: scale(1.176); /* Scale back up: 1/0.85 = 1.176 */
+        transform: scale(1.176);
+        /* Scale back up: 1/0.85 = 1.176 */
     }
 
     .node-label {
@@ -1253,7 +1260,7 @@ body {
         max-width: 900px;
         height: 450px;
         transform: scale(0.75);
-        transform-origin: center center;
+        transform-origin: left center;
     }
 
     .level-node {
@@ -1261,7 +1268,8 @@ body {
         height: 65px;
         font-size: 30px;
         border-radius: 25%;
-        transform: scale(1.333); /* Scale back up: 1/0.75 = 1.333 */
+        transform: scale(1.333);
+        /* Scale back up: 1/0.75 = 1.333 */
     }
 
     .level-node.lecture-node {
@@ -1269,7 +1277,8 @@ body {
         height: 95px;
         font-size: 44px;
         border-radius: 50%;
-        transform: scale(1.333); /* Scale back up: 1/0.75 = 1.333 */
+        transform: scale(1.333);
+        /* Scale back up: 1/0.75 = 1.333 */
     }
 
     .node-label {
@@ -1378,8 +1387,8 @@ body {
 
 @media (max-width: 480px) {
     .roadmap-container {
-        padding-left: 0;
-        padding-right: 0;
+        padding-left: 30px;
+        padding-right: 30px;
     }
 
     .logo-text {
@@ -1417,7 +1426,8 @@ body {
         height: 55px;
         font-size: 26px;
         border-radius: 25%;
-        transform: scale(1.667); /* Scale back up: 1/0.6 = 1.667 */
+        transform: scale(1.667);
+        /* Scale back up: 1/0.6 = 1.667 */
     }
 
     .level-node.lecture-node {
@@ -1425,7 +1435,8 @@ body {
         height: 80px;
         font-size: 38px;
         border-radius: 50%;
-        transform: scale(1.667); /* Scale back up: 1/0.6 = 1.667 */
+        transform: scale(1.667);
+        /* Scale back up: 1/0.6 = 1.667 */
     }
 
     .node-label {

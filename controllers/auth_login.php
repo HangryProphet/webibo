@@ -88,8 +88,5 @@ if ($streakResult['is_new_streak']) {
     }
 }
 
-// Set success message
-set_success('Login successful! Welcome back, ' . $user['first_name'] . '!');
-
 // Redirect to dashboard
 redirect('../views/dashboard.php');

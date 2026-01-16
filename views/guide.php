@@ -67,32 +67,38 @@ start_session_securely();
             <h2>Map Levels</h2>
             <p>These are the exact level nodes from the game map. Clicking opens a lecture or challenge.</p>
             <div class="roadmap-preview">
-                <button class="level-node lecture-node completed" type="button" style="top: 70px; left: 48px;">
-                    <i class="fas fa-book"></i>
-                    <div class="node-popup">
-                        <div class="node-popup-title">Lecture</div>
-                        <div class="node-popup-text">Takes you to a lesson page.</div>
-                    </div>
-                </button>
-                <span class="node-label" style="top: 100px; left: 250px;">Lecture</span>
+                <div class="node-group">
+                    <button class="level-node lecture-node completed" type="button">
+                        <i class="fas fa-book"></i>
+                        <div class="node-popup">
+                            <div class="node-popup-title">Lecture</div>
+                            <div class="node-popup-text">Takes you to a lesson page.</div>
+                        </div>
+                    </button>
+                    <span class="node-label">Lecture</span>
+                </div>
 
-                <button class="level-node current" type="button" style="top: 170px; left: 450px;">
-                    <i class="fas fa-code"></i>
-                    <div class="node-popup">
-                        <div class="node-popup-title">Challenge</div>
-                        <div class="node-popup-text">Quizzes, fills, or code practice.</div>
-                    </div>
-                </button>
-                <span class="node-label" style="top: 200px; left: 610px;">Challenge</span>
+                <div class="node-group">
+                    <button class="level-node current" type="button">
+                        <i class="fas fa-code"></i>
+                        <div class="node-popup">
+                            <div class="node-popup-title">Challenge</div>
+                            <div class="node-popup-text">Quizzes, fills, or code practice.</div>
+                        </div>
+                    </button>
+                    <span class="node-label">Challenge</span>
+                </div>
 
-                <button class="level-node locked" type="button" aria-disabled="true" style="top: 60px; left: 760px;">
-                    <i class="fas fa-lock"></i>
-                    <div class="node-popup">
-                        <div class="node-popup-title">Locked</div>
-                        <div class="node-popup-text">Unlock by clearing the previous node.</div>
-                    </div>
-                </button>
-                <span class="node-label" style="top: 78px; left: 920px;">Locked</span>
+                <div class="node-group">
+                    <button class="level-node locked" type="button" aria-disabled="true">
+                        <i class="fas fa-lock"></i>
+                        <div class="node-popup">
+                            <div class="node-popup-title">Locked</div>
+                            <div class="node-popup-text">Unlock by clearing the previous node.</div>
+                        </div>
+                    </button>
+                    <span class="node-label">Locked</span>
+                </div>
             </div>
         </section>
 

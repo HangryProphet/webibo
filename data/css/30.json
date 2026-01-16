@@ -164,6 +164,6 @@
   "enemy": {
     "name": "Bear",
     "hp": 8,
-    "image": "assets/img/enemies/bear-happy.png"
+    "image": "assets/img/enemies/bear-happy.webp"
   }
 }

@@ -23,7 +23,7 @@ $success = get_success();
 
     <div class="auth-layout fade-up">
         <div class="auth-illustration">
-            <img src="../assets/img/wiza/wiza-signup.png" alt="Wiza welcoming you to sign up" loading="lazy">
+            <img src="../assets/img/wiza/wiza-signup.webp" alt="Wiza welcoming you to sign up" loading="lazy">
         </div>
 
         <div class="signup-container">
@@ -64,21 +64,27 @@ $success = get_success();
                 <div class="input-group">
                     <i class="fas fa-user-circle input-icon"></i>
                     <input 
-                        type="text" 
-                        name="username" 
-                        placeholder="Username"
-                        value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>"
-                    >
+                            type="text" 
+                            name="username" 
+                            placeholder="Username"
+                            value="<?php echo htmlspecialchars($_POST['username'] ?? ''); ?>"
+                            pattern="[a-zA-Z0-9_]+"
+                            title="Username can only contain letters, numbers, and underscores."
+                            required
+                        >
                 </div>
 
                 <div class="input-group">
                     <i class="fas fa-lock input-icon"></i>
                     <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        placeholder="Password"
-                    >
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Password"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}"
+                            title="Password must be at least 6 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one symbol."
+                            required
+                        >
                     <button type="button" class="password-toggle" onclick="togglePassword('password', this)">SHOW</button>
                 </div>
 

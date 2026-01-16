@@ -122,7 +122,7 @@
                 <!-- ===== CODE EDITOR ACTIVITY ===== -->
                 <!-- Wiza Teacher Section -->
                 <div class="teacher-section fade-up">
-                    <img src="../assets/img/wiza/wiza-teach.png" alt="Wiza Teacher" class="teacher-image">
+                    <img src="../assets/img/wiza/wiza-teach.webp" alt="Wiza Teacher" class="teacher-image">
                     <div class="teacher-bubble">
                         <div class="teacher-name">Wiza</div>
                         <div class="teacher-instruction">
@@ -200,7 +200,7 @@
     <!-- Exit Confirmation Modal -->
     <div class="modal-overlay" id="exitModal">
         <div class="modal-content">
-            <img src="../assets/img/wiza/wiza-sad.png" alt="Wiza Sad" class="modal-image">
+            <img src="../assets/img/wiza/wiza-sad.webp" alt="Wiza Sad" class="modal-image">
             <h2 class="modal-title">Hold on! Leaving now will reset your current progress.</h2>
             <p class="modal-message">Do you still want to end this session?</p>
             <div class="modal-buttons">
@@ -213,7 +213,7 @@
     <!-- Game Over Modal -->
     <div class="modal-overlay" id="gameOverModal">
         <div class="modal-content">
-            <img src="../assets/img/wiza/wiza-sad.png" alt="Wiza Defeated" class="modal-image">
+            <img src="../assets/img/wiza/wiza-sad.webp" alt="Wiza Defeated" class="modal-image">
             <h2 class="modal-title" style="color: #ff4757;">Out of Hearts!</h2>
             <p class="modal-message">Don't give up! Every mistake is a step toward mastery. Ready to try again?</p>
             <div class="modal-buttons">
@@ -226,7 +226,7 @@
     <!-- Victory Modal -->
     <div class="modal-overlay" id="victoryModal">
         <div class="modal-content">
-            <img src="../assets/img/wiza/wiza-heart-eyes.png" alt="Wiza Celebrating" class="modal-image">
+            <img src="../assets/img/wiza/wiza-heart-eyes.webp" alt="Wiza Celebrating" class="modal-image">
             <h2 class="modal-title" style="color: #58cc02;">Level Complete!</h2>
             <p class="modal-message" id="victoryMessage">Amazing work! You've mastered this challenge!</p>
             <div class="modal-buttons">
@@ -239,7 +239,7 @@
     <!-- Code Editor Failure Modal -->
     <div class="modal-overlay" id="codeEditorFailureModal">
         <div class="modal-content">
-            <img src="../assets/img/wiza/wiza-sad.png" alt="Wiza Disappointed" class="modal-image">
+            <img src="../assets/img/wiza/wiza-sad.webp" alt="Wiza Disappointed" class="modal-image">
             <h2 class="modal-title" style="color: #ff4757;">Not Quite Right! 🤔</h2>
             <p class="modal-message">Your code doesn't match the expected output. Review the instructions and try again from the beginning.</p>
             <div class="modal-buttons">
@@ -268,6 +268,9 @@
             </p>
             <p class="modal-message enemy-intro-challenge" style="color: #ffd93d; font-weight: 600; margin-top: 12px;">
                 Defeat them by answering correctly!
+            </p>
+            <p class="modal-message" style="color: #ff4b4b; font-size: 15px; margin-top: 8px;">
+                <i class="fas fa-heart"></i> You have <strong><?php echo $activity_data['currentHearts']; ?></strong> Hearts
             </p>
             <div class="modal-buttons">
                 <button class="modal-btn modal-btn-secondary" onclick="exitToDashboard()">BACK TO MAP</button>

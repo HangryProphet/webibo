@@ -40,132 +40,142 @@ function sendVerificationEmail(string $recipientEmail, string $recipientName, st
         $mail->Subject = 'Verify Your Email for Webibo';
         
         // Construct verification URL
-        $baseUrl = $_ENV['APP_URL'] ?? 'http://localhost/Webibo';
+        $baseUrl = $_ENV['APP_URL'] ?? 'http://localhost/webquest';
         $verificationUrl = $baseUrl . '/controllers/verify_email.php?token=' . urlencode($token);
         
-        // Email body (matches Duolingo-style design)
+        // Email body (matches modernized design)
         $mail->Body = '
         <!DOCTYPE html>
         <html>
         <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <style>
                 body {
-                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-                    background-color: #f3f4f6;
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                    background-color: #f4f6f8;
                     margin: 0;
-                    padding: 20px;
+                    padding: 0;
+                    color: #1f2937;
+                    -webkit-font-smoothing: antialiased;
+                }
+                .wrapper {
+                    width: 100%;
+                    background-color: #f4f6f8;
+                    padding: 40px 0;
                 }
                 .container {
-                    max-width: 600px;
+                    max-width: 500px;
                     margin: 0 auto;
                     background-color: #ffffff;
-                    border-radius: 12px;
+                    border-radius: 16px;
                     overflow: hidden;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
                 }
                 .header {
-                    background: linear-gradient(135deg, #1cb0f6 0%, #0d7ca8 100%);
-                    padding: 40px 20px;
+                    padding: 40px 40px 0 40px;
                     text-align: center;
-                    color: #ffffff;
                 }
-                .header h1 {
+                .logo {
+                    font-size: 28px;
+                    font-weight: 800;
+                    color: #1cb0f6;
                     margin: 0;
-                    font-size: 32px;
-                    font-weight: 700;
+                    letter-spacing: -0.5px;
+                    text-decoration: none;
                 }
                 .content {
-                    padding: 40px 30px;
-                }
-                .greeting {
-                    font-size: 18px;
-                    font-weight: 600;
-                    color: #1f2937;
-                    margin-bottom: 20px;
-                }
-                .message {
-                    font-size: 15px;
-                    color: #4b5563;
-                    line-height: 1.6;
-                    margin-bottom: 30px;
-                }
-                .button-container {
+                    padding: 40px;
                     text-align: center;
-                    margin: 30px 0;
                 }
-                .verify-button {
+                .title {
+                    font-size: 24px;
+                    font-weight: 700;
+                    color: #111827;
+                    margin: 0 0 16px 0;
+                }
+                .text {
+                    font-size: 16px;
+                    line-height: 1.6;
+                    color: #4b5563;
+                    margin: 0 0 32px 0;
+                }
+                .button {
                     display: inline-block;
                     background-color: #1cb0f6;
                     color: #ffffff;
                     text-decoration: none;
-                    padding: 16px 48px;
+                    padding: 16px 32px;
                     border-radius: 12px;
                     font-size: 16px;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.5px;
-                    box-shadow: 0 4px 0 #0d7ca8;
+                    font-weight: 600;
+                    transition: background-color 0.2s;
+                    box-shadow: 0 4px 6px -1px rgba(28, 176, 246, 0.2);
                 }
-                .verify-button:hover {
-                    background-color: #17a1e0;
+                .button:hover {
+                    background-color: #0d9cdf;
                 }
-                .alt-link {
-                    font-size: 13px;
-                    color: #6b7280;
-                    margin-top: 20px;
-                    padding: 20px;
-                    background-color: #f9fafb;
+                .expiry-notice {
+                    margin-top: 32px;
+                    padding: 16px;
+                    background-color: #fffbeb;
                     border-radius: 8px;
-                    word-break: break-all;
+                    font-size: 13px;
+                    color: #92400e;
+                    text-align: left;
+                }
+                .expiry-notice strong {
+                    display: block;
+                    margin-bottom: 4px;
+                    color: #b45309;
                 }
                 .footer {
-                    padding: 20px;
+                    background-color: #f9fafb;
+                    padding: 24px 40px;
                     text-align: center;
                     font-size: 13px;
                     color: #9ca3af;
-                    background-color: #f9fafb;
+                    border-top: 1px solid #f3f4f6;
                 }
-                .expiry-notice {
-                    background-color: #fef3c7;
-                    border-left: 4px solid #f59e0b;
-                    padding: 15px;
-                    margin: 20px 0;
-                    font-size: 14px;
-                    color: #92400e;
+                .footer-link {
+                    color: #1cb0f6;
+                    text-decoration: none;
+                    word-break: break-all;
+                }
+                @media only screen and (max-width: 600px) {
+                    .wrapper { padding: 20px 0; }
+                    .container { width: 92%; border-radius: 12px; }
+                    .content { padding: 32px 20px; }
+                    .header { padding-top: 32px; }
                 }
             </style>
         </head>
         <body>
-            <div class="container">
-                <div class="header">
-                    <h1>🎓 Webibo</h1>
-                </div>
-                <div class="content">
-                    <div class="greeting">Hi ' . htmlspecialchars($recipientName) . '! 👋</div>
-                    <div class="message">
-                        Welcome to <strong>Webibo</strong>! We\'re excited to have you join our learning community.
-                        <br><br>
-                        To get started, please verify your email address by clicking the button below:
+            <div class="wrapper">
+                <div class="container">
+                    <div class="header">
+                        <div class="logo">Webibo</div>
                     </div>
-                    <div class="button-container">
-                        <a href="' . htmlspecialchars($verificationUrl) . '" class="verify-button">
-                            Verify My Email
-                        </a>
+                    
+                    <div class="content">
+                        <h1 class="title">Verify Your Email</h1>
+                        <p class="text">
+                            Hi ' . htmlspecialchars($recipientName) . ',<br>
+                            Welcome to Webibo! We\'re excited to have you join our learning community. Please verify your email address to get started:
+                        </p>
+                        
+                        <a href="' . htmlspecialchars($verificationUrl) . '" class="button">Verify Email</a>
+
+                        <div class="expiry-notice">
+                            <strong>⏱️ Important</strong>
+                            This link expires in 24 hours. If you didn\'t create an account with Webibo, you can safely ignore this email.
+                        </div>
                     </div>
-                    <div class="expiry-notice">
-                        ⏱️ <strong>Important:</strong> This verification link will expire in 24 hours.
+                    
+                    <div class="footer">
+                        <p style="margin-bottom: 12px;">Button not working? Paste this link into your browser:</p>
+                        <a href="' . htmlspecialchars($verificationUrl) . '" class="footer-link">' . htmlspecialchars($verificationUrl) . '</a>
+                        <p style="margin-top: 24px;">© ' . date('Y') . ' Webibo. All rights reserved.</p>
                     </div>
-                    <div class="alt-link">
-                        <strong>Link not working?</strong> Copy and paste this URL into your browser:<br>
-                        ' . htmlspecialchars($verificationUrl) . '
-                    </div>
-                    <div class="message">
-                        If you didn\'t create an account with Webibo, you can safely ignore this email.
-                    </div>
-                </div>
-                <div class="footer">
-                    © ' . date('Y') . ' Webibo. All rights reserved.<br>
-                    Happy learning! 🚀
                 </div>
             </div>
         </body>
@@ -225,125 +235,134 @@ function sendPasswordResetEmail(string $recipientEmail, string $resetLink, strin
         <!DOCTYPE html>
         <html>
         <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <style>
                 body {
-                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-                    background-color: #f3f4f6;
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                    background-color: #f4f6f8;
                     margin: 0;
-                    padding: 20px;
+                    padding: 0;
+                    color: #1f2937;
+                    -webkit-font-smoothing: antialiased;
+                }
+                .wrapper {
+                    width: 100%;
+                    background-color: #f4f6f8;
+                    padding: 40px 0;
                 }
                 .container {
-                    max-width: 600px;
+                    max-width: 500px;
                     margin: 0 auto;
                     background-color: #ffffff;
-                    border-radius: 12px;
+                    border-radius: 16px;
                     overflow: hidden;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
                 }
                 .header {
-                    background: linear-gradient(135deg, #1cb0f6 0%, #0d7ca8 100%);
-                    padding: 40px 20px;
+                    padding: 40px 40px 0 40px;
                     text-align: center;
-                    color: #ffffff;
                 }
-                .header h1 {
+                .logo {
+                    font-size: 28px;
+                    font-weight: 800;
+                    color: #1cb0f6;
                     margin: 0;
-                    font-size: 32px;
-                    font-weight: 700;
+                    letter-spacing: -0.5px;
+                    text-decoration: none;
                 }
                 .content {
-                    padding: 40px 30px;
-                }
-                .greeting {
-                    font-size: 18px;
-                    font-weight: 600;
-                    color: #1f2937;
-                    margin-bottom: 20px;
-                }
-                .message {
-                    font-size: 15px;
-                    color: #4b5563;
-                    line-height: 1.6;
-                    margin-bottom: 30px;
-                }
-                .button-container {
+                    padding: 40px;
                     text-align: center;
-                    margin: 30px 0;
                 }
-                .reset-button {
+                .title {
+                    font-size: 24px;
+                    font-weight: 700;
+                    color: #111827;
+                    margin: 0 0 16px 0;
+                }
+                .text {
+                    font-size: 16px;
+                    line-height: 1.6;
+                    color: #4b5563;
+                    margin: 0 0 32px 0;
+                }
+                .button {
                     display: inline-block;
                     background-color: #1cb0f6;
                     color: #ffffff;
                     text-decoration: none;
-                    padding: 16px 40px;
+                    padding: 16px 32px;
                     border-radius: 12px;
                     font-size: 16px;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.5px;
+                    font-weight: 600;
+                    transition: background-color 0.2s;
+                    box-shadow: 0 4px 6px -1px rgba(28, 176, 246, 0.2);
                 }
-                .warning {
-                    background-color: #fef3c7;
-                    border-left: 4px solid #f59e0b;
-                    padding: 15px;
-                    margin: 20px 0;
-                    border-radius: 4px;
+                .button:hover {
+                    background-color: #0d9cdf;
                 }
-                .warning-text {
-                    font-size: 14px;
+                .security-notice {
+                    margin-top: 32px;
+                    padding: 16px;
+                    background-color: #fffbeb;
+                    border-radius: 8px;
+                    font-size: 13px;
                     color: #92400e;
-                    margin: 0;
+                    text-align: left;
+                }
+                .security-notice strong {
+                    display: block;
+                    margin-bottom: 4px;
+                    color: #b45309;
                 }
                 .footer {
                     background-color: #f9fafb;
-                    padding: 20px 30px;
+                    padding: 24px 40px;
                     text-align: center;
                     font-size: 13px;
-                    color: #6b7280;
-                    border-top: 1px solid #e5e7eb;
+                    color: #9ca3af;
+                    border-top: 1px solid #f3f4f6;
                 }
-                .link {
+                .footer-link {
                     color: #1cb0f6;
                     text-decoration: none;
                     word-break: break-all;
                 }
+                @media only screen and (max-width: 600px) {
+                    .wrapper { padding: 20px 0; }
+                    .container { width: 92%; border-radius: 12px; }
+                    .content { padding: 32px 20px; }
+                    .header { padding-top: 32px; }
+                }
             </style>
         </head>
         <body>
-            <div class="container">
-                <div class="header">
-                    <h1>🔐 Password Reset</h1>
-                </div>
-                
-                <div class="content">
-                    <div class="greeting">Hi ' . htmlspecialchars($recipientName) . ',</div>
-                    
-                    <div class="message">
-                        We received a request to reset your password for your Webibo account. 
-                        Click the button below to create a new password:
+            <div class="wrapper">
+                <div class="container">
+                    <div class="header">
+                        <div class="logo">Webibo</div>
                     </div>
                     
-                    <div class="button-container">
-                        <a href="' . htmlspecialchars($resetLink) . '" class="reset-button">Reset Password</a>
-                    </div>
-                    
-                    <div class="message">
-                        Or copy and paste this link into your browser:<br>
-                        <a href="' . htmlspecialchars($resetLink) . '" class="link">' . htmlspecialchars($resetLink) . '</a>
-                    </div>
-                    
-                    <div class="warning">
-                        <p class="warning-text">
-                            <strong>⚠️ Security Notice:</strong><br>
-                            This link will expire in 1 hour. If you didn\'t request a password reset, 
-                            please ignore this email or contact support if you have concerns.
+                    <div class="content">
+                        <h1 class="title">Reset Your Password</h1>
+                        <p class="text">
+                            Hi ' . htmlspecialchars($recipientName) . ',<br>
+                            We received a request to reset the password for your Webibo account. If this was you, you can set a new password here:
                         </p>
+                        
+                        <a href="' . htmlspecialchars($resetLink) . '" class="button">Reset Password</a>
+
+                        <div class="security-notice">
+                            <strong>⏱️ Security Notice</strong>
+                            This link expires in 1 hour. If you didn\'t ask to reset your password, you can safely ignore this email.
+                        </div>
                     </div>
-                </div>
-                
-                <div class="footer">
-                    <p>If the button doesn\'t work, copy and paste the link above into your browser.</p>
-                    <p>© ' . date('Y') . ' Webibo. All rights reserved.</p>
+                    
+                    <div class="footer">
+                        <p style="margin-bottom: 12px;">Button not working? Paste this link into your browser:</p>
+                        <a href="' . htmlspecialchars($resetLink) . '" class="footer-link">' . htmlspecialchars($resetLink) . '</a>
+                        <p style="margin-top: 24px;">© ' . date('Y') . ' Webibo. All rights reserved.</p>
+                    </div>
                 </div>
             </div>
         </body>

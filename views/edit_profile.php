@@ -110,6 +110,8 @@ require_once __DIR__ . '/../controllers/edit_profile_handler.php';
                     name="username" 
                     placeholder="Username"
                     value="<?php echo htmlspecialchars($username); ?>"
+                    pattern="[a-zA-Z0-9_]+"
+                    title="Username can only contain letters, numbers, and underscores."
                     required
                 >
             </div>
@@ -137,6 +139,8 @@ require_once __DIR__ . '/../controllers/edit_profile_handler.php';
                     id="newPassword" 
                     name="new_password" 
                     placeholder="New password (optional)"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}"
+                    title="Password must be at least 6 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one symbol."
                 >
                 <button type="button" class="password-toggle" onclick="togglePassword('newPassword', this)">SHOW</button>
             </div>

@@ -19,6 +19,6 @@
   "enemy": {
     "name": "Fox",
     "hp": 8,
-    "image": "assets/img/enemies/fox-happy.png"
+    "image": "assets/img/enemies/fox-happy.webp"
   }
 }
