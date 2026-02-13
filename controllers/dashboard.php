@@ -69,9 +69,19 @@ $userId = get_current_user_id();
 $username = get_current_username() ?? 'User';
 $firstName = $_SESSION['first_name'] ?? 'User';
 $lastName = $_SESSION['last_name'] ?? '';
+$hasWalkthroughCompleted = $_SESSION['has_walkthrough_completed'] ?? false;
 
+// If not in session, we'll get it from the database via $userStats (needs update)
 // Fetch user statistics from model
 $userStats = StatsModel::getStatsByUserId($pdo, $userId);
+
+// Fetch additional user data for walkthrough status if not in session
+if (!isset($_SESSION['has_walkthrough_completed'])) {
+    require_once __DIR__ . '/../core/models/UserModel.php';
+    $userData = UserModel::getUserById($pdo, $userId);
+    $hasWalkthroughCompleted = $userData['has_walkthrough_completed'] ?? false;
+    $_SESSION['has_walkthrough_completed'] = $hasWalkthroughCompleted;
+}
 
 // Fetch achievement count
 require_once __DIR__ . '/../core/models/AchievementModel.php';

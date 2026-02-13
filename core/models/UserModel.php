@@ -350,5 +350,24 @@ class UserModel
             return false;
         }
     }
+
+    /**
+     * Mark walkthrough as completed for user
+     * 
+     * @param PDO $pdo Database connection
+     * @param int $userId User ID
+     * @return bool True on success, false otherwise
+     */
+    public static function completeWalkthrough(PDO $pdo, int $userId): bool
+    {
+        try {
+            $sql = "UPDATE users SET has_walkthrough_completed = TRUE WHERE id = :user_id";
+            $stmt = $pdo->prepare($sql);
+            return $stmt->execute([':user_id' => $userId]);
+        } catch (PDOException $e) {
+            error_log("UserModel::completeWalkthrough Error: " . $e->getMessage());
+            return false;
+        }
+    }
 }
 

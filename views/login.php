@@ -108,6 +108,7 @@ $success = get_success();
     </div>
 
     <script src="../assets/js/password_toggle.js"></script>
+    <script src="../assets/js/auth_handler.js"></script>
 </body>
 </html>
 

@@ -56,7 +56,51 @@ function require_login(string $loginPath = '../views/login.php'): void
  */
 function redirect(string $path): void
 {
+    // If it's an AJAX request, send a JSON response instead of a header redirect
+    if (is_ajax_request()) {
+        $error = $_SESSION['error'] ?? null;
+        if ($error) unset($_SESSION['error']);
+        
+        $success = $_SESSION['success'] ?? null;
+        if ($success) unset($_SESSION['success']);
+
+        send_json_response([
+            'success' => !$error,
+            'redirect' => $path,
+            'error' => $error,
+            'message' => $success
+        ]);
+    }
+
     header("Location: $path");
+    exit;
+}
+
+/**
+ * Check if the current request is an AJAX request
+ * 
+ * @return bool True if AJAX, false otherwise
+ */
+function is_ajax_request(): bool
+{
+    return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') ||
+           (isset($_SERVER['HTTP_ACCEPT']) && 
+            strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false);
+}
+
+/**
+ * Send a JSON response and terminate the script
+ * 
+ * @param array $data Data to be encoded as JSON
+ * @param int $statusCode HTTP status code (default: 200)
+ * @return void
+ */
+function send_json_response(array $data, int $statusCode = 200): void
+{
+    header('Content-Type: application/json');
+    http_response_code($statusCode);
+    echo json_encode($data);
     exit;
 }
 

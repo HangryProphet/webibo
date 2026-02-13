@@ -7,6 +7,7 @@
     <title>Webibo Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/tour.css">
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -152,5 +153,15 @@
     </div>
 
     <script src="../assets/js/dashboard.js"></script>
+    <script src="../assets/js/tour.js"></script>
+    <?php if (!$hasWalkthroughCompleted): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                webiboTour.init();
+            }, 1000); // Small delay for layout to settle
+        });
+    </script>
+    <?php endif; ?>
 </body>
 </html>

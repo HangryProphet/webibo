@@ -21,6 +21,7 @@ CREATE TABLE `users` (
     `last_name` VARCHAR(100) NULL,
     `avatar_path` VARCHAR(255) NOT NULL DEFAULT '/assets/img/avatars/default.png',
     `is_verified` BOOLEAN NOT NULL DEFAULT FALSE,
+    `has_walkthrough_completed` BOOLEAN NOT NULL DEFAULT FALSE,
     `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
