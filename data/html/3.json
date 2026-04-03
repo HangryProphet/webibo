@@ -1,0 +1,169 @@
+{
+  "questions": [
+    {
+      "question": "The <!______ html> declaration comes first in every HTML document.",
+      "options": ["DOCTYPE", "START", "BEGIN", "HTML"],
+      "correct_answer": "DOCTYPE",
+      "code_template": "<!______ html>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;!DOCTYPE html&gt;</code> is the document type declaration that tells browsers this is an HTML5 document. It must be the very first thing in your HTML file."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;!DOCTYPE html&gt;</code> is the document type declaration that tells browsers this is an HTML5 document. It must be the very first thing in your HTML file."
+        }
+      }
+    },
+    {
+      "question": "The ______ tag is the root element of an HTML page.",
+      "options": ["BODY", "HEAD", "HTML", "MAIN"],
+      "correct_answer": "HTML",
+      "code_template": "<______>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;html&gt;</code> tag is the root element - it contains ALL other HTML elements. Think of it as the foundation of your webpage."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;html&gt;</code> tag is the root element - it contains ALL other HTML elements. Think of it as the foundation of your webpage."
+        }
+      }
+    },
+    {
+      "question": "Metadata goes inside the ______ section.",
+      "options": ["BODY", "CONTENT", "HEAD", "MAIN"],
+      "correct_answer": "HEAD",
+      "code_template": "<______>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;head&gt;</code> section contains metadata - information about the page that isn't displayed, like the title, character set, and links to CSS files."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;head&gt;</code> section contains metadata - information about the page that isn't displayed, like the title, character set, and links to CSS files."
+        }
+      }
+    },
+    {
+      "question": "Visible content goes inside the ______ section.",
+      "options": ["VISIBLE", "BODY", "SHOW", "CONTENT"],
+      "correct_answer": "BODY",
+      "code_template": "<______>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;body&gt;</code> section contains EVERYTHING users see on your webpage: text, images, buttons, videos - all the visible content!"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;body&gt;</code> section contains EVERYTHING users see on your webpage: text, images, buttons, videos - all the visible content!"
+        }
+      }
+    },
+    {
+      "question": "HTML stands for Hyper ______ Markup Language.",
+      "options": ["TEXT", "TRANSFER", "TECH", "TOOL"],
+      "correct_answer": "TEXT",
+      "code_template": "Hyper ______ Markup Language",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The 'Text' in HTML refers to hypertext - text that can contain links to other documents. This is what makes the web interconnected!"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The 'Text' in HTML refers to hypertext - text that can contain links to other documents. This is what makes the web interconnected!"
+        }
+      }
+    },
+    {
+      "question": "The page title goes between <title> and </title> tags inside the ______ section.",
+      "options": ["HEAD", "BODY", "TITLE", "MAIN"],
+      "correct_answer": "HEAD",
+      "code_template": "<______>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;title&gt;</code> tag always goes inside the <code>&lt;head&gt;</code> section, not the <code>&lt;body&gt;</code>. This keeps metadata separate from visible content."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;title&gt;</code> tag always goes inside the <code>&lt;head&gt;</code> section, not the <code>&lt;body&gt;</code>. This keeps metadata separate from visible content."
+        }
+      }
+    },
+    {
+      "question": "HTML uses ______ brackets to define tags.",
+      "options": ["CURLY", "SQUARE", "ANGLE", "ROUND"],
+      "correct_answer": "ANGLE",
+      "code_template": "______ brackets",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "HTML tags are always surrounded by angle brackets: &lt; and &gt;. Like this: <code>&lt;html&gt;</code>, <code>&lt;body&gt;</code>, etc."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "HTML tags are always surrounded by angle brackets: &lt; and &gt;. Like this: <code>&lt;html&gt;</code>, <code>&lt;body&gt;</code>, etc."
+        }
+      }
+    },
+    {
+      "question": "After <!DOCTYPE html>, the next tag should be ______.",
+      "options": ["<head>", "<body>", "<html>", "<!HTML>"],
+      "correct_answer": "<html>",
+      "code_template": "<!DOCTYPE html>\n______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The correct order is: <code>&lt;!DOCTYPE html&gt;</code> → <code>&lt;html&gt;</code> → <code>&lt;head&gt;</code> → <code>&lt;body&gt;</code>. The <code>&lt;html&gt;</code> tag wraps everything else."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The correct order is: <code>&lt;!DOCTYPE html&gt;</code> → <code>&lt;html&gt;</code> → <code>&lt;head&gt;</code> → <code>&lt;body&gt;</code>. The <code>&lt;html&gt;</code> tag wraps everything else."
+        }
+      }
+    },
+    {
+      "question": "The <body> tag comes ______ the <head> tag.",
+      "options": ["BEFORE", "AFTER", "INSIDE", "OUTSIDE"],
+      "correct_answer": "AFTER",
+      "code_template": "<body> comes ______ <head>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;body&gt;</code> always comes after the <code>&lt;head&gt;</code> in proper HTML structure. Inside <code>&lt;html&gt;</code>, first comes <code>&lt;head&gt;</code>, then <code>&lt;body&gt;</code>."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;body&gt;</code> always comes after the <code>&lt;head&gt;</code> in proper HTML structure. Inside <code>&lt;html&gt;</code>, first comes <code>&lt;head&gt;</code>, then <code>&lt;body&gt;</code>."
+        }
+      }
+    },
+    {
+      "question": "Content in the <head> is ______ to webpage visitors.",
+      "options": ["VISIBLE", "INVISIBLE", "COLORFUL", "INTERACTIVE"],
+      "correct_answer": "INVISIBLE",
+      "code_template": "Content in <head> is ______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Content in <code>&lt;head&gt;</code> is invisible to regular visitors! It's only visible in browser tabs (title), source code, or to search engines."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Content in <code>&lt;head&gt;</code> is invisible to regular visitors! It's only visible in browser tabs (title), source code, or to search engines."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Bear",
+    "hp": 10,
+    "image": "assets/img/enemies/bear-happy.png"
+  }
+}

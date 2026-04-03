@@ -1,0 +1,169 @@
+{
+  "questions": [
+    {
+      "question": "What does DOM stand for?",
+      "options": [
+        "Document Object Model",
+        "Data Object Management",
+        "Digital Output Method",
+        "Display Object Matrix"
+      ],
+      "correct_answer": "Document Object Model",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "DOM stands for Document Object Model. It's a programming interface that represents HTML documents as a tree of objects."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "DOM stands for Document Object Model. It's a programming interface that represents HTML documents as a tree of objects."
+        }
+      }
+    },
+    {
+      "question": "Which method selects an element by its ID?",
+      "options": [
+        "document.querySelector()",
+        "document.getElementByClass()",
+        "document.getElementById()",
+        "document.getTagName()"
+      ],
+      "correct_answer": "document.getElementById()",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>document.getElementById('id-name')</code> selects a single element by its ID attribute. IDs should be unique on a page."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>document.getElementById('id-name')</code> selects a single element by its ID attribute. IDs should be unique on a page."
+        }
+      }
+    },
+    {
+      "question": "What property changes the text of an element?",
+      "options": [
+        "innerHTML",
+        "textContent",
+        "value",
+        "Both a and b"
+      ],
+      "correct_answer": "Both a and b",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Both textContent (plain text) and innerHTML (HTML code) can change element content. Use textContent for security."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Both textContent (plain text) and innerHTML (HTML code) can change element content. Use textContent for security."
+        }
+      }
+    },
+    {
+      "question": "How do you change an element's color with JavaScript?",
+      "options": [
+        "element.color = \"red\"",
+        "element.style.color = \"red\"",
+        "element.setColor(\"red\")",
+        "element.changeColor(\"red\")"
+      ],
+      "correct_answer": "element.style.color = \"red\"",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Use <code>element.style.propertyName</code> to change CSS styles. Note: property names use camelCase (backgroundColor, not background-color)."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Use <code>element.style.propertyName</code> to change CSS styles. Note: property names use camelCase (backgroundColor, not background-color)."
+        }
+      }
+    },
+    {
+      "question": "Which adds a click event listener to a button?",
+      "options": [
+        "button.onClick(function() {})",
+        "button.addEvent(\"click\", function() {})",
+        "button.addEventListener(\"click\", function() {})",
+        "button.clickListener(function() {})"
+      ],
+      "correct_answer": "button.addEventListener(\"click\", function() {})",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>addEventListener</code> is the standard method for attaching event handlers. It allows multiple handlers for the same event."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>addEventListener</code> is the standard method for attaching event handlers. It allows multiple handlers for the same event."
+        }
+      }
+    },
+    {
+      "question": "What does classList.add() do?",
+      "options": [
+        "Creates a new class",
+        "Adds a CSS class to an element",
+        "Lists all classes",
+        "Removes a class"
+      ],
+      "correct_answer": "Adds a CSS class to an element",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>classList.add('className')</code> adds a CSS class to an element. This is better than directly modifying className."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>classList.add('className')</code> adds a CSS class to an element. This is better than directly modifying className."
+        }
+      }
+    },
+    {
+      "question": "Which event fires when the page finishes loading?",
+      "options": [
+        "ready",
+        "complete",
+        "DOMContentLoaded",
+        "pageLoad"
+      ],
+      "correct_answer": "DOMContentLoaded",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>DOMContentLoaded</code> fires when the HTML is fully loaded and parsed (images may still be loading). <code>load</code> waits for all resources."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>DOMContentLoaded</code> fires when the HTML is fully loaded and parsed (images may still be loading). <code>load</code> waits for all resources."
+        }
+      }
+    },
+    {
+      "question": "What does querySelector() return?",
+      "options": [
+        "All matching elements",
+        "The first matching element",
+        "An element by ID only",
+        "Only div elements"
+      ],
+      "correct_answer": "The first matching element",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>querySelector()</code> returns the FIRST element that matches the CSS selector. Use <code>querySelectorAll()</code> for all matches."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>querySelector()</code> returns the FIRST element that matches the CSS selector. Use <code>querySelectorAll()</code> for all matches."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Shark",
+    "hp": 8,
+    "image": "assets/img/enemies/shark-happy.png"
+  }
+}

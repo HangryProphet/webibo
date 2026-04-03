@@ -1,0 +1,19 @@
+{
+  "instruction": "Create a complete page with the following structure:<br><br>1. Write an &lt;h1&gt; header that says \"Hello Webibo\"<br>2. Next, write a &lt;p&gt; paragraph that says \"Learning is fun!\"<br>3. After that, write an &lt;h2&gt; header that says \"Welcome to Webibo\"<br>4. Finally, write a &lt;p&gt; paragraph \"Let's build something amazing together.\"",
+  "starter_code": "",
+  "correct_code": "<h1>Hello Webibo</h1>\n<p>Learning is fun!</p>\n<h2>Welcome to Webibo</h2>\n<p>Let's build something amazing together.</p>",
+  "validation": {
+    "ignore_whitespace": true,
+    "case_sensitive": false
+  },
+  "feedback": {
+    "correct": {
+      "title": "Perfect! 🎉",
+      "details": "You've mastered headings and paragraphs! You created a proper HTML structure with an <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, and two <code>&lt;p&gt;</code> tags. Great job!"
+    },
+    "wrong": {
+      "title": "Not quite! 🤔",
+      "details": "Remember the structure:<br>1. <code>&lt;h1&gt;Hello Webibo&lt;/h1&gt;</code><br>2. <code>&lt;p&gt;Learning is fun!&lt;/p&gt;</code><br>3. <code>&lt;h2&gt;Welcome to Webibo&lt;/h2&gt;</code><br>4. <code>&lt;p&gt;Let's build something amazing together.&lt;/p&gt;</code>"
+    }
+  }
+}

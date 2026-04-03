@@ -1,0 +1,169 @@
+{
+  "questions": [
+    {
+      "question": "The <______> tag creates clickable hyperlinks.",
+      "options": ["LINK", "A", "HREF", "HYPER"],
+      "correct_answer": "A",
+      "code_template": "<______>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;a&gt;</code> tag creates anchor elements (hyperlinks). Remember: 'a' for 'anchor' - it anchors one document to another."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;a&gt;</code> tag creates anchor elements (hyperlinks). Remember: 'a' for 'anchor' - it anchors one document to another."
+        }
+      }
+    },
+    {
+      "question": "The href attribute contains the link's ______.",
+      "options": ["COLOR", "DESTINATION", "SIZE", "STYLE"],
+      "correct_answer": "DESTINATION",
+      "code_template": "href = ______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "href contains the link's destination - where it goes when clicked. It can be a URL, file path, email address, or page section."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "href contains the link's destination - where it goes when clicked. It can be a URL, file path, email address, or page section."
+        }
+      }
+    },
+    {
+      "question": "To open a link in a new tab, add target=\"______\".",
+      "options": ["NEW", "BLANK", "TAB", "WINDOW"],
+      "correct_answer": "BLANK",
+      "code_template": "target=\"______\"",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>target=\"_blank\"</code> opens links in a new blank tab/window. The underscore before 'blank' is required."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>target=\"_blank\"</code> opens links in a new blank tab/window. The underscore before 'blank' is required."
+        }
+      }
+    },
+    {
+      "question": "<a href=\"______:hello@example.com\">Email Us</a> creates an email link.",
+      "options": ["EMAIL", "SEND", "MAILTO", "CONTACT"],
+      "correct_answer": "MAILTO",
+      "code_template": "______:email",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>mailto:</code> is the protocol for email links, just like https: is for websites. It tells the browser to open the email client."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>mailto:</code> is the protocol for email links, just like https: is for websites. It tells the browser to open the email client."
+        }
+      }
+    },
+    {
+      "question": "For same-page navigation, use href=\"#______\" with an element's id.",
+      "options": ["LINK", "JUMP", "SECTION", "ID"],
+      "correct_answer": "ID",
+      "code_template": "href=\"#______\"",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Use <code>href=\"#idname\"</code> to jump to an element with <code>id=\"idname\"</code>. The # symbol indicates you're linking to an ID on the same page."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Use <code>href=\"#idname\"</code> to jump to an element with <code>id=\"idname\"</code>. The # symbol indicates you're linking to an ID on the same page."
+        }
+      }
+    },
+    {
+      "question": "Good link text should ______ where the link goes.",
+      "options": ["HIDE", "DESCRIBE", "SHORTEN", "COLOR"],
+      "correct_answer": "DESCRIBE",
+      "code_template": "______ destination",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Link text should describe the destination. Screen reader users often navigate by links, so descriptive text is essential for accessibility."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Link text should describe the destination. Screen reader users often navigate by links, so descriptive text is essential for accessibility."
+        }
+      }
+    },
+    {
+      "question": "Links typically appear ______ and underlined by default.",
+      "options": ["RED", "GREEN", "BLUE", "BLACK"],
+      "correct_answer": "BLUE",
+      "code_template": "______ color",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Most browsers display unvisited links as blue and underlined. This visual cue helps users identify clickable elements."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Most browsers display unvisited links as blue and underlined. This visual cue helps users identify clickable elements."
+        }
+      }
+    },
+    {
+      "question": "A link without an href attribute is a ______ link.",
+      "options": ["BROKEN", "PLACEHOLDER", "INVISIBLE", "STYLED"],
+      "correct_answer": "PLACEHOLDER",
+      "code_template": "______ link",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Links without href are placeholder links - useful during development but should be replaced with real URLs before launching."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Links without href are placeholder links - useful during development but should be replaced with real URLs before launching."
+        }
+      }
+    },
+    {
+      "question": "<a href=\"about.html\">About</a> links to a file in the ______ folder.",
+      "options": ["PARENT", "SAME", "EXTERNAL", "DIFFERENT"],
+      "correct_answer": "SAME",
+      "code_template": "______ folder",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Using just the filename (about.html) means the file is in the same folder as the current HTML file."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Using just the filename (about.html) means the file is in the same folder as the current HTML file."
+        }
+      }
+    },
+    {
+      "question": "The 'a' in <a> tag stands for ______.",
+      "options": ["ANCHOR", "ACTION", "ACCESS", "ATTACH"],
+      "correct_answer": "ANCHOR",
+      "code_template": "'a' = ______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;a&gt;</code> tag stands for anchor - it anchors or connects one document to another, creating the hyperlinks that make the web interconnected."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;a&gt;</code> tag stands for anchor - it anchors or connects one document to another, creating the hyperlinks that make the web interconnected."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Raccoon",
+    "hp": 10,
+    "image": "assets/img/enemies/raccoon-happy.png"
+  }
+}

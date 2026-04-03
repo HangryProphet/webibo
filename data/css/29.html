@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The CSS Box Model</title>
+    <link rel="stylesheet" href="../../assets/css/lecture-content.css">
+</head>
+<body>
+    <div class="page-header">
+        <div class="page-number">Page 1 of 3</div>
+    </div>
+
+    <div class="wiza-intro">
+        <img src="../../assets/img/wiza/wiza-excited.png" alt="Wiza" class="wiza-img">
+        <div class="speech-bubble">
+            <p>Ready for something powerful? 📦</p>
+            <p>The <strong>Box Model</strong> is one of the most important concepts in CSS! It controls spacing, sizing, and layout.</p>
+            <p>Master this, and you'll be able to create beautiful, well-spaced designs!</p>
+        </div>
+    </div>
+
+    <h1>The CSS Box Model</h1>
+
+    <h2>What is the Box Model?</h2>
+    <p>Every HTML element is actually a rectangular box! The CSS Box Model defines how these boxes are structured and spaced.</p>
+
+    <p>Each box consists of four layers (from inside to outside):</p>
+    <ol>
+        <li><strong>Content</strong> - The actual text or images</li>
+        <li><strong>Padding</strong> - Space between content and border</li>
+        <li><strong>Border</strong> - A line around the padding</li>
+        <li><strong>Margin</strong> - Space outside the border (between elements)</li>
+    </ol>
+
+    <div class="info-box">
+        <strong>Think of it like a picture frame:</strong>
+        <ul>
+            <li>Content = The photo</li>
+            <li>Padding = The mat board around the photo</li>
+            <li>Border = The frame itself</li>
+            <li>Margin = The space between frames on the wall</li>
+        </ul>
+    </div>
+
+    <h2>Visual Box Model</h2>
+    <pre style="background: #f5f5f5; padding: 20px; border: 2px solid #333;">
+┌─────────────────── MARGIN ───────────────────┐
+│                                              │
+│  ┌────────────── BORDER ──────────────┐     │
+│  │                                    │     │
+│  │  ┌────────── PADDING ─────────┐   │     │
+│  │  │                            │   │     │
+│  │  │      ┌── CONTENT ──┐       │   │     │
+│  │  │      │   Text/img  │       │   │     │
+│  │  │      └─────────────┘       │   │     │
+│  │  │                            │   │     │
+│  │  └────────────────────────────┘   │     │
+│  │                                    │     │
+│  └────────────────────────────────────┘     │
+│                                              │
+└──────────────────────────────────────────────┘
+    </pre>
+
+    <div class="page-break"></div>
+
+    <div class="page-header">
+        <div class="page-number">Page 2 of 3</div>
+    </div>
+
+    <h2>Padding - Internal Spacing</h2>
+    <p>Padding creates space <strong>inside</strong> the element, between content and border:</p>
+
+    <div class="code-example">
+        <pre><code>/* All sides same */
+.box {
+  padding: 20px;
+}
+
+/* Individual sides */
+.box {
+  padding-top: 10px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+}
+
+/* Shorthand: top right bottom left (clockwise) */
+.box {
+  padding: 10px 15px 10px 15px;
+}</code></pre>
+    </div>
+
+    <h2>Border - The Frame</h2>
+    <p>Borders surround the padding and content:</p>
+
+    <div class="code-example">
+        <pre><code>/* Complete border */
+.box {
+  border: 2px solid black;
+}
+
+/* Individual properties */
+.box {
+  border-width: 2px;
+  border-style: solid;  /* solid, dashed, dotted */
+  border-color: black;
+}
+
+/* Rounded corners */
+.box {
+  border-radius: 10px;
+}</code></pre>
+    </div>
+
+    <div class="info-box">
+        <strong>Border Styles:</strong> solid, dashed, dotted, double, groove, ridge, inset, outset, none, hidden
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="page-header">
+        <div class="page-number">Page 3 of 3</div>
+    </div>
+
+    <h2>Margin - External Spacing</h2>
+    <p>Margin creates space <strong>outside</strong> the element, separating it from other elements:</p>
+
+    <div class="code-example">
+        <pre><code>/* All sides same */
+.box {
+  margin: 20px;
+}
+
+/* Individual sides */
+.box {
+  margin-top: 10px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+}
+
+/* Center an element horizontally */
+.box {
+  margin: 0 auto;  /* 0 top/bottom, auto left/right */
+}</code></pre>
+    </div>
+
+    <h2>Width and Height</h2>
+    <p>Control the size of the content area:</p>
+
+    <div class="code-example">
+        <pre><code>.box {
+  width: 300px;
+  height: 200px;
+}
+
+/* Or use percentages for responsive design */
+.box {
+  width: 50%;   /* 50% of parent element */
+  height: 100%; /* 100% of parent element */
+}</code></pre>
+    </div>
+
+    <h2>Putting It All Together</h2>
+    <div class="code-example">
+        <pre><code>.card {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 20px auto;
+  background-color: white;
+}</code></pre>
+    </div>
+
+    <p>This creates a nice card with:</p>
+    <ul>
+        <li>300px width</li>
+        <li>20px internal spacing (padding)</li>
+        <li>1px gray border with rounded corners</li>
+        <li>20px space above/below, centered horizontally (margin)</li>
+        <li>White background</li>
+    </ul>
+
+    <div class="info-box">
+        <strong>Pro Tip:</strong> In browser DevTools (F12), you can inspect any element and see its box model visualized with colors!
+    </div>
+
+    <div class="wiza-intro">
+        <img src="../../assets/img/wiza/wiza-happy.png" alt="Wiza" class="wiza-img">
+        <div class="speech-bubble">
+            <p>Excellent work! 📦✨</p>
+            <p>The Box Model is the foundation of CSS layout. With padding, border, and margin, you can create perfectly spaced designs!</p>
+            <p>Let's practice building something beautiful!</p>
+        </div>
+    </div>
+</body>
+</html>

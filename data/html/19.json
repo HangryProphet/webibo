@@ -1,0 +1,169 @@
+{
+  "questions": [
+    {
+      "question": "<______> creates bulleted lists.",
+      "options": ["OL", "UL", "LI", "LIST"],
+      "correct_answer": "UL",
+      "code_template": "<______>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;ul&gt;</code> creates unordered lists (bulleted). Remember: \"U\" for \"unordered\" = bullet points without specific order."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;ul&gt;</code> creates unordered lists (bulleted). Remember: \"U\" for \"unordered\" = bullet points without specific order."
+        }
+      }
+    },
+    {
+      "question": "<______> creates numbered lists.",
+      "options": ["OL", "UL", "LI", "NUM"],
+      "correct_answer": "OL",
+      "code_template": "<______>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;ol&gt;</code> creates ordered lists (numbered). Remember: \"O\" for \"ordered\" = numbers indicating sequence."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;ol&gt;</code> creates ordered lists (numbered). Remember: \"O\" for \"ordered\" = numbers indicating sequence."
+        }
+      }
+    },
+    {
+      "question": "Each list item goes inside <______> tags.",
+      "options": ["ITEM", "LI", "LITEM", "POINT"],
+      "correct_answer": "LI",
+      "code_template": "<______>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;li&gt;</code> tags contain list items. Every bullet point or number in a list is wrapped in &lt;li&gt; and &lt;/li&gt;."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;li&gt;</code> tags contain list items. Every bullet point or number in a list is wrapped in &lt;li&gt; and &lt;/li&gt;."
+        }
+      }
+    },
+    {
+      "question": "<ol type=\"______\"> creates lowercase letters (a, b, c).",
+      "options": ["A", "a", "1", "I"],
+      "correct_answer": "a",
+      "code_template": "<ol type=\"______\">",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "type=\"a\" creates lowercase alphabetical numbering. type=\"A\" creates uppercase, type=\"i\" creates Roman numerals."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "type=\"a\" creates lowercase alphabetical numbering. type=\"A\" creates uppercase, type=\"i\" creates Roman numerals."
+        }
+      }
+    },
+    {
+      "question": "Lists inside lists are called ______ lists.",
+      "options": ["CHILD", "NESTED", "INNER", "SUB"],
+      "correct_answer": "NESTED",
+      "code_template": "______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Nested lists are lists within lists. They create hierarchy, like sub-points under main points."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Nested lists are lists within lists. They create hierarchy, like sub-points under main points."
+        }
+      }
+    },
+    {
+      "question": "<ol ______=\"5\"> starts numbering at 5.",
+      "options": ["BEGIN", "START", "FROM", "FIRST"],
+      "correct_answer": "START",
+      "code_template": "<ol ______=\"5\">",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "start=\"5\" makes an ordered list begin at 5 instead of 1. Useful for continuing lists across pages."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "start=\"5\" makes an ordered list begin at 5 instead of 1. Useful for continuing lists across pages."
+        }
+      }
+    },
+    {
+      "question": "For a shopping list without order, use <______>.",
+      "options": ["OL", "UL", "LIST", "ITEMS"],
+      "correct_answer": "UL",
+      "code_template": "<______>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Shopping lists (no specific order) use <code>&lt;ul&gt;</code> (unordered list). Order doesn't matter for grocery items."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Shopping lists (no specific order) use <code>&lt;ul&gt;</code> (unordered list). Order doesn't matter for grocery items."
+        }
+      }
+    },
+    {
+      "question": "Roman numerals use type=\"______\".",
+      "options": ["R", "ROMAN", "I", "IV"],
+      "correct_answer": "I",
+      "code_template": "type=\"______\"",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "type=\"I\" creates uppercase Roman numerals (I, II, III). type=\"i\" creates lowercase (i, ii, iii)."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "type=\"I\" creates uppercase Roman numerals (I, II, III). type=\"i\" creates lowercase (i, ii, iii)."
+        }
+      }
+    },
+    {
+      "question": "<ul type=\"______\"> creates square bullets.",
+      "options": ["SQUARE", "BOX", "RECTANGLE", "BLOCK"],
+      "correct_answer": "SQUARE",
+      "code_template": "<ul type=\"______\">",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "type=\"square\" creates square bullets. Other options: disc (default filled circle), circle (hollow circle)."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "type=\"square\" creates square bullets. Other options: disc (default filled circle), circle (hollow circle)."
+        }
+      }
+    },
+    {
+      "question": "Good indentation makes nested lists easier to ______.",
+      "options": ["READ", "LOAD", "STYLE", "DOWNLOAD"],
+      "correct_answer": "READ",
+      "code_template": "______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Proper indentation makes nested lists easier to read and understand in your code editor. It shows the hierarchy visually."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Proper indentation makes nested lists easier to read and understand in your code editor. It shows the hierarchy visually."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Fox",
+    "hp": 10,
+    "image": "assets/img/enemies/fox-happy.png"
+  }
+}

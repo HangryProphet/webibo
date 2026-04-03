@@ -1,0 +1,24 @@
+{
+  "instruction": "Create a CSS class called 'important' that:\n1. Makes text red\n2. Makes text bold\n3. Has font size of 18px",
+  "starter_code": "/* Write your CSS here */\n",
+  "correct_code": ".important {\n  color: red;\n  font-weight: bold;\n  font-size: 18px;\n}",
+  "validation": {
+    "ignore_whitespace": true,
+    "case_sensitive": false
+  },
+  "feedback": {
+    "success": {
+      "title": "🎉 Excellent Work!",
+      "details": "You've successfully created a reusable class that styles text with color, weight, and size. Classes like this make it easy to consistently style important content across your entire website!"
+    },
+    "error": {
+      "title": "Not quite right!",
+      "details": "Remember to:\n• Use a class selector (.important)\n• Set color: red;\n• Set font-weight: bold;\n• Set font-size: 18px;\n• Use proper CSS syntax with curly braces"
+    }
+  },
+  "enemy": {
+    "name": "Fox",
+    "hp": 8,
+    "image": "assets/img/enemies/fox-happy.png"
+  }
+}

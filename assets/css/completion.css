@@ -1,0 +1,214 @@
+/* Completion/Result Page Styles - Reusable for lesson complete, out of hearts, etc. */
+.completion-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.completion-image {
+    width: 200px;
+    height: auto;
+    margin: 0 auto 30px;
+    display: block;
+    animation: bounceIn 0.8s ease;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.completion-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #58cc02;
+    margin-bottom: 16px;
+    animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+.completion-title.error {
+    color: #ff4b4b;
+}
+
+.completion-message {
+    font-size: 20px;
+    color: #e5e7eb;
+    margin-bottom: 50px;
+    line-height: 1.6;
+    animation: fadeInUp 0.6s ease 0.4s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 50px;
+    animation: fadeInUp 0.6s ease 0.6s both;
+}
+
+.stat-card {
+    background-color: #1e2633;
+    border: 2px solid #2d3949;
+    border-radius: 16px;
+    padding: 30px 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border-color: #3d4a5c;
+}
+
+.stat-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+    color: #1cb0f6;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #8b95a5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-card.xp .stat-icon {
+    color: #ffd93d;
+}
+
+.stat-card.xp .stat-value {
+    color: #ffd93d;
+}
+
+.stat-card.accuracy .stat-icon {
+    color: #58cc02;
+}
+
+.stat-card.accuracy .stat-value {
+    color: #58cc02;
+}
+
+.stat-card.time .stat-icon {
+    color: #ff6b9d;
+}
+
+.stat-card.time .stat-value {
+    color: #ff6b9d;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.6s ease 0.8s both;
+}
+
+.action-btn {
+    padding: 18px 48px;
+    border: none;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.action-btn-primary {
+    background-color: #1cb0f6;
+    color: #ffffff;
+    box-shadow: 0 4px 0 #0e7fb0;
+}
+
+.action-btn-primary:hover {
+    background-color: #1ec5ff;
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #0e7fb0;
+}
+
+.action-btn-primary:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #0e7fb0;
+}
+
+.action-btn-secondary {
+    background-color: #6b7280;
+    color: #ffffff;
+    box-shadow: 0 4px 0 #374151;
+}
+
+.action-btn-secondary:hover {
+    background-color: #7a8290;
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #374151;
+}
+
+.action-btn-secondary:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #374151;
+}
+
+@media (max-width: 768px) {
+    .completion-title {
+        font-size: 32px;
+    }
+
+    .completion-message {
+        font-size: 18px;
+    }
+
+    .completion-image {
+        width: 250px;
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-btn {
+        width: 100%;
+    }
+}
+

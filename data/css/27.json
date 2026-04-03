@@ -1,0 +1,137 @@
+{
+  "questions": [
+    {
+      "question": "Fill in the blank: The _____ property changes text color.",
+      "options": ["color", "text-color", "font-color", "style"],
+      "correct_answer": "color",
+      "code_template": "p {\n  _____: blue;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "The <code>color</code> property changes text color. It's one of the most commonly used CSS properties."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>color</code> property changes text color. It's one of the most commonly used CSS properties."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Hex colors start with _____.",
+      "options": ["#", "0x", "$", "@"],
+      "correct_answer": "#",
+      "code_template": "color: _____FF5733;",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Hex colors always start with a hash symbol (#), followed by 6 characters representing RGB values."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Hex colors always start with a hash symbol (#), followed by 6 characters representing RGB values."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: The _____ property changes background color.",
+      "options": ["background-color", "bg-color", "color-bg", "background"],
+      "correct_answer": "background-color",
+      "code_template": "body {\n  _____: lightgray;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "The <code>background-color</code> property sets the background color of an element."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>background-color</code> property sets the background color of an element."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Use _____ to change the font.",
+      "options": ["font-family", "font-type", "typeface", "font"],
+      "correct_answer": "font-family",
+      "code_template": "p {\n  _____: Arial;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "The <code>font-family</code> property changes the typeface of your text."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>font-family</code> property changes the typeface of your text."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: To make text bold, use font-weight: _____.",
+      "options": ["bold", "strong", "thick", "heavy"],
+      "correct_answer": "bold",
+      "code_template": ".title {\n  font-weight: _____;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>font-weight: bold;</code> makes text bold. You can also use numeric values like 700."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>font-weight: bold;</code> makes text bold. You can also use numeric values like 700."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Font size is commonly measured in _____.",
+      "options": ["px", "cm", "inches", "points"],
+      "correct_answer": "px",
+      "code_template": "h1 {\n  font-size: 32_____;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Pixels (px) are the most common unit for font size: <code>font-size: 16px;</code>"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Pixels (px) are the most common unit for font size: <code>font-size: 16px;</code>"
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: To center text, use text-align: _____.",
+      "options": ["center", "middle", "centered", "align-center"],
+      "correct_answer": "center",
+      "code_template": ".title {\n  text-align: _____;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>text-align: center;</code> centers text horizontally within its container."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>text-align: center;</code> centers text horizontally within its container."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: RGB stands for Red, Green, and _____.",
+      "options": ["Blue", "Black", "Brown", "Bright"],
+      "correct_answer": "Blue",
+      "code_template": "/* RGB = Red, Green, _____ */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "RGB stands for Red, Green, and Blue—the three primary colors of light used in digital displays."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "RGB stands for Red, Green, and Blue—the three primary colors of light used in digital displays."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Bat",
+    "hp": 8,
+    "image": "assets/img/enemies/bat-happy.png"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "instruction": "Create two sections: 1) Use &lt;h2&gt; for \"My Wishlist\" followed by an unordered list with: New book, Coffee mug, Headphones. 2) Use &lt;h2&gt; for \"My Tasks\" followed by an ordered list with: Finish homework, Study for the exams, Clean the kitchen.",
+  "starter_code": "",
+  "correct_code": "<h2>My Wishlist</h2>\n<ul>\n  <li>New book</li>\n  <li>Coffee mug</li>\n  <li>Headphones</li>\n</ul>\n<h2>My Tasks</h2>\n<ol>\n  <li>Finish homework</li>\n  <li>Study for the exams</li>\n  <li>Clean the kitchen</li>\n</ol>",
+  "validation": {
+    "ignore_whitespace": true,
+    "case_sensitive": false
+  },
+  "feedback": {
+    "correct": {
+      "title": "Perfect! 🎉",
+      "details": "Excellent work! You've created both unordered and ordered lists with proper structure. You understand when to use &lt;ul&gt; for items without order and &lt;ol&gt; for sequential items!"
+    },
+    "wrong": {
+      "title": "Not quite! 🤔",
+      "details": "Remember: Use <code>&lt;h2&gt;</code> for headings, <code>&lt;ul&gt;</code> with <code>&lt;li&gt;</code> for the wishlist (unordered), and <code>&lt;ol&gt;</code> with <code>&lt;li&gt;</code> for tasks (ordered). Make sure each list item is wrapped in &lt;li&gt; tags!"
+    }
+  }
+}

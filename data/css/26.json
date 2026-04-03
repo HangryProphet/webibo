@@ -1,0 +1,169 @@
+{
+  "questions": [
+    {
+      "question": "Which property changes text color?",
+      "options": [
+        "text-color",
+        "color",
+        "font-color",
+        "text"
+      ],
+      "correct_answer": "color",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>color</code> property changes text color. Despite its simple name, it specifically targets text, not backgrounds or borders."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>color</code> property changes text color. Despite its simple name, it specifically targets text, not backgrounds or borders."
+        }
+      }
+    },
+    {
+      "question": "Which property changes the background color?",
+      "options": [
+        "bg-color",
+        "background",
+        "background-color",
+        "color-background"
+      ],
+      "correct_answer": "background-color",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>background-color</code> sets the background color of an element. You can also use the shorthand <code>background</code> property, but <code>background-color</code> is more specific."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>background-color</code> sets the background color of an element. You can also use the shorthand <code>background</code> property, but <code>background-color</code> is more specific."
+        }
+      }
+    },
+    {
+      "question": "What does #FF0000 represent?",
+      "options": [
+        "Blue",
+        "Green",
+        "Red",
+        "Yellow"
+      ],
+      "correct_answer": "Red",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>#FF0000</code> is pure red. In hex colors, the first two digits are red, middle two are green, and last two are blue. FF (255) for red and 00 (0) for green and blue gives you pure red."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>#FF0000</code> is pure red. In hex colors, the first two digits are red, middle two are green, and last two are blue. FF (255) for red and 00 (0) for green and blue gives you pure red."
+        }
+      }
+    },
+    {
+      "question": "Which property changes the font?",
+      "options": [
+        "font",
+        "font-family",
+        "typeface",
+        "text-font"
+      ],
+      "correct_answer": "font-family",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>font-family</code> changes the typeface. It's called 'family' because you can list multiple fonts as fallbacks: <code>font-family: Arial, Helvetica, sans-serif;</code>"
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>font-family</code> changes the typeface. It's called 'family' because you can list multiple fonts as fallbacks: <code>font-family: Arial, Helvetica, sans-serif;</code>"
+        }
+      }
+    },
+    {
+      "question": "How do you make text bold?",
+      "options": [
+        "font-weight: bold;",
+        "text-bold: true;",
+        "font-style: bold;",
+        "bold: yes;"
+      ],
+      "correct_answer": "font-weight: bold;",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>font-weight: bold;</code> makes text bold. You can also use numbers: 400 is normal, 700 is bold, and some fonts support 100-900."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>font-weight: bold;</code> makes text bold. You can also use numbers: 400 is normal, 700 is bold, and some fonts support 100-900."
+        }
+      }
+    },
+    {
+      "question": "Which centers text horizontally?",
+      "options": [
+        "align: center;",
+        "text-align: center;",
+        "horizontal-align: center;",
+        "center-text: true;"
+      ],
+      "correct_answer": "text-align: center;",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>text-align: center;</code> centers text horizontally. Other values include <code>left</code>, <code>right</code>, and <code>justify</code>."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>text-align: center;</code> centers text horizontally. Other values include <code>left</code>, <code>right</code>, and <code>justify</code>."
+        }
+      }
+    },
+    {
+      "question": "What unit is commonly used for font size?",
+      "options": [
+        "cm",
+        "px",
+        "pt",
+        "inches"
+      ],
+      "correct_answer": "px",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Pixels (px) are the most common unit for font size on the web. Other units like em, rem, and % are also used for responsive design."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Pixels (px) are the most common unit for font size on the web. Other units like em, rem, and % are also used for responsive design."
+        }
+      }
+    },
+    {
+      "question": "In RGB, what does the first number represent?",
+      "options": [
+        "Green",
+        "Blue",
+        "Red",
+        "Brightness"
+      ],
+      "correct_answer": "Red",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "In <code>rgb(255, 87, 51)</code>, the first number (255) is red, second (87) is green, and third (51) is blue. Each value ranges from 0-255."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "In <code>rgb(255, 87, 51)</code>, the first number (255) is red, second (87) is green, and third (51) is blue. Each value ranges from 0-255."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Skeleton",
+    "hp": 8,
+    "image": "assets/img/enemies/skeleton-happy.png"
+  }
+}

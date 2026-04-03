@@ -1,0 +1,170 @@
+/* CSS for HTML lecture content files */
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Extended body styles for files with different max-width */
+body.full-width {
+    max-width: 900px;
+    padding: 30px;
+    background: #f8f9fa;
+    line-height: 1.8;
+    color: #2c3e50;
+}
+
+body.full-width p {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+body.full-width ul {
+    background: white;
+    padding: 20px 40px;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+h1 {
+    color: #2c3e50;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+}
+
+h1.large {
+    border-bottom: 4px solid #3498db;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #34495e;
+    margin-top: 30px;
+    border-left: 5px solid #3498db;
+    padding-left: 15px;
+}
+
+.slide {
+    background: #f8f9fa;
+    border-left: 4px solid #3498db;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.highlight {
+    background: #fff3cd;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.highlight.block {
+    background: #fff3cd;
+    padding: 15px;
+    border-left: 4px solid #ffc107;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.tip {
+    background: #d4edda;
+    border-left: 4px solid #28a745;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+code {
+    background: #e8f4f8;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    color: #c7254e;
+    font-size: 0.95em;
+}
+
+pre {
+    background: #282c34;
+    color: #abb2bf;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+    border-left: 5px solid #3498db;
+}
+
+pre code {
+    background: transparent;
+    color: #abb2bf;
+    padding: 0;
+}
+
+.wiza-bubble {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.wiza-avatar {
+    flex: 0 0 90px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 4px;
+}
+
+.wiza-avatar img {
+    width: 90px;
+    max-width: 100%;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.wiza-intro,
+.wiza-speech {
+    background: linear-gradient(135deg, #f0f7ff, #ffffff);
+    border: 1px solid #d6e9ff;
+    padding: 16px 18px;
+    border-radius: 14px;
+    position: relative;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.05);
+    color: #2c3e50;
+}
+
+.wiza-intro::after,
+.wiza-speech::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 10px solid #d6e9ff;
+}
+
+.wiza-intro::before,
+.wiza-speech::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 10px solid #f0f7ff;
+    z-index: 2;
+}
+

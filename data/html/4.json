@@ -1,0 +1,19 @@
+{
+  "instruction": "Create an &lt;h1&gt; heading that says: \"Hello World!\"",
+  "starter_code": "",
+  "correct_code": "<h1>Hello World!</h1>",
+  "validation": {
+    "ignore_whitespace": true,
+    "case_sensitive": false
+  },
+  "feedback": {
+    "correct": {
+      "title": "Perfect! 🎉",
+      "details": "You've created your first HTML element! The <code>&lt;h1&gt;</code> tag creates the largest heading. Great job!"
+    },
+    "wrong": {
+      "title": "Not quite! 🤔",
+      "details": "Remember: Use <code>&lt;h1&gt;</code> to open the heading, write \"Hello World!\", then close with <code>&lt;/h1&gt;</code>. Make sure your code looks like: <code>&lt;h1&gt;Hello World!&lt;/h1&gt;</code>"
+    }
+  }
+}

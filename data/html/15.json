@@ -1,0 +1,169 @@
+{
+  "questions": [
+    {
+      "question": "The <______> tag inserts images into HTML.",
+      "options": ["IMAGE", "PICTURE", "IMG", "PHOTO"],
+      "correct_answer": "IMG",
+      "code_template": "<______>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;img&gt;</code> is the image tag. Remember: it's not &lt;image&gt; or &lt;picture&gt; - it's the abbreviated &lt;img&gt;."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;img&gt;</code> is the image tag. Remember: it's not &lt;image&gt; or &lt;picture&gt; - it's the abbreviated &lt;img&gt;."
+        }
+      }
+    },
+    {
+      "question": "The ______ attribute contains the image file path.",
+      "options": ["LINK", "SRC", "PATH", "FILE"],
+      "correct_answer": "SRC",
+      "code_template": "______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "src means source - it's where the browser finds the image file. Can be relative (image.jpg) or absolute (https://...)."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "src means source - it's where the browser finds the image file. Can be relative (image.jpg) or absolute (https://...)."
+        }
+      }
+    },
+    {
+      "question": "______ text describes images for screen readers.",
+      "options": ["ALT", "TITLE", "DESC", "CAPTION"],
+      "correct_answer": "ALT",
+      "code_template": "______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Alt text (alternative text) describes images for accessibility. It's read by screen readers and shows if images don't load."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Alt text (alternative text) describes images for accessibility. It's read by screen readers and shows if images don't load."
+        }
+      }
+    },
+    {
+      "question": "The <img> tag is ______-closing.",
+      "options": ["SELF", "AUTO", "MANUAL", "NEVER"],
+      "correct_answer": "SELF",
+      "code_template": "______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;img&gt;</code> is a self-closing tag (also called void element). It doesn't wrap content, so it closes itself: &lt;img /&gt; or just &lt;img&gt;."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;img&gt;</code> is a self-closing tag (also called void element). It doesn't wrap content, so it closes itself: &lt;img /&gt; or just &lt;img&gt;."
+        }
+      }
+    },
+    {
+      "question": "For decorative images, use alt=\"______\".",
+      "options": ["DECORATION", "EMPTY", "NONE", "SKIP"],
+      "correct_answer": "EMPTY",
+      "code_template": "alt=\"______\"",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Use alt=\"\" (empty string) for decorative images. Empty alt tells screen readers to skip it, while missing alt causes accessibility issues."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Use alt=\"\" (empty string) for decorative images. Empty alt tells screen readers to skip it, while missing alt causes accessibility issues."
+        }
+      }
+    },
+    {
+      "question": ".png files support ______ (clear backgrounds).",
+      "options": ["ANIMATION", "TRANSPARENCY", "SOUND", "LAYERS"],
+      "correct_answer": "TRANSPARENCY",
+      "code_template": "______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "PNG supports transparency - parts of the image can be completely see-through. JPG doesn't support this feature."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "PNG supports transparency - parts of the image can be completely see-through. JPG doesn't support this feature."
+        }
+      }
+    },
+    {
+      "question": "width and ______ control image display size.",
+      "options": ["HEIGHT", "SIZE", "DEPTH", "LENGTH"],
+      "correct_answer": "HEIGHT",
+      "code_template": "______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "width and height attributes control display dimensions. Usually set just one, and the browser calculates the other to maintain aspect ratio."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "width and height attributes control display dimensions. Usually set just one, and the browser calculates the other to maintain aspect ratio."
+        }
+      }
+    },
+    {
+      "question": "Good alt text helps with ______ (Search Engine Optimization).",
+      "options": ["SEO", "SSL", "CSS", "HTML"],
+      "correct_answer": "SEO",
+      "code_template": "______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Good alt text improves SEO because search engines can't \"see\" images - they rely on alt text to understand image content."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Good alt text improves SEO because search engines can't \"see\" images - they rely on alt text to understand image content."
+        }
+      }
+    },
+    {
+      "question": "The ______ attribute shows text when hovering over an image.",
+      "options": ["HOVER", "TOOLTIP", "TITLE", "POPUP"],
+      "correct_answer": "TITLE",
+      "code_template": "______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The title attribute creates a tooltip that appears on hover. It's for additional information, not for accessibility (use alt for that)."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The title attribute creates a tooltip that appears on hover. It's for additional information, not for accessibility (use alt for that)."
+        }
+      }
+    },
+    {
+      "question": "<img src=\"folder/______.jpg\"> looks in a subfolder.",
+      "options": ["IMAGE", "PHOTO", "PICTURE", "ANY_NAME"],
+      "correct_answer": "ANY_NAME",
+      "code_template": "<img src=\"folder/______.jpg\">",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The filename can be any name you choose! folder/image.jpg means \"look in the 'folder' subdirectory for 'image.jpg'\"."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The filename can be any name you choose! folder/image.jpg means \"look in the 'folder' subdirectory for 'image.jpg'\"."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Bat",
+    "hp": 10,
+    "image": "assets/img/enemies/bat-happy.png"
+  }
+}

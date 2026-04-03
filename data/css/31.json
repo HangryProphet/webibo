@@ -1,0 +1,137 @@
+{
+  "questions": [
+    {
+      "question": "Fill in the blank: _____ adds space inside an element.",
+      "options": ["padding", "margin", "border", "spacing"],
+      "correct_answer": "padding",
+      "code_template": ".box {\n  _____: 20px;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>padding</code> adds space inside an element, between the content and the border."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>padding</code> adds space inside an element, between the content and the border."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: _____ adds space outside an element.",
+      "options": ["margin", "padding", "border", "spacing"],
+      "correct_answer": "margin",
+      "code_template": ".box {\n  _____: 20px;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>margin</code> adds space outside an element, creating distance from other elements."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>margin</code> adds space outside an element, creating distance from other elements."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Use _____ to round corners.",
+      "options": ["border-radius", "corner-radius", "round-border", "border-round"],
+      "correct_answer": "border-radius",
+      "code_template": ".box {\n  _____: 10px;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>border-radius</code> creates rounded corners. Higher values = more rounding."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>border-radius</code> creates rounded corners. Higher values = more rounding."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: The box model has four layers: content, padding, border, and _____.",
+      "options": ["margin", "spacing", "outline", "shadow"],
+      "correct_answer": "margin",
+      "code_template": "/* Box Model: content, padding, border, _____ */",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "The four layers are: content, padding, border, and margin (from inside to outside)."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The four layers are: content, padding, border, and margin (from inside to outside)."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: To center an element, use margin: 0 _____.",
+      "options": ["auto", "center", "middle", "50%"],
+      "correct_answer": "auto",
+      "code_template": ".box {\n  margin: 0 _____;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>margin: 0 auto;</code> centers a block element by automatically calculating equal left/right margins."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>margin: 0 auto;</code> centers a block element by automatically calculating equal left/right margins."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: The _____ property sets element width.",
+      "options": ["width", "size", "w", "wide"],
+      "correct_answer": "width",
+      "code_template": ".box {\n  _____: 300px;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "The <code>width</code> property controls how wide an element is. You can use px, %, em, etc."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>width</code> property controls how wide an element is. You can use px, %, em, etc."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: 'border: 2px _____ black;' creates a solid border.",
+      "options": ["solid", "dashed", "dotted", "line"],
+      "correct_answer": "solid",
+      "code_template": ".box {\n  border: 2px _____ black;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "<code>solid</code> creates a continuous line. Other styles include dashed, dotted, and double."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>solid</code> creates a continuous line. Other styles include dashed, dotted, and double."
+        }
+      }
+    },
+    {
+      "question": "Fill in the blank: Padding is measured in units like _____.",
+      "options": ["px", "colors", "names", "tags"],
+      "correct_answer": "px",
+      "code_template": ".box {\n  padding: 20_____;\n}",
+      "feedback": {
+        "correct": {
+          "title": "Perfect! 🎉",
+          "details": "Pixels (px) are the most common unit for padding, margin, and borders."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Pixels (px) are the most common unit for padding, margin, and borders."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Tiger",
+    "hp": 8,
+    "image": "assets/img/enemies/tiger-happy.png"
+  }
+}

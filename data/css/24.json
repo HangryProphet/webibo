@@ -1,0 +1,24 @@
+{
+  "instruction": "Create CSS to make:\n1. All h1 elements blue\n2. All paragraphs gray",
+  "starter_code": "/* Write your CSS here */\n",
+  "correct_code": "h1 {\n  color: blue;\n}\n\np {\n  color: gray;\n}",
+  "validation": {
+    "ignore_whitespace": true,
+    "case_sensitive": false
+  },
+  "feedback": {
+    "success": {
+      "title": "🎉 Perfect CSS!",
+      "details": "You've successfully used element selectors to style both h1 and paragraph elements. Element selectors are perfect when you want to style all instances of a particular HTML tag."
+    },
+    "error": {
+      "title": "Not quite right!",
+      "details": "Remember to:\n• Use element selectors (h1, p)\n• Set the color property\n• Use proper CSS syntax with curly braces"
+    }
+  },
+  "enemy": {
+    "name": "Spider",
+    "hp": 8,
+    "image": "assets/img/enemies/spider-happy.png"
+  }
+}

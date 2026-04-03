@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connecting the Web with Links - Level 9</title>
+    <link rel="stylesheet" href="../../assets/css/lecture-content.css">
+</head>
+<body>
+    <!-- PAGE 1 -->
+    <div class="page-header">
+        <div class="page-number">Page 1/3</div>
+        <h1>🔗 Introducing the Anchor Tag</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Welcome to Module 3! Today, we make your pages CONNECT! 🔗"
+    </div>
+
+    <p>The magic of the web is <strong>hyperlinks</strong> - clickable text that takes you somewhere else. In HTML, we create links with the <strong>anchor tag: &lt;a&gt;</strong></p>
+
+    <h2>Basic Link Structure:</h2>
+    <div class="code-example">
+        <pre><code>&lt;a href="https://www.webibo.com"&gt;Visit Webibo&lt;/a&gt;</code></pre>
+    </div>
+
+    <h2>Breaking it down:</h2>
+    <ul>
+        <li><code>&lt;a&gt;</code> = Anchor tag (creates the link)</li>
+        <li><code>href</code> = Hypertext Reference (the destination URL)</li>
+        <li>Text between tags = The clickable link text</li>
+        <li><code>&lt;/a&gt;</code> = Closes the link</li>
+    </ul>
+
+    <p><strong>Try clicking:</strong> <a href="https://www.google.com" style="color: #3498db; text-decoration: underline;">Search something</a></p>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 2 -->
+    <div class="page-header">
+        <div class="page-number">Page 2/3</div>
+        <h1>🌐 Link Attributes and Types</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Links can go to different places:"
+    </div>
+
+    <h2>1. External Websites (Full URL):</h2>
+    <div class="code-example">
+        <pre><code>&lt;a href="https://www.wikipedia.org"&gt;Learn on Wikipedia&lt;/a&gt;</code></pre>
+    </div>
+
+    <h2>2. Internal Pages (Relative Path):</h2>
+    <div class="code-example">
+        <pre><code>&lt;a href="about.html"&gt;About Us&lt;/a&gt;</code></pre>
+    </div>
+
+    <h2>3. Same Page Sections (Anchor Links):</h2>
+    <div class="code-example">
+        <pre><code>&lt;a href="#contact"&gt;Jump to Contact&lt;/a&gt;
+&lt;!-- Later in page: --&gt;
+&lt;h2 id="contact"&gt;Contact Us&lt;/h2&gt;</code></pre>
+    </div>
+
+    <h2>4. Email Links:</h2>
+    <div class="code-example">
+        <pre><code>&lt;a href="mailto:hello@webibo.com"&gt;Email us!&lt;/a&gt;</code></pre>
+    </div>
+
+    <h2>5. Telephone Links:</h2>
+    <div class="code-example">
+        <pre><code>&lt;a href="tel:+1234567890"&gt;Call us&lt;/a&gt;</code></pre>
+    </div>
+
+    <h2>Important Attribute: target="_blank"</h2>
+    <p>Opens link in a new tab:</p>
+    <div class="code-example">
+        <pre><code>&lt;a href="https://example.com" target="_blank"&gt;Open in New Tab&lt;/a&gt;</code></pre>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- PAGE 3 -->
+    <div class="page-header">
+        <div class="page-number">Page 3/3</div>
+        <h1>✅ Best Practices for Links</h1>
+    </div>
+
+    <div class="wiza-intro">
+        <strong>Wiza:</strong> "Good Link Text:"
+    </div>
+
+    <div class="info-box" style="border-color: #e74c3c;">
+        <h3>❌ DON'T:</h3>
+        <div class="code-example">
+            <pre><code>&lt;a href="..."&gt;Click here&lt;/a&gt;</code></pre>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <h3>✅ DO:</h3>
+        <div class="code-example">
+            <pre><code>&lt;a href="..."&gt;Download the guide&lt;/a&gt;</code></pre>
+        </div>
+    </div>
+
+    <p><strong>Why?</strong> Screen reader users often navigate by links. "Click here" doesn't tell them where they're going!</p>
+
+    <h2>Accessibility Tip:</h2>
+    <p>Add descriptive text:</p>
+    <div class="code-example">
+        <pre><code>&lt;a href="menu.pdf" aria-label="Download restaurant menu (PDF)"&gt;
+  Download Menu
+&lt;/a&gt;</code></pre>
+    </div>
+
+    <h2>Remember: Links should:</h2>
+    <ol>
+        <li>Clearly describe their destination</li>
+        <li>Work when clicked</li>
+        <li>Be visually distinguishable (usually blue and underlined)</li>
+        <li>Change appearance when hovered</li>
+    </ol>
+
+    <h2>Example Page with Links:</h2>
+    <div class="code-example">
+        <pre><code>&lt;h1&gt;My Favorite Resources&lt;/h1&gt;
+&lt;p&gt;Learn more at these sites:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://developer.mozilla.org"&gt;MDN Web Docs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="tutorials.html"&gt;Our Tutorials&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="#resources" target="_blank"&gt;External Resources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+    </div>
+
+    <p class="motivational"><strong>Ready to connect your pages to the world wide web? 🌐</strong></p>
+</body>
+</html>

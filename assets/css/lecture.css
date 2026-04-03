@@ -1,0 +1,660 @@
+/* ============================================
+   LECTURE PAGE - HORIZONTAL CARD LAYOUT
+   Matches activity.css design system
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    background-color: #131F24;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 40px;
+    gap: 20px;
+}
+
+.progress-container {
+    flex: 1;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+}
+
+.progress-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #2d3949;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #58cc02 !important;
+    width: 0%;
+    transition: width 0.6s ease;
+}
+
+.close-btn {
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.close-btn:hover {
+    opacity: 0.7;
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+
+.lecture-main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+    padding-bottom: 120px;
+    overflow-y: auto;
+}
+
+/* Cards Container - Single Slide Layout */
+.cards-container {
+    max-width: 900px;
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+/* Individual Lecture Slide */
+.lecture-slide {
+    background-color: #2d3949;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 4px 0 #1e2633;
+    min-height: 400px;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Legacy card class for compatibility */
+.lecture-card {
+    background-color: #2d3949;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 4px 0 #1e2633;
+    transition: transform 0.2s;
+}
+
+.lecture-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Slide Content Styling */
+.lecture-slide h1,
+.lecture-card h1 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.lecture-slide h2,
+.lecture-card h2 {
+    font-size: 22px;
+    color: #1cb0f6;
+    margin-bottom: 16px;
+    margin-top: 24px;
+}
+
+.lecture-slide p,
+.lecture-card p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #d1d5db;
+    margin-bottom: 16px;
+}
+
+.lecture-slide ul,
+.lecture-card ul {
+    margin: 16px 0;
+    padding-left: 24px;
+}
+
+.lecture-slide li,
+.lecture-card li {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #d1d5db;
+    margin-bottom: 10px;
+}
+
+.lecture-slide strong,
+.lecture-card strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.lecture-slide .highlight,
+.lecture-card .highlight {
+    background: #ffc800;
+    color: #131F24;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+/* Code Blocks */
+.lecture-slide code,
+.lecture-card code {
+    background: #1e2633;
+    color: #1cb0f6;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-family: 'Courier New', Consolas, Monaco, monospace;
+    font-size: 14px;
+}
+
+.lecture-slide pre,
+.lecture-card pre {
+    background: #1e2633;
+    padding: 20px;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 16px 0;
+    border: 2px solid #1cb0f6;
+}
+
+.lecture-slide pre code,
+.lecture-card pre code {
+    background: transparent;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d1d5db;
+}
+
+/* Icon Styling */
+.lecture-slide h1 i,
+.lecture-card h1 i {
+    color: #1cb0f6;
+}
+
+/* Page Header and Page Break Styling */
+.lecture-slide .page-header,
+.lecture-slide .page-break {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #3d4a5c;
+}
+
+.lecture-slide .page-number {
+    font-size: 14px;
+    color: #8b95a5;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.lecture-slide .wiza-bubble {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.lecture-slide .wiza-avatar {
+    flex: 0 0 90px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 4px;
+}
+
+.lecture-slide .wiza-avatar img {
+    width: 90px;
+    max-width: 100%;
+}
+
+.lecture-slide .wiza-intro,
+.lecture-slide .wiza-speech {
+    background: linear-gradient(135deg, #1e2633, #18202c);
+    border: 1px solid #2d3a4d;
+    padding: 16px 18px;
+    border-radius: 14px;
+    position: relative;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25);
+    color: #e7ecf3;
+}
+
+.lecture-slide .wiza-intro::after,
+.lecture-slide .wiza-speech::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 10px solid #2d3a4d;
+}
+
+.lecture-slide .wiza-intro::before,
+.lecture-slide .wiza-speech::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 10px solid #1e2633;
+    z-index: 2;
+}
+
+.lecture-slide .example-card {
+    background: #1e2633;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border: 2px solid #3d4a5c;
+}
+
+.lecture-slide .example-card h3 {
+    color: #1cb0f6;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.lecture-slide .tip {
+    background: #2d4a3d;
+    border-left: 4px solid #1cb0f6;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.lecture-slide .visual-box {
+    background: #1e2633;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    border: 2px solid #3d4a5c;
+}
+
+/* ============================================
+   NAVIGATION FOOTER
+   ============================================ */
+
+.lecture-nav-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #131F24;
+    padding: 30px 40px;
+    border-top: 2px solid #2d3949;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+    min-height: 110px;
+}
+
+
+.nav-btn {
+    padding: 18px 64px;
+    border: none;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.1s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+}
+
+.nav-btn-secondary {
+    background-color: #6b7280;
+    box-shadow: 0 4px 0 #374151;
+}
+
+.nav-btn-secondary:hover {
+    background-color: #7a8290;
+}
+
+.nav-btn-secondary:active {
+    box-shadow: 0 2px 0 #374151;
+    transform: translateY(2px);
+}
+
+.nav-btn-primary {
+    background-color: #58cc02 !important;
+    box-shadow: 0 4px 0 #3a7f02 !important;
+}
+
+.nav-btn-primary:hover {
+    background-color: #62d905;
+}
+
+.nav-btn-primary:active {
+    box-shadow: 0 2px 0 #3a7f02;
+    transform: translateY(2px);
+}
+
+/* ============================================
+   EXIT MODAL
+   ============================================ */
+   .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background-color: #1e2633;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    animation: slideUp 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border-left: none;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-image {
+    width: 160px;
+    height: auto;
+    margin: 0 auto 24px;
+    display: block;
+    animation: bounceIn 0.5s ease;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e5e7eb;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    border-left: none;
+}
+
+.modal-message {
+    font-size: 16px;
+    color: #9ca3af;
+    margin-bottom: 32px;
+    line-height: 1.5;
+    border-left: none;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-btn {
+    padding: 18px 32px;
+    border: none;
+    border-radius: 16px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.modal-btn-primary {
+    background-color: #1cb0f6;
+    color: #ffffff;
+    box-shadow: 0 4px 0 #0e7fb0;
+}
+
+.modal-btn-primary:hover {
+    background-color: #1ec5ff;
+}
+
+.modal-btn-primary:active {
+    box-shadow: 0 2px 0 #0e7fb0;
+    transform: translateY(2px);
+}
+
+.modal-btn-danger {
+    background-color: #ff4b4b;
+    color: #ffffff;
+    box-shadow: 0 4px 0 #cc3c3c;
+}
+
+.modal-btn-danger:hover {
+    background-color: #ff5c5c;
+}
+
+.modal-btn-danger:active {
+    box-shadow: 0 2px 0 #cc3c3c;
+    transform: translateY(2px);
+}
+
+.modal-btn-secondary {
+    background-color: #374151;
+    color: #e5e7eb;
+    box-shadow: 0 4px 0 #1f2937;
+}
+
+.modal-btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+.modal-btn-secondary:active {
+    box-shadow: 0 2px 0 #1f2937;
+    transform: translateY(2px);
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   MASCOT
+   ============================================ */
+
+.mascot-guide {
+    position: fixed;
+    bottom: 120px;
+    left: 40px;
+    z-index: 50;
+    text-align: center;
+}
+
+.mascot-image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .cards-container {
+        max-width: 700px;
+    }
+    
+    .lecture-slide {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 15px 20px;
+    }
+    
+    .progress-container {
+        max-width: 100%;
+    }
+    
+    .lecture-slide,
+    .lecture-card {
+        padding: 24px;
+        min-width: 100%;
+    }
+    
+    .lecture-slide h1,
+    .lecture-card h1 {
+        font-size: 22px;
+    }
+    
+    .lecture-slide h2,
+    .lecture-card h2 {
+        font-size: 18px;
+    }
+    
+    .lecture-slide p, .lecture-slide li,
+    .lecture-card p, .lecture-card li {
+        font-size: 14px;
+    }
+    
+    .mascot-guide {
+        display: none;
+    }
+    
+    .lecture-nav-footer {
+        padding: 20px;
+        min-height: 96px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .nav-btn {
+        flex: 1;
+        min-width: 120px;
+        justify-content: center;
+        padding: 16px 40px;
+        font-size: 16px;
+    }
+    
+    .nav-btn-primary {
+        flex: 1 1 100%;
+    }
+    
+    .modal-content {
+        padding: 32px 24px;
+    }
+    
+    .modal-title {
+        font-size: 20px;
+    }
+    
+    .modal-message {
+        font-size: 15px;
+    }
+}

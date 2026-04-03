@@ -1,0 +1,261 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    background-color: #131F24;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.otp-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    background-color: #2d3949;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.logo-section {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.logo {
+    font-size: 48px;
+    color: #1cb0f6;
+    margin-bottom: 16px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #8b95a5;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.email-display {
+    text-align: center;
+    font-size: 15px;
+    color: #1cb0f6;
+    font-weight: 600;
+    margin-bottom: 32px;
+}
+
+.demo-otp {
+    background-color: #1e2633;
+    border: 2px solid #1cb0f6;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.demo-otp h3 {
+    font-size: 13px;
+    color: #1cb0f6;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.demo-otp h3 i {
+    margin-right: 6px;
+}
+
+.demo-otp-code {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 8px;
+    font-family: 'Courier New', monospace;
+}
+
+.otp-inputs {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.otp-input {
+    width: 56px;
+    height: 64px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    background-color: #1e2633;
+    border: 2px solid #3d4a5c;
+    border-radius: 12px;
+    color: #ffffff;
+    outline: none;
+    transition: all 0.2s;
+    font-family: 'Courier New', monospace;
+}
+
+.otp-input:focus {
+    border-color: #1cb0f6;
+    background-color: #2d3949;
+}
+
+.otp-input.error {
+    border-color: #ff4b4b;
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
+.timer {
+    text-align: center;
+    font-size: 14px;
+    color: #8b95a5;
+    margin-bottom: 16px;
+}
+
+.timer.expired {
+    color: #ff4b4b;
+}
+
+.timer-value {
+    font-weight: 700;
+    color: #1cb0f6;
+    font-family: 'Courier New', monospace;
+}
+
+.timer-value.expired {
+    color: #ff4b4b;
+}
+
+.feedback-message {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.feedback-message.success {
+    background-color: rgba(88, 204, 2, 0.15);
+    color: #58cc02;
+    border: 1px solid rgba(88, 204, 2, 0.3);
+}
+
+.feedback-message.error {
+    background-color: rgba(255, 75, 75, 0.15);
+    color: #ff4b4b;
+    border: 1px solid rgba(255, 75, 75, 0.3);
+}
+
+.feedback-message.info {
+    background-color: rgba(28, 176, 246, 0.15);
+    color: #1cb0f6;
+    border: 1px solid rgba(28, 176, 246, 0.3);
+}
+
+.feedback-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.verify-btn {
+    width: 100%;
+    padding: 18px;
+    background-color: #1cb0f6;
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+    transition: all 0.1s;
+    box-shadow: 0 4px 0 #0d5a7a;
+}
+
+.verify-btn:hover {
+    background-color: #17a1e0;
+}
+
+.verify-btn:active {
+    box-shadow: 0 2px 0 #0d5a7a;
+    transform: translateY(2px);
+}
+
+.verify-btn:disabled {
+    background-color: #3d4a5c;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.resend-section {
+    text-align: center;
+    font-size: 14px;
+    color: #8b95a5;
+}
+
+.resend-btn {
+    background: none;
+    border: none;
+    color: #1cb0f6;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    font-size: 14px;
+}
+
+.resend-btn:hover {
+    color: #17a1e0;
+}
+
+.resend-btn:disabled {
+    color: #3d4a5c;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.back-link a {
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+input[type="hidden"] {
+    display: none;
+}
+

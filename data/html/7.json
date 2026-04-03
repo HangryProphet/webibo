@@ -1,0 +1,169 @@
+{
+  "questions": [
+    {
+      "question": "The <h1> tag should be used for the ______ title of your page.",
+      "options": ["SMALLEST", "SECTION", "MAIN", "FOOTER"],
+      "correct_answer": "MAIN",
+      "code_template": "<h1> for ______ title",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;h1&gt;</code> is for the main title of your page, like a book title. Each page should have only one main title."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;h1&gt;</code> is for the main title of your page, like a book title. Each page should have only one main title."
+        }
+      }
+    },
+    {
+      "question": "For regular text blocks, use the <______> tag.",
+      "options": ["TEXT", "PARA", "P", "CONTENT"],
+      "correct_answer": "P",
+      "code_template": "<______>text</______>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Use the <code>&lt;p&gt;</code> tag (short for 'paragraph') for regular text blocks. It's the standard way to mark up paragraphs in HTML."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Use the <code>&lt;p&gt;</code> tag (short for 'paragraph') for regular text blocks. It's the standard way to mark up paragraphs in HTML."
+        }
+      }
+    },
+    {
+      "question": "There are ______ levels of headings in HTML.",
+      "options": ["2", "4", "6", "8"],
+      "correct_answer": "6",
+      "code_template": "______ heading levels",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "HTML provides six heading levels: <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;h4&gt;</code>, <code>&lt;h5&gt;</code>, and <code>&lt;h6&gt;</code>. Each has different importance and default size."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "HTML provides six heading levels: <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;h4&gt;</code>, <code>&lt;h5&gt;</code>, and <code>&lt;h6&gt;</code>. Each has different importance and default size."
+        }
+      }
+    },
+    {
+      "question": "<h6> creates the ______ heading.",
+      "options": ["LARGEST", "MEDIUM", "DEFAULT", "SMALLEST"],
+      "correct_answer": "SMALLEST",
+      "code_template": "<h6> = ______ heading",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;h6&gt;</code> creates the smallest heading. It has the lowest importance in the heading hierarchy."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;h6&gt;</code> creates the smallest heading. It has the lowest importance in the heading hierarchy."
+        }
+      }
+    },
+    {
+      "question": "Each paragraph should be wrapped in its own <p> and </p> ______.",
+      "options": ["BRACKETS", "TAGS", "LINES", "STYLES"],
+      "correct_answer": "TAGS",
+      "code_template": "<p></p> ______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Paragraphs should be wrapped in <code>&lt;p&gt;</code> and <code>&lt;/p&gt;</code> tags. Tags are the angle-bracket elements that define HTML elements."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Paragraphs should be wrapped in <code>&lt;p&gt;</code> and <code>&lt;/p&gt;</code> tags. Tags are the angle-bracket elements that define HTML elements."
+        }
+      }
+    },
+    {
+      "question": "Screen readers use heading structure to help ______ users.",
+      "options": ["NEW", "VISUALLY IMPAIRED", "EXPERT", "YOUNG"],
+      "correct_answer": "VISUALLY IMPAIRED",
+      "code_template": "Screen readers help ______ users",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Visually impaired users rely on screen readers that use heading structure to navigate pages. Proper headings make websites accessible to everyone."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Visually impaired users rely on screen readers that use heading structure to navigate pages. Proper headings make websites accessible to everyone."
+        }
+      }
+    },
+    {
+      "question": "Don't skip heading ______ (e.g., from h1 to h3).",
+      "options": ["LEVELS", "TAGS", "PAGES", "SECTIONS"],
+      "correct_answer": "LEVELS",
+      "code_template": "Don't skip ______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Don't skip heading levels! Always go in order: <code>&lt;h1&gt;</code> → <code>&lt;h2&gt;</code> → <code>&lt;h3&gt;</code>, etc. Skipping levels confuses screen readers and breaks the logical structure."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Don't skip heading levels! Always go in order: <code>&lt;h1&gt;</code> → <code>&lt;h2&gt;</code> → <code>&lt;h3&gt;</code>, etc. Skipping levels confuses screen readers and breaks the logical structure."
+        }
+      }
+    },
+    {
+      "question": "<h2> is typically used for ______ titles.",
+      "options": ["MAIN", "SECTION", "PARAGRAPH", "FOOTER"],
+      "correct_answer": "SECTION",
+      "code_template": "<h2> for ______ titles",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;h2&gt;</code> is perfect for section titles. If <code>&lt;h1&gt;</code> is the book title, <code>&lt;h2&gt;</code> are the chapter titles within that book."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;h2&gt;</code> is perfect for section titles. If <code>&lt;h1&gt;</code> is the book title, <code>&lt;h2&gt;</code> are the chapter titles within that book."
+        }
+      }
+    },
+    {
+      "question": "Paragraphs automatically have ______ above and below them.",
+      "options": ["COLOR", "SPACING", "BORDERS", "IMAGES"],
+      "correct_answer": "SPACING",
+      "code_template": "Paragraphs have ______",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Paragraphs automatically have spacing (margins) above and below them. This creates visual separation between paragraphs without extra CSS."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Paragraphs automatically have spacing (margins) above and below them. This creates visual separation between paragraphs without extra CSS."
+        }
+      }
+    },
+    {
+      "question": "Proper heading structure helps ______ engines understand your content.",
+      "options": ["CAR", "SEARCH", "GAME", "DATABASE"],
+      "correct_answer": "SEARCH",
+      "code_template": "______ engines",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Proper heading structure helps search engines (like Google) understand what your page is about, which can improve your search rankings."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Proper heading structure helps search engines (like Google) understand what your page is about, which can improve your search rankings."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Snake",
+    "hp": 10,
+    "image": "assets/img/enemies/snake-happy.png"
+  }
+}

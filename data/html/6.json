@@ -1,0 +1,247 @@
+{
+  "questions": [
+    {
+      "question": "Which heading tag is the largest and most important?",
+      "options": [
+        "<h6>",
+        "<h3>",
+        "<h1>",
+        "<heading>"
+      ],
+      "correct_answer": "<h1>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;h1&gt;</code> is the largest and most important heading. HTML has six heading levels (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>), with <code>&lt;h1&gt;</code> being the main title of the page."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;h1&gt;</code> is the largest and most important heading. HTML has six heading levels (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>), with <code>&lt;h1&gt;</code> being the main title of the page."
+        }
+      }
+    },
+    {
+      "question": "How many <h1> tags should you typically use on one page?",
+      "options": [
+        "As many as needed",
+        "2-3",
+        "0",
+        "1"
+      ],
+      "correct_answer": "1",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "You should typically have only ONE <code>&lt;h1&gt;</code> per page, just like a book has one title. This helps screen readers and search engines understand your page structure."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "You should typically have only ONE <code>&lt;h1&gt;</code> per page, just like a book has one title. This helps screen readers and search engines understand your page structure."
+        }
+      }
+    },
+    {
+      "question": "Which tag is used for regular text paragraphs?",
+      "options": [
+        "<text>",
+        "<para>",
+        "<p>",
+        "<paragraph>"
+      ],
+      "correct_answer": "<p>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "The <code>&lt;p&gt;</code> tag (short for 'paragraph') is used for regular text blocks. It automatically adds spacing before and after the text."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The <code>&lt;p&gt;</code> tag (short for 'paragraph') is used for regular text blocks. It automatically adds spacing before and after the text."
+        }
+      }
+    },
+    {
+      "question": "Which is the correct order of heading importance?",
+      "options": [
+        "<h6> (most) to <h1> (least)",
+        "<h1> (most) to <h6> (least)",
+        "All are equal",
+        "<h3> is most important"
+      ],
+      "correct_answer": "<h1> (most) to <h6> (least)",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Headings go from most important (<code>&lt;h1&gt;</code>) to least important (<code>&lt;h6&gt;</code>). The number gets bigger as importance decreases."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Headings go from most important (<code>&lt;h1&gt;</code>) to least important (<code>&lt;h6&gt;</code>). The number gets bigger as importance decreases."
+        }
+      }
+    },
+    {
+      "question": "What does this code create: <p>Hello</p><p>World</p>",
+      "options": [
+        "One paragraph saying \"Hello World\"",
+        "Two paragraphs on the same line",
+        "Two separate paragraphs",
+        "An error"
+      ],
+      "correct_answer": "Two separate paragraphs",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "This creates two separate paragraphs. Each <code>&lt;p&gt;</code> tag creates its own paragraph block with automatic spacing around it."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "This creates two separate paragraphs. Each <code>&lt;p&gt;</code> tag creates its own paragraph block with automatic spacing around it."
+        }
+      }
+    },
+    {
+      "question": "Which heading would be appropriate for a chapter title?",
+      "options": [
+        "<h1>",
+        "<h2>",
+        "<h6>",
+        "<p>"
+      ],
+      "correct_answer": "<h2>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;h2&gt;</code> is perfect for chapter titles or major sections. <code>&lt;h1&gt;</code> is for the book title (main page title), and <code>&lt;h2&gt;</code> is for chapters within that book."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;h2&gt;</code> is perfect for chapter titles or major sections. <code>&lt;h1&gt;</code> is for the book title (main page title), and <code>&lt;h2&gt;</code> is for chapters within that book."
+        }
+      }
+    },
+    {
+      "question": "What happens if you skip heading levels (e.g., go from <h1> to <h3>)?",
+      "options": [
+        "The page won't load",
+        "It's bad for accessibility",
+        "The text becomes invisible",
+        "Nothing, it's fine"
+      ],
+      "correct_answer": "It's bad for accessibility",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Skipping heading levels (like going from <code>&lt;h1&gt;</code> to <code>&lt;h3&gt;</code> without an <code>&lt;h2&gt;</code>) is bad for accessibility. Screen readers use heading structure to help visually impaired users navigate."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Skipping heading levels (like going from <code>&lt;h1&gt;</code> to <code>&lt;h3&gt;</code> without an <code>&lt;h2&gt;</code>) is bad for accessibility. Screen readers use heading structure to help visually impaired users navigate."
+        }
+      }
+    },
+    {
+      "question": "Which tag creates the smallest heading?",
+      "options": [
+        "<h1>",
+        "<h3>",
+        "<h6>",
+        "<small>"
+      ],
+      "correct_answer": "<h6>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;h6&gt;</code> creates the smallest heading. All heading tags (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>) create bold text, but <code>&lt;h6&gt;</code> is the smallest size."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;h6&gt;</code> creates the smallest heading. All heading tags (<code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code>) create bold text, but <code>&lt;h6&gt;</code> is the smallest size."
+        }
+      }
+    },
+    {
+      "question": "True or False: <p> tags automatically add space before and after paragraphs.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correct_answer": "True",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "True! <code>&lt;p&gt;</code> tags automatically add vertical spacing (margins) before and after paragraphs, creating natural separation between text blocks."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "True! <code>&lt;p&gt;</code> tags automatically add vertical spacing (margins) before and after paragraphs, creating natural separation between text blocks."
+        }
+      }
+    },
+    {
+      "question": "What is the purpose of heading hierarchy?",
+      "options": [
+        "To make the page look pretty",
+        "To organize content logically",
+        "To increase page loading speed",
+        "To add colors to text"
+      ],
+      "correct_answer": "To organize content logically",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Heading hierarchy helps organize content logically - like an outline for your page. It helps users (and search engines) understand the structure and importance of information."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "Heading hierarchy helps organize content logically - like an outline for your page. It helps users (and search engines) understand the structure and importance of information."
+        }
+      }
+    },
+    {
+      "question": "Which code shows correct heading structure?",
+      "options": [
+        "<h1>Title</h1><h3>Section</h3><h2>Subsection</h2>",
+        "<h1>Title</h1><h2>Section</h2><h3>Subsection</h3>",
+        "<h2>Title</h2><h1>Section</h1><h3>Subsection</h3>",
+        "<h6>Title</h6><h5>Section</h5><h4>Subsection</h4>"
+      ],
+      "correct_answer": "<h1>Title</h1><h2>Section</h2><h3>Subsection</h3>",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "Option b shows correct hierarchical structure: <code>&lt;h1&gt;</code> (main title), then <code>&lt;h2&gt;</code> (section), then <code>&lt;h3&gt;</code> (subsection). Never skip levels or use headings out of order."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "The correct structure is: <code>&lt;h1&gt;</code> (main title), then <code>&lt;h2&gt;</code> (section), then <code>&lt;h3&gt;</code> (subsection). Never skip levels or use headings out of order."
+        }
+      }
+    },
+    {
+      "question": "Why use <p> tags instead of just typing text?",
+      "options": [
+        "<p> tags are required by law",
+        "They don't matter, it's optional",
+        "They provide structure and accessibility",
+        "They make text bold"
+      ],
+      "correct_answer": "They provide structure and accessibility",
+      "feedback": {
+        "correct": {
+          "title": "Correct! 🎉",
+          "details": "<code>&lt;p&gt;</code> tags provide structure and accessibility. They tell browsers, screen readers, and search engines that this is a paragraph of text, not just random words."
+        },
+        "wrong": {
+          "title": "Not quite! 🤔",
+          "details": "<code>&lt;p&gt;</code> tags provide structure and accessibility. They tell browsers, screen readers, and search engines that this is a paragraph of text, not just random words."
+        }
+      }
+    }
+  ],
+  "enemy": {
+    "name": "Tiger",
+    "hp": 12,
+    "image": "assets/img/enemies/tiger-happy.png"
+  }
+}

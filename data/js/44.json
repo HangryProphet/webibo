@@ -1,0 +1,24 @@
+{
+  "instruction": "Complete the given code:\n1. Select the button with id 'myBtn'\n2. Add click event that changes paragraph text to 'Clicked!'",
+  "starter_code": "// Select the button\nlet button = document.querySelector();\n\n// Add click event\nbutton.addEventListener(\"\", function() {\n  // Change paragraph text\n  let paragraph = document.querySelector(\"p\");\n  paragraph.textContent = \"\";\n});",
+  "correct_code": "// Select the button\nlet button = document.querySelector(\"#myBtn\");\n\n// Add click event\nbutton.addEventListener(\"click\", function() {\n  // Change paragraph text\n  let paragraph = document.querySelector(\"p\");\n  paragraph.textContent = \"Clicked!\";\n});",
+  "validation": {
+    "ignore_whitespace": true,
+    "case_sensitive": false
+  },
+  "feedback": {
+    "success": {
+      "title": "🎊 INCREDIBLE ACHIEVEMENT! 🎊",
+      "details": "You've completed the Webibo JavaScript Learning Path! You're now officially a web developer who can create interactive experiences! You've mastered JavaScript foundations, operators, functions, and DOM manipulation. The web is your playground - go build something amazing! ⚡"
+    },
+    "error": {
+      "title": "Almost there!",
+      "details": "Remember to:\n• Select button with querySelector('#myBtn')\n• Use addEventListener('click', ...)\n• Set textContent to 'Clicked!'\n\nCheck your code and try again!"
+    }
+  },
+  "enemy": {
+    "name": "Skeleton",
+    "hp": 8,
+    "image": "assets/img/enemies/skeleton-happy.png"
+  }
+}

@@ -1,0 +1,139 @@
+/* Landing page styles extracted from index.php */
+.brand {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 2;
+}
+
+.brand-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.brand-name {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+}
+
+.brand-tagline {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: #9ca3af;
+    line-height: 1.3;
+}
+
+.landing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    width: min(1200px, 100%);
+    padding: 32px;
+}
+
+.hero-visual video {
+    width: 500px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+.hero-content {
+    flex: 1;
+    max-width: 460px;
+}
+
+.hero-title {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: #ffffff;
+}
+
+.hero-copy {
+    font-size: 15px;
+    color: #c6ced9;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.cta-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+}
+
+.cta-btn {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.1s;
+    text-align: center;
+    box-shadow: 0 4px 0 #0d5a7a;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.cta-btn.login {
+    background-color: #1cb0f6;
+    box-shadow: 0 4px 0 #0e7fb0;
+}
+
+.cta-btn.login:hover {
+    filter: brightness(1.08);
+}
+
+.cta-btn.login:active {
+    box-shadow: 0 2px 0 #0e7fb0;
+    transform: translateY(2px);
+}
+
+.cta-btn.signup {
+    background-color: #58cc02;
+    box-shadow: 0 4px 0 #3a7f02;
+}
+
+.cta-btn.signup:hover {
+    filter: brightness(1.08);
+}
+
+.cta-btn.signup:active {
+    box-shadow: 0 2px 0 #3a7f02;
+    transform: translateY(2px);
+}
+
+@media (max-width: 900px) {
+    body {
+        padding-top: 96px;
+    }
+
+    .landing {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px;
+    }
+
+    .hero-content {
+        max-width: none;
+    }
+
+    .cta-stack {
+        align-items: stretch;
+    }
+}
